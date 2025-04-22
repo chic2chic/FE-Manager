@@ -1,24 +1,38 @@
-# Logs
-logs
-*.log
+# 의존성
+/node_modules
+/.pnp
+.pnp.js
+
+# 빌드 결과물
+/dist
+/build
+
+# 환경 변수 파일 (보안상 민감한 정보가 포함될 수 있음)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# 로그 파일
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
-lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
-*.local
-
-# Editor directories and files
+# 에디터 관련 파일
 .vscode/*
 !.vscode/extensions.json
 .idea
-.DS_Store
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+
+# OS 관련 파일
+.DS_Store
+*storybook.log
+
+# https pem 파일
+localhost*
