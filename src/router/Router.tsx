@@ -1,10 +1,21 @@
-import DefaultBoundary from "@/boundary/DefaultBoundary";
+import GlobalLayout from "@/components/layouts/GlobalLayout";
+import DashBoard from "@/pages/dashboard/Dashboard";
+import Home from "@/pages/home/Home";
 import { createBrowserRouter } from "react-router-dom";
 
 export const Router = createBrowserRouter([
   {
     path: "/",
-    element: <DefaultBoundary />,
-    children: [],
+    element: <GlobalLayout />,
+    children: [
+      {
+        path: "",
+        element: <Home />,
+      },
+      {
+        path: "/dashboard",
+        element: <DashBoard />,
+      },
+    ],
   },
 ]);

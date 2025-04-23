@@ -13,6 +13,8 @@
 .env.development.local
 .env.test.local
 .env.production.local
+.env.production
+.env.development
 
 # 로그 파일
 npm-debug.log*
