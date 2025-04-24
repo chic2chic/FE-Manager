@@ -4,12 +4,8 @@ export const NavigationItems = [
     url: "/dashboard",
   },
   {
-    title: "예약관리",
-    url: "/reservations",
-  },
-  {
-    title: "입장관리",
-    url: "/entries",
+    title: "팝업관리",
+    url: "/popup",
   },
   {
     title: "상품관리",
