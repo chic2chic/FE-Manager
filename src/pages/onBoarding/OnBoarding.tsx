@@ -2,12 +2,12 @@ import { useRef, useState } from "react";
 import rightArrowImg from "@/assets/webps/onBoarding/right-arrow.webp";
 import OnBoardingHeader from "./views/OnBoardingHeader";
 import OnBoardingContents from "./views/OnBoardingContents";
-import OnBoradingLogin from "./views/OnBoradingLogin";
 import { ContentDesc } from "@/constants/onboarding/ContentDesc";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css";
 import type { Swiper as SwiperType } from "swiper/types";
+import OnBoradingLogin from "./views/OnBoradingLogin";
 
 export default function OnBorading() {
   const swiperRef = useRef<SwiperType | null>(null);
