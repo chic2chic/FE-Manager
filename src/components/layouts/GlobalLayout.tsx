@@ -4,7 +4,7 @@ import NavBar from "../common/NavBar";
 
 export default function GlobalLayout() {
   return (
-    <div>
+    <div className="box-border">
       <NavBar />
       <CustomErrorBoundary>
         <Outlet />
