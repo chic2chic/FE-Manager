@@ -1,13 +1,15 @@
+import { NavLink, useNavigate } from "react-router-dom";
 import { NavigationItems } from "@/constants/NavigationItems";
 import { useAuth } from "@/hooks/useAuth";
-import { NavLink } from "react-router-dom";
 import logoImage from "@/assets/webps/common/logo_manager.webp";
 import alarmImage from "@/assets/webps/common/alarm.webp";
 
 export default function NavBar() {
   const { isLogin } = useAuth();
+  const navigate = useNavigate();
+
   return (
-    <div className="flex h-[80px] items-center justify-between px-6 border-b border-gray04">
+    <div className="flex h-[80px] items-center justify-between px-10 border-b border-gray04">
       <div className="flex items-center gap-[50px]">
         <img
           src={logoImage}
@@ -15,6 +17,7 @@ export default function NavBar() {
           width={225}
           height={36}
           className="cursor-pointer"
+          onClick={() => navigate("/dashboard")}
         />
         <div className="flex gap-[40px]">
           {NavigationItems.map((nav, idx) => (
@@ -22,7 +25,7 @@ export default function NavBar() {
               key={idx}
               to={nav.url}
               className={({ isActive }) =>
-                `font-semibold text-[20px] ${isActive ? "text-main07" : "text-gray09"} cursor-pointer`
+                `font-semibold text-[20px] transition duration-200 hover:text-main05 ${isActive ? "text-main07" : "text-gray09"} cursor-pointer`
               }
             >
               {nav.title}
