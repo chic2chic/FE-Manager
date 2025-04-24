@@ -6,7 +6,7 @@ export default function OnBoradingLogin() {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
-  const isActive = username && password;
+  const isActive: boolean = Boolean(username && password);
 
   const handleLogin = () => {};
 
@@ -40,6 +40,7 @@ export default function OnBoradingLogin() {
         onClick={handleLogin}
         label="login"
         lang="en"
+        isActive={isActive}
       />
     </div>
   );

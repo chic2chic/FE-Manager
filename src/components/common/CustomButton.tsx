@@ -3,6 +3,7 @@ type Props = {
   onClick: () => void;
   label: string;
   lang?: "en" | "ko";
+  isActive: boolean;
 };
 
 export default function CustomButton({
@@ -10,12 +11,14 @@ export default function CustomButton({
   onClick,
   label,
   lang = "ko",
+  isActive = false,
 }: Props) {
   return (
     <button
       lang={lang}
-      className={`rounded-[50px] ${style} cursor-pointer`}
+      className={`rounded-[50px] ${style} ${isActive ? "cursor-pointer" : ""}`}
       onClick={onClick}
+      disabled={!isActive}
     >
       {label}
     </button>

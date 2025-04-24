@@ -30,7 +30,10 @@ export default function OnBorading() {
       <div className="flex flex-col h-[590px] border bg-gray10">
         <OnBoardingHeader />
         <div className="flex-1 relative flex justify-center items-center text-white">
-          <button className="mr-10 cursor-pointer" onClick={handlePrev}>
+          <button
+            className="absolute left-10 cursor-pointer"
+            onClick={handlePrev}
+          >
             <img
               src={rightArrowImg}
               width={36}
@@ -65,7 +68,10 @@ export default function OnBorading() {
               />
             ))}
           </div>
-          <button className="ml-10 cursor-pointer" onClick={handleNext}>
+          <button
+            className="absolute right-10 cursor-pointer"
+            onClick={handleNext}
+          >
             <img
               src={rightArrowImg}
               width={36}
