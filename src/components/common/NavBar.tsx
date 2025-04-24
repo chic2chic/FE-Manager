@@ -1,7 +1,7 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { NavigationItems } from "@/constants/NavigationItems";
 import { useAuth } from "@/hooks/useAuth";
-import logoImage from "@/assets/webps/common/logo_manager.webp";
+import logoImage from "@/assets/webps/common/logo-manager.webp";
 import alarmImage from "@/assets/webps/common/alarm.webp";
 
 export default function NavBar() {
@@ -9,7 +9,7 @@ export default function NavBar() {
   const navigate = useNavigate();
 
   return (
-    <div className="flex h-[80px] items-center justify-between px-10 border-b border-gray04">
+    <div className="fixed z-100 top-0 w-screen flex h-[80px] items-center justify-between px-10 border-b border-gray04">
       <div className="flex items-center gap-[50px]">
         <img
           src={logoImage}
