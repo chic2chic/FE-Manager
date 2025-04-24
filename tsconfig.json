@@ -10,5 +10,6 @@
     "paths": {
       "@/*": ["src/*"]
     }
-  }
+  },
+  "include": ["eslint.config.js", "public/mockServiceWorker.js"]
 }

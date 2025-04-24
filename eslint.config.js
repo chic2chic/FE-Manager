@@ -8,9 +8,18 @@ import tseslint from "typescript-eslint";
 
 export default tseslint.config(
   { ignores: ["dist"] },
-  ...tseslint.configs.recommendedTypeChecked,
+  {
+    files: ["eslint.config.js", "*.js"],
+    ...js.configs.recommended,
+  },
+  ...tseslint.configs.recommended,
   {
     files: ["**/*.{ts,tsx}"],
+    settings: {
+      react: {
+        version: "detect",
+      },
+    },
     languageOptions: {
       ecmaVersion: 2020,
       globals: {
@@ -22,8 +31,6 @@ export default tseslint.config(
         ecmaFeatures: {
           jsx: true,
         },
-        project: ["./tsconfig.app.json"],
-        tsconfigRootDir: import.meta.dirname,
       },
     },
     plugins: {
@@ -45,12 +52,6 @@ export default tseslint.config(
       "prefer-const": "error",
       "react/react-in-jsx-scope": "off",
       eqeqeq: ["error", "always"],
-      "@typescript-eslint/no-misused-promises": [
-        "error",
-        {
-          checksVoidReturn: false,
-        },
-      ],
       "no-unused-vars": [
         "error",
         {

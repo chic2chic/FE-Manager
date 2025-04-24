@@ -33,6 +33,7 @@
     "jest.config.ts",
     ".storybook/vitest.setup.ts",
     ".storybook/main.ts",
-    "vitest.workspace.ts"
+    "vitest.workspace.ts",
+    "eslint.config.js"
   ]
 }
