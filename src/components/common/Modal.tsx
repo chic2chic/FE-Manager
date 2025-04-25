@@ -11,8 +11,7 @@ import xGray from "@/assets/webps/common/x-gray05.webp";
 
 type Props = {
   isOpen: boolean;
-  // eslint-disable-next-line no-unused-vars
-  setIsOpen: (open: boolean) => void;
+  setIsOpen: (_open: boolean) => void;
   content: string;
   image: string;
   confirmText?: string;
