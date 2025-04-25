@@ -5,6 +5,7 @@
  * onCancel까지 있으면 버튼이 두 개 있는 confirm 모달이 됩니다.
  */
 
+import { useEffect } from "react";
 import popiLogo from "@/assets/webps/common/popi-logo.webp";
 import xGray from "@/assets/webps/common/x-gray05.webp";
 
@@ -30,8 +31,6 @@ export default function Modal({
   onConfirm,
   onCancel,
 }: Props) {
-  if (!isOpen) return null;
-
   const handleClose = () => {
     if (onCancel) {
       onCancel(); // Confirm 모달일 경우 취소만
@@ -41,9 +40,34 @@ export default function Modal({
     setIsOpen(false);
   };
 
+  // 모달 open일 때 바깥 스크롤 방지
+  useEffect(() => {
+    if (isOpen) {
+      const scrollBarWidth = window.innerWidth - document.body.clientWidth;
+      document.body.style.overflow = "hidden";
+      document.body.style.paddingRight = `${scrollBarWidth}px`; // scrollbar 너비만큼 패딩 설정하여 화면 흔들림 방지
+    } else {
+      document.body.style.overflow = "auto";
+      document.body.style.paddingRight = "0px";
+    }
+
+    return () => {
+      document.body.style.overflow = "auto";
+      document.body.style.paddingRight = "0px";
+    };
+  }, [isOpen]);
+
+  if (!isOpen) return null;
+
   return (
-    <div className="fixed inset-0 z-110 flex items-center justify-center bg-gray10/50">
-      <div className="relative bg-white w-[500px] h-[360px] rounded-[20px]">
+    <div
+      className="fixed inset-0 z-110 flex items-center justify-center bg-gray10/50"
+      onClick={handleClose}
+    >
+      <div
+        className="relative bg-white w-[500px] h-[360px] rounded-[20px]"
+        onClick={e => e.stopPropagation()}
+      >
         {/* logo */}
         <img
           src={popiLogo}

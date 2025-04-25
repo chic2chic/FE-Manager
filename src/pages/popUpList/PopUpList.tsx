@@ -38,10 +38,11 @@ export default function PopUpList() {
 
   const alertDelete = () => {
     if (pendingDeleteId === null) return;
+
+    // TO DO : 팝업 삭제 API 연결
     setCards(prev => prev.filter(card => card.id !== pendingDeleteId));
     setIsAlertModalOpen(false);
     setPendingDeleteId(null);
-    // TO DO : API 연결
   };
 
   return (
