@@ -10,7 +10,7 @@ export default function OnBoradingLogin() {
   const handleLogin = () => {};
 
   return (
-    <div className="flex flex-col my-[50px] gap-[34px] items-center">
+    <div className="flex flex-col gap-[34px] items-center">
       <div className="flex flex-col gap-4">
         <CustomInput
           title="Email"

@@ -81,7 +81,9 @@ export default function OnBorading() {
           </div>
         </div>
       </div>
-      <OnBoardingLogin />
+      <div className="py-[54px]">
+        <OnBoardingLogin />
+      </div>
     </div>
   );
 }

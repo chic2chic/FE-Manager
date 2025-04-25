@@ -99,7 +99,7 @@ export default function Modal({
         <p className="mt-2 text-[24px] text-center text-gray10">{content}</p>
 
         {/* 버튼 2개 */}
-        <div className="justify-center absolute bottom-[46px] left-1/2 -translate-x-1/2 flex gap-[66px]">
+        <div className="justify-center absolute bottom-[46px] left-1/2 -translate-x-1/2 flex gap-[66px] w-full">
           {onCancel && (
             <button
               onClick={onCancel}

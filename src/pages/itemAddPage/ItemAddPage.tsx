@@ -4,6 +4,7 @@ import ItemAddInputs from "./views/ItemAddInputs";
 import TestImage from "@/assets/webps/onBoarding/test.png";
 import Modal from "@/components/common/Modal";
 import bin from "@/assets/webps/common/bin.webp";
+import check from "@/assets/webps/common/check.webp";
 import { useNavigate } from "react-router-dom";
 
 export default function ItemAddPage() {
@@ -86,8 +87,8 @@ export default function ItemAddPage() {
         setIsOpen={setIsAlertModalOpen}
         content="상품 등록을 취소하시겠어요?"
         image={bin}
-        confirmText="취소"
-        cancelText="이전"
+        confirmText="취소하기"
+        cancelText="돌아가기"
         onConfirm={() => navigate("/products")}
         onCancel={() => setIsAlertModalOpen(false)}
       />
@@ -96,7 +97,7 @@ export default function ItemAddPage() {
         isOpen={isSaveModalOpen}
         setIsOpen={setIsSaveModalOpen}
         content="상품이 등록되었습니다"
-        image={bin}
+        image={check}
         confirmText="확인"
         onConfirm={handleSaveConfirmBtn}
       />
