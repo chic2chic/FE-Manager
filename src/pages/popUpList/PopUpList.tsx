@@ -1,17 +1,37 @@
+import "swiper/css";
+import "swiper/css/pagination";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/pagination";
+import { popUpCards } from "@/mocks/popUpList/PopUpCards";
+import PopUpCard from "@/pages/popUpList/views/PopUpCard";
+import ConfirmModal from "@/components/common/ConfirmModal";
 import logoImage from "@/assets/webps/common/logo-manager.webp";
 import plusWhite from "@/assets/webps/popUpList/plus-white.webp";
 import leftArrowGray09 from "@/assets/webps/common/left-arrow-gray09.webp";
 import rightArrowGray09 from "@/assets/webps/common/right-arrow-gray09.webp";
-import { popUpCards } from "@/mocks/popUpList/PopUpCards";
-import PopUpCard from "@/pages/popUpList/views/PopUpCard";
+import bin from "@/assets/webps/common/bin.webp";
 
 export default function PopUpList() {
   const navigate = useNavigate();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [cards, setCards] = useState(popUpCards);
+  const [selectedCardId, setSelectedCardId] = useState<number | null>(null);
+
+  const handleDelete = (id: number) => {
+    setIsModalOpen(true);
+    setSelectedCardId(id);
+  };
+
+  const confirmDelete = () => {
+    if (selectedCardId === null) return;
+
+    setCards(prev => prev.filter(card => card.id !== selectedCardId));
+    setIsModalOpen(false);
+    setSelectedCardId(null);
+    // TO DO : API 연결
+  };
 
   return (
     <div className="bg-gray03 min-h-screen pb-20">
@@ -35,6 +55,7 @@ export default function PopUpList() {
               List
             </span>
           </div>
+          {/* plus button */}
           <div className="cursor-pointer flex justify-center items-center w-[70px] h-[70px] rounded-full bg-main07 mt-[50px] mr-11">
             <img src={plusWhite} alt="plus button" width={36} height={36} />
           </div>
@@ -55,7 +76,7 @@ export default function PopUpList() {
               }}
               modules={[Pagination, Navigation]}
             >
-              {popUpCards.map(card => (
+              {cards.map(card => (
                 <SwiperSlide
                   key={card.id}
                   className="h-[342px] w-[286px] flex flex-col justify-center items-center"
@@ -64,10 +85,12 @@ export default function PopUpList() {
                     id={card.id}
                     title={card.title}
                     imagePath={card.imagePath}
+                    onDeleteClick={() => handleDelete(card.id)}
                   />
                 </SwiperSlide>
               ))}
             </Swiper>
+            {/* prev & next 버튼 */}
             <div className="custom-prev absolute top-[110px] -translate-y-1/2 left-0 z-10 cursor-pointer">
               <img
                 src={leftArrowGray09}
@@ -85,6 +108,17 @@ export default function PopUpList() {
           </div>
         </div>
       </div>
+
+      {/* 모달 */}
+      <ConfirmModal
+        isOpen={isModalOpen}
+        content="팝업을 삭제하시겠어요?"
+        image={bin}
+        confirmText="삭제"
+        cancelText="취소"
+        onConfirm={confirmDelete}
+        onCancel={() => setIsModalOpen(false)}
+      />
     </div>
   );
 }

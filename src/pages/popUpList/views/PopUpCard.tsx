@@ -1,7 +1,11 @@
 import { PopUpCardType } from "@/mocks/popUpList/PopUpCards";
 import xWhite from "@/assets/webps/popUpList/x-white.webp";
 
-export default function PopUpCard({ title, imagePath }: PopUpCardType) {
+type Props = PopUpCardType & {
+  onDeleteClick: () => void;
+};
+
+export default function PopUpCard({ title, imagePath, onDeleteClick }: Props) {
   return (
     <>
       <div className="w-[286px] flex justify-center">
@@ -19,7 +23,10 @@ export default function PopUpCard({ title, imagePath }: PopUpCardType) {
           {/* 오버레이 (hover 시) */}
           <div className="cursor-auto absolute top-0 left-0 w-full h-full bg-gray10/70 rounded-[62px] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-10">
             {/* x button */}
-            <div className="cursor-pointer w-[74px] h-[74px] bg-main07 rounded-full flex items-center justify-center">
+            <div
+              onClick={onDeleteClick}
+              className="cursor-pointer w-[74px] h-[74px] bg-main07 rounded-full flex items-center justify-center"
+            >
               <img src={xWhite} width={32} height={32} alt="x button" />
             </div>
           </div>
