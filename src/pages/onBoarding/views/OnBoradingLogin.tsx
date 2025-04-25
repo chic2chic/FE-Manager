@@ -1,4 +1,3 @@
-import CustomButton from "@/components/common/CustomButton";
 import CustomInput from "@/components/common/CustomInput";
 import React, { useState } from "react";
 
@@ -35,13 +34,14 @@ export default function OnBoradingLogin() {
           height={60}
         />
       </div>
-      <CustomButton
-        style={`w-[500px] h-[50px] text-white text-[22px] ${isActive ? "bg-main07" : "bg-main02"}`}
-        onClick={handleLogin}
-        label="login"
+      <button
         lang="en"
-        isActive={isActive}
-      />
+        className={`w-[500px] h-[60px] text-[22px] font-medium rounded-[50px] ${isActive ? "bg-main07 cursor-pointer" : "bg-main04"} text-gray02`}
+        disabled={!isActive}
+        onClick={handleLogin}
+      >
+        login
+      </button>
     </div>
   );
 }
