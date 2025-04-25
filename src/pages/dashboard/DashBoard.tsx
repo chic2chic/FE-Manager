@@ -1,7 +1,3 @@
 export default function DashBoard() {
-  return (
-    <div>
-      <div></div>
-    </div>
-  );
+  return <div></div>;
 }
