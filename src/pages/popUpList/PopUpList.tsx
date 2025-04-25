@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
-import { popUpCards } from "@/mocks/popUpList/PopUpCards";
+import { popUpCards } from "@/mocks/handlers/popUpList/PopUpCards";
 import PopUpCard from "@/pages/popUpList/views/PopUpCard";
 import Modal from "@/components/common/Modal";
 import logoImage from "@/assets/webps/common/logo-manager.webp";
@@ -12,24 +12,35 @@ import plusWhite from "@/assets/webps/popUpList/plus-white.webp";
 import leftArrowGray09 from "@/assets/webps/common/left-arrow-gray09.webp";
 import rightArrowGray09 from "@/assets/webps/common/right-arrow-gray09.webp";
 import bin from "@/assets/webps/common/bin.webp";
+import check from "@/assets/webps/common/check.webp";
 
 export default function PopUpList() {
   const navigate = useNavigate();
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
+  const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
   const [cards, setCards] = useState(popUpCards);
   const [selectedCardId, setSelectedCardId] = useState<number | null>(null);
+  const [pendingDeleteId, setPendingDeleteId] = useState<number | null>(null);
 
   const handleDelete = (id: number) => {
-    setIsModalOpen(true);
+    setIsConfirmModalOpen(true);
     setSelectedCardId(id);
   };
 
   const confirmDelete = () => {
     if (selectedCardId === null) return;
 
-    setCards(prev => prev.filter(card => card.id !== selectedCardId));
-    setIsModalOpen(false);
+    setIsConfirmModalOpen(false); // Confirm 모달 닫기
+    setIsAlertModalOpen(true); // Alert 모달 열기
+    setPendingDeleteId(selectedCardId); // 삭제할 ID 저장
     setSelectedCardId(null);
+  };
+
+  const alertDelete = () => {
+    if (pendingDeleteId === null) return;
+    setCards(prev => prev.filter(card => card.id !== pendingDeleteId));
+    setIsAlertModalOpen(false);
+    setPendingDeleteId(null);
     // TO DO : API 연결
   };
 
@@ -109,15 +120,26 @@ export default function PopUpList() {
         </div>
       </div>
 
-      {/* 모달 */}
+      {/* Confirm 모달 */}
       <Modal
-        isOpen={isModalOpen}
+        isOpen={isConfirmModalOpen}
+        setIsOpen={setIsConfirmModalOpen}
         content="팝업을 삭제하시겠어요?"
         image={bin}
         confirmText="삭제"
         cancelText="취소"
         onConfirm={confirmDelete}
-        onCancel={() => setIsModalOpen(false)}
+        onCancel={() => setIsConfirmModalOpen(false)}
+      />
+
+      {/* Alert 모달 */}
+      <Modal
+        isOpen={isAlertModalOpen}
+        setIsOpen={setIsAlertModalOpen}
+        content="팝업이 삭제되었어요"
+        image={check}
+        confirmText="확인"
+        onConfirm={alertDelete}
       />
     </div>
   );

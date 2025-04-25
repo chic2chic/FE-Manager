@@ -10,6 +10,8 @@ import xGray from "@/assets/webps/common/x-gray05.webp";
 
 type Props = {
   isOpen: boolean;
+  // eslint-disable-next-line no-unused-vars
+  setIsOpen: (open: boolean) => void;
   content: string;
   image: string;
   confirmText?: string;
@@ -20,6 +22,7 @@ type Props = {
 
 export default function Modal({
   isOpen,
+  setIsOpen,
   content,
   image,
   confirmText,
@@ -28,6 +31,15 @@ export default function Modal({
   onCancel,
 }: Props) {
   if (!isOpen) return null;
+
+  const handleClose = () => {
+    if (onCancel) {
+      onCancel(); // Confirm 모달일 경우 취소만
+    } else {
+      onConfirm(); // Alert 모달일 경우 확인 동작
+    }
+    setIsOpen(false);
+  };
 
   return (
     <div className="fixed inset-0 z-110 flex items-center justify-center bg-gray10/50">
@@ -48,7 +60,7 @@ export default function Modal({
           width={16}
           height={16}
           className="absolute top-5 right-5 cursor-pointer"
-          onClick={onCancel}
+          onClick={handleClose}
         />
 
         {/* image */}
