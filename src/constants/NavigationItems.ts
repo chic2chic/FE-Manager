@@ -5,7 +5,7 @@ export const NavigationItems = [
   },
   {
     title: "팝업관리",
-    url: "/popup",
+    url: "/popup-list",
   },
   {
     title: "상품관리",

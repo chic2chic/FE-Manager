@@ -6,9 +6,11 @@ export default function GlobalLayout() {
   return (
     <div className="box-border">
       <NavBar />
-      <CustomErrorBoundary>
-        <Outlet />
-      </CustomErrorBoundary>
+      <div className="mt-[80px]">
+        <CustomErrorBoundary>
+          <Outlet />
+        </CustomErrorBoundary>
+      </div>
     </div>
   );
 }
