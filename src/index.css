@@ -74,22 +74,3 @@ body {
 [lang="en"] {
   font-family: "GmarketSans", sans-serif;
 }
-
-.popup-swiper .swiper-pagination {
-  position: relative;
-  margin-top: 48px;
-}
-
-.popup-swiper .swiper-pagination-bullet {
-  width: 12px;
-  height: 12px;
-  background-color: #c9c9ca;
-  border-radius: 50%;
-  margin: 0 6px !important;
-}
-
-.popup-swiper .swiper-pagination-bullet-active {
-  width: 12px;
-  height: 12px;
-  background-color: #ff448d;
-}

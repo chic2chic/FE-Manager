@@ -13,7 +13,7 @@ export default function PopUpList() {
   const navigate = useNavigate();
 
   return (
-    <div className="bg-gray03 min-h-screen pb-40">
+    <div className="bg-gray03 min-h-screen pb-20">
       <img
         src={logoImage}
         alt="logo"
@@ -22,7 +22,7 @@ export default function PopUpList() {
         className="pt-[22px] ml-10 cursor-pointer"
         onClick={() => navigate("/dashboard")}
       />
-      <div className="mt-[80px] mx-auto w-[1360px] h-[600px] bg-gray01 pb-80 rounded-[50px]">
+      <div className="mt-[80px] mx-auto w-[1360px] min-h-[600px] bg-gray01 pb-14 rounded-[50px]">
         <div className="flex items-start justify-between">
           <div className="ml-11 mt-[52px] flex items-center">
             <span className="text-[36px] tracking-[-2%] text-gray10">
@@ -38,9 +38,9 @@ export default function PopUpList() {
         </div>
 
         <div className="flex justify-center mt-12">
-          <div className="relative mx-auto w-[1260px]">
+          <div className="relative mx-auto w-[1296px]">
             <Swiper
-              className="popup-swiper w-[920px] mx-auto"
+              className="popup-swiper w-[1010px] mx-auto"
               centeredSlides={true}
               slidesPerView={3}
               spaceBetween={72}
@@ -49,14 +49,11 @@ export default function PopUpList() {
                 prevEl: ".custom-prev",
                 nextEl: ".custom-next",
               }}
-              pagination={{
-                clickable: true,
-              }}
               modules={[Pagination, Navigation]}
             >
-              <SwiperSlide className="h-[342px] w-[268px] flex flex-col justify-center items-center">
-                <div className="w-[268px] flex justify-center">
-                  <div className="cursor-pointer bg-gray10 h-[240px] w-[240px] rounded-[62px] flex items-center justify-center">
+              <SwiperSlide className="h-[342px] w-[286px] flex flex-col justify-center items-center">
+                <div className="w-[286px] flex justify-center">
+                  <div className="cursor-pointer shadow-[0_4px_12px_rgba(0,0,0,0.4)] bg-gradient-to-br from-black via-gray08 to-black h-[240px] w-[240px] rounded-[62px] flex items-center justify-center">
                     <div className="w-[200px] h-[200px] rounded-full overflow-hidden">
                       <img
                         src={popUpPoster01}
@@ -70,14 +67,14 @@ export default function PopUpList() {
                 </div>
                 <span
                   lang="en"
-                  className="w-[268px] flex justify-center text-[34px] mt-[22px]"
+                  className="w-[286px] break-words block text-center justify-center text-[34px] mt-[22px]"
                 >
-                  BLACKPINK
+                  2025 BLACKPINK Special POP-UP
                 </span>
               </SwiperSlide>
-              <SwiperSlide className="h-[342px] w-[268px] flex flex-col justify-center items-center">
-                <div className="w-[268px] flex justify-center">
-                  <div className="cursor-pointer bg-gray10 h-[240px] w-[240px] rounded-[62px] flex items-center justify-center">
+              <SwiperSlide className="h-[342px] w-[286px] flex flex-col justify-center items-center">
+                <div className="w-[286px] flex justify-center">
+                  <div className="cursor-pointer shadow-[0_4px_12px_rgba(0,0,0,0.4)] bg-gradient-to-br from-black via-gray08 to-black h-[240px] w-[240px] rounded-[62px] flex items-center justify-center">
                     <div className="w-[200px] h-[200px] rounded-full overflow-hidden">
                       <img
                         src={popUpPoster01}
@@ -91,14 +88,14 @@ export default function PopUpList() {
                 </div>
                 <span
                   lang="en"
-                  className="w-[268px] flex justify-center text-[34px] mt-[22px]"
+                  className="w-[286px] break-words block text-center justify-center text-[34px] mt-[22px]"
                 >
-                  BLACKPINK
+                  TOMORROW X TOGETHERzzzzzzzz zzzdfddzfdzfdzfzz
                 </span>
               </SwiperSlide>
-              <SwiperSlide className="h-[342px] w-[268px] flex flex-col justify-center items-center">
-                <div className="w-[268px] flex justify-center">
-                  <div className="cursor-pointer bg-gray10 h-[240px] w-[240px] rounded-[62px] flex items-center justify-center">
+              <SwiperSlide className="h-[342px] w-[286px] flex flex-col justify-center items-center">
+                <div className="w-[286px] flex justify-center">
+                  <div className="cursor-pointer shadow-[0_4px_12px_rgba(0,0,0,0.4)] bg-gradient-to-br from-black via-gray08 to-black h-[240px] w-[240px] rounded-[62px] flex items-center justify-center">
                     <div className="w-[200px] h-[200px] rounded-full overflow-hidden">
                       <img
                         src={popUpPoster01}
@@ -112,14 +109,14 @@ export default function PopUpList() {
                 </div>
                 <span
                   lang="en"
-                  className="w-[268px] flex justify-center text-[34px] mt-[22px]"
+                  className="w-[286px] break-words block text-center justify-center text-[34px] mt-[22px]"
                 >
-                  BLACKPINK
+                  2025 BLACKPINK Special POP-UP
                 </span>
               </SwiperSlide>
-              <SwiperSlide className="h-[342px] w-[268px] flex flex-col justify-center items-center">
-                <div className="w-[268px] flex justify-center">
-                  <div className="cursor-pointer bg-gray10 h-[240px] w-[240px] rounded-[62px] flex items-center justify-center">
+              <SwiperSlide className="h-[342px] w-[286px] flex flex-col justify-center items-center">
+                <div className="w-[286px] flex justify-center">
+                  <div className="cursor-pointer shadow-[0_4px_12px_rgba(0,0,0,0.4)] bg-gradient-to-br from-black via-gray08 to-black h-[240px] w-[240px] rounded-[62px] flex items-center justify-center">
                     <div className="w-[200px] h-[200px] rounded-full overflow-hidden">
                       <img
                         src={popUpPoster01}
@@ -133,14 +130,14 @@ export default function PopUpList() {
                 </div>
                 <span
                   lang="en"
-                  className="w-[268px] flex justify-center text-[34px] mt-[22px]"
+                  className="w-[286px] break-words block text-center justify-center text-[34px] mt-[22px]"
                 >
-                  BLACKPINK
+                  TOMORROW X TOGETHERzzzzzzzz zzzdfddzfdzfdzfzz
                 </span>
               </SwiperSlide>
-              <SwiperSlide className="h-[342px] w-[268px] flex flex-col justify-center items-center">
-                <div className="w-[268px] flex justify-center">
-                  <div className="cursor-pointer bg-gray10 h-[240px] w-[240px] rounded-[62px] flex items-center justify-center">
+              <SwiperSlide className="h-[342px] w-[286px] flex flex-col justify-center items-center">
+                <div className="w-[286px] flex justify-center">
+                  <div className="cursor-pointer shadow-[0_4px_12px_rgba(0,0,0,0.4)] bg-gradient-to-br from-black via-gray08 to-black h-[240px] w-[240px] rounded-[62px] flex items-center justify-center">
                     <div className="w-[200px] h-[200px] rounded-full overflow-hidden">
                       <img
                         src={popUpPoster01}
@@ -154,14 +151,14 @@ export default function PopUpList() {
                 </div>
                 <span
                   lang="en"
-                  className="w-[268px] flex justify-center text-[34px] mt-[22px]"
+                  className="w-[286px] break-words block text-center justify-center text-[34px] mt-[22px]"
                 >
-                  BLACKPINK
+                  2025 BLACKPINK Special POP-UP
                 </span>
               </SwiperSlide>
-              <SwiperSlide className="h-[342px] w-[268px] flex flex-col justify-center items-center">
-                <div className="w-[268px] flex justify-center">
-                  <div className="cursor-pointer bg-gray10 h-[240px] w-[240px] rounded-[62px] flex items-center justify-center">
+              <SwiperSlide className="h-[342px] w-[286px] flex flex-col justify-center items-center">
+                <div className="w-[286px] flex justify-center">
+                  <div className="cursor-pointer shadow-[0_4px_12px_rgba(0,0,0,0.4)] bg-gradient-to-br from-black via-gray08 to-black h-[240px] w-[240px] rounded-[62px] flex items-center justify-center">
                     <div className="w-[200px] h-[200px] rounded-full overflow-hidden">
                       <img
                         src={popUpPoster01}
@@ -175,14 +172,14 @@ export default function PopUpList() {
                 </div>
                 <span
                   lang="en"
-                  className="w-[268px] flex justify-center text-[34px] mt-[22px]"
+                  className="w-[286px] break-words block text-center justify-center text-[34px] mt-[22px]"
                 >
-                  BLACKPINK
+                  TOMORROW X TOGETHERzzzzzzzz zzzdfddzfdzfdzfzz
                 </span>
               </SwiperSlide>
-              <SwiperSlide className="h-[342px] w-[268px] flex flex-col justify-center items-center">
-                <div className="w-[268px] flex justify-center">
-                  <div className="cursor-pointer bg-gray10 h-[240px] w-[240px] rounded-[62px] flex items-center justify-center">
+              <SwiperSlide className="h-[342px] w-[286px] flex flex-col justify-center items-center">
+                <div className="w-[286px] flex justify-center">
+                  <div className="cursor-pointer shadow-[0_4px_12px_rgba(0,0,0,0.4)] bg-gradient-to-br from-black via-gray08 to-black h-[240px] w-[240px] rounded-[62px] flex items-center justify-center">
                     <div className="w-[200px] h-[200px] rounded-full overflow-hidden">
                       <img
                         src={popUpPoster01}
@@ -196,14 +193,14 @@ export default function PopUpList() {
                 </div>
                 <span
                   lang="en"
-                  className="w-[268px] flex justify-center text-[34px] mt-[22px]"
+                  className="w-[286px] break-words block text-center justify-center text-[34px] mt-[22px]"
                 >
-                  BLACKPINK
+                  2025 BLACKPINK Special POP-UP
                 </span>
               </SwiperSlide>
-              <SwiperSlide className="h-[342px] w-[268px] flex flex-col justify-center items-center">
-                <div className="w-[268px] flex justify-center">
-                  <div className="cursor-pointer bg-gray10 h-[240px] w-[240px] rounded-[62px] flex items-center justify-center">
+              <SwiperSlide className="h-[342px] w-[286px] flex flex-col justify-center items-center">
+                <div className="w-[286px] flex justify-center">
+                  <div className="cursor-pointer shadow-[0_4px_12px_rgba(0,0,0,0.4)] bg-gradient-to-br from-black via-gray08 to-black h-[240px] w-[240px] rounded-[62px] flex items-center justify-center">
                     <div className="w-[200px] h-[200px] rounded-full overflow-hidden">
                       <img
                         src={popUpPoster01}
@@ -217,9 +214,177 @@ export default function PopUpList() {
                 </div>
                 <span
                   lang="en"
-                  className="w-[268px] flex justify-center text-[34px] mt-[22px]"
+                  className="w-[286px] break-words block text-center justify-center text-[34px] mt-[22px]"
                 >
-                  BLACKPINK
+                  TOMORROW X TOGETHERzzzzzzzz zzzdfddzfdzfdzfzz
+                </span>
+              </SwiperSlide>
+              <SwiperSlide className="h-[342px] w-[286px] flex flex-col justify-center items-center">
+                <div className="w-[286px] flex justify-center">
+                  <div className="cursor-pointer shadow-[0_4px_12px_rgba(0,0,0,0.4)] bg-gradient-to-br from-black via-gray08 to-black h-[240px] w-[240px] rounded-[62px] flex items-center justify-center">
+                    <div className="w-[200px] h-[200px] rounded-full overflow-hidden">
+                      <img
+                        src={popUpPoster01}
+                        alt="poster"
+                        width={40}
+                        height={40}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <span
+                  lang="en"
+                  className="w-[286px] break-words block text-center justify-center text-[34px] mt-[22px]"
+                >
+                  2025 BLACKPINK Special POP-UP
+                </span>
+              </SwiperSlide>
+              <SwiperSlide className="h-[342px] w-[286px] flex flex-col justify-center items-center">
+                <div className="w-[286px] flex justify-center">
+                  <div className="cursor-pointer shadow-[0_4px_12px_rgba(0,0,0,0.4)] bg-gradient-to-br from-black via-gray08 to-black h-[240px] w-[240px] rounded-[62px] flex items-center justify-center">
+                    <div className="w-[200px] h-[200px] rounded-full overflow-hidden">
+                      <img
+                        src={popUpPoster01}
+                        alt="poster"
+                        width={40}
+                        height={40}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <span
+                  lang="en"
+                  className="w-[286px] break-words block text-center justify-center text-[34px] mt-[22px]"
+                >
+                  TOMORROW X TOGETHERzzzzzzzz zzzdfddzfdzfdzfzz
+                </span>
+              </SwiperSlide>
+              <SwiperSlide className="h-[342px] w-[286px] flex flex-col justify-center items-center">
+                <div className="w-[286px] flex justify-center">
+                  <div className="cursor-pointer shadow-[0_4px_12px_rgba(0,0,0,0.4)] bg-gradient-to-br from-black via-gray08 to-black h-[240px] w-[240px] rounded-[62px] flex items-center justify-center">
+                    <div className="w-[200px] h-[200px] rounded-full overflow-hidden">
+                      <img
+                        src={popUpPoster01}
+                        alt="poster"
+                        width={40}
+                        height={40}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <span
+                  lang="en"
+                  className="w-[286px] break-words block text-center justify-center text-[34px] mt-[22px]"
+                >
+                  2025 BLACKPINK Special POP-UP
+                </span>
+              </SwiperSlide>
+              <SwiperSlide className="h-[342px] w-[286px] flex flex-col justify-center items-center">
+                <div className="w-[286px] flex justify-center">
+                  <div className="cursor-pointer shadow-[0_4px_12px_rgba(0,0,0,0.4)] bg-gradient-to-br from-black via-gray08 to-black h-[240px] w-[240px] rounded-[62px] flex items-center justify-center">
+                    <div className="w-[200px] h-[200px] rounded-full overflow-hidden">
+                      <img
+                        src={popUpPoster01}
+                        alt="poster"
+                        width={40}
+                        height={40}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <span
+                  lang="en"
+                  className="w-[286px] break-words block text-center justify-center text-[34px] mt-[22px]"
+                >
+                  TOMORROW X TOGETHERzzzzzzzz zzzdfddzfdzfdzfzz
+                </span>
+              </SwiperSlide>
+              <SwiperSlide className="h-[342px] w-[286px] flex flex-col justify-center items-center">
+                <div className="w-[286px] flex justify-center">
+                  <div className="cursor-pointer shadow-[0_4px_12px_rgba(0,0,0,0.4)] bg-gradient-to-br from-black via-gray08 to-black h-[240px] w-[240px] rounded-[62px] flex items-center justify-center">
+                    <div className="w-[200px] h-[200px] rounded-full overflow-hidden">
+                      <img
+                        src={popUpPoster01}
+                        alt="poster"
+                        width={40}
+                        height={40}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <span
+                  lang="en"
+                  className="w-[286px] break-words block text-center justify-center text-[34px] mt-[22px]"
+                >
+                  2025 BLACKPINK Special POP-UP
+                </span>
+              </SwiperSlide>
+              <SwiperSlide className="h-[342px] w-[286px] flex flex-col justify-center items-center">
+                <div className="w-[286px] flex justify-center">
+                  <div className="cursor-pointer shadow-[0_4px_12px_rgba(0,0,0,0.4)] bg-gradient-to-br from-black via-gray08 to-black h-[240px] w-[240px] rounded-[62px] flex items-center justify-center">
+                    <div className="w-[200px] h-[200px] rounded-full overflow-hidden">
+                      <img
+                        src={popUpPoster01}
+                        alt="poster"
+                        width={40}
+                        height={40}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <span
+                  lang="en"
+                  className="w-[286px] break-words block text-center justify-center text-[34px] mt-[22px]"
+                >
+                  TOMORROW X TOGETHERzzzzzzzz zzzdfddzfdzfdzfzz
+                </span>
+              </SwiperSlide>
+              <SwiperSlide className="h-[342px] w-[286px] flex flex-col justify-center items-center">
+                <div className="w-[286px] flex justify-center">
+                  <div className="cursor-pointer shadow-[0_4px_12px_rgba(0,0,0,0.4)] bg-gradient-to-br from-black via-gray08 to-black h-[240px] w-[240px] rounded-[62px] flex items-center justify-center">
+                    <div className="w-[200px] h-[200px] rounded-full overflow-hidden">
+                      <img
+                        src={popUpPoster01}
+                        alt="poster"
+                        width={40}
+                        height={40}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <span
+                  lang="en"
+                  className="w-[286px] break-words block text-center justify-center text-[34px] mt-[22px]"
+                >
+                  2025 BLACKPINK Special POP-UP
+                </span>
+              </SwiperSlide>
+              <SwiperSlide className="h-[342px] w-[286px] flex flex-col justify-center items-center">
+                <div className="w-[286px] flex justify-center">
+                  <div className="cursor-pointer shadow-[0_4px_12px_rgba(0,0,0,0.4)] bg-gradient-to-br from-black via-gray08 to-black h-[240px] w-[240px] rounded-[62px] flex items-center justify-center">
+                    <div className="w-[200px] h-[200px] rounded-full overflow-hidden">
+                      <img
+                        src={popUpPoster01}
+                        alt="poster"
+                        width={40}
+                        height={40}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <span
+                  lang="en"
+                  className="w-[286px] break-words block text-center justify-center text-[34px] mt-[22px]"
+                >
+                  TOMORROW X TOGETHERzzzzzzzz zzzdfddzfdzfdzfzz
                 </span>
               </SwiperSlide>
             </Swiper>
