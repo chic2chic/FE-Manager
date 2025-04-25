@@ -1,17 +1,17 @@
 import { Meta, StoryObj } from "@storybook/react";
-import ConfirmModal from "./ConfirmModal";
+import Modal from "./Modal";
 
-const meta: Meta<typeof ConfirmModal> = {
-  title: "components/common/ConfirmModal",
-  component: ConfirmModal,
+const meta: Meta<typeof Modal> = {
+  title: "components/common/Modal",
+  component: Modal,
   tags: ["autodocs"],
 };
 
 export default meta;
 
-type Story = StoryObj<typeof ConfirmModal>;
+type Story = StoryObj<typeof Modal>;
 
-export const ConfirmModalTest: Story = {
+export const ModalTest: Story = {
   parameters: {
     design: {
       type: "figma",

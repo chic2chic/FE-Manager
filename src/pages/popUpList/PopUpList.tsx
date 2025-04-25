@@ -6,7 +6,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 import { popUpCards } from "@/mocks/popUpList/PopUpCards";
 import PopUpCard from "@/pages/popUpList/views/PopUpCard";
-import ConfirmModal from "@/components/common/ConfirmModal";
+import Modal from "@/components/common/Modal";
 import logoImage from "@/assets/webps/common/logo-manager.webp";
 import plusWhite from "@/assets/webps/popUpList/plus-white.webp";
 import leftArrowGray09 from "@/assets/webps/common/left-arrow-gray09.webp";
@@ -110,7 +110,7 @@ export default function PopUpList() {
       </div>
 
       {/* 모달 */}
-      <ConfirmModal
+      <Modal
         isOpen={isModalOpen}
         content="팝업을 삭제하시겠어요?"
         image={bin}

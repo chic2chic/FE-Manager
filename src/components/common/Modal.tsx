@@ -1,7 +1,8 @@
 /**
  * @Description
- * 취소와 확인(삭제) 등 두 가지 버튼을 포함한 모달입니다
- * 팝업 리스트 페이지와 상품 조회 페이지에서 사용됩니다
+ * 모달 공통 컴포넌트입니다
+ * onCancel이 없으면 버튼이 한 개만 있는 alert 모달이고,
+ * onCancel까지 있으면 버튼이 두 개 있는 confirm 모달이 됩니다.
  */
 
 import popiLogo from "@/assets/webps/common/popi-logo.webp";
@@ -14,15 +15,15 @@ type Props = {
   confirmText?: string;
   cancelText?: string;
   onConfirm: () => void;
-  onCancel: () => void;
+  onCancel?: () => void;
 };
 
-export default function ConfirmModal({
+export default function Modal({
   isOpen,
   content,
   image,
-  confirmText = "확인",
-  cancelText = "취소",
+  confirmText,
+  cancelText,
   onConfirm,
   onCancel,
 }: Props) {
@@ -63,18 +64,21 @@ export default function ConfirmModal({
         <p className="mt-2 text-[24px] text-center text-gray10">{content}</p>
 
         {/* 버튼 2개 */}
-        <div className="justify-center mt-9 flex gap-[66px]">
-          <button
-            onClick={onCancel}
-            className="rounded-full cursor-pointer px-5 py-[10px] text-[20px] border border-gray05 text-gray09 hover:bg-gray02 transition"
-          >
-            {cancelText}
-          </button>
+        <div className="justify-center absolute bottom-[46px] left-1/2 -translate-x-1/2 flex gap-[66px]">
+          {onCancel && (
+            <button
+              onClick={onCancel}
+              className="rounded-full cursor-pointer px-5 py-[10px] text-[20px] border border-gray05 text-gray09 hover:bg-gray02 transition"
+            >
+              {cancelText || "취소"}
+            </button>
+          )}
+
           <button
             onClick={onConfirm}
             className="rounded-full cursor-pointer px-5 py-[10px] text-[20px] bg-main07 text-gray01 hover:opacity-90 transition"
           >
-            {confirmText}
+            {confirmText || "확인"}
           </button>
         </div>
       </div>
