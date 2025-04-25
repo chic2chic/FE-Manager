@@ -7,7 +7,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css";
 import type { Swiper as SwiperType } from "swiper/types";
-import OnBoradingLogin from "./views/OnBoradingLogin";
+import OnBoradingLogin from "./views/OnBoardingLogin";
 
 export default function OnBorading() {
   const swiperRef = useRef<SwiperType | null>(null);
