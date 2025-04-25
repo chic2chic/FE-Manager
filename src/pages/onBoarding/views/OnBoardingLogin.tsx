@@ -10,7 +10,7 @@ export default function OnBoradingLogin() {
   const handleLogin = () => {};
 
   return (
-    <div className="flex flex-col my-[50px] gap-[34px] items-center">
+    <div className="flex flex-col gap-[34px] items-center">
       <div className="flex flex-col gap-4">
         <CustomInput
           title="Email"
@@ -36,7 +36,7 @@ export default function OnBoradingLogin() {
       </div>
       <button
         lang="en"
-        className={`w-[500px] h-[60px] text-[22px] font-medium rounded-[50px] ${isActive ? "bg-main07 cursor-pointer" : "bg-main04"} text-gray02`}
+        className={`w-[500px] h-[60px] text-[22px] font-medium rounded-full ${isActive ? "bg-main07 cursor-pointer" : "bg-main04"} text-gray02`}
         disabled={!isActive}
         onClick={handleLogin}
       >

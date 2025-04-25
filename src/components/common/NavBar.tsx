@@ -9,7 +9,7 @@ export default function NavBar() {
   const navigate = useNavigate();
 
   return (
-    <div className="fixed z-100 top-0 w-screen flex h-[80px] items-center justify-between px-10 border-b border-gray04">
+    <div className="fixed z-100 top-0 w-screen flex h-[80px] items-center justify-between px-10 border-b border-gray04 bg-gray01">
       <div className="flex items-center gap-[50px]">
         <img
           src={logoImage}
