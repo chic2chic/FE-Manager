@@ -18,9 +18,6 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
-  server: {
-    port: 3000,
-  },
   // server: {
   //   https: {
   //     key: fs.readFileSync("localhost+1-key.pem"),
