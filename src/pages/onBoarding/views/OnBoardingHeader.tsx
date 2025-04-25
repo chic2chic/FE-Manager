@@ -1,4 +1,4 @@
-import LogoImage from "@/assets/webps/common/logo_manager.webp";
+import LogoImage from "@/assets/webps/common/logo-manager.webp";
 
 export default function OnBoardingHeader() {
   return (
