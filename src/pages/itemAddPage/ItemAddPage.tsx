@@ -65,7 +65,7 @@ export default function ItemAddPage() {
             src={TestImage}
             alt="상품 이미지"
             width={400}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover rounded-[20px]"
           />
           <input
             type="file"
