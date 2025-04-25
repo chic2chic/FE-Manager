@@ -1,6 +1,6 @@
 import GlobalLayout from "@/components/layouts/GlobalLayout";
 import DashBoard from "@/pages/dashboard/DashBoard";
-import Home from "@/pages/home/Home";
+import OnBorading from "@/pages/onBoarding/OnBoarding";
 import { createBrowserRouter } from "react-router-dom";
 
 export const Router = createBrowserRouter([
@@ -9,13 +9,13 @@ export const Router = createBrowserRouter([
     element: <GlobalLayout />,
     children: [
       {
-        path: "",
-        element: <Home />,
-      },
-      {
         path: "/dashboard",
         element: <DashBoard />,
       },
     ],
+  },
+  {
+    path: "/onboarding",
+    element: <OnBorading />,
   },
 ]);
