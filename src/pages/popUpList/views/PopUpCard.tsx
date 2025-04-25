@@ -1,10 +1,12 @@
 import { PopUpCardType } from "@/mocks/popUpList/PopUpCards";
+import xWhite from "@/assets/webps/popUpList/x-white.webp";
 
 export default function PopUpCard({ title, imagePath }: PopUpCardType) {
   return (
     <>
       <div className="w-[286px] flex justify-center">
-        <div className="cursor-pointer shadow-[0_4px_12px_rgba(0,0,0,0.4)] bg-gradient-to-br from-black via-gray08 to-black h-[240px] w-[240px] rounded-[62px] flex items-center justify-center">
+        <div className="relative group cursor-pointer shadow-[0_4px_12px_rgba(0,0,0,0.4)] bg-gradient-to-br from-black via-gray08 to-black h-[240px] w-[240px] rounded-[62px] flex items-center justify-center">
+          {/* 이미지 */}
           <div className="w-[200px] h-[200px] rounded-full overflow-hidden">
             <img
               src={imagePath}
@@ -13,6 +15,13 @@ export default function PopUpCard({ title, imagePath }: PopUpCardType) {
               height={40}
               className="w-full h-full object-cover"
             />
+          </div>
+          {/* 오버레이 (hover 시) */}
+          <div className="cursor-auto absolute top-0 left-0 w-full h-full bg-gray10/70 rounded-[62px] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-10">
+            {/* x button */}
+            <div className="cursor-pointer w-[74px] h-[74px] bg-main07 rounded-full flex items-center justify-center">
+              <img src={xWhite} width={32} height={32} alt="x button" />
+            </div>
           </div>
         </div>
       </div>

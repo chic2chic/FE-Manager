@@ -4,7 +4,7 @@ import { Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import logoImage from "@/assets/webps/common/logo-manager.webp";
-import plusWhite from "@/assets/webps/common/plus-white.webp";
+import plusWhite from "@/assets/webps/popUpList/plus-white.webp";
 import leftArrowGray09 from "@/assets/webps/common/left-arrow-gray09.webp";
 import rightArrowGray09 from "@/assets/webps/common/right-arrow-gray09.webp";
 import { popUpCards } from "@/mocks/popUpList/PopUpCards";
