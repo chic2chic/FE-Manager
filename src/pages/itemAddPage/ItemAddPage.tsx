@@ -34,12 +34,12 @@ export default function ItemAddPage() {
       <div className="flex gap-[14px] mt-[46px] mr-[80px] justify-end">
         <CustomButton
           label="취소"
-          cssOption="bg-gray03 text-gray08 text-[20px] w-[76px] h-[46px] hover:opacity-50"
+          cssOption="bg-gray03 text-gray08 text-[20px] hover:opacity-50"
           onClick={handleSave}
         />
         <CustomButton
           label="등록"
-          cssOption="bg-gray10 text-gray01 text-[20px] w-[76px] h-[46px] hover:opacity-50"
+          cssOption="bg-gray10 text-gray01 text-[20px] hover:opacity-50"
           onClick={handleSave}
         />
       </div>
