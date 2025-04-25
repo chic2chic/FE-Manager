@@ -31,7 +31,7 @@ export default function CustomInput({
         {title}
       </p>
       <input
-        className="border rounded-[50px] pl-[24px] border-gray05 bg-gray02 placeholder:text-gray07 text-gray10 text-20"
+        className="border rounded-[50px] pl-[24px] border-gray05 bg-gray02 placeholder:text-gray07 text-gray10 text-[19px] transition-all duration-200 focus:border-gray09 focus:outline-none"
         style={{ width: `${width}px`, height: `${height}px` }}
         type={inputType || "text"}
         placeholder={placeholder}

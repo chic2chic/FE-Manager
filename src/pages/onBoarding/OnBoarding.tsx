@@ -60,11 +60,11 @@ export default function OnBorading() {
               ))}
             </Swiper>
           </div>
-          <div className="absolute bottom-5 flex gap-2 justify-center">
+          <div className="absolute bottom-5 flex gap-4 justify-center">
             {ContentDesc.map((_, idx) => (
               <span
                 key={idx}
-                className={`w-2 h-2 rounded-full ${idx === activeidx ? "bg-white" : "bg-gray-500"}`}
+                className={`w-[12px] h-[12px] rounded-full ${idx === activeidx ? "bg-gray01" : "border border-gray01"}`}
               />
             ))}
           </div>
