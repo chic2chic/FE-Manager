@@ -1,20 +1,9 @@
 import { NoticeItemType } from "@/types/NoticeItemType";
+import { formatTimestamp } from "@/utils/FormatTimeStamp";
 
 type Props = Omit<NoticeItemType, "id">;
 
 // 알림: api 10분에 한번씩 요청하기
-
-function formatTimestamp(timestamp: string) {
-  const date = new Date(timestamp);
-
-  const year = String(date.getFullYear()).slice(2); // YY
-  const month = String(date.getMonth() + 1).padStart(2, "0"); // MM
-  const day = String(date.getDate()).padStart(2, "0"); // DD
-  const hours = String(date.getHours()).padStart(2, "0"); // HH
-  const minutes = String(date.getMinutes()).padStart(2, "0"); // MM
-
-  return `${year}.${month}.${day} ${hours}:${minutes}`;
-}
 
 export default function NoticeItem({
   type,
@@ -27,7 +16,10 @@ export default function NoticeItem({
     <div className="border-b border-b-gray03 w-full flex flex-col pt-3 pb-4">
       <div className="flex justify-between items-center">
         <div className="flex items-center gap-[6px]">
-          <span lang="en" className="text-[18px] tracking-[-2%]">
+          <span
+            lang="en"
+            className="text-[18px] max-w-[160px] truncate tracking-[-2%]"
+          >
             {popup}
           </span>
           {type === "hot" && (
