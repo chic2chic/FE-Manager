@@ -18,23 +18,11 @@ export default function ProductList() {
   const navigate = useNavigate();
   const [isDeleteConfirmOpen, setIsDeleteConfirmOpen] = useState(false);
 
-
-  const handleDelete = () => {
-    // 삭제 처리 로직
-    console.log("상품 삭제 완료!");
-    setIsModalOpen(false);
-  };
-
-  const handleCancel = () => {
-    console.log("삭제 취소");
-    setIsModalOpen(false);
-  };
-
   useEffect(() => {
     fetch("/products")
       .then(res => res.json())
       .then(data => setDisplayList(data))
-      .catch(err => console.error("상품 데이터 호출 실패:", err));
+      .catch(err => new Error(err));
   }, []);
 
   return (
@@ -89,7 +77,7 @@ export default function ProductList() {
                 <p className="text-[16px] text-gray08 mb-2">
                   남은재고 : {product.stock}
                 </p>
-                <div className="flex gap-2" >
+                <div className="flex gap-2">
                   <div className="flex justify-center gap-4 mt-2">
                     <button className="text-[18px] px-4 py-1 cursor-pointer bg-gray10 text-gray01 rounded-full hover:opacity-90">
                       수정
@@ -121,10 +109,8 @@ export default function ProductList() {
           confirmText="삭제"
           cancelText="취소"
           onConfirm={() => {
-            console.log(`${selectedProduct.name} 삭제`);
-            // 삭제 API 호출 또는 displayList 업데이트 추가 예정
             setIsModalOpen(false);
-            setIsDeleteConfirmOpen(true);   // 두 번째(삭제완료) 모달 열기
+            setIsDeleteConfirmOpen(true); // 두 번째(삭제완료) 모달 열기
           }}
           onCancel={() => {
             setIsModalOpen(false);

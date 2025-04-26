@@ -12,4 +12,4 @@ export const AuthHandlers = [
     posts.push(newPost);
     return HttpResponse.json({ success: true }, { status: 201 });
   }),
-];  
+];

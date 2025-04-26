@@ -4,8 +4,4 @@ import { ProductHandlers } from "./handlers/Product.handlers";
 
 export const handlers = [...AuthHandlers, ...ProductHandlers];
 
-
 export const worker = setupWorker(...handlers);
-
-
-
