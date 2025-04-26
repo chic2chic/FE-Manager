@@ -1,8 +1,8 @@
 import GlobalLayout from "@/components/layouts/GlobalLayout";
 import DashBoard from "@/pages/dashboard/DashBoard";
 import ItemAddPage from "@/pages/itemAddPage/ItemAddPage";
-import ItemListPage from "@/pages/itemListPage/ItemListPage";
 import OnBorading from "@/pages/onBoarding/OnBoarding";
+import ProductList from "@/pages/productList/ProductList";
 import PopUpList from "@/pages/popUpList/PopUpList";
 import { createBrowserRouter } from "react-router-dom";
 
@@ -12,7 +12,7 @@ export const Router = createBrowserRouter([
     element: <GlobalLayout />,
     children: [
       {
-        path: "/dashboard",
+        path: "dashboard",
         element: <DashBoard />,
       },
       {
@@ -21,7 +21,7 @@ export const Router = createBrowserRouter([
       },
       {
         path: "/products",
-        element: <ItemListPage />,
+        element: <ProductList />,
       },
     ],
   },
