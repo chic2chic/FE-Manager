@@ -1,4 +1,5 @@
 import NoticeItem from "@/components/noticeModal/views/NoticeItem";
+import { NoticeItems } from "@/mocks/handlers/noticeModal/NoticeItems";
 import { useEffect, useRef } from "react";
 
 type Props = {
@@ -26,13 +27,16 @@ export default function NoticeModal({ onClose }: Props) {
       className="pt-1 px-5 w-[360px] max-h-[544px] absolute overflow-scroll top-[46px] right-[-18px] z-[130px] bg-white rounded-[20px] shadow-[0_0_10px_2px_rgba(0,0,0,0.15)]"
     >
       <div className="relative flex flex-col items-center">
-        <NoticeItem
-          type="hot"
-          popup="BLACKPINK"
-          title="팝업 포스터"
-          stockThreshold={30}
-          timestamp="25.04.23 13:47"
-        />
+        {NoticeItems.map(item => (
+          <NoticeItem
+            key={item.id}
+            type={item.type}
+            popup={item.popup}
+            title={item.title}
+            stockThreshold={item.stockThreshold}
+            timestamp={item.timestamp}
+          />
+        ))}
       </div>
     </div>
   );

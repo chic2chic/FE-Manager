@@ -1,4 +1,4 @@
-import { PopUpCardType } from "@/mocks/handlers/popUpList/PopUpCards";
+import { PopUpCardType } from "@/types/PopUpCardType";
 import xWhite from "@/assets/webps/popUpList/x-white.webp";
 
 type Props = PopUpCardType & {
