@@ -1,5 +1,5 @@
 import { NoticeItemType } from "@/types/NoticeItemType";
-import { formatTimestamp } from "@/utils/FormatTimeStamp";
+import { formatTimestamp } from "@/utils/FormatTimestamp";
 
 type Props = Omit<NoticeItemType, "id">;
 
