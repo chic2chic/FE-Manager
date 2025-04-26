@@ -3,10 +3,13 @@ import { NavigationItems } from "@/constants/NavigationItems";
 import { useAuth } from "@/hooks/useAuth";
 import logoImage from "@/assets/webps/common/logo-manager.webp";
 import alarmImage from "@/assets/webps/common/alarm.webp";
+import { useState } from "react";
+import NoticeModal from "@/components/noticeModal/NoticeModal";
 
 export default function NavBar() {
   const { isLogin } = useAuth();
   const navigate = useNavigate();
+  const [isNoticeModalOpen, setIsNoticeModalOpen] = useState(false);
 
   return (
     <div className="fixed z-100 top-0 w-screen flex h-[80px] items-center justify-between px-10 border-b border-gray04 bg-gray01">
@@ -33,13 +36,18 @@ export default function NavBar() {
           ))}
         </div>
       </div>
-      <div className="flex gap-[50px]">
-        <img
-          src={alarmImage}
-          width={24}
-          height={24}
-          className="cursor-pointer"
-        />
+      <div className="flex gap-[44px] items-center">
+        <div className="relative">
+          <div
+            className={`${isNoticeModalOpen ? "bg-gray03" : "hover:bg-gray03"} transition rounded-[8px] w-9 h-9 flex justify-center items-center cursor-pointer`}
+            onClick={() => setIsNoticeModalOpen(true)}
+          >
+            <img src={alarmImage} width={24} height={24} />
+          </div>
+          {isNoticeModalOpen && (
+            <NoticeModal onClose={() => setIsNoticeModalOpen(false)} />
+          )}
+        </div>
         <div>
           {isLogin ? (
             <button
