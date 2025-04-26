@@ -1,7 +1,6 @@
 import GlobalLayout from "@/components/layouts/GlobalLayout";
 import DashBoard from "@/pages/dashboard/DashBoard";
 import ItemAddPage from "@/pages/itemAddPage/ItemAddPage";
-import ItemListPage from "@/pages/itemListPage/ItemListPage";
 import OnBorading from "@/pages/onBoarding/OnBoarding";
 import ProductList from "@/pages/productList/ProductList";
 import PopUpList from "@/pages/popUpList/PopUpList";
@@ -22,7 +21,7 @@ export const Router = createBrowserRouter([
       },
       {
         path: "/products",
-        element: <ItemListPage />,
+        element: <ProductList />,
       },
     ],
   },
