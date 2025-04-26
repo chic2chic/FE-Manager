@@ -63,7 +63,7 @@ export const NoticeItems: NoticeItemType[] = [
     type: "normal",
     popup: "NEWJEANS",
     title: "한정판 굿즈",
-    timestamp: "2025-04-22T05:30:00.000Z", // (이건 시간은 같지만 id가 뒤니까 마지막)
+    timestamp: "2025-04-22T05:30:00.000Z",
     stockThreshold: 10,
   },
 ];
