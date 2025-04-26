@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import productImage from "@/assets/webps/productList/product-img.webp";
 import { Product } from "@/types/Product";
-import Modal from "@/components/common/Modal"; // 모달 import
+import Modal from "@/components/common/Modal";
 import { useNavigate } from "react-router-dom";
 import bin from "@/assets/webps/common/bin.webp";
 import check from "@/assets/webps/common/check.webp";
@@ -17,6 +17,16 @@ export default function ProductList() {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const navigate = useNavigate();
   const [isDeleteConfirmOpen, setIsDeleteConfirmOpen] = useState(false);
+
+  const handleOpenDeleteModal = (product: Product) => {
+    setSelectedProduct(product);
+    setIsModalOpen(true);
+  };
+
+  const handlerConfirm = () => {
+    setIsModalOpen(false);
+    setIsDeleteConfirmOpen(true);
+  };
 
   useEffect(() => {
     fetch("/products")
@@ -44,10 +54,7 @@ export default function ProductList() {
       {displayList.map(display => (
         <div key={display.name} className="mb-12">
           {/* 매대명 + 구분선 */}
-          <div
-            className="flex items-center gap-4 mb-4"
-            style={{ paddingLeft: "161px", paddingRight: "180px" }}
-          >
+          <div className="flex items-center gap-4 mb-4 pl-[161px] pr-[180px]">
             <div className="w-15 h-15 flex items-center justify-center rounded-full bg-main01 text-gray10 text-[36px] font-semibold">
               {display.name}
             </div>
@@ -84,10 +91,7 @@ export default function ProductList() {
                     </button>
                     <button
                       className="text-[18px] px-4 py-1 cursor-pointer border border-gray10 rounded-full hover:bg-gray10 hover:text-gray01 transition-colors duration-300"
-                      onClick={() => {
-                        setSelectedProduct(product); // 어떤 상품을 삭제할지 저장
-                        setIsModalOpen(true); // 모달 열기
-                      }}
+                      onClick={() => handleOpenDeleteModal(product)}
                     >
                       삭제
                     </button>
@@ -108,25 +112,19 @@ export default function ProductList() {
           image={bin}
           confirmText="삭제"
           cancelText="취소"
-          onConfirm={() => {
-            setIsModalOpen(false);
-            setIsDeleteConfirmOpen(true); // 두 번째(삭제완료) 모달 열기
-          }}
-          onCancel={() => {
-            setIsModalOpen(false);
-          }}
+          onConfirm={handlerConfirm}
+          onCancel={() => setIsModalOpen(false)}
         />
       )}
 
+      {/* 삭제 완료 모달 */}
       <Modal
         isOpen={isDeleteConfirmOpen}
         setIsOpen={setIsDeleteConfirmOpen}
         content="상품이 삭제되었습니다."
         image={check}
         confirmText="확인"
-        onConfirm={() => {
-          setIsDeleteConfirmOpen(false);
-        }}
+        onConfirm={() => setIsDeleteConfirmOpen(false)}
       />
     </div>
   );
