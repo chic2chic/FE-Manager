@@ -28,7 +28,7 @@ export default function Congestion() {
 
         {/* 혼잡도 그래프 */}
         <div className="absolute bottom-6 w-[612px] h-[394px] bg-gray01 rounded-[40px] flex justify-center">
-          <DottedAreaChart />
+          <DottedAreaChart selectedDay={selectedDay} />
         </div>
       </div>
     </div>
