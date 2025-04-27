@@ -278,13 +278,7 @@ export default function PopUpCreate() {
           </div>
         </div>
       </div>
-      <PopUpQuestionnaire />
-      <button
-        className="rounded-full my-0 mx-auto bg-gray10 text-gray01 py-[16px] px-[42px] cursor-pointer"
-        onClick={handleSave}
-      >
-        저장하기
-      </button>
+      <PopUpQuestionnaire handleSave={handleSave} />
       <Modal
         isOpen={isAlertModalOpen}
         setIsOpen={setIsAlertModalOpen}
