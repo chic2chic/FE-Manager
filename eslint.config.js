@@ -61,4 +61,10 @@ export default tseslint.config(
       ],
     },
   },
+  {
+    files: ["**/useDaumPostcode.tsx"],
+    rules: {
+      "@typescript-eslint/no-explicit-any": "off",
+    },
+  },
 );
