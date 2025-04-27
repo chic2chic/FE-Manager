@@ -3,15 +3,15 @@ import TestImage from "@/assets/webps/onBoarding/test.png";
 import PopUpInput from "./views/PopUpInput";
 import PopUpLabel from "./views/PopUpLabel";
 import { useEffect, useRef } from "react";
-import useCalender from "@/hooks/useCalender";
+import useCalendar from "@/hooks/useCalendar";
 import { useDaumPostcode } from "@/hooks/useDaumPostcode";
 import { usePopUpCreateStore } from "@/stores/usePopUpCreateStore";
 
 export default function PopUpCreate() {
-  const startCalender = useCalender();
-  const endCalender = useCalender();
-  const reservStartCalender = useCalender();
-  const reservEndCalender = useCalender();
+  const startCalender = useCalendar();
+  const endCalender = useCalendar();
+  const reservStartCalender = useCalendar();
+  const reservEndCalender = useCalendar();
 
   const { addressInfo, PostCode } = useDaumPostcode();
 
@@ -20,7 +20,7 @@ export default function PopUpCreate() {
   const reservStartCalendarRef = useRef<HTMLDivElement>(null);
   const reservEndCalendarRef = useRef<HTMLDivElement>(null);
 
-  const { updateField } = usePopUpCreateStore();
+  const { formData, updateField } = usePopUpCreateStore();
 
   useEffect(() => {
     updateField("popUpStartDate", startCalender.selectedDate);
@@ -123,6 +123,7 @@ export default function PopUpCreate() {
                 startCalender.calender({
                   cssOption: "absolute top-[60px] left-0 bg-gray01 z-20",
                   startDate: new Date(),
+                  endDate: endCalender.selectedDate,
                 })}
             </div>
             <span>-</span>
@@ -141,6 +142,8 @@ export default function PopUpCreate() {
               placeholder="open"
               cssOption="text-center w-[90px]"
               isOnlyNumber={true}
+              isTimeFormat={true}
+              maxTime={formData.popUpEndTime || 24}
               onChange={e =>
                 updateField("popUpOpenTime", Number(e.target.value))
               }
@@ -150,6 +153,8 @@ export default function PopUpCreate() {
               placeholder="close"
               cssOption="text-center w-[90px]"
               isOnlyNumber={true}
+              isTimeFormat={true}
+              minTime={formData.popUpOpenTime || 0}
               onChange={e =>
                 updateField("popUpEndTime", Number(e.target.value))
               }
@@ -167,12 +172,22 @@ export default function PopUpCreate() {
                   reservStartCalender.calender({
                     cssOption: "absolute top-[60px] left-0 bg-gray01 z-20",
                     startDate: startCalender.selectedDate,
-                    endDate: endCalender.selectedDate,
+                    endDate:
+                      endCalender.selectedDate > reservEndCalender.selectedDate
+                        ? reservEndCalender.selectedDate
+                        : endCalender.selectedDate,
                   })}
                 <PopUpInput
                   placeholder="open"
                   cssOption="text-center w-[90px]"
                   isOnlyNumber={true}
+                  isTimeFormat={true}
+                  maxTime={
+                    reservStartCalender.selectedDate.getTime() ===
+                    reservEndCalender.selectedDate.getTime()
+                      ? formData.reservEndTime || 24
+                      : 24
+                  }
                   onChange={e =>
                     updateField("reservOpenTime", Number(e.target.value))
                   }
@@ -193,6 +208,13 @@ export default function PopUpCreate() {
                   placeholder="close"
                   cssOption="text-center w-[90px]"
                   isOnlyNumber={true}
+                  isTimeFormat={true}
+                  minTime={
+                    reservStartCalender.selectedDate.getTime() ===
+                    reservEndCalender.selectedDate.getTime()
+                      ? formData.reservOpenTime || 0
+                      : 0
+                  }
                   onChange={e =>
                     updateField("reservEndTime", Number(e.target.value))
                   }
@@ -206,6 +228,9 @@ export default function PopUpCreate() {
               placeholder="수용 인원을 입력해주세요"
               cssOption="text-center w-[242px]"
               isOnlyNumber={true}
+              isLimit={true}
+              minTime={1}
+              maxTime={formData.entireMaxNum || 1000}
               onChange={e => updateField("timeMaxNum", Number(e.target.value))}
             />
           </div>
@@ -215,6 +240,9 @@ export default function PopUpCreate() {
               placeholder="총 수용 인원을 입력해주세요"
               cssOption="text-center w-[242px]"
               isOnlyNumber={true}
+              isLimit={true}
+              minTime={formData.timeMaxNum || 1}
+              maxTime={1000}
               onChange={e =>
                 updateField("entireMaxNum", Number(e.target.value))
               }
