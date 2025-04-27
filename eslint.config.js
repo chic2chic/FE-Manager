@@ -61,4 +61,10 @@ export default tseslint.config(
       ],
     },
   },
+  {
+    files: ["**/types/daum.d.ts"],
+    rules: {
+      "@typescript-eslint/no-explicit-any": "off",
+    },
+  },
 );
