@@ -2,9 +2,10 @@ import leftArrowImg from "@/assets/webps/popUpCreate/left-arrow.webp";
 import TestImage from "@/assets/webps/onBoarding/test.png";
 import PopUpInput from "./views/PopUpInput";
 import PopUpLabel from "./views/PopUpLabel";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import useCalender from "@/hooks/useCalender";
 import { useDaumPostcode } from "@/hooks/useDaumPostcode";
+import { usePopUpForm } from "@/hooks/usePopUpForm";
 
 export default function PopUpCreate() {
   const startCalender = useCalender();
@@ -12,19 +13,34 @@ export default function PopUpCreate() {
   const reservStartCalender = useCalender();
   const reservEndCalender = useCalender();
 
-  const [popUpTitle, setPopUpTitle] = useState<string>("");
-  const [popUpOpenTime, setPopUpOpenTime] = useState<number>(0);
-  const [popUpEndTime, setPopUpEndTime] = useState<number>(0);
-  const [reservOpenTime, setReservOpenTime] = useState<number>(0);
-  const [reservEndTime, setReservEndTime] = useState<number>(0);
-  const [timeMaxNum, setTimeMaxNum] = useState<number>(0);
-  const [entireMaxNum, setEntireMaxNum] = useState<number>(0);
   const { addressInfo, PostCode } = useDaumPostcode();
 
   const startCalendarRef = useRef<HTMLDivElement>(null);
   const endCalendarRef = useRef<HTMLDivElement>(null);
   const reservStartCalendarRef = useRef<HTMLDivElement>(null);
   const reservEndCalendarRef = useRef<HTMLDivElement>(null);
+
+  const { updateField, updateAddress } = usePopUpForm();
+
+  useEffect(() => {
+    updateField("popUpStartDate", startCalender.selectedDate);
+  }, [startCalender.selectedDate, updateField]);
+
+  useEffect(() => {
+    updateField("popUpEndDate", endCalender.selectedDate);
+  }, [endCalender.selectedDate, updateField]);
+
+  useEffect(() => {
+    updateField("reservStartDate", reservStartCalender.selectedDate);
+  }, [reservStartCalender.selectedDate, updateField]);
+
+  useEffect(() => {
+    updateField("reservEndDate", reservEndCalender.selectedDate);
+  }, [reservEndCalender.selectedDate, updateField]);
+
+  useEffect(() => {
+    updateAddress(addressInfo);
+  }, [addressInfo, updateAddress]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -67,20 +83,6 @@ export default function PopUpCreate() {
     reservEndCalender.isOpen,
   ]);
 
-  // TODO: 기능 구현 백로그에서 로직 작성
-  const handleSaveBtn = () => {
-    return (
-      popUpTitle &&
-      popUpOpenTime &&
-      popUpEndTime &&
-      reservOpenTime &&
-      reservEndTime &&
-      timeMaxNum &&
-      entireMaxNum &&
-      addressInfo
-    );
-  };
-
   return (
     <div className="flex flex-col py-[32px]">
       <img
@@ -110,7 +112,7 @@ export default function PopUpCreate() {
             <PopUpInput
               placeholder="팝업명을 입력해주세요"
               cssOption="w-[480px]"
-              onChange={e => setPopUpTitle(e.target.value)}
+              onChange={e => updateField("popUpTitle", e.target.value)}
             />
           </div>
           <div className="flex gap-[30px] items-center relative">
@@ -141,14 +143,18 @@ export default function PopUpCreate() {
               placeholder="open"
               cssOption="text-center w-[90px]"
               isOnlyNumber={true}
-              onChange={e => setPopUpOpenTime(Number(e.target.value))}
+              onChange={e =>
+                updateField("popUpOpenTime", Number(e.target.value))
+              }
             />
             <span>-</span>
             <PopUpInput
               placeholder="close"
               cssOption="text-center w-[90px]"
               isOnlyNumber={true}
-              onChange={e => setPopUpEndTime(Number(e.target.value))}
+              onChange={e =>
+                updateField("popUpEndTime", Number(e.target.value))
+              }
             />
           </div>
           <div className="flex gap-[30px] items-baseline">
@@ -170,7 +176,9 @@ export default function PopUpCreate() {
                   placeholder="open"
                   cssOption="text-center w-[90px]"
                   isOnlyNumber={true}
-                  onChange={e => setReservOpenTime(Number(e.target.value))}
+                  onChange={e =>
+                    updateField("reservOpenTime", Number(e.target.value))
+                  }
                 />
               </div>
               <div
@@ -189,7 +197,9 @@ export default function PopUpCreate() {
                   placeholder="close"
                   cssOption="text-center w-[90px]"
                   isOnlyNumber={true}
-                  onChange={e => setReservEndTime(Number(e.target.value))}
+                  onChange={e =>
+                    updateField("reservEndTime", Number(e.target.value))
+                  }
                 />
               </div>
             </div>
@@ -200,7 +210,7 @@ export default function PopUpCreate() {
               placeholder="수용 인원을 입력해주세요"
               cssOption="text-center w-[242px]"
               isOnlyNumber={true}
-              onChange={e => setTimeMaxNum(Number(e.target.value))}
+              onChange={e => updateField("timeMaxNum", Number(e.target.value))}
             />
           </div>
           <div className="flex gap-[30px] items-center">
@@ -209,7 +219,9 @@ export default function PopUpCreate() {
               placeholder="총 수용 인원을 입력해주세요"
               cssOption="text-center w-[242px]"
               isOnlyNumber={true}
-              onChange={e => setEntireMaxNum(Number(e.target.value))}
+              onChange={e =>
+                updateField("entireMaxNum", Number(e.target.value))
+              }
             />
           </div>
           <div className="flex gap-[30px] items-center">
@@ -220,7 +232,7 @@ export default function PopUpCreate() {
       </div>
       <button
         className="rounded-full my-0 mx-auto bg-gray10 text-gray01 py-[16px] px-[42px]"
-        onClick={handleSaveBtn}
+        onClick={() => {}}
       >
         저장하기
       </button>
