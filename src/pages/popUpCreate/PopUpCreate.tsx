@@ -5,7 +5,7 @@ import PopUpLabel from "./views/PopUpLabel";
 import { useEffect, useRef } from "react";
 import useCalender from "@/hooks/useCalender";
 import { useDaumPostcode } from "@/hooks/useDaumPostcode";
-import { usePopUpForm } from "@/hooks/usePopUpForm";
+import { usePopUpCreateStore } from "@/stores/usePopUpCreateStore";
 
 export default function PopUpCreate() {
   const startCalender = useCalender();
@@ -20,7 +20,7 @@ export default function PopUpCreate() {
   const reservStartCalendarRef = useRef<HTMLDivElement>(null);
   const reservEndCalendarRef = useRef<HTMLDivElement>(null);
 
-  const { updateField, updateAddress } = usePopUpForm();
+  const { updateField } = usePopUpCreateStore();
 
   useEffect(() => {
     updateField("popUpStartDate", startCalender.selectedDate);
@@ -39,8 +39,8 @@ export default function PopUpCreate() {
   }, [reservEndCalender.selectedDate, updateField]);
 
   useEffect(() => {
-    updateAddress(addressInfo);
-  }, [addressInfo, updateAddress]);
+    updateField("address", addressInfo);
+  }, [addressInfo, updateField]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
