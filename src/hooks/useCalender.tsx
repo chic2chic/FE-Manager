@@ -31,9 +31,9 @@ export default function useCalender() {
 
   const header = () => {
     return (
-      <div className="flex justify-between items-center mb-4 text-gray-600">
+      <div className="flex justify-between items-center mb-4 text-gray09">
         <button
-          className="w-8 h-8 flex items-center justify-center hover:bg-mint01 rounded-full transition-colors"
+          className="w-8 h-8 flex items-center justify-center cursor-pointer rounded-full transition-colors"
           onClick={() => setCurrentDate(subMonths(currentDate, 1))}
         >
           <img
@@ -45,7 +45,7 @@ export default function useCalender() {
         </button>
         <div className="font-medium">{format(currentDate, "yyyy년 MM월")}</div>
         <button
-          className="w-8 h-8 flex items-center justify-center hover:bg-mint01 rounded-full transition-colors"
+          className="w-8 h-8 flex items-center justify-center cursor-pointer rounded-full transition-colors"
           onClick={() => setCurrentDate(addMonths(currentDate, 1))}
         >
           <img src={RightArrowImg} width={16} height={16} />
@@ -62,7 +62,7 @@ export default function useCalender() {
       days.push(
         <div
           key={i}
-          className={`font-medium text-center py-2 text-sm ${i === 0 ? "text-red-400" : i === 6 ? "text-blue-400" : "text-gray-500"}`}
+          className={`font-semibold text-center py-2 text-[15px] text-gray09`}
         >
           {weekDays[i]}
         </div>,
@@ -103,11 +103,11 @@ export default function useCalender() {
           <div
             key={day.toString()}
             className={`
-              w-8 h-8 mx-auto flex items-center justify-center text-sm rounded-full
-              ${!isDisabled ? "cursor-pointer hover:bg-mint02" : "cursor-not-allowed"}
-              ${!isCurrentMonth ? "text-gray-300" : i === 0 ? "text-red-300" : i === 6 ? "text-blue-300" : "text-gray-600"}
-              ${isSelected ? "bg-mint07 text-white" : ""}
-              ${isToday && !isSelected ? "border border-mint05" : ""}
+              w-8 h-8 mx-auto flex items-center justify-center text-[14px] font-medium rounded-full
+              ${!isDisabled ? "cursor-pointer hover:bg-mint03 transition" : "cursor-default"}
+              ${!isCurrentMonth ? "text-gray05" : "text-gray09"}
+              ${isSelected ? "bg-mint05 text-gray10 font-semibold" : ""}
+              ${isToday && !isSelected ? "border border-mint07" : ""}
               ${isDisabled ? "opacity-40" : ""}
             `}
             onClick={() => !isDisabled && handleClick(cloneDay)}
@@ -135,7 +135,7 @@ export default function useCalender() {
         onClick={() => setIsOpen(true)}
         className="flex gap-[12px] rounded-full border border-gray05 px-[24px] py-[14px] items-center justify-centetransition-colors cursor-pointer"
       >
-        <span className="text-gray-700">
+        <span className="text-gray09">
           {selectedDate
             ? `${selectedDate.getFullYear()} . ${selectedDate.getMonth() + 1} . ${selectedDate.getDate()}`
             : "날짜를 선택해주세요"}
@@ -156,19 +156,11 @@ export default function useCalender() {
   }) => {
     return (
       <div
-        className={`p-4 border border-gray05 rounded-lg shadow-lg bg-white ${cssOption}`}
+        className={`p-4 border border-gray05 rounded-lg shadow-lg bg-white w-[350px] ${cssOption}`}
       >
-        <p
-          className="text-end w-full cursor-pointer text-gray-500 hover:text-gray-700 mb-2"
-          onClick={() => setIsOpen(false)}
-        >
-          X
-        </p>
         {header()}
-        <div className="border-t border-gray05 pt-2">
-          {daysOfWeek()}
-          {cells(startDate, endDate)}
-        </div>
+        {daysOfWeek()}
+        {cells(startDate, endDate)}
       </div>
     );
   };

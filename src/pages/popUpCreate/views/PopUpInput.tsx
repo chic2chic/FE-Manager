@@ -28,7 +28,7 @@ export default function PopUpInput({
   };
   return (
     <input
-      className={`rounded-full placeholder:text-gray08 border-gray05 border px-[24px] py-[16px] text-[16px] font-medium ${cssOption}`}
+      className={`rounded-full placeholder:text-gray08 border-gray05 border px-[24px] py-[16px] text-[16px] font-medium ${cssOption} transition-all duration-200 focus:border-gray09 focus:outline-none`}
       placeholder={`${placeholder}`}
       onChange={onChange}
       onInput={isOnlyNumber ? numberHandler : undefined}

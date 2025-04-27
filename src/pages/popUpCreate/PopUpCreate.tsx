@@ -121,8 +121,7 @@ export default function PopUpCreate() {
               {startCalender.foldCalender()}
               {startCalender.isOpen &&
                 startCalender.calender({
-                  cssOption:
-                    "absolute top-[54px] left-0 bg-gray01 z-20 w-[400px]",
+                  cssOption: "absolute top-[60px] left-0 bg-gray01 z-20",
                   startDate: new Date(),
                 })}
             </div>
@@ -131,8 +130,7 @@ export default function PopUpCreate() {
               {endCalender.foldCalender()}
               {endCalender.isOpen &&
                 endCalender.calender({
-                  cssOption:
-                    "absolute top-[54px] left-0 bg-gray01 z-20 w-[400px]",
+                  cssOption: "absolute top-[60px] left-0 bg-gray01 z-20",
                   startDate: startCalender.selectedDate,
                 })}
             </div>
@@ -167,8 +165,7 @@ export default function PopUpCreate() {
                 {reservStartCalender.foldCalender()}
                 {reservStartCalender.isOpen &&
                   reservStartCalender.calender({
-                    cssOption:
-                      "absolute top-[54px] left-0 bg-gray01 z-20 w-[400px]",
+                    cssOption: "absolute top-[60px] left-0 bg-gray01 z-20",
                     startDate: startCalender.selectedDate,
                     endDate: endCalender.selectedDate,
                   })}
@@ -188,8 +185,7 @@ export default function PopUpCreate() {
                 {reservEndCalender.foldCalender()}
                 {reservEndCalender.isOpen &&
                   reservEndCalender.calender({
-                    cssOption:
-                      "absolute top-[54px] left-0 bg-gray01 z-20 w-[400px]",
+                    cssOption: "absolute top-[60px] left-0 bg-gray01 z-20",
                     startDate: reservStartCalender.selectedDate,
                     endDate: endCalender.selectedDate,
                   })}
