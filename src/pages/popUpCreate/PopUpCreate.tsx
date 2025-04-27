@@ -2,10 +2,14 @@ import leftArrowImg from "@/assets/webps/popUpCreate/left-arrow.webp";
 import TestImage from "@/assets/webps/onBoarding/test.png";
 import PopUpInput from "./views/PopUpInput";
 import PopUpLabel from "./views/PopUpLabel";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import useCalendar from "@/hooks/useCalendar";
 import { useDaumPostcode } from "@/hooks/useDaumPostcode";
 import { usePopUpCreateStore } from "@/stores/usePopUpCreateStore";
+import Modal from "@/components/common/Modal";
+import bin from "@/assets/webps/common/bin.webp";
+import check from "@/assets/webps/common/check.webp";
+import { useNavigate } from "react-router-dom";
 
 export default function PopUpCreate() {
   const startCalender = useCalendar();
@@ -21,6 +25,24 @@ export default function PopUpCreate() {
   const reservEndCalendarRef = useRef<HTMLDivElement>(null);
 
   const { formData, updateField } = usePopUpCreateStore();
+
+  const [isAlertModalOpen, setIsAlertModalOpen] = useState<boolean>(false);
+  const [isSaveModalOpen, setIsSaveModalOpen] = useState<boolean>(false);
+  const navigate = useNavigate();
+
+  const handleCancel = () => {
+    setIsAlertModalOpen(true);
+  };
+
+  // TODO : 저장 기능 구현 -> React Query로 API 호출
+  const handleSave = () => {
+    setIsSaveModalOpen(true);
+  };
+
+  const handleSaveConfirmBtn = () => {
+    setIsSaveModalOpen(false);
+    navigate("/popup-list");
+  };
 
   useEffect(() => {
     updateField("popUpStartDate", startCalender.selectedDate);
@@ -90,6 +112,7 @@ export default function PopUpCreate() {
         width={36}
         height={36}
         className="ml-[40px] cursor-pointer"
+        onClick={handleCancel}
       />
       <div className="flex justify-center gap-[30px] mt-[60px]">
         <div className="relative w-[312px] h-[440px]">
@@ -255,11 +278,30 @@ export default function PopUpCreate() {
         </div>
       </div>
       <button
-        className="rounded-full my-0 mx-auto bg-gray10 text-gray01 py-[16px] px-[42px]"
-        onClick={() => {}}
+        className="rounded-full my-0 mx-auto bg-gray10 text-gray01 py-[16px] px-[42px] cursor-pointer"
+        onClick={handleSave}
       >
         저장하기
       </button>
+      <Modal
+        isOpen={isAlertModalOpen}
+        setIsOpen={setIsAlertModalOpen}
+        content="상품 등록을 취소하시겠어요?"
+        image={bin}
+        confirmText="취소하기"
+        cancelText="돌아가기"
+        onConfirm={() => navigate("/popup-list")}
+        onCancel={() => setIsAlertModalOpen(false)}
+      />
+
+      <Modal
+        isOpen={isSaveModalOpen}
+        setIsOpen={setIsSaveModalOpen}
+        content="상품이 등록되었습니다"
+        image={check}
+        confirmText="확인"
+        onConfirm={handleSaveConfirmBtn}
+      />
     </div>
   );
 }
