@@ -72,8 +72,10 @@ export default function useCalender() {
     return <div className="grid grid-cols-7 mb-1">{days}</div>;
   };
 
-  const cells = (customStartDate?: Date) => {
-    const dateLimit = customStartDate ? subDays(customStartDate, 1) : null;
+  const cells = (customStartDate?: Date, customEndDate?: Date) => {
+    const startDateLimit = customStartDate ? subDays(customStartDate, 1) : null;
+    const endDateLimit = customEndDate || null;
+
     const monthStart = startOfMonth(currentDate);
     const monthEnd = endOfMonth(monthStart);
     const startDay = startOfWeek(monthStart);
@@ -86,7 +88,13 @@ export default function useCalender() {
     while (day <= endDay) {
       for (let i = 0; i < 7; i++) {
         const cloneDay = day;
-        const isDisabled = dateLimit ? day <= dateLimit : false;
+        // startDate와 endDate 모두 체크
+        const isBeforeStartDate = startDateLimit
+          ? day <= startDateLimit
+          : false;
+        const isAfterEndDate = endDateLimit ? day > endDateLimit : false;
+        const isDisabled = isBeforeStartDate || isAfterEndDate;
+
         const isToday = isSameDay(day, new Date());
         const isSelected = isSameDay(day, selectedDate);
         const isCurrentMonth = isSameMonth(day, monthStart);
@@ -140,9 +148,11 @@ export default function useCalender() {
   const calender = ({
     cssOption,
     startDate,
+    endDate,
   }: {
     cssOption?: string;
     startDate?: Date;
+    endDate?: Date;
   }) => {
     return (
       <div
@@ -157,7 +167,7 @@ export default function useCalender() {
         {header()}
         <div className="border-t border-gray05 pt-2">
           {daysOfWeek()}
-          {cells(startDate)}
+          {cells(startDate, endDate)}
         </div>
       </div>
     );
