@@ -151,7 +151,7 @@ export default function PopUpCreate() {
               onChange={e => setPopUpEndTime(Number(e.target.value))}
             />
           </div>
-          <div className="flex gap-[30px] items-center">
+          <div className="flex gap-[30px] items-baseline">
             <PopUpLabel label="예약 기간" />
             <div className="flex flex-col gap-[28px]">
               <div
@@ -164,6 +164,7 @@ export default function PopUpCreate() {
                     cssOption:
                       "absolute top-[54px] left-0 bg-gray01 z-20 w-[400px]",
                     startDate: startCalender.selectedDate,
+                    endDate: endCalender.selectedDate,
                   })}
                 <PopUpInput
                   placeholder="open"
@@ -182,6 +183,7 @@ export default function PopUpCreate() {
                     cssOption:
                       "absolute top-[54px] left-0 bg-gray01 z-20 w-[400px]",
                     startDate: reservStartCalender.selectedDate,
+                    endDate: endCalender.selectedDate,
                   })}
                 <PopUpInput
                   placeholder="close"
