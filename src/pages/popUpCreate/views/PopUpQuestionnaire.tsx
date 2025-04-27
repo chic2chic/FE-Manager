@@ -2,6 +2,7 @@ import RightArrowImg from "@/assets/webps/onBoarding/right-arrow.webp";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import QuestionnaireForm from "./QuestionnaireForm";
+import { Questions } from "@/constants/popUpCreate/Questions";
 
 export default function PopUpQuestionnaire() {
   const [isOpen, setIsOpen] = useState(false);
@@ -34,22 +35,20 @@ export default function PopUpQuestionnaire() {
             }}
             className="bg-white overflow-hidden gap-[64px] flex flex-col"
           >
-            <QuestionnaireForm number={1} title="좋아하는 굿즈 타입은?" />
-            <div className="w-3/4 border flex my-0 mx-auto border-gray05" />
-            <QuestionnaireForm
-              number={2}
-              title="어떤 경로로 팝업스토어 오픈 소식을 접하셨나요?"
-            />
-            <div className="w-3/4 border flex my-0 mx-auto border-gray05" />
-            <QuestionnaireForm
-              number={3}
-              title="이번 팝업스토어에 방문한 가장 큰 이유는 무엇인가요?"
-            />
-            <div className="w-3/4 border flex my-0 mx-auto border-gray05" />
-            <QuestionnaireForm
-              number={4}
-              title="구매 시 중요하게 고려하는 요소는 무엇인가요?"
-            />
+            {Questions.map(question => {
+              return (
+                <>
+                  <QuestionnaireForm
+                    key={question.questionNumber}
+                    number={question.questionNumber}
+                    title={question.title}
+                  />
+                  {question.questionNumber !== 4 && (
+                    <div className="w-3/4 border flex my-0 mx-auto border-gray05" />
+                  )}
+                </>
+              );
+            })}
           </motion.div>
         )}
       </AnimatePresence>
