@@ -4,7 +4,7 @@ type Props = {
   placeholder: string;
   cssOption?: string;
   isOnlyNumber?: boolean;
-  onChange: (_e: React.FormEvent<HTMLInputElement>) => void;
+  onChange: (_e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 export default function PopUpInput({

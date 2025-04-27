@@ -2,21 +2,16 @@ import leftArrowImg from "@/assets/webps/popUpCreate/left-arrow.webp";
 import TestImage from "@/assets/webps/onBoarding/test.png";
 import PopUpInput from "./views/PopUpInput";
 import PopUpLabel from "./views/PopUpLabel";
-import {
-  AddressResultType,
-  DaumPostcode,
-} from "@/components/common/DaumPostcode";
 import { useEffect, useRef, useState } from "react";
 import useCalender from "@/hooks/useCalender";
+import { useDaumPostcode } from "@/hooks/useDaumPostcode";
 
 export default function PopUpCreate() {
   const startCalender = useCalender();
   const endCalender = useCalender();
   const reservStartCalender = useCalender();
   const reservEndCalender = useCalender();
-  const handleComplete = (data: AddressResultType) => {
-    console.log(data);
-  };
+
   const [popUpTitle, setPopUpTitle] = useState<string>("");
   const [popUpOpenTime, setPopUpOpenTime] = useState<number>(0);
   const [popUpEndTime, setPopUpEndTime] = useState<number>(0);
@@ -24,6 +19,7 @@ export default function PopUpCreate() {
   const [reservEndTime, setReservEndTime] = useState<number>(0);
   const [timeMaxNum, setTimeMaxNum] = useState<number>(0);
   const [entireMaxNum, setEntireMaxNum] = useState<number>(0);
+  const { addressInfo, PostCode } = useDaumPostcode();
 
   const startCalendarRef = useRef<HTMLDivElement>(null);
   const endCalendarRef = useRef<HTMLDivElement>(null);
@@ -80,7 +76,8 @@ export default function PopUpCreate() {
       reservOpenTime &&
       reservEndTime &&
       timeMaxNum &&
-      entireMaxNum
+      entireMaxNum &&
+      addressInfo
     );
   };
 
@@ -166,7 +163,7 @@ export default function PopUpCreate() {
                   reservStartCalender.calender({
                     cssOption:
                       "absolute top-[54px] left-0 bg-gray01 z-20 w-[400px]",
-                    startDate: new Date(),
+                    startDate: startCalender.selectedDate,
                   })}
                 <PopUpInput
                   placeholder="open"
@@ -215,7 +212,7 @@ export default function PopUpCreate() {
           </div>
           <div className="flex gap-[30px] items-center">
             <PopUpLabel label="위치" />
-            <DaumPostcode onComplete={handleComplete} />
+            <PostCode />
           </div>
         </div>
       </div>

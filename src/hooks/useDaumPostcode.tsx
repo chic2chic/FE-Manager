@@ -7,17 +7,13 @@ declare global {
   }
 }
 
-type Props = {
-  onComplete: (_data: any) => void;
-};
-
 export type AddressResultType = {
   address: string;
   latitude: number;
   longitude: number;
 };
 
-export function DaumPostcode({ onComplete }: Props) {
+export function useDaumPostcode() {
   const postcodeRef = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
   const [addressInfo, setAddressInfo] = useState<AddressResultType>({
@@ -59,13 +55,9 @@ export function DaumPostcode({ onComplete }: Props) {
         height: "100%",
       }).embed(postcodeRef.current);
     }
-  }, [isOpen, onComplete]);
+  }, [isOpen]);
 
-  useEffect(() => {
-    onComplete(addressInfo);
-  }, [addressInfo]);
-
-  return (
+  const PostCode = () => (
     <div className="relative">
       <div
         className="flex items-center justify-between border border-gray05 rounded-full px-5 w-[480px] h-[54px]"
@@ -106,4 +98,6 @@ export function DaumPostcode({ onComplete }: Props) {
       )}
     </div>
   );
+
+  return { addressInfo, PostCode };
 }
