@@ -1,3 +1,8 @@
+type Question = {
+  questionNumber: number;
+  answers: string[];
+};
+
 export type PopUpFormData = {
   popUpTitle: string;
   popUpStartDate: Date;
@@ -15,4 +20,5 @@ export type PopUpFormData = {
     latitude: number;
     longitude: number;
   };
+  questions: Question[];
 };

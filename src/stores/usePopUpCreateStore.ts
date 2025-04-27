@@ -1,23 +1,6 @@
+import { Questions } from "@/constants/popUpCreate/Questions";
+import { PopUpFormData } from "@/types/PopUpCreateFormType";
 import { create } from "zustand";
-
-type PopUpFormData = {
-  popUpTitle: string;
-  popUpStartDate: Date;
-  popUpEndDate: Date;
-  popUpOpenTime: number;
-  popUpEndTime: number;
-  reservStartDate: Date;
-  reservEndDate: Date;
-  reservOpenTime: number;
-  reservEndTime: number;
-  timeMaxNum: number;
-  entireMaxNum: number;
-  address: {
-    address: string;
-    latitude: number;
-    longitude: number;
-  };
-};
 
 const initialState: PopUpFormData = {
   popUpTitle: "",
@@ -36,6 +19,7 @@ const initialState: PopUpFormData = {
     latitude: 0,
     longitude: 0,
   },
+  questions: Questions.map(q => ({ ...q, answers: Array(2).fill("") })),
 };
 
 type PopUpStore = {
@@ -44,6 +28,7 @@ type PopUpStore = {
     _field: K,
     _value: PopUpFormData[K],
   ) => void;
+  updateQuestionAnswers: (_questionNumber: number, _answers: string[]) => void;
   resetForm: () => void;
   validateForm: () => boolean;
 };
@@ -52,6 +37,16 @@ export const usePopUpCreateStore = create<PopUpStore>((set, get) => ({
   formData: { ...initialState },
   updateField: (field, value) =>
     set(state => ({ formData: { ...state.formData, [field]: value } })),
+  updateQuestionAnswers: (questionNumber, answers) =>
+    set(state => ({
+      ...state,
+      formData: {
+        ...state.formData,
+        questions: state.formData.questions.map(q =>
+          q.questionNumber === questionNumber ? { ...q, answers } : q,
+        ),
+      },
+    })),
   // 폼이 유효하지 않으면 false를 뱉습니다.
   // 에러 문구까지 나중에 보여준다면, isFormValid를 여러개 쪼개면 될 것 같아요
   validateForm: () => {

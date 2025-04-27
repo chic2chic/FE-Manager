@@ -10,6 +10,7 @@ import Modal from "@/components/common/Modal";
 import bin from "@/assets/webps/common/bin.webp";
 import check from "@/assets/webps/common/check.webp";
 import { useNavigate } from "react-router-dom";
+import PopUpQuestionnaire from "./views/PopUpQuestionnaire";
 
 export default function PopUpCreate() {
   const startCalender = useCalendar();
@@ -277,12 +278,7 @@ export default function PopUpCreate() {
           </div>
         </div>
       </div>
-      <button
-        className="rounded-full my-0 mx-auto bg-gray10 text-gray01 py-[16px] px-[42px] cursor-pointer"
-        onClick={handleSave}
-      >
-        저장하기
-      </button>
+      <PopUpQuestionnaire handleSave={handleSave} />
       <Modal
         isOpen={isAlertModalOpen}
         setIsOpen={setIsAlertModalOpen}
