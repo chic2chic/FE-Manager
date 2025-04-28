@@ -1,5 +1,5 @@
 import { congestionDatas } from "@/mocks/handlers/dashboard/conjestionDatas";
-import { DayOfWeek } from "@/types/CongestionType";
+import { CongestionData } from "@/types/CongestionType";
 
 import {
   AreaChart,
@@ -12,7 +12,7 @@ import {
 } from "recharts";
 
 type Props = {
-  selectedDay: DayOfWeek;
+  dayData: CongestionData[];
 };
 
 type TooltipPayload = {
@@ -76,9 +76,7 @@ const BlurDot = ({ cx, cy }: DotProps) => {
   );
 };
 
-export default function DottedAreaChart({ selectedDay }: Props) {
-  const data = congestionDatas[selectedDay];
-
+export default function DottedAreaChart({ dayData }: Props) {
   // 모든 요일 데이터 중 가장 큰 value 찾기
   const allValues = Object.values(congestionDatas)
     .flat()
@@ -89,7 +87,7 @@ export default function DottedAreaChart({ selectedDay }: Props) {
   return (
     <ResponsiveContainer width={612} height={394}>
       <AreaChart
-        data={data}
+        data={dayData}
         margin={{ top: 70, right: 40, left: 40, bottom: 20 }}
       >
         <defs>
