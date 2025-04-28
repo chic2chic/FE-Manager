@@ -1,3 +1,5 @@
+import { congestionDatas } from "@/mocks/handlers/dashboard/conjestionDatas";
+
 import {
   AreaChart,
   Area,
@@ -8,102 +10,8 @@ import {
   YAxis,
 } from "recharts";
 
-const congestionData: { [key: string]: { time: number; value: number }[] } = {
-  월: [
-    { time: 6, value: 5 },
-    { time: 8, value: 10 },
-    { time: 10, value: 14 },
-    { time: 12, value: 20 },
-    { time: 14, value: 25 },
-    { time: 16, value: 22 },
-    { time: 18, value: 32 },
-    { time: 20, value: 26 },
-    { time: 22, value: 18 },
-    { time: 24, value: 5 },
-  ],
-  화: [
-    { time: 6, value: 3 },
-    { time: 8, value: 7 },
-    { time: 10, value: 13 },
-    { time: 12, value: 19 },
-    { time: 14, value: 23 },
-    { time: 16, value: 20 },
-    { time: 18, value: 28 },
-    { time: 20, value: 22 },
-    { time: 22, value: 16 },
-    { time: 24, value: 4 },
-  ],
-  수: [
-    { time: 6, value: 4 },
-    { time: 8, value: 9 },
-    { time: 10, value: 15 },
-    { time: 12, value: 21 },
-    { time: 14, value: 26 },
-    { time: 16, value: 24 },
-    { time: 18, value: 34 },
-    { time: 20, value: 28 },
-    { time: 22, value: 20 },
-    { time: 24, value: 6 },
-  ],
-
-  목: [
-    { time: 6, value: 2 },
-    { time: 8, value: 5 },
-    { time: 10, value: 9 },
-    { time: 12, value: 15 },
-    { time: 14, value: 18 },
-    { time: 16, value: 16 },
-    { time: 18, value: 22 },
-    { time: 20, value: 18 },
-    { time: 22, value: 12 },
-    { time: 24, value: 3 },
-  ],
-  금: [
-    { time: 6, value: 1 },
-    { time: 8, value: 3 },
-    { time: 10, value: 7 },
-    { time: 12, value: 12 },
-    { time: 14, value: 15 },
-    { time: 16, value: 14 },
-    { time: 18, value: 20 },
-    { time: 20, value: 16 },
-    { time: 22, value: 10 },
-    { time: 24, value: 2 },
-  ],
-  토: [
-    { time: 6, value: 6 },
-    { time: 8, value: 12 },
-    { time: 10, value: 17 },
-    { time: 12, value: 22 },
-    { time: 14, value: 28 },
-    { time: 16, value: 25 },
-    { time: 18, value: 36 },
-    { time: 20, value: 30 },
-    { time: 22, value: 22 },
-    { time: 24, value: 7 },
-  ],
-  일: [
-    { time: 6, value: 8 },
-    { time: 8, value: 14 },
-    { time: 10, value: 18 },
-    { time: 12, value: 24 },
-    { time: 14, value: 30 },
-    { time: 16, value: 27 },
-    { time: 18, value: 38 },
-    { time: 20, value: 32 },
-    { time: 22, value: 24 },
-    { time: 24, value: 8 },
-  ],
-};
-
 type Props = {
   selectedDay: string;
-};
-
-type CustomTooltipProps = {
-  active?: boolean;
-  payload?: TooltipPayload;
-  label?: string | number;
 };
 
 type TooltipPayload = {
@@ -111,6 +19,12 @@ type TooltipPayload = {
   name: string;
   dataKey: string;
 }[];
+
+type CustomTooltipProps = {
+  active?: boolean;
+  payload?: TooltipPayload;
+  label?: string | number;
+};
 
 type CursorProps = {
   points?: { x: number; y: number }[];
@@ -162,12 +76,13 @@ const BlurDot = ({ cx, cy }: DotProps) => {
 };
 
 export default function DottedAreaChart({ selectedDay }: Props) {
-  const data = congestionData[selectedDay] || congestionData["월"];
+  const data = congestionDatas[selectedDay];
 
   // 모든 요일 데이터 중 가장 큰 value 찾기
-  const allValues = Object.values(congestionData)
+  const allValues = Object.values(congestionDatas)
     .flat()
     .map(d => d.value);
+
   const maxValue = Math.max(...allValues);
 
   return (

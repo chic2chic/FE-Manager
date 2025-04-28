@@ -1,11 +1,11 @@
+import { useState } from "react";
+import { Days } from "@/constants/dashboard/Days";
 import DashBoardTitle from "@/pages/dashboard/views/DashBoardTitle";
 import DottedAreaChart from "@/pages/dashboard/views/DottedAreaChart";
-import { useState } from "react";
-
-const days = ["월", "화", "수", "목", "금", "토", "일"];
 
 export default function Congestion() {
-  const [selectedDay, setSelectedDay] = useState("월");
+  const today = new Date().getDay(); // 0(일) - 6(토)
+  const [selectedDay, setSelectedDay] = useState(Days[today - 1]); // default: 오늘 요일이 기본으로 보임.
 
   return (
     <div className="flex flex-col">
@@ -13,7 +13,7 @@ export default function Congestion() {
       <div className="relative w-[660px] h-[510px] bg-gray02 rounded-[50px] px-6">
         {/* 요일 버튼 */}
         <div className="mt-5 flex justify-center gap-6 mb-4">
-          {days.map(day => (
+          {Days.map(day => (
             <button
               key={day}
               onClick={() => setSelectedDay(day)}
