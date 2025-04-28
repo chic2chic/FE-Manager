@@ -1,7 +1,7 @@
 import { CongestionType } from "@/types/CongestionType";
 
 export const congestionDatas: CongestionType = {
-  월: [
+  mon: [
     { time: 6, value: 5 },
     { time: 8, value: 10 },
     { time: 10, value: 14 },
@@ -13,7 +13,7 @@ export const congestionDatas: CongestionType = {
     { time: 22, value: 18 },
     { time: 24, value: 5 },
   ],
-  화: [
+  tue: [
     { time: 6, value: 3 },
     { time: 8, value: 7 },
     { time: 10, value: 13 },
@@ -25,7 +25,7 @@ export const congestionDatas: CongestionType = {
     { time: 22, value: 16 },
     { time: 24, value: 4 },
   ],
-  수: [
+  wed: [
     { time: 6, value: 4 },
     { time: 8, value: 9 },
     { time: 10, value: 15 },
@@ -37,8 +37,7 @@ export const congestionDatas: CongestionType = {
     { time: 22, value: 20 },
     { time: 24, value: 6 },
   ],
-
-  목: [
+  thu: [
     { time: 6, value: 2 },
     { time: 8, value: 5 },
     { time: 10, value: 9 },
@@ -50,7 +49,7 @@ export const congestionDatas: CongestionType = {
     { time: 22, value: 12 },
     { time: 24, value: 3 },
   ],
-  금: [
+  fri: [
     { time: 6, value: 1 },
     { time: 8, value: 3 },
     { time: 10, value: 7 },
@@ -62,7 +61,7 @@ export const congestionDatas: CongestionType = {
     { time: 22, value: 10 },
     { time: 24, value: 2 },
   ],
-  토: [
+  sat: [
     { time: 6, value: 6 },
     { time: 8, value: 12 },
     { time: 10, value: 17 },
@@ -74,7 +73,7 @@ export const congestionDatas: CongestionType = {
     { time: 22, value: 22 },
     { time: 24, value: 7 },
   ],
-  일: [
+  sun: [
     { time: 6, value: 8 },
     { time: 8, value: 14 },
     { time: 10, value: 18 },

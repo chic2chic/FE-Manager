@@ -1,4 +1,5 @@
 import { congestionDatas } from "@/mocks/handlers/dashboard/conjestionDatas";
+import { DayOfWeek } from "@/types/CongestionType";
 
 import {
   AreaChart,
@@ -11,7 +12,7 @@ import {
 } from "recharts";
 
 type Props = {
-  selectedDay: string;
+  selectedDay: DayOfWeek;
 };
 
 type TooltipPayload = {
@@ -52,8 +53,8 @@ const CustomCursor = ({ points }: CursorProps) => {
     <line
       x1={x}
       x2={x}
-      y1={20} // 그래프 중간부터
-      y2={340} // 그래프 아래 끝까지
+      y1={20}
+      y2={340}
       stroke="#dadada"
       strokeWidth={1}
       strokeDasharray="3 6"

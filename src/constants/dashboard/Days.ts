@@ -1,1 +1,11 @@
-export const Days = ["월", "화", "수", "목", "금", "토", "일"];
+import { DayOfWeek } from "@/types/CongestionType";
+
+export const Days: DayOfWeek[] = [
+  "mon",
+  "tue",
+  "wed",
+  "thu",
+  "fri",
+  "sat",
+  "sun",
+];
