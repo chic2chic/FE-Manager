@@ -4,7 +4,7 @@ import { formatDay } from "@/utils/FormatDay";
 import DashBoardTitle from "@/pages/dashboard/views/DashBoardTitle";
 import DottedAreaChart from "@/pages/dashboard/views/DottedAreaChart";
 
-export default function Congestion() {
+export default function DashBoardCongestion() {
   const today = new Date().getDay(); // 0(일) - 6(토)
   const [selectedDay, setSelectedDay] = useState(Days[today - 1]); // default: 오늘 요일이 기본으로 보임.
 
