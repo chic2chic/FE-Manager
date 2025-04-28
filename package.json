@@ -25,6 +25,7 @@
     "react-dom": "^18.3.1",
     "react-error-boundary": "^5.0.0",
     "react-router-dom": "^7.5.0",
+    "recharts": "^2.15.3",
     "swiper": "^11.2.6",
     "tailwindcss": "^4.0.0",
     "zustand": "^5.0.3"
