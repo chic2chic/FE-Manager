@@ -3,7 +3,7 @@ import { Days } from "@/constants/dashboard/Days";
 import { formatDay } from "@/utils/FormatDay";
 import DashBoardTitle from "@/pages/dashboard/views/DashBoardTitle";
 import DottedAreaChart from "@/pages/dashboard/views/DottedAreaChart";
-import { CongestionDatas } from "@/mocks/handlers/dashboard/conjestionDatas";
+import { CongestionDatas } from "@/mocks/handlers/dashboard/ConjestionDatas";
 
 export default function DashBoardCongestion() {
   const today = new Date().getDay(); // 0(일) - 6(토)

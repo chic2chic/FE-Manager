@@ -1,5 +1,5 @@
 import CustomTooltip from "@/components/common/CustomTooltip";
-import { CongestionDatas } from "@/mocks/handlers/dashboard/conjestionDatas";
+import { CongestionDatas } from "@/mocks/handlers/dashboard/ConjestionDatas";
 import { CongestionData } from "@/types/CongestionType";
 
 import {
