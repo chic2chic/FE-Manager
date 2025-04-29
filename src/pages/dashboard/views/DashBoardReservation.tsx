@@ -1,7 +1,7 @@
 import DashBoardTitle from "@/pages/dashboard/views/DashBoardTitle";
 import ReservationByDay from "@/pages/dashboard/views/ReservationByDay";
 import checkCalendar from "@/assets/webps/dashboard/check-calendar.webp";
-import { TodayReservationDatas } from "@/mocks/handlers/dashboard/reservationDatas";
+import { TodayReservationDatas } from "@/mocks/handlers/dashboard/ReservationDatas";
 import { CountCard } from "@/pages/dashboard/views/CountCard";
 
 export default function DashBoardReservation() {
