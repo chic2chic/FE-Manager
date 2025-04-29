@@ -1,7 +1,6 @@
 import CustomTooltip from "@/components/common/CustomTooltip";
-import { Colors } from "@/constants/dashboard/Colors";
 import { ReservationChartDatas } from "@/mocks/handlers/dashboard/ReservationDatas";
-import { ReservationChartType } from "@/types/ReservationType";
+import { reservationColorMapper } from "@/utils/ReservationColorMapper";
 import {
   BarChart,
   Bar,
@@ -12,26 +11,8 @@ import {
   Cell,
 } from "recharts";
 
-// ⭐️ value 기준 오름차순으로 color 매칭시키기 ⭐️
-// 1. value 기준 오름차순 정렬
-const sortedData = [...ReservationChartDatas].sort(
-  (a: ReservationChartType, b: ReservationChartType) => a.value - b.value,
-);
-
-// 2. 요일 -> 색상 매칭
-const dayToColorMap = new Map(
-  sortedData.map((entry, index) => [entry.day, Colors[index]]),
-);
-
-// 3. 원래 data에 색상 입히기
-const coloredData = ReservationChartDatas.map(
-  (entry: ReservationChartType) => ({
-    ...entry,
-    fill: dayToColorMap.get(entry.day),
-  }),
-);
-
 export default function ReservationByDay() {
+  const coloredData = reservationColorMapper(ReservationChartDatas);
   // max값 기준 y축 눈금 100 단위로 만들기
   const maxValue = Math.max(...ReservationChartDatas.map(d => d.value)); // value 중 가장 큰 수
   const roundedMax = Math.ceil(maxValue / 100) * 100; // 100 단위 올림
