@@ -1,7 +1,7 @@
 import {
   visitorGenderData,
   visitorAgeData,
-} from "@/mocks/handlers/dashboard/visitorDatas";
+} from "@/mocks/handlers/dashboard/VisitorDatas";
 import DashBoardTitle from "@/pages/dashboard/views/DashBoardTitle";
 import { PieChart, Pie, Cell } from "recharts";
 
