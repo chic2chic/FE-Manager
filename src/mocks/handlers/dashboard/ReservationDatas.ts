@@ -1,4 +1,7 @@
-import { ReservationChartType } from "@/types/ReservationType";
+import {
+  ReservationChartType,
+  TodayReservationType,
+} from "@/types/ReservationType";
 
 export const ReservationChartDatas: ReservationChartType[] = [
   { day: "월", value: 220 },
@@ -9,3 +12,8 @@ export const ReservationChartDatas: ReservationChartType[] = [
   { day: "토", value: 370 },
   { day: "일", value: 310 },
 ];
+
+export const TodayReservationDatas: TodayReservationType = {
+  reservedCount: 240,
+  enteredCount: 180,
+};

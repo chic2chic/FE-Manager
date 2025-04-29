@@ -1,6 +1,7 @@
 import DashBoardTitle from "@/pages/dashboard/views/DashBoardTitle";
 import ReservationByDay from "@/pages/dashboard/views/ReservationByDay";
 import checkCalendar from "@/assets/webps/dashboard/check-calendar.webp";
+import { TodayReservationDatas } from "@/mocks/handlers/dashboard/reservationDatas";
 
 type Props = {
   title: string;
@@ -35,13 +36,13 @@ export default function DashBoardReservation() {
         <div className="w-[314px] flex flex-col justify-between">
           <CountCard
             title="예약자 수"
-            value={240}
+            value={TodayReservationDatas.reservedCount}
             bgColor="bg-purple02"
             textColor="text-purple07"
           />
           <CountCard
             title="입장자 수"
-            value={180}
+            value={TodayReservationDatas.enteredCount}
             bgColor="bg-blue02"
             textColor="text-blue08"
           />
