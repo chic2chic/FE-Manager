@@ -1,6 +1,6 @@
 import { CongestionType } from "@/types/CongestionType";
 
-export const congestionDatas: CongestionType = {
+export const CongestionDatas: CongestionType = {
   mon: [
     { time: 6, value: 5 },
     { time: 8, value: 10 },

@@ -1,4 +1,6 @@
-import CustomTooltip from "@/pages/dashboard/views/CustomTooltip";
+import CustomTooltip from "@/components/common/CustomTooltip";
+import { Colors } from "@/constants/dashboard/Colors";
+import { ReservationChartDatas } from "@/mocks/handlers/dashboard/reservationDatas";
 import {
   BarChart,
   Bar,
@@ -9,52 +11,34 @@ import {
   Cell,
 } from "recharts";
 
-const data = [
-  { day: "월", value: 220 },
-  { day: "화", value: 210 },
-  { day: "수", value: 90 },
-  { day: "목", value: 130 },
-  { day: "금", value: 300 },
-  { day: "토", value: 370 },
-  { day: "일", value: 310 },
-];
+// ⭐️ value 기준 오름차순으로 color 매칭시키기 ⭐️
+// 1. value 기준 오름차순 정렬
+const sortedData = [...ReservationChartDatas].sort((a, b) => a.value - b.value);
 
-const colors = [
-  "#FF98C0", // 가장 작은 값
-  "#FFB4D1",
-  "#D9D9FC",
-  "#D3E5FF",
-  "#C5EFE8",
-  "#B3D2FF",
-  "#BCBCFA", // 가장 큰 값
-];
+// 2. 요일 -> 색상 매칭
+const dayToColorMap = new Map(
+  sortedData.map((entry, index) => [entry.day, Colors[index]]),
+);
+
+// 3. 원래 data에 색상 입히기
+const coloredData = ReservationChartDatas.map(entry => ({
+  ...entry,
+  fill: dayToColorMap.get(entry.day),
+}));
 
 export default function ReservationByDay() {
-  const maxValue = Math.max(...data.map(d => d.value));
-  const roundedMax = Math.ceil(maxValue / 100) * 100;
+  // max값 기준 y축 눈금 100 단위로 만들기
+  const maxValue = Math.max(...ReservationChartDatas.map(d => d.value)); // value 중 가장 큰 수
+  const roundedMax = Math.ceil(maxValue / 100) * 100; // 100 단위 올림
   const ticks = [];
 
   for (let i = 0; i <= roundedMax; i += 100) {
-    ticks.push(i);
+    ticks.push(i); // 0 100 200 300 400
   }
-
-  // value 기준 오름차순 정렬
-  const sortedData = [...data].sort((a, b) => a.value - b.value);
-
-  // 정렬 순서대로 색상 매칭
-  const coloredData = data.map(entry => {
-    const sortedIndex = sortedData.findIndex(
-      sorted => sorted.day === entry.day,
-    );
-    return {
-      ...entry,
-      fill: colors[sortedIndex],
-    };
-  });
 
   return (
     <ResponsiveContainer width={473} height={250}>
-      <BarChart data={data}>
+      <BarChart data={ReservationChartDatas}>
         <XAxis
           dataKey="day"
           tick={{ fill: "#939494", fontSize: 20 }}

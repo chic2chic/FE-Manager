@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
-import { popUpCards } from "@/mocks/handlers/popUpList/PopUpCards";
+import { PopUpCards } from "@/mocks/handlers/popUpList/PopUpCards";
 import PopUpCard from "@/pages/popUpList/views/PopUpCard";
 import Modal from "@/components/common/Modal";
 import logoImage from "@/assets/webps/common/logo-manager.webp";
@@ -18,7 +18,7 @@ export default function PopUpList() {
   const navigate = useNavigate();
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
   const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
-  const [cards, setCards] = useState(popUpCards);
+  const [cards, setCards] = useState(PopUpCards);
   const [selectedCardId, setSelectedCardId] = useState<number | null>(null);
   const [pendingDeleteId, setPendingDeleteId] = useState<number | null>(null);
 

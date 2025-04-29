@@ -1,3 +1,8 @@
+/**
+ * @Description
+ * rechart 라이브러리를 활용한 그래프에서 사용되는 툴팁입니다
+ */
+
 type Props = {
   active?: boolean;
   payload?: {

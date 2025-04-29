@@ -1,5 +1,5 @@
-import { congestionDatas } from "@/mocks/handlers/dashboard/conjestionDatas";
-import CustomTooltip from "@/pages/dashboard/views/CustomTooltip";
+import CustomTooltip from "@/components/common/CustomTooltip";
+import { CongestionDatas } from "@/mocks/handlers/dashboard/conjestionDatas";
 import { CongestionData } from "@/types/CongestionType";
 
 import {
@@ -31,20 +31,6 @@ export type CustomTooltipProps = {
 type CursorProps = {
   points?: { x: number; y: number }[];
 };
-
-// const CustomTooltip = ({ active, payload, label }: CustomTooltipProps) => {
-//   if (active && payload && payload.length) {
-//     return (
-//       <div className="bg-white border border-gray02 rounded-md p-2 shadow-sm">
-//         <p className="text-[18px] text-gray09 font-semibold">{label}시</p>
-//         <p className="text-[17px] text-gray07 font-semibold">
-//           평균<span className="text-[#54d8c2]"> {payload[0].value}</span>명
-//         </p>
-//       </div>
-//     );
-//   }
-//   return null;
-// };
 
 const CustomCursor = ({ points }: CursorProps) => {
   const x = points?.[0]?.x;
@@ -78,8 +64,8 @@ const BlurDot = ({ cx, cy }: DotProps) => {
 };
 
 export default function DottedAreaChart({ dayData }: Props) {
-  // 모든 요일 데이터 중 가장 큰 value 찾기
-  const allValues = Object.values(congestionDatas)
+  // y축 최댓값: 모든 요일 데이터 중 가장 큰 value
+  const allValues = Object.values(CongestionDatas)
     .flat()
     .map(d => d.value);
 
