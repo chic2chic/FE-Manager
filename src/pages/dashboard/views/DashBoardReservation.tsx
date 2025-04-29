@@ -27,6 +27,8 @@ export default function DashBoardReservation() {
             unitCSS="text-purple06 text-[40px]"
           />
         </div>
+
+        {/* 요일별 예약자 수 */}
         <div className="flex flex-col justify-between w-[552px] h-[394px] bg-gray02 rounded-[50px] px-[30px] pt-[22px] pb-[30px]">
           <div className="flex ml-[92px] gap-[10px] items-center left-[122px] top-[22px]">
             <img

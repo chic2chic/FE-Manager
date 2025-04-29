@@ -9,6 +9,7 @@ type Props = {
     value: number;
     name: string;
     dataKey: string;
+    payload?: { fill?: string };
   }[];
   label?: string | number;
   labelSuffix?: string;
@@ -21,12 +22,15 @@ export default function CustomTooltip({
   active,
   payload,
   label,
-  labelSuffix = "",
-  unitPrefix = "",
-  highlightColor = "#54d8c2",
-  unitSuffix = "",
+  labelSuffix,
+  unitPrefix,
+  highlightColor,
+  unitSuffix,
 }: Props) {
   if (active && payload && payload.length) {
+    const dynamicColor =
+      highlightColor ?? payload?.[0]?.payload?.fill ?? "#000";
+
     return (
       <div className="bg-white border border-gray02 rounded-md p-2 shadow-sm">
         <p className="text-[18px] text-gray09 font-semibold">
@@ -35,7 +39,7 @@ export default function CustomTooltip({
         </p>
         <p className="text-[17px] text-gray07 font-semibold">
           {unitPrefix}
-          <span style={{ color: highlightColor }}> {payload[0].value}</span>
+          <span style={{ color: dynamicColor }}> {payload[0].value}</span>
           {unitSuffix}
         </p>
       </div>

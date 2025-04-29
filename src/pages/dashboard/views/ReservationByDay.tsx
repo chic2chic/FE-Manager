@@ -38,7 +38,7 @@ export default function ReservationByDay() {
 
   return (
     <ResponsiveContainer width={473} height={250}>
-      <BarChart data={ReservationChartDatas}>
+      <BarChart data={coloredData}>
         <XAxis
           dataKey="day"
           tick={{ fill: "#939494", fontSize: 20 }}
@@ -57,13 +57,7 @@ export default function ReservationByDay() {
         />
         <Tooltip
           cursor={{ fill: "transparent" }}
-          content={
-            <CustomTooltip
-              unitPrefix="평균"
-              highlightColor="#9F9FF8"
-              unitSuffix="명"
-            />
-          }
+          content={<CustomTooltip unitPrefix="평균" unitSuffix="명" />}
         />
         <Bar dataKey="value" radius={10} barSize={35}>
           {coloredData.map((entry, index) => (

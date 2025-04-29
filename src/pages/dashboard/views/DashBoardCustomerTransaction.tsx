@@ -19,9 +19,9 @@ export default function DashBoardCustomerTransaction() {
           title="TODAY"
           bgCSS="bg-blue02"
           value={CustomerTransactionDatas.todayPrice.toLocaleString()}
-          valueCSS="text-blue08 text-[56px]"
+          valueCSS="text-blue07 text-[56px]"
           unit="원"
-          unitCSS="text-blue08 text-[40px]"
+          unitCSS="text-blue07 text-[40px]"
         />
       </div>
     </div>
