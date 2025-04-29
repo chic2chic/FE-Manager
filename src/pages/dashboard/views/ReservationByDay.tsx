@@ -1,4 +1,4 @@
-import { CustomTooltipProps } from "@/pages/dashboard/views/DottedAreaChart";
+import CustomTooltip from "@/pages/dashboard/views/CustomTooltip";
 import {
   BarChart,
   Bar,
@@ -52,20 +52,6 @@ export default function ReservationByDay() {
     };
   });
 
-  const CustomTooltip = ({ active, payload, label }: CustomTooltipProps) => {
-    if (active && payload && payload.length) {
-      return (
-        <div className="bg-white border border-gray02 rounded-md p-2 shadow-sm">
-          <p className="text-[18px] text-gray09 font-semibold">{label}</p>
-          <p className="text-[17px] text-gray07 font-semibold">
-            평균<span className="text-purple07"> {payload[0].value}</span>명
-          </p>
-        </div>
-      );
-    }
-    return null;
-  };
-
   return (
     <ResponsiveContainer width={473} height={250}>
       <BarChart data={data}>
@@ -85,7 +71,16 @@ export default function ReservationByDay() {
           tickMargin={0}
           padding={{ bottom: 5 }}
         />
-        <Tooltip cursor={{ fill: "transparent" }} content={<CustomTooltip />} />
+        <Tooltip
+          cursor={{ fill: "transparent" }}
+          content={
+            <CustomTooltip
+              unitPrefix="평균"
+              highlightColor="#9F9FF8"
+              unitSuffix="명"
+            />
+          }
+        />
         <Bar dataKey="value" radius={10} barSize={35}>
           {coloredData.map((entry, index) => (
             <Cell key={index} fill={entry.fill} />
