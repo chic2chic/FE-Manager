@@ -27,7 +27,6 @@
     "react-router-dom": "^7.5.0",
     "recharts": "^2.15.3",
     "swiper": "^11.2.6",
-    "tailwindcss": "^4.0.0",
     "zustand": "^5.0.3"
   },
   "devDependencies": {
@@ -68,6 +67,7 @@
     "prettier": "^3.5.3",
     "storybook": "^8.6.12",
     "storybook-addon-designs": "^6.3.1",
+    "tailwindcss": "^4.1.4",
     "ts-jest": "^29.3.2",
     "ts-node": "^10.9.2",
     "typescript": "~5.6.2",
