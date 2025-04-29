@@ -1,4 +1,5 @@
-import { congestionDatas } from "@/mocks/handlers/dashboard/conjestionDatas";
+import CustomTooltip from "@/components/common/CustomTooltip";
+import { CongestionDatas } from "@/mocks/handlers/dashboard/ConjestionDatas";
 import { CongestionData } from "@/types/CongestionType";
 
 import {
@@ -21,7 +22,7 @@ type TooltipPayload = {
   dataKey: string;
 }[];
 
-type CustomTooltipProps = {
+export type CustomTooltipProps = {
   active?: boolean;
   payload?: TooltipPayload;
   label?: string | number;
@@ -29,20 +30,6 @@ type CustomTooltipProps = {
 
 type CursorProps = {
   points?: { x: number; y: number }[];
-};
-
-const CustomTooltip = ({ active, payload, label }: CustomTooltipProps) => {
-  if (active && payload && payload.length) {
-    return (
-      <div className="bg-white border border-gray02 rounded-md p-2 shadow-sm">
-        <p className="text-[18px] text-gray10 font-semibold">{label}시</p>
-        <p className="text-[16px] text-mint07 font-semibold">
-          평균 {payload[0].value}명
-        </p>
-      </div>
-    );
-  }
-  return null;
 };
 
 const CustomCursor = ({ points }: CursorProps) => {
@@ -77,8 +64,8 @@ const BlurDot = ({ cx, cy }: DotProps) => {
 };
 
 export default function DottedAreaChart({ dayData }: Props) {
-  // 모든 요일 데이터 중 가장 큰 value 찾기
-  const allValues = Object.values(congestionDatas)
+  // y축 최댓값: 모든 요일 데이터 중 가장 큰 value
+  const allValues = Object.values(CongestionDatas)
     .flat()
     .map(d => d.value);
 
@@ -103,7 +90,17 @@ export default function DottedAreaChart({ dayData }: Props) {
           tickLine={false}
           tick={{ fill: "#939494", fontSize: 20 }}
         />
-        <Tooltip content={<CustomTooltip />} cursor={<CustomCursor />} />
+        <Tooltip
+          content={
+            <CustomTooltip
+              labelSuffix="시"
+              unitPrefix="평균"
+              highlightColor="#54d8c2"
+              unitSuffix="명"
+            />
+          }
+          cursor={<CustomCursor />}
+        />
         <Area
           type="linear"
           dataKey="value"

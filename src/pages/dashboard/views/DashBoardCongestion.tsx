@@ -3,7 +3,7 @@ import { Days } from "@/constants/dashboard/Days";
 import { formatDay } from "@/utils/FormatDay";
 import DashBoardTitle from "@/pages/dashboard/views/DashBoardTitle";
 import DottedAreaChart from "@/pages/dashboard/views/DottedAreaChart";
-import { congestionDatas } from "@/mocks/handlers/dashboard/conjestionDatas";
+import { CongestionDatas } from "@/mocks/handlers/dashboard/ConjestionDatas";
 
 export default function DashBoardCongestion() {
   const today = new Date().getDay(); // 0(일) - 6(토)
@@ -30,7 +30,7 @@ export default function DashBoardCongestion() {
 
         {/* 혼잡도 그래프 */}
         <div className="absolute bottom-6 w-[612px] h-[394px] bg-gray01 rounded-[40px] flex justify-center">
-          <DottedAreaChart dayData={congestionDatas[selectedDay]} />
+          <DottedAreaChart dayData={CongestionDatas[selectedDay]} />
         </div>
       </div>
     </div>

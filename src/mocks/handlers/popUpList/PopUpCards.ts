@@ -1,7 +1,7 @@
 import { PopUpCardType } from "@/types/PopUpCardType";
 import TestImage from "@/assets/webps/popUpList/pop-up-poster-01.webp";
 
-export const popUpCards: PopUpCardType[] = [
+export const PopUpCards: PopUpCardType[] = [
   {
     id: 1,
     title: "BLACKPINK IN YOUR AREA - THE POP-UP",
