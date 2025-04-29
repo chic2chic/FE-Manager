@@ -3,6 +3,6 @@ export type NoticeItemType = {
   type: "normal" | "hot";
   popup: string;
   title: string;
-  timestamp: string;
+  timestamp: Date;
   stockThreshold: number;
 };
