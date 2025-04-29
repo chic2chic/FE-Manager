@@ -21,7 +21,7 @@ type TooltipPayload = {
   dataKey: string;
 }[];
 
-type CustomTooltipProps = {
+export type CustomTooltipProps = {
   active?: boolean;
   payload?: TooltipPayload;
   label?: string | number;
@@ -35,9 +35,9 @@ const CustomTooltip = ({ active, payload, label }: CustomTooltipProps) => {
   if (active && payload && payload.length) {
     return (
       <div className="bg-white border border-gray02 rounded-md p-2 shadow-sm">
-        <p className="text-[18px] text-gray10 font-semibold">{label}시</p>
-        <p className="text-[16px] text-mint07 font-semibold">
-          평균 {payload[0].value}명
+        <p className="text-[18px] text-gray09 font-semibold">{label}시</p>
+        <p className="text-[17px] text-gray07 font-semibold">
+          평균<span className="text-mint07"> {payload[0].value}</span>명
         </p>
       </div>
     );
