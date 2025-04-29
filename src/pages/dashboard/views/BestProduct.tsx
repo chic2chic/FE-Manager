@@ -25,10 +25,10 @@ export default function BestProduct() {
   // const filteredProducts = bestProducts.filter(item => ...);
 
   return (
-    <div >
+    <div>
       {/* 헤더 + 카테고리 */}
       <div className="flex items-baseline gap-6">
-        <DashBoardTitle title="이번 주 인기상품"/>
+        <DashBoardTitle title="이번 주 인기상품" />
         {/* 필터 버튼 바로 옆에 위치 */}
         <div className="flex gap-4 ">
           <DropdownFilter
@@ -36,11 +36,7 @@ export default function BestProduct() {
             options={GenderOptions}
             onChange={setGender}
           />
-          <DropdownFilter
-            value={age}
-            options={AgeOptions}
-            onChange={setAge}
-          />
+          <DropdownFilter value={age} options={AgeOptions} onChange={setAge} />
         </div>
       </div>
 
