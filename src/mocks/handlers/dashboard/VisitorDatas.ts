@@ -1,4 +1,3 @@
-// src/mocks/handlers/dashboard/VisitorDatas.ts
 export const visitorGenderData = [
   { name: "남성", value: 70 },
   { name: "여성", value: 30 },
