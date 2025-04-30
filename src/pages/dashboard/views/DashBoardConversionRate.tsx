@@ -10,9 +10,9 @@ export default function DashBoardConversionRate() {
     <div className="flex flex-col">
       <DashBoardTitle title="구매전환율" />
       <div className="flex justify-between">
-        <div className="relative w-[660px] h-[510px] bg-gray02 rounded-[50px] px-6">
-          <div className="mt-9 flex ml-[30px] mb-[23px] text-gray09 font-medium text-[28px]">
-            구매전환율 하위 상품 TOP 6
+        <div className="relative w-[660px] h-[510px] bg-gray02 rounded-[50px] px-6 flex justify-center">
+          <div className="mt-7 flex text-gray09 font-medium text-[28px]">
+            하위 상품 TOP 6
           </div>
           <div className="absolute bottom-6 w-[612px] h-[394px] bg-gray01 rounded-[40px] flex justify-center">
             <ConversionRateChart
@@ -31,9 +31,9 @@ export default function DashBoardConversionRate() {
             />
           </div>
         </div>
-        <div className="relative w-[660px] h-[510px] bg-gray02 rounded-[50px] px-6">
-          <div className="mt-9 flex ml-[30px] mb-[23px] text-gray09 font-medium text-[28px]">
-            구매전환율 상위 상품 TOP 6
+        <div className="relative w-[660px] h-[510px] bg-gray02 rounded-[50px] px-6 flex justify-center">
+          <div className="mt-7 flex text-gray09 font-medium text-[28px]">
+            상위 상품 TOP 6
           </div>
           <div className="absolute bottom-6 w-[612px] h-[394px] bg-gray01 rounded-[40px] flex justify-center">
             <ConversionRateChart
