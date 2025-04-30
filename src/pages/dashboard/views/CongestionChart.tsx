@@ -63,7 +63,7 @@ const BlurDot = ({ cx, cy }: DotProps) => {
   );
 };
 
-export default function DottedAreaChart({ dayData }: Props) {
+export default function CongestionChart({ dayData }: Props) {
   // y축 최댓값: 모든 요일 데이터 중 가장 큰 value
   const allValues = Object.values(CongestionDatas)
     .flat()
@@ -72,7 +72,7 @@ export default function DottedAreaChart({ dayData }: Props) {
   const maxValue = Math.max(...allValues);
 
   return (
-    <ResponsiveContainer width={612} height={394}>
+    <ResponsiveContainer width="100%" height="100%">
       <AreaChart
         data={dayData}
         margin={{ top: 70, right: 40, left: 40, bottom: 20 }}
@@ -95,7 +95,7 @@ export default function DottedAreaChart({ dayData }: Props) {
             <CustomTooltip
               labelSuffix="시"
               unitPrefix="평균"
-              highlightColor="#54d8c2"
+              highlightColor="#71DDCB"
               unitSuffix="명"
             />
           }

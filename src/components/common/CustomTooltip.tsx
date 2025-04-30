@@ -32,8 +32,8 @@ export default function CustomTooltip({
       highlightColor ?? payload?.[0]?.payload?.fill ?? "#000";
 
     return (
-      <div className="bg-white border border-gray02 rounded-md p-2 shadow-sm">
-        <p className="text-[18px] text-gray09 font-semibold">
+      <div className="bg-white border border-gray02 rounded-md p-3 shadow-sm">
+        <p className="text-[18px] text-gray09 font-semibold mb-1">
           {label}
           {labelSuffix}
         </p>

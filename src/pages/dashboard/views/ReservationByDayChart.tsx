@@ -11,7 +11,7 @@ import {
   Cell,
 } from "recharts";
 
-export default function ReservationByDay() {
+export default function ReservationByDayChart() {
   const coloredData = reservationColorMapper(ReservationChartDatas);
   // max값 기준 y축 눈금 100 단위로 만들기
   const maxValue = Math.max(...ReservationChartDatas.map(d => d.value)); // value 중 가장 큰 수

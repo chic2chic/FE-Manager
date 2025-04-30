@@ -1,8 +1,8 @@
 import DashBoardTitle from "@/pages/dashboard/views/DashBoardTitle";
-import ReservationByDay from "@/pages/dashboard/views/ReservationByDay";
 import checkCalendar from "@/assets/webps/dashboard/check-calendar.webp";
 import { TodayReservationDatas } from "@/mocks/handlers/dashboard/ReservationDatas";
 import { CountCard } from "@/pages/dashboard/views/CountCard";
+import ReservationByDayChart from "@/pages/dashboard/views/ReservationByDayChart";
 
 export default function DashBoardReservation() {
   return (
@@ -41,7 +41,7 @@ export default function DashBoardReservation() {
               요일별 예약자 수
             </span>
           </div>
-          <ReservationByDay />
+          <ReservationByDayChart />
         </div>
       </div>
     </div>

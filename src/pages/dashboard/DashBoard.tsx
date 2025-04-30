@@ -2,6 +2,7 @@ import DashBoardCongestion from "@/pages/dashboard/views/DashBoardCongestion";
 import DashBoardCustomerTransaction from "@/pages/dashboard/views/DashBoardCustomerTransaction";
 import DashBoardReservation from "@/pages/dashboard/views/DashBoardReservation";
 import BestProduct from "./views/BestProduct";
+import DashBoardConversionRate from "@/pages/dashboard/views/DashBoardConversionRate";
 
 export default function DashBoard() {
   return (
@@ -12,6 +13,7 @@ export default function DashBoard() {
         <DashBoardReservation />
         <DashBoardCustomerTransaction />
       </div>
+      <DashBoardConversionRate />
     </div>
   );
 }
