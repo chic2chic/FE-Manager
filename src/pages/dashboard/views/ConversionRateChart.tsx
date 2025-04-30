@@ -1,3 +1,5 @@
+import CustomBlurDot from "@/components/common/CustomBlurDot";
+import CustomCursor from "@/components/common/CustomCursor";
 import { ConversionRateType } from "@/types/ConversionRateType";
 import {
   ResponsiveContainer,
@@ -7,64 +9,20 @@ import {
   XAxis,
   Tooltip,
   Legend,
-  DotProps,
   YAxis,
   TooltipProps,
 } from "recharts";
 
-type ConversionRateChartProps = {
+type Props = {
   data: ConversionRateType[];
   barColor: string;
   lineColor: string;
-  dotColor: string;
   tooltipColorClass: {
     interested: string;
     purchased: string;
     rate: string;
   };
-  legendColors: {
-    interested: string;
-    purchased: string;
-  };
-};
-
-type CursorProps = {
-  points?: { x: number; y: number }[];
-};
-
-const CustomCursor = ({ points }: CursorProps) => {
-  const x = points?.[0]?.x;
-  if (x === undefined) return null;
-
-  return (
-    <line
-      x1={x}
-      x2={x}
-      y1={60}
-      y2={340}
-      stroke="#dadada"
-      strokeWidth={1}
-      strokeDasharray="3 6"
-    />
-  );
-};
-
-type BlurDotProps = DotProps & {
-  fillColor?: string;
-};
-
-const BlurDot = ({ cx, cy, fillColor = "#9F9FF8" }: BlurDotProps) => {
-  return (
-    <circle
-      cx={cx}
-      cy={cy}
-      r={7}
-      fill={fillColor}
-      style={{
-        filter: "blur(3px)",
-      }}
-    />
-  );
+  purchasedColor: string;
 };
 
 export const ConversionRateChart = ({
@@ -72,8 +30,8 @@ export const ConversionRateChart = ({
   barColor,
   lineColor,
   tooltipColorClass,
-  legendColors,
-}: ConversionRateChartProps) => {
+  purchasedColor,
+}: Props) => {
   const CustomTooltip = ({
     active,
     payload,
@@ -114,16 +72,12 @@ export const ConversionRateChart = ({
   const CustomLegend = () => (
     <div className="flex justify-end gap-4 pb-5 pr-4">
       <div className="flex items-center gap-2">
-        <span
-          className={`w-[12px] h-[12px] rounded-full`}
-          style={{ backgroundColor: legendColors.interested }}
-        />
+        <span className={`w-[12px] h-[12px] rounded-full bg-${lineColor}`} />
         <span className="text-[16px] text-gray08 font-medium">관심자 수</span>
       </div>
       <div className="flex items-center gap-2">
         <span
-          className={`w-[12px] h-[12px] rounded-full`}
-          style={{ backgroundColor: legendColors.purchased }}
+          className={`w-[12px] h-[12px] rounded-full bg-${purchasedColor}`}
         />
         <span className="text-[16px] text-gray08 font-medium">구매자 수</span>
       </div>
@@ -150,18 +104,17 @@ export const ConversionRateChart = ({
           interval={0}
         />
         <YAxis hide padding={{ bottom: 10 }} />
-        <Tooltip cursor={<CustomCursor />} content={<CustomTooltip />} />
-        <Legend
-          content={<CustomLegend />}
-          verticalAlign="top"
-          align="right"
-        />{" "}
+        <Tooltip
+          cursor={<CustomCursor y1={60} />}
+          content={<CustomTooltip />}
+        />
+        <Legend content={<CustomLegend />} verticalAlign="top" align="right" />{" "}
         <Bar dataKey="purchased" fill={barColor} radius={10} name="구매자 수" />
         <Line
           dataKey="interested"
           stroke={lineColor}
           strokeWidth={1}
-          dot={<BlurDot fillColor={lineColor} />}
+          dot={<CustomBlurDot fillColor={lineColor} />}
           activeDot={false}
           name="관심자 수"
         />

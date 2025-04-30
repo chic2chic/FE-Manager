@@ -19,16 +19,12 @@ export default function DashBoardConversionRate() {
               data={LowConversionDatas}
               barColor="#FFDCEA"
               lineColor="#9F9FF8"
-              dotColor="#9F9FF8"
               tooltipColorClass={{
                 interested: "text-purple07",
                 purchased: "text-main03",
                 rate: "text-blue07",
               }}
-              legendColors={{
-                interested: "#9F9FF8",
-                purchased: "#FFB4D1",
-              }}
+              purchasedColor="#FFB4D1"
             />
           </div>
         </div>
@@ -41,16 +37,12 @@ export default function DashBoardConversionRate() {
               data={TopConversionDatas}
               barColor="#C5EFE8"
               lineColor="#78B0FF"
-              dotColor="#78B0FF"
               tooltipColorClass={{
                 interested: "text-blue07",
                 purchased: "text-mint07",
                 rate: "text-main04",
               }}
-              legendColors={{
-                interested: "#78B0FF",
-                purchased: "#C5EFE8",
-              }}
+              purchasedColor="#C5EFE8"
             />
           </div>
         </div>

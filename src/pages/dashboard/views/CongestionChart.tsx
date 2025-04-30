@@ -53,7 +53,7 @@ export default function CongestionChart({ dayData }: Props) {
               unitSuffix="명"
             />
           }
-          cursor={<CustomCursor yRange={{ from: 20, to: 340 }} />}
+          cursor={<CustomCursor y1={20} y2={340} />}
         />
         <Area
           type="linear"

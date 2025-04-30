@@ -1,13 +1,15 @@
 type Props = {
   points?: { x: number; y: number }[];
   strokeColor?: string;
-  yRange?: { from: number; to: number };
+  y1?: number;
+  y2?: number;
 };
 
 export default function CustomCursor({
   points,
   strokeColor = "#dadada",
-  yRange = { from: 60, to: 340 },
+  y1 = 60,
+  y2 = 340,
 }: Props) {
   const x = points?.[0]?.x;
   if (x === undefined) return null;
@@ -16,8 +18,8 @@ export default function CustomCursor({
     <line
       x1={x}
       x2={x}
-      y1={yRange.from}
-      y2={yRange.to}
+      y1={y1}
+      y2={y2}
       stroke={strokeColor}
       strokeWidth={1}
       strokeDasharray="3 6"
