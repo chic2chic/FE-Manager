@@ -9,9 +9,9 @@ export default function DashBoard() {
     <div className="w-[1360px] mx-auto flex flex-col gap-[70px] pt-[50px] pb-[86px]">
       <BestProduct />
       <div className="flex gap-[70px]">
-         <DashBoardCongestion />
-         <DashBoardVisitor />
-       </div>
+        <DashBoardCongestion />
+        <DashBoardVisitor />
+      </div>
       <div className="flex gap-10">
         <DashBoardReservation />
         <DashBoardCustomerTransaction />
