@@ -18,7 +18,7 @@ export default function DashBoardVisitor() {
   const RADIUS = 80;
 
   const genderData = mapGenderData(VisitorGenderData);
-  const ageData    = mapAgeData(VisitorAgeData);
+  const ageData = mapAgeData(VisitorAgeData);
 
   return (
     <div className="flex flex-col w-[660px] mx-auto">
@@ -76,8 +76,8 @@ export default function DashBoardVisitor() {
                 content={(props: TooltipProps<number, string>) => {
                   const { active, payload } = props;
                   if (!active || !payload || !payload.length) return null;
-                  const { name, value, rawFill } =
-                    payload[0].payload as SegmentDatum;
+                  const { name, value, rawFill } = payload[0]
+                    .payload as SegmentDatum;
 
                   return (
                     <div className="bg-white border border-gray02 rounded-md p-2 shadow-sm">
@@ -151,8 +151,8 @@ export default function DashBoardVisitor() {
                 content={(props: TooltipProps<number, string>) => {
                   const { active, payload } = props;
                   if (!active || !payload || !payload.length) return null;
-                  const { name, value, rawFill } =
-                    payload[0].payload as SegmentDatum;
+                  const { name, value, rawFill } = payload[0]
+                    .payload as SegmentDatum;
 
                   return (
                     <div className="bg-white border border-gray02 rounded-md p-2 shadow-sm">
