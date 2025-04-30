@@ -52,7 +52,7 @@ export function DropdownFilter({
       </button>
 
       {open && (
-        <div className="absolute top-full mt-1 left-0 w-full bg-white border rounded-xl shadow-md z-10">
+        <div className="absolute top-full mt-1 left-0 w-full bg-gray01 border border-gray09 rounded-3xl shadow-md z-10">
           {options.map(option => (
             <button
               type="button"
@@ -61,8 +61,8 @@ export function DropdownFilter({
                 onChange(option);
                 setOpen(false);
               }}
-              className={`block w-full px-4 py-2 text-[20px] rounded-xl text-center cursor-pointer hover:bg-gray10 transition-colors duration-300
-                ${option === value ? "text-gray10 font-semibold" : "text-gray07"}`}
+              className={`block w-full px-4 py-2 text-[20px] rounded-3xl text-center cursor-pointer hover:bg-gray03 transition-colors duration-300
+                ${option === value ? "text-gray10 " : "text-gray07"}`}
             >
               {option}
             </button>
