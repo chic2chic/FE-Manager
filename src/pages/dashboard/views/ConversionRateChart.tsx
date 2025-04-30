@@ -13,7 +13,7 @@ import {
   TooltipProps,
 } from "recharts";
 
-type Props = {
+type ConversionRateChartProps = {
   data: ConversionRateType[];
   barColor: string;
   lineColor: string;
@@ -22,7 +22,10 @@ type Props = {
     purchased: string;
     rate: string;
   };
-  purchasedColor: string;
+  legendColors: {
+    interested: string;
+    purchased: string;
+  };
 };
 
 export const ConversionRateChart = ({
@@ -30,8 +33,9 @@ export const ConversionRateChart = ({
   barColor,
   lineColor,
   tooltipColorClass,
-  purchasedColor,
-}: Props) => {
+  legendColors,
+}: ConversionRateChartProps) => {
+  // ConversionRateChart 전용 CustomTooltip
   const CustomTooltip = ({
     active,
     payload,
@@ -69,15 +73,20 @@ export const ConversionRateChart = ({
     );
   };
 
+  // ConversionRateChart 전용 CustomLegend
   const CustomLegend = () => (
     <div className="flex justify-end gap-4 pb-5 pr-4">
       <div className="flex items-center gap-2">
-        <span className={`w-[12px] h-[12px] rounded-full bg-${lineColor}`} />
+        <span
+          className={`w-[12px] h-[12px] rounded-full`}
+          style={{ backgroundColor: legendColors.interested }}
+        />
         <span className="text-[16px] text-gray08 font-medium">관심자 수</span>
       </div>
       <div className="flex items-center gap-2">
         <span
-          className={`w-[12px] h-[12px] rounded-full bg-${purchasedColor}`}
+          className={`w-[12px] h-[12px] rounded-full`}
+          style={{ backgroundColor: legendColors.purchased }}
         />
         <span className="text-[16px] text-gray08 font-medium">구매자 수</span>
       </div>

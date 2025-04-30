@@ -24,7 +24,10 @@ export default function DashBoardConversionRate() {
                 purchased: "text-main03",
                 rate: "text-blue07",
               }}
-              purchasedColor="#FFB4D1"
+              legendColors={{
+                interested: "#9F9FF8",
+                purchased: "#FFB4D1",
+              }}
             />
           </div>
         </div>
@@ -42,7 +45,10 @@ export default function DashBoardConversionRate() {
                 purchased: "text-mint07",
                 rate: "text-main04",
               }}
-              purchasedColor="#C5EFE8"
+              legendColors={{
+                interested: "#78B0FF",
+                purchased: "#C5EFE8",
+              }}
             />
           </div>
         </div>
