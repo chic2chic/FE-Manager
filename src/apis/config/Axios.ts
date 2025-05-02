@@ -1,6 +1,7 @@
 import axios, { AxiosError } from "axios";
 import { refreshAccessToken } from "../user/auth";
 import { useAuthStore } from "@/stores/useAuthStore";
+import Cookies from "js-cookie";
 
 export const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
@@ -8,7 +9,7 @@ export const api = axios.create({
 
 api.interceptors.request.use(
   config => {
-    const token = useAuthStore.getState().token;
+    const token = useAuthStore.getState().accessToken;
     if (token) {
       config.headers["Authorization"] = `Bearer ${token}`;
     }
@@ -24,16 +25,25 @@ api.interceptors.response.use(
   async (error: AxiosError) => {
     const originalRequest = error.config;
 
-    if (error.response?.status === 401) {
+    if (
+      error.response?.status === 401 &&
+      !originalRequest?.headers["X-Retry"]
+    ) {
       try {
-        const response = await refreshAccessToken();
-        if (response.data.success) {
-          return axios(originalRequest!);
-        }
-      } catch (error) {
-        useAuthStore.persist.clearStorage();
+        const refreshResponse = await refreshAccessToken();
+        const newAccessToken = refreshResponse.data.data.accessToken;
+
+        useAuthStore.getState().login(newAccessToken);
+
+        originalRequest!.headers["Authorization"] = `Bearer ${newAccessToken}`;
+        originalRequest!.headers["X-Retry"] = "true";
+
+        return axios(originalRequest!);
+      } catch (refreshError) {
+        useAuthStore.getState().logout();
+        Cookies.remove("refreshToken");
         window.location.href = "/onboarding";
-        return Promise.reject(error);
+        return Promise.reject(refreshError);
       }
     }
     return Promise.reject(error);
