@@ -282,7 +282,7 @@ export default function PopUpCreate() {
       <Modal
         isOpen={isAlertModalOpen}
         setIsOpen={setIsAlertModalOpen}
-        content="팝업 등록을 취소하시겠어요?"
+        content="상품 등록을 취소하시겠어요?"
         image={bin}
         confirmText="취소하기"
         cancelText="돌아가기"
@@ -293,7 +293,7 @@ export default function PopUpCreate() {
       <Modal
         isOpen={isSaveModalOpen}
         setIsOpen={setIsSaveModalOpen}
-        content="팝업이 등록되었습니다"
+        content="상품이 등록되었습니다"
         image={check}
         confirmText="확인"
         onConfirm={handleSaveConfirmBtn}
