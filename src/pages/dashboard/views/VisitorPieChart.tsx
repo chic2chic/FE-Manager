@@ -8,7 +8,7 @@ export type SegmentDatum = {
   rawFill: string;
 };
 
-export type TooltipPayloadItem = {
+type TooltipPayloadItem = {
   value: number;
   name: string;
   dataKey: string;
@@ -17,22 +17,23 @@ export type TooltipPayloadItem = {
     rawFill?: string;
   };
 };
-export type TooltipPayload = TooltipPayloadItem[];
+
+type TooltipPayload = TooltipPayloadItem[];
 
 const SIZE = 180;
 const RADIUS = 80;
 
-export interface VisitorPieChartProps {
+type Props = {
   data: SegmentDatum[];
   gradIdPrefix: string;
   innerRadius?: number;
-}
+};
 
 export default function VisitorPieChart({
   data,
   gradIdPrefix,
   innerRadius,
-}: VisitorPieChartProps) {
+}: Props) {
   return (
     <div className="flex flex-col items-center">
       {/* 범례 */}
