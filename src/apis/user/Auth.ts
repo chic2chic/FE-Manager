@@ -1,15 +1,15 @@
-import { api } from "../config/Axios";
-import { ApiResponse, LoginResponse } from "@/types/api/ApiResponseType";
+import { api } from "../config/axios";
 
-export const refreshAccessToken = async (): ApiResponse<LoginResponse> => {
-  const response = await api.post("/auth/reissue");
-  return response.data;
+const refreshAccessToken = async () => {
+  return await api.get("/api/auth/refresh");
 };
 
-export const loginApi = async (credentials: {
+const loginApi = async (credentials: {
   username: string;
   password: string;
-}): ApiResponse<LoginResponse> => {
+}) => {
   const response = await api.post("/auth/login", credentials);
   return response.data;
 };
+
+export { refreshAccessToken, loginApi };
