@@ -12,7 +12,11 @@ export default function OnBoradingLogin() {
   const isActive: boolean = Boolean(username && password);
 
   const handleLogin = async () => {
-    await login.mutateAsync({ username, password });
+    try {
+      await login.mutateAsync({ username, password });
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const handleCloseModalAll = () => {

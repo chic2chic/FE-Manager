@@ -42,7 +42,6 @@ api.interceptors.response.use(
       } catch (refreshError) {
         useAuthStore.getState().logout();
         Cookies.remove("refreshToken");
-        window.location.href = "/onboarding";
         return Promise.reject(refreshError);
       }
     }
