@@ -3,6 +3,7 @@ import DashBoardCustomerTransaction from "@/pages/dashboard/views/DashBoardCusto
 import DashBoardReservation from "@/pages/dashboard/views/DashBoardReservation";
 import BestProduct from "./views/BestProduct";
 import DashBoardVisitor from "./views/DashBoardVisitor";
+import DashBoardQuestionnaire from "./views/DashBoardQuestionnaire";
 
 export default function DashBoard() {
   return (
@@ -15,6 +16,9 @@ export default function DashBoard() {
       <div className="flex gap-10">
         <DashBoardReservation />
         <DashBoardCustomerTransaction />
+      </div>
+      <div>
+        <DashBoardQuestionnaire />
       </div>
     </div>
   );

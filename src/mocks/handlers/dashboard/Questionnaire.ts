@@ -34,6 +34,21 @@ export const QuestionnaireDatas: QuestionnaireType[] = [
         numOfRespondents: 380,
         ratio: 30,
       },
+      {
+        title: "사인회",
+        numOfRespondents: 290,
+        ratio: 23,
+      },
+      {
+        title: "팬티켓팅",
+        numOfRespondents: 180,
+        ratio: 14,
+      },
+      {
+        title: "음악방송",
+        numOfRespondents: 150,
+        ratio: 12,
+      },
     ],
   },
   {
