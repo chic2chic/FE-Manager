@@ -6,17 +6,12 @@ import {
   VisitorAgeData,
 } from "@/mocks/handlers/dashboard/VisitorDatas";
 import DashBoardTitle from "@/pages/dashboard/views/DashBoardTitle";
+import CustomTooltip from "@/components/common/CustomTooltip";
 
-type SegmentDatum = {
-  name: string;
-  value: number;
-  rawFill: string;
-};
+const SIZE = 180;
+const RADIUS = 80;
 
 export default function DashBoardVisitor() {
-  const SIZE = 180;
-  const RADIUS = 80;
-
   const genderData = mapGenderData(VisitorGenderData);
   const ageData = mapAgeData(VisitorAgeData);
 
@@ -56,7 +51,7 @@ export default function DashBoardVisitor() {
                 {genderData.map((d, i) => (
                   <radialGradient
                     key={i}
-                    id={`genderGrad${i}`}
+                    id={d.fillId}
                     gradientUnits="userSpaceOnUse"
                     cx="50%"
                     cy="50%"
@@ -71,25 +66,24 @@ export default function DashBoardVisitor() {
                   </radialGradient>
                 ))}
               </defs>
-
               <Tooltip
+                cursor={{ fill: "transparent" }}
                 content={(props: TooltipProps<number, string>) => {
-                  const { active, payload } = props;
-                  if (!active || !payload || !payload.length) return null;
-                  const { name, value, rawFill } = payload[0]
-                    .payload as SegmentDatum;
-
+                  const targetPayload = props.payload?.[0]?.payload;
                   return (
-                    <div className="bg-white border border-gray02 rounded-md p-2 shadow-sm">
-                      {/* 1. 첫 줄: 카테고리 이름 */}
-                      <p className="m-0 text-[18px] text-gray09 font-semibold mb-1">
-                        {name}
-                      </p>
-                      {/* 2. 둘째 줄: 숫자만 컬러, 나머진 회색 */}
-                      <p className="m-0 text-[17px] text-gray07 font-semibold">
-                        <span style={{ color: rawFill }}>{value}</span>명
-                      </p>
-                    </div>
+                    <CustomTooltip
+                      active={props.active}
+                      payload={[
+                        {
+                          value: targetPayload?.value,
+                          name: targetPayload?.name,
+                          dataKey: props.payload?.[0]?.dataKey as string,
+                        },
+                      ]}
+                      label={targetPayload?.name}
+                      unitSuffix="명"
+                      highlightColor={targetPayload?.rawFill}
+                    />
                   );
                 }}
               />
@@ -102,8 +96,8 @@ export default function DashBoardVisitor() {
                 cx="50%"
                 cy="50%"
               >
-                {genderData.map((_, idx) => (
-                  <Cell key={idx} fill={`url(#genderGrad${idx})`} />
+                {genderData.map((d, idx) => (
+                  <Cell key={idx} fill={`url(#${d.fillId})`} />
                 ))}
               </Pie>
             </PieChart>
@@ -131,7 +125,7 @@ export default function DashBoardVisitor() {
                 {ageData.map((d, i) => (
                   <radialGradient
                     key={i}
-                    id={`ageGrad${i}`}
+                    id={d.fillId}
                     gradientUnits="userSpaceOnUse"
                     cx="50%"
                     cy="50%"
@@ -149,20 +143,21 @@ export default function DashBoardVisitor() {
 
               <Tooltip
                 content={(props: TooltipProps<number, string>) => {
-                  const { active, payload } = props;
-                  if (!active || !payload || !payload.length) return null;
-                  const { name, value, rawFill } = payload[0]
-                    .payload as SegmentDatum;
-
+                  const targetPayload = props.payload?.[0]?.payload;
                   return (
-                    <div className="bg-white border border-gray02 rounded-md p-2 shadow-sm">
-                      <p className="m-0 text-[18px] text-gray09 font-semibold mb-1">
-                        {name}
-                      </p>
-                      <p className="m-0 text-[17px] text-gray07 font-semibold">
-                        <span style={{ color: rawFill }}>{value}</span>명
-                      </p>
-                    </div>
+                    <CustomTooltip
+                      active={props.active}
+                      payload={[
+                        {
+                          value: targetPayload?.value,
+                          name: targetPayload?.name,
+                          dataKey: props.payload?.[0]?.dataKey as string,
+                        },
+                      ]}
+                      label={targetPayload?.name}
+                      unitSuffix="명"
+                      highlightColor={targetPayload?.rawFill}
+                    />
                   );
                 }}
               />
@@ -174,8 +169,8 @@ export default function DashBoardVisitor() {
                 cx="50%"
                 cy="50%"
               >
-                {ageData.map((_, idx) => (
-                  <Cell key={idx} fill={`url(#ageGrad${idx})`} />
+                {ageData.map((d, idx) => (
+                  <Cell key={idx} fill={`url(#${d.fillId})`} />
                 ))}
               </Pie>
             </PieChart>

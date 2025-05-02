@@ -1,4 +1,3 @@
-// src/utils/VisitorColorMapper.ts
 const genderColorCodes = ["#90C5FF", "#F48FB1"];
 const ageColorCodes = ["#F48FB1", "#C5CCFF", "#90C5FF", "#B2EBF2"];
 
