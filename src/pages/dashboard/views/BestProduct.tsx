@@ -27,8 +27,8 @@ export default function BestProduct() {
   return (
     <div>
       {/* 헤더 + 카테고리 */}
-      <div className="flex items-baseline gap-6">
-        <DashBoardTitle title="이번 주 인기상품" />
+      <div className="flex items-start gap-6">
+        <DashBoardTitle title="실시간 인기상품" />
         {/* 필터 버튼 바로 옆에 위치 */}
         <div className="flex gap-4 ">
           <DropdownFilter
@@ -41,7 +41,7 @@ export default function BestProduct() {
       </div>
 
       {/* 베스트 상품 리스트 */}
-      <div className="flex justify-center gap-[60px]">
+      <div className="flex justify-center gap-[60px] mt-2">
         {BestProducts.map((item, index) => (
           <div
             key={item.id}
