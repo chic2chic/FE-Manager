@@ -1,6 +1,6 @@
 import { setupWorker } from "msw/browser";
-import { AuthHandlers } from "./handlers/Auth.handlers";
 import { ProductHandlers } from "./handlers/Product.handlers";
+import { AuthHandlers } from "./handlers/onBoarding/Auth.handlers";
 
 export const handlers = [...AuthHandlers, ...ProductHandlers];
 

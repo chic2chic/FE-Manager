@@ -1,13 +1,25 @@
 import CustomInput from "@/components/common/CustomInput";
+import Modal from "@/components/common/Modal";
+import { useAuth } from "@/hooks/api/useAuth";
 import React, { useState } from "react";
+import bin from "@/assets/webps/common/bin.webp";
 
 export default function OnBoradingLogin() {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const { login, LoginErrorMsg, showErrorModal, handleCloseModal } = useAuth();
 
   const isActive: boolean = Boolean(username && password);
 
-  const handleLogin = () => {};
+  const handleLogin = async () => {
+    await login.mutateAsync({ username, password });
+  };
+
+  const handleCloseModalAll = () => {
+    handleCloseModal();
+    setUsername("");
+    setPassword("");
+  };
 
   return (
     <div className="flex flex-col gap-[34px] items-center">
@@ -19,6 +31,7 @@ export default function OnBoradingLogin() {
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setUsername(e.target.value)
           }
+          value={username}
           width={500}
           height={60}
         />
@@ -30,6 +43,7 @@ export default function OnBoradingLogin() {
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setPassword(e.target.value)
           }
+          value={password}
           width={500}
           height={60}
         />
@@ -42,6 +56,13 @@ export default function OnBoradingLogin() {
       >
         login
       </button>
+      <Modal
+        isOpen={showErrorModal}
+        content={LoginErrorMsg}
+        image={bin}
+        onConfirm={handleCloseModalAll}
+        setIsOpen={() => {}}
+      />
     </div>
   );
 }
