@@ -1,15 +1,15 @@
+import Cookies from "js-cookie";
 import { api } from "../config/axios";
 
-const refreshAccessToken = async () => {
-  return await api.get("/api/auth/refresh");
+export const refreshAccessToken = async () => {
+  const refreshToken = Cookies.get("refreshToken");
+  return api.post("/auth/refresh", { refreshToken });
 };
 
-const loginApi = async (credentials: {
+export const loginApi = async (credentials: {
   username: string;
   password: string;
 }) => {
   const response = await api.post("/auth/login", credentials);
   return response.data;
 };
-
-export { refreshAccessToken, loginApi };
