@@ -9,10 +9,7 @@ type Props = {
     value: number;
     name: string;
     dataKey: string;
-    payload?: {
-      fill?: string;
-      rawFill?: string;
-    };
+    payload?: { fill?: string };
   }[];
   label?: string | number;
   labelSuffix?: string;
@@ -32,10 +29,7 @@ export default function CustomTooltip({
 }: Props) {
   if (active && payload && payload.length) {
     const dynamicColor =
-      highlightColor ??
-      payload[0].payload?.fill ??
-      payload[0].payload?.rawFill ??
-      "#000";
+      highlightColor ?? payload?.[0]?.payload?.fill ?? "#000";
 
     return (
       <div className="bg-white border border-gray02 rounded-md p-2 shadow-sm">
