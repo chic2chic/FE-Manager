@@ -2,7 +2,7 @@ import leftArrowImg from "@/assets/webps/popUpCreate/left-arrow.webp";
 import TestImage from "@/assets/webps/onBoarding/test.png";
 import PopUpInput from "./views/PopUpInput";
 import PopUpLabel from "./views/PopUpLabel";
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import useCalendar from "@/hooks/useCalendar";
 import { useDaumPostcode } from "@/hooks/useDaumPostcode";
 import { usePopUpCreateStore } from "@/stores/usePopUpCreateStore";
@@ -29,6 +29,10 @@ export default function PopUpCreate() {
 
   const [isAlertModalOpen, setIsAlertModalOpen] = useState<boolean>(false);
   const [isSaveModalOpen, setIsSaveModalOpen] = useState<boolean>(false);
+
+  const [imageFile, setImageFile] = useState<File | null>(null);
+  const [previewUrl, setPreviewUrl] = useState<string>(TestImage);
+
   const navigate = useNavigate();
 
   const handleCancel = () => {
@@ -38,6 +42,17 @@ export default function PopUpCreate() {
   // TODO : 저장 기능 구현 -> React Query로 API 호출
   const handleSave = () => {
     setIsSaveModalOpen(true);
+  };
+
+  const handleUploadImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (!files || files.length === 0) return;
+
+    const file = files[0];
+    setImageFile(file);
+
+    const objectUrl = URL.createObjectURL(file);
+    setPreviewUrl(objectUrl);
   };
 
   const handleSaveConfirmBtn = () => {
@@ -118,15 +133,15 @@ export default function PopUpCreate() {
       <div className="flex justify-center gap-[30px] mt-[60px]">
         <div className="relative w-[312px] h-[440px]">
           <img
-            src={TestImage}
-            alt="상품 이미지"
+            src={previewUrl}
+            alt="팝업 이미지"
             width={400}
             className="w-full h-full object-cover rounded-[20px]"
           />
           <input
             type="file"
             accept="image/*"
-            onChange={() => {}}
+            onChange={handleUploadImage}
             className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
           />
         </div>
