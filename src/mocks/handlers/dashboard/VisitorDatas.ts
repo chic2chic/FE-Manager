@@ -1,4 +1,3 @@
-///Users/yeongseo/Documents/GitHub/FE-Manager/src/mocks/handlers/dashboard/VisitorDatas.ts
 export const VisitorGenderData = [
   { name: "남성", value: 1200 },
   { name: "여성", value: 800 },
