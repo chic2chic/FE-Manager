@@ -11,6 +11,7 @@ import bin from "@/assets/webps/common/bin.webp";
 import check from "@/assets/webps/common/check.webp";
 import { useNavigate } from "react-router-dom";
 import PopUpQuestionnaire from "./views/PopUpQuestionnaire";
+import { usePopUpCreate } from "@/hooks/api/usePopUpCreate";
 
 export default function PopUpCreate() {
   const startCalender = useCalendar();
@@ -33,6 +34,8 @@ export default function PopUpCreate() {
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string>(TestImage);
 
+  const { uploadImage } = usePopUpCreate();
+
   const navigate = useNavigate();
 
   const handleCancel = () => {
@@ -42,6 +45,8 @@ export default function PopUpCreate() {
   // TODO : 저장 기능 구현 -> React Query로 API 호출
   const handleSave = () => {
     setIsSaveModalOpen(true);
+    if (!imageFile) return null;
+    uploadImage(imageFile);
   };
 
   const handleUploadImage = (e: React.ChangeEvent<HTMLInputElement>) => {

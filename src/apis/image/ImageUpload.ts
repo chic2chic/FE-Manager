@@ -1,11 +1,10 @@
 import { api } from "../config/Axios";
 
-export const getPresignedUrl = async ({ file }: { file: File }) => {
-  const typeRegex = /.[a-z]+/;
+export const getPresignedUrl = async (file: File) => {
+  const typeRegex = /\/([a-z]+)/;
+  const match = file.type.match(typeRegex);
+  const extension = match ? match[1] : "";
   const fileName = file.name;
-  const extension = file.type.match(typeRegex);
-
-  console.log(extension);
 
   const response = await api.post("/images/presigned-url", {
     fileName,
@@ -29,6 +28,7 @@ export const uploadImageToS3 = async ({
     });
     return;
   } catch (error) {
-    throw new Error(`이미지 업로드 실패`);
+    const errorMessage = error instanceof Error ? error.message : String(error);
+    throw new Error(`이미지 업로드 실패 ${errorMessage}`);
   }
 };
