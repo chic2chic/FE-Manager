@@ -1,5 +1,5 @@
 import axios, { AxiosError } from "axios";
-import { refreshAccessToken } from "../user/auth";
+import { refreshAccessToken } from "../user/Auth";
 import { useAuthStore } from "@/stores/useAuthStore";
 import Cookies from "js-cookie";
 

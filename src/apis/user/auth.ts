@@ -1,5 +1,5 @@
 import Cookies from "js-cookie";
-import { api } from "../config/axios";
+import { api } from "../config/Axios";
 
 export const refreshAccessToken = async () => {
   const refreshToken = Cookies.get("refreshToken");

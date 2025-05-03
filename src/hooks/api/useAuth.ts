@@ -1,4 +1,4 @@
-import { loginApi } from "@/apis/user/auth";
+import { loginApi } from "@/apis/user/Auth";
 import { LoginErrorMsg } from "@/constants/Message";
 import { useAuthStore } from "@/stores/useAuthStore";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
