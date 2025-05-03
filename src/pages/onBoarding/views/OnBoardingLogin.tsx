@@ -14,8 +14,11 @@ export default function OnBoradingLogin() {
   const handleLogin = async () => {
     try {
       await login.mutateAsync({ username, password });
-    } catch (error) {
-      console.error(error);
+    } catch (error: unknown) {
+      const errorMessage =
+        error instanceof Error ? error.message : String(error);
+
+      throw new Error(`로그인 오류: ${errorMessage}`);
     }
   };
 
