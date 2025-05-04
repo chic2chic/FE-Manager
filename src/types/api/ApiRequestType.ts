@@ -19,3 +19,13 @@ export type PopUpCreateRequest = {
   latitude: number;
   longitude: number;
 };
+
+export type LoginRequest = {
+  username: string;
+  password: string;
+};
+
+export type GetPresignedUrlRequest = {
+  fileName: string;
+  extenstion: string;
+};

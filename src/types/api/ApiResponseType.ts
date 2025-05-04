@@ -10,4 +10,9 @@ export type GlobalResponse<T> = {
 
 export type LoginResponse = {
   accessToken: string;
+  refreshToken: string;
+};
+
+export type GetPresignedUrlResponse = {
+  preSignedUrl: string;
 };
