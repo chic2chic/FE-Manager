@@ -26,15 +26,16 @@ export default function PopUpCreate() {
   const reservStartCalendarRef = useRef<HTMLDivElement>(null);
   const reservEndCalendarRef = useRef<HTMLDivElement>(null);
 
-  const { formData, updateField } = usePopUpCreateStore();
+  const { formData, isValidate, updateField } = usePopUpCreateStore();
 
   const [isAlertModalOpen, setIsAlertModalOpen] = useState<boolean>(false);
   const [isSaveModalOpen, setIsSaveModalOpen] = useState<boolean>(false);
 
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string>(TestImage);
+  const [alertMessage, setAlertMessage] = useState<string>("");
 
-  const { uploadImage } = usePopUpCreate();
+  const { createPopUp } = usePopUpCreate();
 
   const navigate = useNavigate();
 
@@ -42,11 +43,15 @@ export default function PopUpCreate() {
     setIsAlertModalOpen(true);
   };
 
-  // TODO : 저장 기능 구현 -> React Query로 API 호출
   const handleSave = () => {
-    setIsSaveModalOpen(true);
+    const { isValid, message } = isValidate();
+    if (!isValid) {
+      setAlertMessage(message);
+      return;
+    }
     if (!imageFile) return null;
-    uploadImage(imageFile);
+    setIsSaveModalOpen(true);
+    createPopUp({ file: imageFile, formData });
   };
 
   const handleUploadImage = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -298,7 +303,7 @@ export default function PopUpCreate() {
           </div>
         </div>
       </div>
-      <PopUpQuestionnaire handleSave={handleSave} />
+      <PopUpQuestionnaire handleSave={handleSave} alertMessage={alertMessage} />
       <Modal
         isOpen={isAlertModalOpen}
         setIsOpen={setIsAlertModalOpen}

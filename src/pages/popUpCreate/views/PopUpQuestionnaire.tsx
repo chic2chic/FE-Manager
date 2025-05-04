@@ -6,9 +6,13 @@ import { useState } from "react";
 
 type Props = {
   handleSave: () => void;
+  alertMessage: string;
 };
 
-export default function PopUpQuestionnaire({ handleSave }: Props) {
+export default function PopUpQuestionnaire({
+  handleSave,
+  alertMessage,
+}: Props) {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleOpen = () => {
@@ -70,6 +74,7 @@ export default function PopUpQuestionnaire({ handleSave }: Props) {
           height={41}
         />
       </motion.div>
+      {alertMessage && <div className="h-[40px] text-2xl">{alertMessage}</div>}
       {/** 저장하기 버튼입니다. 설문지를 등록하지 않으면 팝업 등록이 불가하기에 설문지 컴포넌트 내부에 넣었습니다. */}
       {isOpen && (
         <button

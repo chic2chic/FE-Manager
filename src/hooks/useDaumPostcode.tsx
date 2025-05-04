@@ -9,6 +9,7 @@ declare global {
 
 export type AddressResultType = {
   address: string;
+  detailAddress: string;
   latitude: number;
   longitude: number;
 };
@@ -18,6 +19,7 @@ export function useDaumPostcode() {
   const [isOpen, setIsOpen] = useState(false);
   const [addressInfo, setAddressInfo] = useState<AddressResultType>({
     address: "",
+    detailAddress: "",
     latitude: 0,
     longitude: 0,
   });
@@ -40,11 +42,12 @@ export function useDaumPostcode() {
           geocoder.addressSearch(addr, function (results: any, status: any) {
             if (status === window.daum.maps.services.Status.OK) {
               const result = results[0];
-              setAddressInfo({
+              setAddressInfo(prev => ({
+                ...prev,
                 address: addr,
                 latitude: result.y,
                 longitude: result.x,
-              });
+              }));
             }
           });
 
