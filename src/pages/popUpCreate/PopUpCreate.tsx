@@ -11,7 +11,7 @@ import bin from "@/assets/webps/common/bin.webp";
 import check from "@/assets/webps/common/check.webp";
 import { useNavigate } from "react-router-dom";
 import PopUpQuestionnaire from "./views/PopUpQuestionnaire";
-import { usePopUpCreate } from "@/hooks/api/usePopUpCreate";
+import { usePopUpCreate } from "@/hooks/usePopUpCreate";
 
 export default function PopUpCreate() {
   const startCalender = useCalendar();
@@ -26,7 +26,8 @@ export default function PopUpCreate() {
   const reservStartCalendarRef = useRef<HTMLDivElement>(null);
   const reservEndCalendarRef = useRef<HTMLDivElement>(null);
 
-  const { formData, isValidate, updateField } = usePopUpCreateStore();
+  const { formData, isValidate, updateField, resetForm } =
+    usePopUpCreateStore();
 
   const [isAlertModalOpen, setIsAlertModalOpen] = useState<boolean>(false);
   const [isSaveModalOpen, setIsSaveModalOpen] = useState<boolean>(false);
@@ -51,7 +52,7 @@ export default function PopUpCreate() {
     }
     if (!imageFile) return null;
     setIsSaveModalOpen(true);
-    createPopUp({ file: imageFile, formData });
+    createPopUp({ imageFile: imageFile, formData });
   };
 
   const handleUploadImage = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -69,6 +70,12 @@ export default function PopUpCreate() {
     setIsSaveModalOpen(false);
     navigate("/popup-list");
   };
+
+  useEffect(() => {
+    return () => {
+      resetForm();
+    };
+  }, [resetForm]);
 
   useEffect(() => {
     updateField("popUpStartDate", startCalender.selectedDate);

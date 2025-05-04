@@ -1,11 +1,17 @@
+import {
+  GetPresignedUrlRequest,
+  UploadImageToS3Request,
+} from "@/types/api/ApiRequestType";
 import { api } from "../config/Axios";
+import {
+  ApiResponse,
+  GetPresignedUrlResponse,
+} from "@/types/api/ApiResponseType";
 
-export const getPresignedUrl = async (file: File) => {
-  const typeRegex = /\/([a-z]+)/;
-  const match = file.type.match(typeRegex);
-  const extension = match ? match[1] : "";
-  const fileName = file.name;
-
+export const getPresignedUrl = async ({
+  fileName,
+  extension,
+}: GetPresignedUrlRequest): ApiResponse<GetPresignedUrlResponse> => {
   const response = await api.post("/images/presigned-url", {
     fileName,
     extension,
@@ -15,20 +21,12 @@ export const getPresignedUrl = async (file: File) => {
 
 export const uploadImageToS3 = async ({
   presignedUrl,
-  file,
-}: {
-  presignedUrl: string;
-  file: File;
-}) => {
-  try {
-    await api.put(presignedUrl, file, {
-      headers: {
-        "Content-Type": file.type,
-      },
-    });
-    return;
-  } catch (error) {
-    const errorMessage = error instanceof Error ? error.message : String(error);
-    throw new Error(`이미지 업로드 실패 ${errorMessage}`);
-  }
+  imageFile,
+}: UploadImageToS3Request) => {
+  const response = await api.put(presignedUrl, imageFile, {
+    headers: {
+      "Content-Type": imageFile.type,
+    },
+  });
+  return response.status;
 };

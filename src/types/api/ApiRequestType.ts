@@ -6,10 +6,10 @@ export type LoginRequest = {
 export type PopUpCreateRequest = {
   name: string;
   imageUrl: string;
-  popupOpenDate: Date;
-  popupCloseDate: Date;
-  reservationOpenDateTime: number;
-  reservationCloseDateTime: number;
+  popupOpenDate: string;
+  popupCloseDate: string;
+  reservationOpenDateTime: string;
+  reservationCloseDateTime: string;
   runOpenTime: number;
   runCloseTime: number;
   totalCapacity: number;
@@ -18,6 +18,10 @@ export type PopUpCreateRequest = {
   detailAddress: string;
   latitude: number;
   longitude: number;
+  survey: {
+    number: number;
+    content: string[];
+  }[];
 };
 
 export type LoginRequest = {
@@ -27,5 +31,10 @@ export type LoginRequest = {
 
 export type GetPresignedUrlRequest = {
   fileName: string;
-  extenstion: string;
+  extension: string;
+};
+
+export type UploadImageToS3Request = {
+  presignedUrl: string;
+  imageFile: File;
 };

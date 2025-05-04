@@ -60,8 +60,9 @@ export const usePopUpCreateStore = create<PopUpStore>((set, get) => ({
       reservEndDate,
       timeMaxNum,
       entireMaxNum,
-      imageUrl,
+      // imageUrl,
       address,
+      questions,
     } = get().formData;
 
     if (!popUpTitle) {
@@ -82,12 +83,14 @@ export const usePopUpCreateStore = create<PopUpStore>((set, get) => ({
     if (!address.address) {
       return { isValid: false, message: "주소를 입력해주세요" };
     }
-    if (!address.detailAddress) {
-      return { isValid: false, message: "상세 주소를 입력해주세요" };
-    }
-    if (!imageUrl) {
-      return { isValid: false, message: "이미지를 업로드해주세요" };
-    }
+    // TODO : 상세주소 입력 공간 UI 생성 이후 Validation 검증
+    // if (!address.detailAddress) {
+    //   return { isValid: false, message: "상세 주소를 입력해주세요" };
+    // }
+    // if (!imageUrl) {
+    //   return { isValid: false, message: "이미지를 업로드해주세요" };
+    // }
+
     if (popUpEndDate < popUpStartDate) {
       return {
         isValid: false,
@@ -98,6 +101,22 @@ export const usePopUpCreateStore = create<PopUpStore>((set, get) => ({
       return {
         isValid: false,
         message: "예약 종료일은 시작일 이후여야 합니다",
+      };
+    }
+
+    const validateQuestions = () => {
+      for (const question of questions) {
+        if (question.answers.some(answer => answer.trim() === "")) {
+          return false;
+        }
+      }
+      return true;
+    };
+
+    if (!validateQuestions()) {
+      return {
+        isValid: false,
+        message: "모든 설문 항목을 입력해주세요",
       };
     }
 
