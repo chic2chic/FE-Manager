@@ -1,9 +1,10 @@
+import { LoginRequest } from "@/types/api/ApiRequestType";
 import { http, HttpResponse } from "msw";
 
 export const AuthHandlers = [
   http.post("/auth/login", async ({ request }) => {
-    const requestBody = await request.json();
-    const { username } = requestBody as { username: string };
+    const requestBody = (await request.json()) as LoginRequest;
+    const { username } = requestBody;
 
     if (username === "error") {
       return HttpResponse.json(
