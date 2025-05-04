@@ -2,11 +2,7 @@ import { useAuthStore } from "@/stores/useAuthStore";
 import { useAuthApi } from "./api/useAuthApi";
 import Cookies from "js-cookie";
 import { ErrorMessage } from "@/utils/ErrorMessage";
-
-type CredentialsType = {
-  username: string;
-  password: string;
-};
+import { LoginRequest } from "@/types/api/ApiRequestType";
 
 const COOKIE_OPTIONS = {
   secure: false,
@@ -18,7 +14,7 @@ export const useAuth = () => {
   const { isLogin, setLogin, setLogout } = useAuthStore();
   const mutate = useAuthApi();
 
-  const login = async ({ username, password }: CredentialsType) => {
+  const login = async ({ username, password }: LoginRequest) => {
     try {
       const response = await mutate.mutateAsync({ username, password });
       setLogin(response.data.accessToken);
