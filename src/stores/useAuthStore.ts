@@ -4,8 +4,8 @@ import { createJSONStorage, persist } from "zustand/middleware";
 interface AuthState {
   accessToken: string | null;
   isLogin: boolean;
-  login: (_token: string) => void;
-  logout: () => void;
+  setLogin: (_token: string) => void;
+  setLogout: () => void;
 }
 
 export const useAuthStore = create<AuthState>()(
@@ -13,12 +13,12 @@ export const useAuthStore = create<AuthState>()(
     set => ({
       accessToken: null,
       isLogin: false,
-      login: token =>
+      setLogin: token =>
         set({
           accessToken: token,
           isLogin: true,
         }),
-      logout: () =>
+      setLogout: () =>
         set({
           accessToken: null,
           isLogin: false,
@@ -30,7 +30,7 @@ export const useAuthStore = create<AuthState>()(
       partialize: state => ({
         accessToken: state.accessToken,
       }),
-      onRehydrateStorage: () => state => {
+      onRehydrateStorage: state => {
         if (state && state.accessToken) {
           state.isLogin = true;
         }

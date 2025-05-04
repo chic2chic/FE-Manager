@@ -33,14 +33,14 @@ api.interceptors.response.use(
         const refreshResponse = await refreshAccessToken();
         const newAccessToken = refreshResponse.data.data.accessToken;
 
-        useAuthStore.getState().login(newAccessToken);
+        useAuthStore.getState().setLogin(newAccessToken);
 
         originalRequest!.headers["Authorization"] = `Bearer ${newAccessToken}`;
         originalRequest!.headers["X-Retry"] = "true";
 
         return axios(originalRequest!);
       } catch (refreshError) {
-        useAuthStore.getState().logout();
+        useAuthStore.getState().setLogout();
         Cookies.remove("refreshToken");
         return Promise.reject(refreshError);
       }

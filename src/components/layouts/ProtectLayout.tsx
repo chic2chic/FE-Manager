@@ -1,4 +1,4 @@
-import { useAuth } from "@/hooks/api/useAuth";
+import { useAuth } from "@/hooks/useAuth";
 import { Navigate, Outlet } from "react-router-dom";
 
 export default function ProtectLayout() {

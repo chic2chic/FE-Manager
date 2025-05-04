@@ -4,7 +4,7 @@ import logoImage from "@/assets/webps/common/logo-manager.webp";
 import alarmImage from "@/assets/webps/common/alarm.webp";
 import { useState } from "react";
 import NoticeModal from "@/components/noticeModal/NoticeModal";
-import { useAuth } from "@/hooks/api/useAuth";
+import { useAuth } from "@/hooks/useAuth";
 
 export default function NavBar() {
   const { isLogin, logout } = useAuth();

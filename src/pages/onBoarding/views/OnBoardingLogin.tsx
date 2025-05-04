@@ -1,31 +1,30 @@
 import CustomInput from "@/components/common/CustomInput";
 import Modal from "@/components/common/Modal";
-import { useAuth } from "@/hooks/api/useAuth";
 import React, { useState } from "react";
 import bin from "@/assets/webps/common/bin.webp";
+import { useAuth } from "@/hooks/useAuth";
+import { LoginErrorMsg } from "@/constants/Message";
+import { useNavigate } from "react-router-dom";
 
 export default function OnBoradingLogin() {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const { login, LoginErrorMsg, showErrorModal, handleCloseModal } = useAuth();
+  const { login } = useAuth();
+  const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   const isActive: boolean = Boolean(username && password);
 
-  const handleLogin = async () => {
-    try {
-      await login.mutateAsync({ username, password });
-    } catch (error: unknown) {
-      const errorMessage =
-        error instanceof Error ? error.message : String(error);
-
-      throw new Error(`로그인 오류: ${errorMessage}`);
-    }
+  const handleLogin = () => {
+    login({ username, password })
+      .then(() => navigate("/popup-list"))
+      .catch(() => setIsOpenModal(true));
   };
 
   const handleCloseModalAll = () => {
-    handleCloseModal();
     setUsername("");
     setPassword("");
+    setIsOpenModal(false);
   };
 
   return (
@@ -64,7 +63,7 @@ export default function OnBoradingLogin() {
         login
       </button>
       <Modal
-        isOpen={showErrorModal}
+        isOpen={isOpenModal}
         content={LoginErrorMsg}
         image={bin}
         onConfirm={handleCloseModalAll}
