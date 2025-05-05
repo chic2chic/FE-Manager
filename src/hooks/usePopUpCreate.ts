@@ -66,9 +66,8 @@ export const usePopUpCreate = () => {
     formData: PopUpFormData;
   }) => {
     try {
-      const popUpForm = transformFormDataToRequest(formData);
-      console.log(popUpForm);
       await uploadImage(imageFile);
+      const popUpForm = transformFormDataToRequest(formData);
       const response = await popUpCreateMutation.mutateAsync(popUpForm);
       return response.status;
     } catch (error) {

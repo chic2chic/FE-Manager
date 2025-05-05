@@ -9,9 +9,13 @@ export const api = axios.create({
 
 api.interceptors.request.use(
   config => {
-    const token = useAuthStore.getState().accessToken;
-    if (token) {
-      config.headers["Authorization"] = `Bearer ${token}`;
+    const isS3Request = config.url?.includes("amazonaws.com");
+
+    if (!isS3Request) {
+      const token = useAuthStore.getState().accessToken;
+      if (token) {
+        config.headers["Authorization"] = `Bearer ${token}`;
+      }
     }
     return config;
   },
