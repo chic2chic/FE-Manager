@@ -1,4 +1,5 @@
 import { LoginRequest } from "@/types/api/ApiRequestType";
+import { LoginResponse } from "@/types/api/ApiResponseType";
 import { http, HttpResponse } from "msw";
 
 export const AuthHandlers = [
@@ -28,9 +29,7 @@ export const AuthHandlers = [
         data: {
           accessToken:
             "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJwb3BpLW1hbmFnZXIiLCJzdWIiOiJ5b3Vuc2FuZzAxMjQiLCJhdXRob3JpdGllcyI6IlJPTEVfVVNFUiIsImlhdCI6MTc0NjE5MTIwMSwiZXhwIjoxNzQ2MTk4NDAxfQ.v8jv5jFspTFJ-Wilu3bLErf6HIS215AC6DfZ6FBj0mXlyp8f1JyRsvyaNflAiUvDwDTDPOWc-kTZS_noJOlSIQ",
-          refreshToken:
-            "eyJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJwb3BpLW1hbmFnZXIiLCJzdWIiOiJ5b3Vuc2FuZzAxMjQiLCJpYXQiOjE3NDYxOTEyMDEsImV4cCI6MTc0NjM2NDAwMX0.YSZiH_1mHsZ2KpLGwhL2PvnBLnsuDftpX35LK7RV9NCLQHPpsQefMcBsHNEiS7UsZPDWQdMdSa4b8iL5Rxk3pQ",
-        },
+        } as LoginResponse,
         timestamp: new Date().toISOString(),
       },
       { status: 200 },

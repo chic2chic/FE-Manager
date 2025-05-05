@@ -10,5 +10,4 @@ export type GlobalResponse<T> = {
 
 export type LoginResponse = {
   accessToken: string;
-  refreshToken: string;
 };

@@ -1,7 +1,6 @@
 import axios, { AxiosError } from "axios";
 import { refreshAccessToken } from "../user/Auth";
 import { useAuthStore } from "@/stores/useAuthStore";
-import Cookies from "js-cookie";
 
 export const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
@@ -31,7 +30,7 @@ api.interceptors.response.use(
     ) {
       try {
         const refreshResponse = await refreshAccessToken();
-        const newAccessToken = refreshResponse.data.data.accessToken;
+        const newAccessToken = refreshResponse.data.accessToken;
 
         useAuthStore.getState().setLogin(newAccessToken);
 
@@ -41,7 +40,6 @@ api.interceptors.response.use(
         return axios(originalRequest!);
       } catch (refreshError) {
         useAuthStore.getState().setLogout();
-        Cookies.remove("refreshToken");
         return Promise.reject(refreshError);
       }
     }
