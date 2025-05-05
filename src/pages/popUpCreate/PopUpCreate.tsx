@@ -50,9 +50,8 @@ export default function PopUpCreate() {
       setAlertMessage(message);
       return;
     }
-    if (!imageFile) return null;
     setIsSaveModalOpen(true);
-    createPopUp({ imageFile: imageFile, formData });
+    createPopUp({ imageFile: imageFile || "", formData });
   };
 
   const handleUploadImage = (e: React.ChangeEvent<HTMLInputElement>) => {
