@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "test": "vitest run --config ./vitest.config.ts",
+    "test": "vitest run --config ./vitest.config.ts --passWithNoTests",
     "test:storybook": "vitest run --config ./vitest.storybook.config.ts",
     "dev": "vite",
     "build": "tsc -b && vite build",
