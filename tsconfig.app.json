@@ -30,10 +30,9 @@
     "src/**/*.js",
     "src/**/*.jsx",
     "vite.config.ts",
-    "jest.config.ts",
     ".storybook/vitest.setup.ts",
     ".storybook/main.ts",
-    "vitest.workspace.ts",
+    "vitest.storybook.config.ts",
     "vitest.config.ts",
     "eslint.config.js"
   ]
