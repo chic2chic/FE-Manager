@@ -2,26 +2,12 @@
 
 ---
 
-상수 데이터를 관리하는 디렉토리입니다.
+페이지 구현에 필요한 상수 데이터를 관리합니다.
 
-### 구현방법
+### 주요 내용
 
-```ts
-export const NavigationItems = [
-  {
-    title: "대시보드",
-    url: "/dashboard",
-  },
-  {
-    title: "팝업관리",
-    url: "/popup",
-  },
-  {
-    title: "상품관리",
-    url: "/products",
-  },
-];
-```
+- 상수 데이터는 도메인별로 묶어서 관리합니다.
 
-- `constants/onboarding` 과 같이 페이지별로 상수를 관리합니다.
-- 파스칼 케이스를 사용합니다.
+### Naming Conventions
+
+- 파일명과 함수명은 모두 파스칼 케이스로 작성합니다.

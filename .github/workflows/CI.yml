@@ -32,5 +32,5 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Test
-        run: npm test || echo "No tests specified"
+      - name: 단위 테스트
+        run: npm run test
