@@ -1,39 +1,21 @@
-## 📊 mocks 디렉토리입니다
+## 💡 mocks 디렉토리입니다
 
 ---
 
-MSW Handler를 정의하는 디렉토리입니다.
+MSW에서 사용할 핸들러들을 관리하는 디렉토리입니다.
 
-### 구현방법
+### 주요 내용
 
-```ts
-// Auth.handlers.ts
-import { http, HttpResponse } from "msw";
-
-const posts = ["사용자1", "사용자2", "사용자3"];
-
-export const AuthHandlers = [
-  http.get("/auth", () => {
-    return HttpResponse.json(posts, { status: 200 });
-  }),
-
-  http.post("/auth", async ({ request }) => {
-    const newPost = await request.text();
-    posts.push(newPost);
-    return HttpResponse.json({ success: true }, { status: 201 });
-  }),
-];
-```
-
-- 필요한 목데이터에 맞춰서 handlers를 정의합니다.
-- handler는 `Auth.handlers.ts` 와 같이 중간에 `handlers`를 추가하여 파일을 관리합니다.
-- 파스칼 케이스를 사용합니다.
+- `@/mocks/handlers/` : 도메인 혹은 기능별로 묶어서 구현합니다.
+- `@/mocks/browser.ts` : 위에서 구현된 Handler를 browser.ts에 추가합니다.
+- API Call이 발생하는 모든 기능이 `handlers/` 디렉토리 안에 구현되어야 합니다.
+- 다음과 같이 스프레드를 사용해서 추가해주면 됩니다.
 
 ```ts
-// browser.ts
-export const handlers = [...AuthHandlers];
-
-export const worker = setupWorker(...handlers);
+export const handlers = [...AuthHandlers, ...ProductHandlers];
 ```
 
-- 다음으로 정의된 handler를 browser.ts의 `handlers`에 스프레드 형식으로 추가하여 사용합니다.
+### Naming Conventions
+
+- browser.ts를 제외한 파일은 모두 파스칼 케이스로 작성합니다.
+- handler로 사용되는 파일은 `~.handlers.ts` 와 같이 중간에 `handlers` 를 추가합니다.
