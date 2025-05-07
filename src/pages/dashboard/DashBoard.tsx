@@ -4,6 +4,7 @@ import DashBoardReservation from "@/pages/dashboard/views/DashBoardReservation";
 import BestProduct from "./views/BestProduct";
 import DashBoardConversionRate from "@/pages/dashboard/views/DashBoardConversionRate";
 import DashBoardVisitor from "./views/DashBoardVisitor";
+import DashBoardQuestionnaire from "./views/DashBoardQuestionnaire";
 
 export default function DashBoard() {
   return (
@@ -18,6 +19,7 @@ export default function DashBoard() {
         <DashBoardCustomerTransaction />
       </div>
       <DashBoardConversionRate />
+      <DashBoardQuestionnaire />
     </div>
   );
 }
