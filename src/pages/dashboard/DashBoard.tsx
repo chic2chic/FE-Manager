@@ -18,9 +18,8 @@ export default function DashBoard() {
         <DashBoardReservation />
         <DashBoardCustomerTransaction />
       </div>
-      <div>
-        <DashBoardQuestionnaire />
-      </div>
+      <DashBoardConversionRate />
+      <DashBoardQuestionnaire />
     </div>
   );
 }
