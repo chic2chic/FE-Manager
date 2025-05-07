@@ -1,3 +1,5 @@
+import CustomBlurDot from "@/components/common/CustomBlurDot";
+import CustomCursor from "@/components/common/CustomCursor";
 import CustomTooltip from "@/components/common/CustomTooltip";
 import { CongestionDatas } from "@/mocks/handlers/dashboard/ConjestionDatas";
 import { CongestionData } from "@/types/CongestionType";
@@ -8,7 +10,6 @@ import {
   XAxis,
   ResponsiveContainer,
   Tooltip,
-  DotProps,
   YAxis,
 } from "recharts";
 
@@ -16,54 +17,7 @@ type Props = {
   dayData: CongestionData[];
 };
 
-type TooltipPayload = {
-  value: number;
-  name: string;
-  dataKey: string;
-}[];
-
-export type CustomTooltipProps = {
-  active?: boolean;
-  payload?: TooltipPayload;
-  label?: string | number;
-};
-
-type CursorProps = {
-  points?: { x: number; y: number }[];
-};
-
-const CustomCursor = ({ points }: CursorProps) => {
-  const x = points?.[0]?.x;
-  if (x === undefined) return null;
-
-  return (
-    <line
-      x1={x}
-      x2={x}
-      y1={20}
-      y2={340}
-      stroke="#dadada"
-      strokeWidth={1}
-      strokeDasharray="3 6"
-    />
-  );
-};
-
-const BlurDot = ({ cx, cy }: DotProps) => {
-  return (
-    <circle
-      cx={cx}
-      cy={cy}
-      r={7}
-      fill="#96E2D6"
-      style={{
-        filter: "blur(3px)",
-      }}
-    />
-  );
-};
-
-export default function DottedAreaChart({ dayData }: Props) {
+export default function CongestionChart({ dayData }: Props) {
   // y축 최댓값: 모든 요일 데이터 중 가장 큰 value
   const allValues = Object.values(CongestionDatas)
     .flat()
@@ -72,7 +26,7 @@ export default function DottedAreaChart({ dayData }: Props) {
   const maxValue = Math.max(...allValues);
 
   return (
-    <ResponsiveContainer width={612} height={394}>
+    <ResponsiveContainer width="100%" height="100%">
       <AreaChart
         data={dayData}
         margin={{ top: 70, right: 40, left: 40, bottom: 20 }}
@@ -95,11 +49,11 @@ export default function DottedAreaChart({ dayData }: Props) {
             <CustomTooltip
               labelSuffix="시"
               unitPrefix="평균"
-              highlightColor="#54d8c2"
+              highlightColor="#71DDCB"
               unitSuffix="명"
             />
           }
-          cursor={<CustomCursor />}
+          cursor={<CustomCursor y1={20} y2={340} />}
         />
         <Area
           type="linear"
@@ -107,7 +61,7 @@ export default function DottedAreaChart({ dayData }: Props) {
           stroke="#96E2D6"
           strokeWidth={1}
           fill="url(#colorMint)"
-          dot={<BlurDot />}
+          dot={<CustomBlurDot fillColor="#96E2D6" />}
           activeDot={false}
         />
       </AreaChart>
