@@ -8,9 +8,10 @@ import check from "@/assets/webps/common/check.webp";
 import { useNavigate } from "react-router-dom";
 
 export default function ItemAddPage() {
-  const [itemTitle, setItemTitle] = useState<string>("");
-  const [itemQuantity, setItemQuantity] = useState<number>(0);
+  const [itemName, setItemName] = useState<string>("");
   const [itemPrice, setItemPrice] = useState<number>(0);
+  const [itemStock, setItemStock] = useState<number>(0);
+  const [itemMinStock, setItemMinStock] = useState<number>(0);
   const [itemLocation, setItemLocation] = useState<string>("");
   const [isAlertModalOpen, setIsAlertModalOpen] = useState<boolean>(false);
   const [isSaveModalOpen, setIsSaveModalOpen] = useState<boolean>(false);
@@ -22,7 +23,7 @@ export default function ItemAddPage() {
 
   const handleSave = () => {
     setIsSaveModalOpen(true);
-    return itemTitle && itemQuantity && itemPrice && itemLocation;
+    return itemName && itemPrice && itemStock && itemMinStock && itemLocation;
   };
 
   const handleSaveConfirmBtn = () => {
@@ -30,16 +31,20 @@ export default function ItemAddPage() {
     navigate("/products");
   };
 
-  const handleTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setItemTitle(e.target.value);
-  };
-
-  const handleQuantity = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setItemQuantity(Number(e.target.value));
+  const handleName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setItemName(e.target.value);
   };
 
   const handlePrice = (e: React.ChangeEvent<HTMLInputElement>) => {
     setItemPrice(Number(e.target.value));
+  };
+
+  const handleStock = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setItemStock(Number(e.target.value));
+  };
+
+  const handleMinStock = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setItemMinStock(Number(e.target.value));
   };
 
   const handleLocation = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -60,7 +65,7 @@ export default function ItemAddPage() {
           onClick={handleSave}
         />
       </div>
-      <div className="absolute left-[50%] top-[50%] transform -translate-x-1/2 -translate-y-1/2 flex justify-center items-center gap-[53px]">
+      <div className="absolute left-[50%] mt-40 transform -translate-x-1/2 flex justify-center items-center gap-[53px]">
         <div className="relative w-[400px] h-[400px]">
           <img
             src={TestImage}
@@ -76,13 +81,15 @@ export default function ItemAddPage() {
           />
         </div>
         <ItemAddInputs
-          title={itemTitle}
-          quantity={itemQuantity}
+          name={itemName}
           price={itemPrice}
+          stock={itemStock}
+          minStock={itemMinStock}
           location={itemLocation}
-          handleTitle={handleTitle}
-          handleQuantity={handleQuantity}
+          handleName={handleName}
           handlePrice={handlePrice}
+          handleStock={handleStock}
+          handleMinStock={handleMinStock}
           handleLocation={handleLocation}
         />
       </div>

@@ -2,33 +2,37 @@ import CustomInput from "@/components/common/CustomInput";
 import React from "react";
 
 type Props = {
-  title: string;
-  quantity: number;
+  name: string;
   price: number;
+  stock: number;
+  minStock: number;
   location: string;
-  handleTitle: (_e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleQuantity: (_e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleName: (_e: React.ChangeEvent<HTMLInputElement>) => void;
   handlePrice: (_e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleStock: (_e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleMinStock: (_e: React.ChangeEvent<HTMLInputElement>) => void;
   handleLocation: (_e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 export default function ItemAddInputs({
-  title,
-  quantity,
+  name,
   price,
+  stock,
+  minStock,
   location,
-  handleTitle,
-  handleQuantity,
+  handleName,
   handlePrice,
+  handleStock,
+  handleMinStock,
   handleLocation,
 }: Props) {
   return (
     <div className="flex flex-col gap-[30px]">
       <CustomInput
-        value={title}
+        value={name}
         title="상품명"
         placeholder="상품명을 입력해주세요"
-        onChange={handleTitle}
+        onChange={handleName}
       />
       <CustomInput
         value={price}
@@ -38,11 +42,17 @@ export default function ItemAddInputs({
         onChange={handlePrice}
       />
       <CustomInput
-        value={quantity}
+        value={stock}
         isOnlyNumber={true}
         title="수량"
         placeholder="상품 수량을 입력해주세요"
-        onChange={handleQuantity}
+        onChange={handleStock}
+      />
+      <CustomInput
+        value={minStock}
+        title="발주 기준 수량"
+        placeholder="상품 발주 기준 수량을 입력해주세요"
+        onChange={handleMinStock}
       />
       <CustomInput
         value={location}

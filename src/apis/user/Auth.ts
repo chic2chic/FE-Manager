@@ -1,4 +1,4 @@
-import { api } from "../config/Axios";
+import { api } from "@/apis/config/Axios";
 import { ApiResponse, LoginResponse } from "@/types/api/ApiResponseType";
 
 export const refreshAccessToken = async (): ApiResponse<LoginResponse> => {
