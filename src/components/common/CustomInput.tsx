@@ -12,6 +12,7 @@ type Props = {
   title: string;
   titleType?: "ko" | "en";
   onChange: (_e: React.ChangeEvent<HTMLInputElement>) => void;
+  value: string | number;
   placeholder: string;
   width?: number;
   height?: number;
@@ -23,6 +24,7 @@ export default function CustomInput({
   title,
   titleType = "ko",
   onChange,
+  value,
   placeholder,
   width = 500,
   height = 60,
@@ -52,6 +54,7 @@ export default function CustomInput({
         type={inputType || "text"}
         placeholder={placeholder}
         onChange={onChange}
+        value={value}
         onInput={isOnlyNumber ? numberHandler : undefined}
       />
     </div>

@@ -1,8 +1,24 @@
-// import { useState } from "react";
+import { useAuthStore } from "@/stores/useAuthStore";
+import { useAuthApi } from "./api/useAuthApi";
+import { ErrorMessage } from "@/utils/ErrorMessage";
+import { LoginRequest } from "@/types/api/ApiRequestType";
 
 export const useAuth = () => {
-  // const [isLogin, setIsLogin] = useState<boolean>(true);
-  const isLogin = true;
+  const { isLogin, setLogin, setLogout } = useAuthStore();
+  const mutate = useAuthApi();
 
-  return { isLogin };
+  const login = async ({ username, password }: LoginRequest) => {
+    try {
+      const response = await mutate.mutateAsync({ username, password });
+      setLogin(response.data.accessToken);
+    } catch (error) {
+      throw new Error(`로그인 오류 ${ErrorMessage(error)}`);
+    }
+  };
+
+  const logout = () => {
+    setLogout();
+  };
+
+  return { isLogin, login, logout, error: mutate.error };
 };

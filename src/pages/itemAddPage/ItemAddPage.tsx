@@ -76,6 +76,10 @@ export default function ItemAddPage() {
           />
         </div>
         <ItemAddInputs
+          title={itemTitle}
+          quantity={itemQuantity}
+          price={itemPrice}
+          location={itemLocation}
           handleTitle={handleTitle}
           handleQuantity={handleQuantity}
           handlePrice={handlePrice}

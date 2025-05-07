@@ -1,13 +1,13 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { NavigationItems } from "@/constants/NavigationItems";
-import { useAuth } from "@/hooks/useAuth";
 import logoImage from "@/assets/webps/common/logo-manager.webp";
 import alarmImage from "@/assets/webps/common/alarm.webp";
 import { useState } from "react";
 import NoticeModal from "@/components/noticeModal/NoticeModal";
+import { useAuth } from "@/hooks/useAuth";
 
 export default function NavBar() {
-  const { isLogin } = useAuth();
+  const { isLogin, logout } = useAuth();
   const navigate = useNavigate();
   const [isNoticeModalOpen, setIsNoticeModalOpen] = useState(false);
 
@@ -53,6 +53,7 @@ export default function NavBar() {
             <button
               lang="en"
               className="text-[16px] font-medium text-gray09 cursor-pointer"
+              onClick={logout}
             >
               logout
             </button>
