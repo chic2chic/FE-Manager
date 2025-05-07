@@ -24,11 +24,6 @@ export type PopUpCreateRequest = {
   }[];
 };
 
-export type LoginRequest = {
-  username: string;
-  password: string;
-};
-
 export type GetPresignedUrlRequest = {
   fileName: string;
   extension: string;
