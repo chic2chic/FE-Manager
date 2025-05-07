@@ -1,10 +1,12 @@
-import DashBoardTitle from "@/pages/dashboard/views/DashBoardTitle";
-import VisitorPieChart, { SegmentDatum } from "./VisitorPieChart";
+import DashBoardTitle from "@/pages/dashboardPage/views/DashBoardTitle";
 import { mapGenderData, mapAgeData } from "@/utils/VisitorColorMapper";
 import {
   VisitorGenderData,
   VisitorAgeData,
 } from "@/mocks/handlers/dashboard/VisitorDatas";
+import VisitorPieChart, {
+  SegmentDatum,
+} from "@/pages/dashboardPage/views/VisitorPieChart";
 
 export default function DashBoardVisitor() {
   const genderData: SegmentDatum[] = mapGenderData(VisitorGenderData);

@@ -1,6 +1,6 @@
 import { CustomerTransactionDatas } from "@/mocks/handlers/dashboard/CustomerTransactionDatas";
-import { CountCard } from "@/pages/dashboard/views/CountCard";
-import DashBoardTitle from "@/pages/dashboard/views/DashBoardTitle";
+import { CountCard } from "@/pages/dashboardPage/views/CountCard";
+import DashBoardTitle from "@/pages/dashboardPage/views/DashBoardTitle";
 
 export default function DashBoardCustomerTransaction() {
   return (

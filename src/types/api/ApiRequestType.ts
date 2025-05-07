@@ -3,7 +3,7 @@ export type LoginRequest = {
   password: string;
 };
 
-export type ItemRequest = {
+export type ItemCreateRequest = {
   name: string;
   imageUrl: string;
   price: number;

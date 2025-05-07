@@ -1,7 +1,5 @@
 import leftArrowImg from "@/assets/webps/popUpCreate/left-arrow.webp";
 import TestImage from "@/assets/webps/onBoarding/test.png";
-import PopUpInput from "./views/PopUpInput";
-import PopUpLabel from "./views/PopUpLabel";
 import { useEffect, useRef, useState } from "react";
 import useCalendar from "@/hooks/useCalendar";
 import { useDaumPostcode } from "@/hooks/useDaumPostcode";
@@ -10,9 +8,11 @@ import Modal from "@/components/common/Modal";
 import bin from "@/assets/webps/common/bin.webp";
 import check from "@/assets/webps/common/check.webp";
 import { useNavigate } from "react-router-dom";
-import PopUpQuestionnaire from "./views/PopUpQuestionnaire";
+import PopUpLabel from "@/pages/popUpCreatePage/views/PopUpLabel";
+import PopUpInput from "@/pages/popUpCreatePage/views/PopUpInput";
+import PopUpQuestionnaire from "@/pages/popUpCreatePage/views/PopUpQuestionnaire";
 
-export default function PopUpCreate() {
+export default function PopUpCreatePage() {
   const startCalender = useCalendar();
   const endCalender = useCalendar();
   const reservStartCalender = useCalendar();

@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Days } from "@/constants/dashboard/Days";
 import { formatDay } from "@/utils/FormatDay";
-import DashBoardTitle from "@/pages/dashboard/views/DashBoardTitle";
+import DashBoardTitle from "@/pages/dashboardPage/views/DashBoardTitle";
 import { CongestionDatas } from "@/mocks/handlers/dashboard/ConjestionDatas";
-import CongestionChart from "@/pages/dashboard/views/CongestionChart";
+import CongestionChart from "@/pages/dashboardPage/views/CongestionChart";
 
 export default function DashBoardCongestion() {
   const today = new Date().getDay(); // 0(일) - 6(토)

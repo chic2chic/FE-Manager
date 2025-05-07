@@ -1,8 +1,8 @@
 import WideArrowImg from "@/assets/webps/popUpCreate/wide-arrow.webp";
 import { motion, AnimatePresence } from "framer-motion";
-import QuestionnaireForm from "./QuestionnaireForm";
 import { Questions } from "@/constants/popUpCreate/Questions";
 import { useState } from "react";
+import QuestionnaireForm from "@/pages/popUpCreatePage/views/QuestionnaireForm";
 
 type Props = {
   handleSave: () => void;

@@ -1,5 +1,5 @@
+import DashBoardQuestionnaire from "@/pages/dashboardPage/views/DashBoardQuestionnaire";
 import { Meta, StoryObj } from "@storybook/react";
-import DashBoardQuestionnaire from "./DashBoardQuestionnaire";
 
 const meta: Meta<typeof DashBoardQuestionnaire> = {
   title: "pages/dashboard/views/DashBoardQuestionnaire",

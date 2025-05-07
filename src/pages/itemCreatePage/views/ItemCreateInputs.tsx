@@ -14,7 +14,7 @@ type Props = {
   handleLocation: (_e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-export default function ItemAddInputs({
+export default function ItemCreateInputs({
   name,
   price,
   stock,

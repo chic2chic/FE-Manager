@@ -25,7 +25,7 @@ export const displays = [
 ];
 
 export const ProductHandlers = [
-  http.get("/products", () => {
+  http.get("/items", () => {
     return HttpResponse.json(displays, { status: 200 });
   }),
 ];

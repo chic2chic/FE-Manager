@@ -3,7 +3,7 @@ import { GenderOptions, AgeOptions } from "@/constants/dashboard/PersonInfo";
 import { DropdownFilter } from "@/components/common/DropdownFilter";
 import { BestProducts } from "@/mocks/handlers/dashboard/BestProduct";
 import productImage from "@/assets/webps/productList/product-img.webp";
-import DashBoardTitle from "./DashBoardTitle";
+import DashBoardTitle from "@/pages/dashboardPage/views/DashBoardTitle";
 
 const cardBgClass: Record<number, string> = {
   1: "bg-purple01",

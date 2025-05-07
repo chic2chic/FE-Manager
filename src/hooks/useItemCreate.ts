@@ -1,9 +1,9 @@
 import { ErrorMessage } from "@/utils/ErrorMessage";
-import { ItemRequest } from "@/types/api/ApiRequestType";
-import { useItemApi } from "@/hooks/api/useItemApi";
+import { ItemCreateRequest } from "@/types/api/ApiRequestType";
+import { useItemCreateApi } from "@/hooks/api/useItemCreateApi";
 
-export const useItem = () => {
-  const mutate = useItemApi();
+export const useItemCreate = () => {
+  const mutate = useItemCreateApi();
 
   const createItem = async ({
     name,
@@ -12,7 +12,7 @@ export const useItem = () => {
     stock,
     minStock,
     location,
-  }: ItemRequest) => {
+  }: ItemCreateRequest) => {
     try {
       const response = await mutate.mutateAsync({
         name,

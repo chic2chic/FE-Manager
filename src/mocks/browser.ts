@@ -1,6 +1,6 @@
 import { setupWorker } from "msw/browser";
-import { ProductHandlers } from "./handlers/Product.handlers";
-import { AuthHandlers } from "./handlers/onBoarding/Auth.handlers";
+import { AuthHandlers } from "@/mocks/handlers/onBoarding/Auth.handlers";
+import { ProductHandlers } from "@/mocks/handlers/Product.handlers";
 
 export const handlers = [...AuthHandlers, ...ProductHandlers];
 

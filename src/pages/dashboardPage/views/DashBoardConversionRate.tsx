@@ -2,8 +2,8 @@ import {
   LowConversionDatas,
   TopConversionDatas,
 } from "@/mocks/handlers/dashboard/ConversionRateDatas";
-import { ConversionRateChart } from "@/pages/dashboard/views/ConversionRateChart";
-import DashBoardTitle from "@/pages/dashboard/views/DashBoardTitle";
+import { ConversionRateChart } from "@/pages/dashboardPage/views/ConversionRateChart";
+import DashBoardTitle from "@/pages/dashboardPage/views/DashBoardTitle";
 
 export default function DashBoardConversionRate() {
   return (

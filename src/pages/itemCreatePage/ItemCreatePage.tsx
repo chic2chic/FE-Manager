@@ -1,11 +1,12 @@
 import CustomButton from "@/components/common/CustomButton";
 import React, { useState } from "react";
-import ItemAddInputs from "./views/ItemAddInputs";
 import TestImage from "@/assets/webps/onBoarding/test.png";
 import Modal from "@/components/common/Modal";
 import bin from "@/assets/webps/common/bin.webp";
 import check from "@/assets/webps/common/check.webp";
 import { useNavigate } from "react-router-dom";
+import { useItemCreate } from "@/hooks/useItemCreate";
+import ItemCreateInputs from "@/pages/itemCreatePage/views/ItemCreateInputs";
 
 export default function ItemAddPage() {
   const [itemName, setItemName] = useState<string>("");
@@ -17,6 +18,8 @@ export default function ItemAddPage() {
   const [isSaveModalOpen, setIsSaveModalOpen] = useState<boolean>(false);
   const navigate = useNavigate();
 
+  const { createItem } = useItemCreate();
+
   const handleCancel = () => {
     setIsAlertModalOpen(true);
   };
@@ -26,9 +29,18 @@ export default function ItemAddPage() {
     return itemName && itemPrice && itemStock && itemMinStock && itemLocation;
   };
 
-  const handleSaveConfirmBtn = () => {
+  const handleSaveConfirmBtn = async () => {
+    await createItem({
+      name: itemName,
+      imageUrl: "presigned_url",
+      price: itemPrice,
+      stock: itemStock,
+      minStock: itemMinStock,
+      location: itemLocation,
+    });
+
     setIsSaveModalOpen(false);
-    navigate("/products");
+    navigate("/items");
   };
 
   const handleName = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -80,7 +92,7 @@ export default function ItemAddPage() {
             className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
           />
         </div>
-        <ItemAddInputs
+        <ItemCreateInputs
           name={itemName}
           price={itemPrice}
           stock={itemStock}
@@ -100,7 +112,7 @@ export default function ItemAddPage() {
         image={bin}
         confirmText="취소하기"
         cancelText="돌아가기"
-        onConfirm={() => navigate("/products")}
+        onConfirm={() => navigate("/items")}
         onCancel={() => setIsAlertModalOpen(false)}
       />
 

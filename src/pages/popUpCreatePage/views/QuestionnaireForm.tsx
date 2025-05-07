@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import QuestionnaireInput from "./QuestionnaireInput";
 import PlusImg from "@/assets/webps/popUpCreate/plus.webp";
 import { usePopUpCreateStore } from "@/stores/usePopUpCreateStore";
 import { motion } from "framer-motion";
+import QuestionnaireInput from "@/pages/popUpCreatePage/views/QuestionnaireInput";
 
 type Props = {
   number: number;

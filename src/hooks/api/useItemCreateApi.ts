@@ -1,11 +1,11 @@
-import { postItem } from "@/apis/ItemAdd";
+import { postItemCreate } from "@/apis/ItemCreatePage";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-export const useItemApi = () => {
+export const useItemCreateApi = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: postItem,
+    mutationFn: postItemCreate,
     onSuccess: response => {
       queryClient.invalidateQueries({ queryKey: ["user"] });
       return response;

@@ -1,5 +1,5 @@
+import NoticeModal from "@/components/noticeModal/NoticeModal";
 import { Meta, StoryObj } from "@storybook/react";
-import NoticeModal from "./NoticeModal";
 
 const meta: Meta<typeof NoticeModal> = {
   title: "components/common/NoticeModal",

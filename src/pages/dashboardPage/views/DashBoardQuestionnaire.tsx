@@ -1,11 +1,11 @@
 import { DropdownFilter } from "@/components/common/DropdownFilter";
-import DashBoardTitle from "./DashBoardTitle";
 import { useState } from "react";
 import { Questions } from "@/constants/popUpCreate/Questions";
 import { QuestionnaireDatas } from "@/mocks/handlers/dashboard/Questionnaire";
 import { QuestionnaireType } from "@/types/QuestionnaireType";
 import { Cell, Pie, PieChart, Tooltip, TooltipProps } from "recharts";
 import CustomTooltip from "@/components/common/CustomTooltip";
+import DashBoardTitle from "@/pages/dashboardPage/views/DashBoardTitle";
 
 const options = ["1번 문항", "2번 문항", "3번 문항", "4번 문항"];
 const SIZE = 300;
@@ -62,13 +62,15 @@ export default function DashBoardQuestionnaire() {
 
   return (
     <div className="flex flex-col">
-      <div className="flex gap-[20px]">
+      <div className="relative flex gap-[20px]">
         <DashBoardTitle title="설문지 분석" />
-        <DropdownFilter
-          value={selectedQuestion}
-          options={options}
-          onChange={handleQuestion}
-        />
+        <div className="ml-2">
+          <DropdownFilter
+            value={selectedQuestion}
+            options={options}
+            onChange={handleQuestion}
+          />
+        </div>
       </div>
       <div className="w-[1360px] h-[662px] bg-gray02 rounded-[50px] px-[60px] py-[45px]">
         <p className="font-semibold text-[36px]">

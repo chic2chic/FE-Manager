@@ -1,5 +1,5 @@
+import NavBar from "@/components/common/NavBar";
 import { Meta, StoryObj } from "@storybook/react";
-import NavBar from "./NavBar";
 import { BrowserRouter } from "react-router-dom";
 
 const meta: Meta<typeof NavBar> = {
