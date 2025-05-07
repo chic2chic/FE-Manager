@@ -1,4 +1,8 @@
-import { getPresignedUrl, uploadImageToS3 } from "@/apis/image/ImageUpload";
+import {
+  getPresignedUrl,
+  postImageComplete,
+  uploadImageToS3,
+} from "@/apis/image/ImageUpload";
 import { postPopUpCreate } from "@/apis/PopUpCreatePage";
 import { ErrorMessage } from "@/utils/ErrorMessage";
 import { useMutation } from "@tanstack/react-query";
@@ -24,6 +28,11 @@ export const usePopUpCreateApi = () => {
     },
   });
 
+  const postImageCompleteMutation = useMutation({
+    mutationFn: postImageComplete,
+    onSuccess: response => response.status === 200,
+  });
+
   const popUpCreateMutation = useMutation({
     mutationFn: postPopUpCreate,
     onSuccess: response => response.data,
@@ -36,5 +45,6 @@ export const usePopUpCreateApi = () => {
     getPresignedUrlMutation,
     uploadImgToS3Mutation,
     popUpCreateMutation,
+    postImageCompleteMutation,
   };
 };

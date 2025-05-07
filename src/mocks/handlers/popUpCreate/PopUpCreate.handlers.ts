@@ -34,7 +34,7 @@ export const PopUpCreateHandlers = [
     );
   }),
 
-  http.post("/images/presigned-url", async ({ request }) => {
+  http.post("/popups/upload-url", async ({ request }) => {
     const { fileName, extension } =
       (await request.json()) as GetPresignedUrlRequest;
 
@@ -51,6 +51,27 @@ export const PopUpCreateHandlers = [
         preSignedUrl: newPresignedUrl,
       },
       timestamp: new Date().toISOString(),
+    });
+  }),
+
+  http.post("popups/upload-complete", async ({ request }) => {
+    const { fileName, extension } =
+      (await request.json()) as GetPresignedUrlRequest;
+
+    if (!fileName || !extension) {
+      return HttpResponse.json({
+        success: false,
+        status: 400,
+        data: {},
+        timeStamp: new Date().toISOString(),
+      });
+    }
+
+    return HttpResponse.json({
+      success: true,
+      status: 200,
+      data: {},
+      timeStamp: new Date().toISOString(),
     });
   }),
 ];

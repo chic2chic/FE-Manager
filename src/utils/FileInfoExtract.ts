@@ -1,4 +1,4 @@
-export const FileInoExtract = (file: File) => {
+export const FileInfoExtract = (file: File) => {
   const typeRegex = /\/([a-z]+)/;
   const match = file.type.match(typeRegex);
   const extension = match ? match[1] : "";

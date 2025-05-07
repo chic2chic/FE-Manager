@@ -6,13 +6,14 @@ import { api } from "../config/Axios";
 import {
   ApiResponse,
   GetPresignedUrlResponse,
+  NoResponse,
 } from "@/types/api/ApiResponseType";
 
 export const getPresignedUrl = async ({
   fileName,
   extension,
 }: GetPresignedUrlRequest): ApiResponse<GetPresignedUrlResponse> => {
-  const response = await api.post("/images/presigned-url", {
+  const response = await api.post("/popups/upload-url", {
     fileName,
     extension,
   });
@@ -29,4 +30,15 @@ export const uploadImageToS3 = async ({
     },
   });
   return response.status;
+};
+
+export const postImageComplete = async ({
+  fileName,
+  extension,
+}: GetPresignedUrlRequest): ApiResponse<NoResponse> => {
+  const response = await api.post("/popups/upload-complete", {
+    fileName,
+    extension,
+  });
+  return response.data;
 };
