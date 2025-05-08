@@ -1,4 +1,4 @@
-import { postLogin } from "@/apis/user/Auth";
+import { postLogin } from "@/apis/user/AuthApi";
 import { QueryClient, useMutation } from "@tanstack/react-query";
 
 const authQueryClient = new QueryClient();

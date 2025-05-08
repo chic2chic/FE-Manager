@@ -1,6 +1,6 @@
 import axios, { AxiosError } from "axios";
-import { postRefreshAccessToken } from "@/apis/user/Auth";
 import { useAuthStore } from "@/stores/useAuthStore";
+import { postRefreshAccessToken } from "../user/AuthApi";
 
 export const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
