@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { GenderOptions, AgeOptions } from "@/constants/dashboard/PersonInfo";
 import { DropdownFilter } from "@/components/common/DropdownFilter";
-import { BestProducts } from "@/mocks/handlers/dashboard/BestProduct";
-import productImage from "@/assets/webps/productList/product-img.webp";
+import { BestItems } from "@/mocks/handlers/dashboard/BestItems";
+import itemImage from "@/assets/webps/itemList/item-img.webp";
 import DashBoardTitle from "@/pages/dashboardPage/views/DashBoardTitle";
 
 const cardBgClass: Record<number, string> = {
@@ -17,12 +17,12 @@ const badgeBgClass: Record<number, string> = {
   3: "bg-mint07",
 };
 
-export default function BestProduct() {
+export default function BestItem() {
   const [gender, setGender] = useState<string>("남성");
   const [age, setAge] = useState<string>("10대");
 
   // TODO: gender, age에 따른 상품 필터링 로직 적용
-  // const filteredProducts = bestProducts.filter(item => ...);
+  // const filteredItems = bestItems.filter(item => ...);
 
   return (
     <div>
@@ -42,7 +42,7 @@ export default function BestProduct() {
 
       {/* 베스트 상품 리스트 */}
       <div className="flex justify-center gap-[60px] mt-2">
-        {BestProducts.map((item, index) => (
+        {BestItems.map((item, index) => (
           <div
             key={item.id}
             className={`
@@ -67,7 +67,7 @@ export default function BestProduct() {
             {/* 상품 이미지 */}
             <div className="mb-6">
               <img
-                src={productImage}
+                src={itemImage}
                 alt={item.name}
                 className="w-[334px] h-[334px] object-cover mt-9 mb-4"
               />

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import productImage from "@/assets/webps/productList/product-img.webp";
-import { Product } from "@/types/Product";
+import itemImage from "@/assets/webps/itemList/item-img.webp";
+import { ItemType } from "@/types/ItemType";
 import Modal from "@/components/common/Modal";
 import { useNavigate } from "react-router-dom";
 import bin from "@/assets/webps/common/bin.webp";
@@ -8,18 +8,18 @@ import check from "@/assets/webps/common/check.webp";
 
 type Display = {
   name: string;
-  products: Product[];
+  items: ItemType[];
 };
 
 export default function ItemListPage() {
   const [displayList, setDisplayList] = useState<Display[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [selectedItem, setSelectedItem] = useState<ItemType | null>(null);
   const navigate = useNavigate();
   const [isDeleteConfirmOpen, setIsDeleteConfirmOpen] = useState(false);
 
-  const handleOpenDeleteModal = (product: Product) => {
-    setSelectedProduct(product);
+  const handleOpenDeleteModal = (item: ItemType) => {
+    setSelectedItem(item);
     setIsModalOpen(true);
   };
 
@@ -31,7 +31,10 @@ export default function ItemListPage() {
   useEffect(() => {
     fetch("/items")
       .then(res => res.json())
-      .then(data => setDisplayList(data))
+      .then(data => {
+        console.log("items fetch data:", data);
+        setDisplayList(data);
+      })
       .catch(err => new Error(err));
   }, []);
 
@@ -39,12 +42,12 @@ export default function ItemListPage() {
     <div className="py-8">
       {/* 상단 버튼 */}
       <div className="flex justify-end gap-3 mb-10 px-10">
-        <button className="px-4 py-2 bg-gray01 border border-gray10 text-gray10 rounded-full text-[20px] font-semibold hover:bg-gray10 hover:text-gray01 transition-colors duration-300">
+        <button className="cursor-pointer px-4 py-2 bg-gray01 border border-gray10 text-gray10 rounded-full text-[20px] font-semibold hover:bg-gray10 hover:text-gray01 transition-colors duration-300">
           전체 상품 등록
         </button>
         <button
           onClick={() => navigate("/items/create")}
-          className="px-4 py-2 bg-gray01 border border-gray10 text-gray10 rounded-full text-[20px] font-semibold hover:bg-gray10 hover:text-gray01 transition-colors duration-300"
+          className="cursor-pointer px-4 py-2 bg-gray01 border border-gray10 text-gray10 rounded-full text-[20px] font-semibold hover:bg-gray10 hover:text-gray01 transition-colors duration-300"
         >
           상품 등록
         </button>
@@ -67,22 +70,22 @@ export default function ItemListPage() {
             className="grid grid-cols-4 gap-6 gap-y-14 "
             style={{ paddingLeft: "272px", paddingRight: "180px" }}
           >
-            {display.products.map(product => (
-              <div key={product.id} className="flex flex-col items-center">
+            {display.items.map(item => (
+              <div key={item.id} className="flex flex-col items-center">
                 {/* 상품 이미지 */}
                 <img
-                  src={productImage}
-                  alt={product.name}
+                  src={itemImage}
+                  alt={item.name}
                   className="w-53 h-53 object-cover mb-3"
                 />
 
                 {/* 상품명 + 버튼 */}
-                <p className="font-bold text-[20px] mb-1">{product.name}</p>
+                <p className="font-bold text-[20px] mb-1">{item.name}</p>
                 <p className="text-[16px] text-gray08 mb-1">
-                  {product.price.toLocaleString()}원
+                  {item.price.toLocaleString()}원
                 </p>
                 <p className="text-[16px] text-gray08 mb-2">
-                  남은재고 : {product.stock}
+                  남은재고 : {item.stock}
                 </p>
                 <div className="flex gap-2">
                   <div className="flex justify-center gap-4 mt-2">
@@ -91,7 +94,7 @@ export default function ItemListPage() {
                     </button>
                     <button
                       className="text-[18px] px-4 py-1 cursor-pointer border border-gray10 rounded-full hover:bg-gray10 hover:text-gray01 transition-colors duration-300"
-                      onClick={() => handleOpenDeleteModal(product)}
+                      onClick={() => handleOpenDeleteModal(item)}
                     >
                       삭제
                     </button>
@@ -104,11 +107,11 @@ export default function ItemListPage() {
       ))}
 
       {/* 삭제 확인 모달 */}
-      {selectedProduct && (
+      {selectedItem && (
         <Modal
           isOpen={isModalOpen}
           setIsOpen={setIsModalOpen}
-          content={`"${selectedProduct.name} 상품을 삭제하시겠어요?`}
+          content={`"${selectedItem.name} 상품을 삭제하시겠어요?`}
           image={bin}
           confirmText="삭제"
           cancelText="취소"

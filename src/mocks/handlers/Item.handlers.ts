@@ -4,7 +4,7 @@ import { http, HttpResponse } from "msw";
 export const displays = [
   {
     name: "A",
-    products: [
+    items: [
       { id: 1, name: "POSTER SET", price: 20000, stock: 24 },
       { id: 2, name: "KRUNK ORANGE", price: 20000, stock: 24 },
       { id: 3, name: "BAG SET", price: 15000, stock: 12 },
@@ -13,7 +13,7 @@ export const displays = [
   },
   {
     name: "B",
-    products: [
+    items: [
       { id: 5, name: "KEYRING", price: 10000, stock: 30 },
       { id: 6, name: "POSTER SET", price: 20000, stock: 10 },
       { id: 7, name: "KEYRING", price: 10000, stock: 30 },
@@ -24,7 +24,7 @@ export const displays = [
   },
 ];
 
-export const ProductHandlers = [
+export const ItemHandlers = [
   http.get("/items", () => {
     return HttpResponse.json(displays, { status: 200 });
   }),

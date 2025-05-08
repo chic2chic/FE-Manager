@@ -1,14 +1,13 @@
 import { postItemCreate } from "@/apis/ItemCreatePage";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { ErrorMessage } from "@/utils/ErrorMessage";
+import { useMutation } from "@tanstack/react-query";
 
 export const useItemCreateApi = () => {
-  const queryClient = useQueryClient();
-
   return useMutation({
     mutationFn: postItemCreate,
-    onSuccess: response => {
-      queryClient.invalidateQueries({ queryKey: ["user"] });
-      return response;
+    onSuccess: response => response.data,
+    onError: error => {
+      throw new Error(`상품 생성 에러 : ${ErrorMessage(error)}`);
     },
   });
 };

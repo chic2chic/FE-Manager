@@ -1,6 +1,6 @@
-import { Product } from "@/types/Product";
+import { ItemType } from "@/types/ItemType";
 
-export const BestProducts: Product[] = [
+export const BestItems: ItemType[] = [
   {
     id: 1,
     name: "BLACKPINK IN YOUR AREA - THE POP-UP",

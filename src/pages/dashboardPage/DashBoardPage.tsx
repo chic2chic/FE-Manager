@@ -2,7 +2,7 @@ import DashBoardCongestion from "@/pages/dashboardPage/views/DashBoardCongestion
 import DashBoardCustomerTransaction from "@/pages/dashboardPage/views/DashBoardCustomerTransaction";
 import DashBoardReservation from "@/pages/dashboardPage/views/DashBoardReservation";
 import DashBoardConversionRate from "@/pages/dashboardPage/views/DashBoardConversionRate";
-import BestProduct from "@/pages/dashboardPage/views/BestProduct";
+import BestProduct from "@/pages/dashboardPage/views/BestItem";
 import DashBoardVisitor from "@/pages/dashboardPage/views/DashBoardVisitor";
 import DashBoardQuestionnaire from "@/pages/dashboardPage/views/DashBoardQuestionnaire";
 

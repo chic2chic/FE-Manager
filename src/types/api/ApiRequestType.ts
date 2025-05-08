@@ -11,3 +11,12 @@ export type ItemCreateRequest = {
   minStock: number;
   location: string;
 };
+
+export type GetPresignedUrlRequest = {
+  extension: string;
+};
+
+export type UploadImageToS3Request = {
+  presignedUrl: string;
+  imageFile: File;
+};

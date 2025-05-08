@@ -13,3 +13,7 @@ export type NoResponse = Record<string, never>;
 export type LoginResponse = {
   accessToken: string;
 };
+
+export type GetPresignedUrlResponse = {
+  preSignedUrl: string;
+};
