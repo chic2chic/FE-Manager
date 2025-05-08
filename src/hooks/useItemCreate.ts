@@ -23,14 +23,15 @@ export const useItemCreate = () => {
 
   const uploadImage = async (imageFile: File): Promise<string> => {
     // 이미지 확장자 추출
-    const extension = imageFile.name
+    const imageFileExtension = imageFile.name
       .split(".")
       .pop()
       ?.toUpperCase() as ImageType;
 
     // presigned URL 요청
     const response = await getItemPresignedUrlMutation.mutateAsync({
-      extension,
+      imageFileExtension,
+      imageDirectory: "ITEM",
     });
 
     // console.log(response);

@@ -19,7 +19,7 @@ export const ItemCreateHandlers = [
     );
   }),
 
-  http.post("/items/upload-url", async () => {
+  http.post("/images/upload-url", async () => {
     return HttpResponse.json(
       {
         success: true,

@@ -8,16 +8,18 @@ import {
   GetPresignedUrlResponse,
 } from "@/types/api/ApiResponseType";
 
-export const getItemPresignedUrl = async ({
-  extension,
+export const getPresignedUrl = async ({
+  imageFileExtension,
+  imageDirectory,
 }: GetPresignedUrlRequest): ApiResponse<GetPresignedUrlResponse> => {
-  const response = await api.post("/items/upload-url", {
-    extension,
+  const response = await api.post("/images/upload-url", {
+    imageFileExtension,
+    imageDirectory,
   });
   return response.data;
 };
 
-export const uploadItemImageToS3 = async ({
+export const putImageToS3 = async ({
   presignedUrl,
   imageFile,
 }: UploadImageToS3Request) => {

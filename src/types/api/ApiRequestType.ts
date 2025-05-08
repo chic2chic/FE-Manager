@@ -14,7 +14,8 @@ export type ItemCreateRequest = {
 };
 
 export type GetPresignedUrlRequest = {
-  extension: string;
+  imageFileExtension: string;
+  imageDirectory: string;
 };
 
 export type UploadImageToS3Request = {

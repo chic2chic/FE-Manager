@@ -1,7 +1,4 @@
-import {
-  getItemPresignedUrl,
-  uploadItemImageToS3,
-} from "@/apis/image/ImageUpload";
+import { getPresignedUrl, putImageToS3 } from "@/apis/image/ImageApi";
 import { postItemCreate } from "@/apis/ItemCreateApi";
 import { ErrorMessage } from "@/utils/ErrorMessage";
 import { useMutation } from "@tanstack/react-query";
@@ -10,14 +7,14 @@ import { useMutation } from "@tanstack/react-query";
 // react query
 export const useItemCreateApi = () => {
   const getItemPresignedUrlMutation = useMutation({
-    mutationFn: getItemPresignedUrl,
+    mutationFn: getPresignedUrl,
     onError: error => {
       throw new Error(`PresignedUrl 발급 에러 : ${ErrorMessage(error)}`);
     },
   });
 
   const uploadItemImgToS3Mutation = useMutation({
-    mutationFn: uploadItemImageToS3,
+    mutationFn: putImageToS3,
     onError: error => {
       throw new Error(`이미지 S3 업로드 에러 : ${ErrorMessage(error)}`);
     },
