@@ -34,7 +34,7 @@ export const useItemCreate = () => {
     });
 
     // console.log(response);
-    const presignedUrl = response.data.preSignedUrl;
+    const presignedUrl = response.data.presignedUrl;
     const imageUrl = presignedUrl.split("?")[0];
 
     // put

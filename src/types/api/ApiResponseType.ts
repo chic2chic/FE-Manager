@@ -15,5 +15,5 @@ export type LoginResponse = {
 };
 
 export type GetPresignedUrlResponse = {
-  preSignedUrl: string;
+  presignedUrl: string;
 };
