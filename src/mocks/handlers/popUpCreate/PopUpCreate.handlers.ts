@@ -1,4 +1,7 @@
-import { PopupWithChoicesRequest } from "@/types/api/ApiRequestType";
+import {
+  GetPresignedUrlRequest,
+  PopupWithChoicesRequest,
+} from "@/types/api/ApiRequestType";
 import {
   GetPresignedUrlResponse,
   PostPopUpCreateResponse,
@@ -6,7 +9,21 @@ import {
 import { http, HttpResponse } from "msw";
 
 export const PopUpCreateHandlers = [
-  http.post("/popups/upload-url", async () => {
+  http.post("/popups/upload-url", async ({ request }) => {
+    const { imageFileExtension, imageDirectory } =
+      (await request.json()) as GetPresignedUrlRequest;
+    if (!imageFileExtension || !imageDirectory) {
+      return HttpResponse.json(
+        {
+          success: false,
+          status: 400,
+          data: null,
+          timestamp: new Date().toISOString(),
+        },
+        { status: 400 },
+      );
+    }
+
     return HttpResponse.json(
       {
         success: true,
@@ -27,6 +44,7 @@ export const PopUpCreateHandlers = [
   http.post("/popups", async ({ request }) => {
     const requestBody = (await request.json()) as PopupWithChoicesRequest;
     const isError = requestBody.popupCreateRequest.name === "error";
+
     console.log("popup 생성시 Request : ", requestBody);
 
     if (isError) {

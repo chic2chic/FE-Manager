@@ -28,17 +28,14 @@ export const useItemCreate = () => {
       .pop()
       ?.toUpperCase() as ImageType;
 
-    // presigned URL 요청
     const response = await getItemPresignedUrlMutation.mutateAsync({
       imageFileExtension,
       imageDirectory: "ITEM",
     });
 
-    // console.log(response);
     const presignedUrl = response.data.presignedUrl;
     const imageUrl = presignedUrl.split("?")[0];
 
-    // put
     await uploadItemImgToS3Mutation.mutateAsync({
       imageFile,
       presignedUrl,

@@ -1,5 +1,3 @@
-import { FileExtension } from "../ImageExtenstionType";
-
 export type LoginRequest = {
   username: string;
   password: string;
@@ -23,10 +21,6 @@ export type GetPresignedUrlRequest = {
 export type UploadImageToS3Request = {
   presignedUrl: string;
   imageFile: File;
-};
-
-export type PresignedUrlRequest = {
-  imageFileExtension: FileExtension;
 };
 
 export type PopupCreateRequest = {

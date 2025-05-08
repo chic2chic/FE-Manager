@@ -1,13 +1,11 @@
-import { getPresignedUrl, putImageToS3 } from "@/apis/image/ImageApi";
+import { postCreatePresignedUrl, putImageToS3 } from "@/apis/image/ImageApi";
 import { postItemCreate } from "@/apis/ItemCreateApi";
 import { ErrorMessage } from "@/utils/ErrorMessage";
 import { useMutation } from "@tanstack/react-query";
 
-// 에러 핸들링은 여기서만
-// react query
 export const useItemCreateApi = () => {
   const getItemPresignedUrlMutation = useMutation({
-    mutationFn: getPresignedUrl,
+    mutationFn: postCreatePresignedUrl,
     onError: error => {
       throw new Error(`PresignedUrl 발급 에러 : ${ErrorMessage(error)}`);
     },

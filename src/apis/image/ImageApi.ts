@@ -2,13 +2,13 @@ import {
   GetPresignedUrlRequest,
   UploadImageToS3Request,
 } from "@/types/api/ApiRequestType";
-import { api } from "../config/Axios";
+import { api, apiS3 } from "../config/Axios";
 import {
   ApiResponse,
   GetPresignedUrlResponse,
 } from "@/types/api/ApiResponseType";
 
-export const getPresignedUrl = async ({
+export const postCreatePresignedUrl = async ({
   imageFileExtension,
   imageDirectory,
 }: GetPresignedUrlRequest): ApiResponse<GetPresignedUrlResponse> => {
@@ -23,7 +23,7 @@ export const putImageToS3 = async ({
   presignedUrl,
   imageFile,
 }: UploadImageToS3Request) => {
-  const response = await api.put(presignedUrl, imageFile, {
+  const response = await apiS3.put(presignedUrl, imageFile, {
     headers: {
       "Content-Type": imageFile.type,
     },

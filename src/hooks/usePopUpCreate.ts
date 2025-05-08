@@ -13,6 +13,7 @@ export const usePopUpCreate = () => {
   const imageUpload = async (imageFile: File) => {
     const presignedResponse = await getPresignedUrlMutation.mutateAsync({
       imageFileExtension: FileInfoExtract(imageFile),
+      imageDirectory: "POPUP",
     });
 
     const presignedUrl = presignedResponse.data.presignedUrl;
