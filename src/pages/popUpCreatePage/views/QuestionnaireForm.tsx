@@ -16,6 +16,7 @@ type Props = {
 
 export default function QuestionnaireForm({ number, title }: Props) {
   const { formData, updateChoiceOptions } = usePopUpCreateStore();
+
   const existingAnswers =
     formData.choiceCreateRequestList[number - 1].optionList; // 배열형태로 넘어오기 때문에 -1로 인덱싱 필요
   const [answers, setAnswers] = useState<string[]>(

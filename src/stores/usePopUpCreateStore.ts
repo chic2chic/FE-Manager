@@ -1,36 +1,10 @@
 import { Questions } from "@/constants/popUpCreate/Questions";
+import {
+  PopupCreateRequest,
+  PopupWithChoicesRequest,
+} from "@/types/api/ApiRequestType";
 import { create } from "zustand";
 
-// 팝업 생성 요청 인터페이스
-export type PopupCreateRequest = {
-  name: string;
-  imageUrl: string;
-  popupStartDate: string;
-  popupEndDate: string;
-  reservationOpenDateTime: string;
-  reservationCloseDateTime: string;
-  runOpenTime: string;
-  runCloseTime: string;
-  totalCapacity: number;
-  timeCapacity: number;
-  roadAddress: string;
-  detailAddress: string;
-  latitude: number;
-  longitude: number;
-};
-
-// 선택지 생성 요청 인터페이스
-export type ChoiceCreateRequest = {
-  optionList: string[];
-};
-
-// 전체 요청 구조 인터페이스
-export type PopupWithChoicesRequest = {
-  popupCreateRequest: PopupCreateRequest;
-  choiceCreateRequestList: ChoiceCreateRequest[];
-};
-
-// 초기 상태 정의 - PopupWithChoicesRequest 타입 사용
 const initialState: PopupWithChoicesRequest = {
   popupCreateRequest: {
     name: "",
@@ -111,13 +85,9 @@ export const usePopUpCreateStore = create<PopUpStore>((set, get) => ({
       return { isValid: false, message: "주소를 입력해주세요" };
     }
 
-    // TODO : 상세주소 입력 공간 UI 생성 이후 Validation 검증
-    // if (!popupCreateRequest.detailAddress) {
-    //   return { isValid: false, message: "상세 주소를 입력해주세요" };
-    // }
-    // if (!popupCreateRequest.imageUrl) {
-    //   return { isValid: false, message: "이미지를 업로드해주세요" };
-    // }
+    if (!popupCreateRequest.detailAddress) {
+      return { isValid: false, message: "상세 주소를 입력해주세요" };
+    }
 
     // 날짜 유효성 검증
     const startDate = new Date(popupCreateRequest.popupStartDate);
