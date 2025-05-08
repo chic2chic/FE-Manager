@@ -45,7 +45,7 @@ export default function PopUpCreatePage() {
     setIsAlertModalOpen(true);
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     const { isValid, message } = isValidate();
 
     if (!isValid) {
@@ -58,8 +58,9 @@ export default function PopUpCreatePage() {
       return;
     }
 
-    popUpCreate(imageFile);
-    setIsSaveModalOpen(true);
+    await popUpCreate(imageFile)
+      .then(() => setIsSaveModalOpen(true))
+      .catch(() => setAlertMessage("등록 오류가 발생했습니다."));
   };
 
   const handleUploadImage = (e: React.ChangeEvent<HTMLInputElement>) => {

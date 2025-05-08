@@ -89,7 +89,6 @@ export const usePopUpCreateStore = create<PopUpStore>((set, get) => ({
       return { isValid: false, message: "상세 주소를 입력해주세요" };
     }
 
-    // 날짜 유효성 검증
     const startDate = new Date(popupCreateRequest.popupStartDate);
     const endDate = new Date(popupCreateRequest.popupEndDate);
     if (endDate < startDate) {

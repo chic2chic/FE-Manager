@@ -8,7 +8,7 @@ export const usePopUpCreate = () => {
     putImgToS3Mutation,
     postPopUpCreateMutation,
   } = usePopUpCreateApi();
-  const { formData } = usePopUpCreateStore();
+  const { formData, updatePopupField } = usePopUpCreateStore();
 
   const imageUpload = async (imageFile: File) => {
     const presignedResponse = await getPresignedUrlMutation.mutateAsync({
@@ -21,11 +21,21 @@ export const usePopUpCreate = () => {
       presignedUrl,
       imageFile,
     });
+
+    updatePopupField("imageUrl", presignedUrl);
+
+    return presignedUrl;
   };
 
   const popUpCreate = async (imageFile: File) => {
-    await imageUpload(imageFile);
-    await postPopUpCreateMutation.mutateAsync(formData);
+    const presignedUrl = await imageUpload(imageFile);
+    await postPopUpCreateMutation.mutateAsync({
+      ...formData,
+      popupCreateRequest: {
+        ...formData.popupCreateRequest,
+        imageUrl: presignedUrl,
+      },
+    });
   };
 
   return { popUpCreate };

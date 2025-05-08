@@ -74,8 +74,9 @@ export default function PopUpQuestionnaire({
           height={41}
         />
       </motion.div>
-      {/** 저장하기 버튼입니다. 설문지를 등록하지 않으면 팝업 등록이 불가하기에 설문지 컴포넌트 내부에 넣었습니다. */}
-      <div>{alertMessage}</div>
+      <div className="text-center font-medium text-main07 text-[20px]">
+        {alertMessage}
+      </div>
       {isOpen && (
         <button
           className="rounded-full my-0 mx-auto bg-gray10 text-gray01 py-[16px] px-[42px] cursor-pointer text-[24px] font-medium tracking-[0.2px] mb-30 hover:opacity-80"
