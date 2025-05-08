@@ -7,7 +7,7 @@ export const postRefreshAccessToken = async (): ApiResponse<LoginResponse> => {
   return response.data;
 };
 
-export const loginApi = async (
+export const postLogin = async (
   credentials: LoginRequest,
 ): ApiResponse<LoginResponse> => {
   const response = await api.post("/auth/login", credentials);
