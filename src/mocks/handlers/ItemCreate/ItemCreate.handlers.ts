@@ -19,7 +19,7 @@ export const ItemCreateHandlers = [
     );
   }),
 
-  http.post("/images/upload-url", async () => {
+  http.post("/images/presigned-url", async () => {
     return HttpResponse.json(
       {
         success: true,

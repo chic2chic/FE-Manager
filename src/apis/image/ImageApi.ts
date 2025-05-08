@@ -12,7 +12,7 @@ export const getPresignedUrl = async ({
   imageFileExtension,
   imageDirectory,
 }: GetPresignedUrlRequest): ApiResponse<GetPresignedUrlResponse> => {
-  const response = await api.post("/images/upload-url", {
+  const response = await api.post("/images/presigned-url", {
     imageFileExtension,
     imageDirectory,
   });
