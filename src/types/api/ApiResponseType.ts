@@ -17,3 +17,14 @@ export type LoginResponse = {
 export type GetPresignedUrlResponse = {
   presignedUrl: string;
 };
+
+export type ItemType = {
+  itemId: number;
+  name: string;
+  price: number;
+  stock: number;
+  location: string;
+  imageUrl: string;
+};
+
+export type ItemListType = Record<string, ItemType[]>;

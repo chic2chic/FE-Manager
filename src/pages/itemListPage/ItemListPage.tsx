@@ -1,22 +1,19 @@
 import { useEffect, useState } from "react";
 import itemImage from "@/assets/webps/itemList/item-img.webp";
-import { ItemType } from "@/types/ItemType";
 import Modal from "@/components/common/Modal";
 import { useNavigate } from "react-router-dom";
 import bin from "@/assets/webps/common/bin.webp";
 import check from "@/assets/webps/common/check.webp";
-
-type Display = {
-  name: string;
-  items: ItemType[];
-};
+import { ItemListType, ItemType } from "@/types/api/ApiResponseType";
 
 export default function ItemListPage() {
-  const [displayList, setDisplayList] = useState<Display[]>([]);
+  const [itemList, setItemList] = useState<ItemListType>({});
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState<ItemType | null>(null);
   const navigate = useNavigate();
   const [isDeleteConfirmOpen, setIsDeleteConfirmOpen] = useState(false);
+
+  const keys = Object.keys(itemList).values();
 
   const handleOpenDeleteModal = (item: ItemType) => {
     setSelectedItem(item);
@@ -33,7 +30,7 @@ export default function ItemListPage() {
       .then(res => res.json())
       .then(data => {
         console.log("items fetch data:", data);
-        setDisplayList(data);
+        setItemList(data);
       })
       .catch(err => new Error(err));
   }, []);
@@ -52,57 +49,11 @@ export default function ItemListPage() {
           상품 등록
         </button>
       </div>
-
-      {/* 매대별 리스트 */}
-      {displayList.map(display => (
-        <div key={display.name} className="mb-12">
-          {/* 매대명 + 구분선 */}
-          <div className="flex items-center gap-4 mb-4 pl-[161px] pr-[180px]">
-            <div className="w-15 h-15 flex items-center justify-center rounded-full bg-main01 text-gray10 text-[36px] font-semibold">
-              {display.name}
-            </div>
-
-            <div className="flex-1 h-px bg-gray05" />
-          </div>
-
-          {/* 상품 카드 리스트 */}
-          <div
-            className="grid grid-cols-4 gap-6 gap-y-14 "
-            style={{ paddingLeft: "272px", paddingRight: "180px" }}
-          >
-            {display.items.map(item => (
-              <div key={item.id} className="flex flex-col items-center">
-                {/* 상품 이미지 */}
-                <img
-                  src={itemImage}
-                  alt={item.name}
-                  className="w-53 h-53 object-cover mb-3"
-                />
-
-                {/* 상품명 + 버튼 */}
-                <p className="font-bold text-[20px] mb-1">{item.name}</p>
-                <p className="text-[16px] text-gray08 mb-1">
-                  {item.price.toLocaleString()}원
-                </p>
-                <p className="text-[16px] text-gray08 mb-2">
-                  남은재고 : {item.stock}
-                </p>
-                <div className="flex gap-2">
-                  <div className="flex justify-center gap-4 mt-2">
-                    <button className="text-[18px] px-4 py-1 cursor-pointer bg-gray10 text-gray01 rounded-full hover:opacity-90">
-                      수정
-                    </button>
-                    <button
-                      className="text-[18px] px-4 py-1 cursor-pointer border border-gray10 rounded-full hover:bg-gray10 hover:text-gray01 transition-colors duration-300"
-                      onClick={() => handleOpenDeleteModal(item)}
-                    >
-                      삭제
-                    </button>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
+      {Object.entries(itemList).map(([k, products]) => (
+        <div key={k} className="mb-12">
+          {products.map(item => (
+            <div key={item.itemId}>{k}</div>
+          ))}
         </div>
       ))}
 
