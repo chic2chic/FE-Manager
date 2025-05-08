@@ -29,10 +29,11 @@ export const useAuthStore = create<AuthState>()(
       storage: createJSONStorage(() => localStorage),
       partialize: state => ({
         accessToken: state.accessToken,
+        isLogin: state.isLogin,
       }),
       onRehydrateStorage: state => {
-        if (state && state.accessToken) {
-          state.isLogin = true;
+        if (!state.accessToken) {
+          state.isLogin = false;
         }
       },
     },
