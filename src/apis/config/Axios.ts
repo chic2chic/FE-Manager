@@ -1,5 +1,5 @@
 import axios, { AxiosError } from "axios";
-import { refreshAccessToken } from "../user/Auth";
+import { refreshAccessToken } from "@/apis/user/Auth";
 import { useAuthStore } from "@/stores/useAuthStore";
 
 export const api = axios.create({

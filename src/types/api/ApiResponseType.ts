@@ -8,6 +8,12 @@ export type GlobalResponse<T> = {
   timestamp: string;
 };
 
+export type NoResponse = Record<string, never>;
+
 export type LoginResponse = {
   accessToken: string;
+};
+
+export type GetPresignedUrlResponse = {
+  presignedUrl: string;
 };

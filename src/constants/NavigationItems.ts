@@ -9,6 +9,6 @@ export const NavigationItems = [
   },
   {
     title: "상품관리",
-    url: "/products",
+    url: "/items",
   },
 ];

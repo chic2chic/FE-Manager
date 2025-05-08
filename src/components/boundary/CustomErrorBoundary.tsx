@@ -1,7 +1,7 @@
+import CustomErrorFallback from "@/components/boundary/CustomErrorFallback";
 import { QueryErrorResetBoundary } from "@tanstack/react-query";
 import React, { Suspense } from "react";
 import { ErrorBoundary } from "react-error-boundary";
-import CustomErrorFallback from "./CustomErrorFallback";
 
 type Props = {
   children: React.ReactNode;

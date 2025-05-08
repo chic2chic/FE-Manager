@@ -1,11 +1,11 @@
 import GlobalLayout from "@/components/layouts/GlobalLayout";
 import ProtectLayout from "@/components/layouts/ProtectLayout";
-import DashBoard from "@/pages/dashboard/DashBoard";
-import ItemAddPage from "@/pages/itemAddPage/ItemAddPage";
-import OnBorading from "@/pages/onBoarding/OnBoarding";
-import PopUpCreate from "@/pages/popUpCreate/PopUpCreate";
-import PopUpList from "@/pages/popUpList/PopUpList";
-import ProductList from "@/pages/productList/ProductList";
+import DashBoardPage from "@/pages/dashboardPage/DashBoardPage";
+import ItemAddPage from "@/pages/itemCreatePage/ItemCreatePage";
+import ItemListPage from "@/pages/itemListPage/ItemListPage";
+import OnBoradingPage from "@/pages/onBoardingPage/OnBoardingPage";
+import PopUpCreatePage from "@/pages/popUpCreatePage/PopUpCreatePage";
+import PopUpListPage from "@/pages/popUpListPage/PopUpListPage";
 import { createBrowserRouter } from "react-router-dom";
 
 // TODO : 리팩토링 예정 - ProtectLayout 중복 사용
@@ -20,19 +20,19 @@ export const Router = createBrowserRouter([
         children: [
           {
             path: "dashboard",
-            element: <DashBoard />,
+            element: <DashBoardPage />,
           },
           {
-            path: "/products/create",
+            path: "/items/create",
             element: <ItemAddPage />,
           },
           {
-            path: "/products",
-            element: <ProductList />,
+            path: "/items",
+            element: <ItemListPage />,
           },
           {
             path: "/popup-create",
-            element: <PopUpCreate />,
+            element: <PopUpCreatePage />,
           },
         ],
       },
@@ -40,7 +40,7 @@ export const Router = createBrowserRouter([
   },
   {
     path: "/onboarding",
-    element: <OnBorading />,
+    element: <OnBoradingPage />,
   },
   {
     path: "/",
@@ -48,7 +48,7 @@ export const Router = createBrowserRouter([
     children: [
       {
         path: "/popup-list",
-        element: <PopUpList />,
+        element: <PopUpListPage />,
       },
     ],
   },

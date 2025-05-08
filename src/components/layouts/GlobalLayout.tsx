@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
-import NavBar from "../common/NavBar";
-import CustomErrorBoundary from "../boundary/CustomErrorBoundary";
+import CustomErrorBoundary from "@/components/boundary/CustomErrorBoundary";
+import NavBar from "@/components/common/NavBar";
 
 export default function GlobalLayout() {
   return (
