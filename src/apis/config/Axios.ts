@@ -6,6 +6,8 @@ export const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
 });
 
+export const apiS3 = axios.create({});
+
 api.interceptors.request.use(
   config => {
     const token = useAuthStore.getState().accessToken;

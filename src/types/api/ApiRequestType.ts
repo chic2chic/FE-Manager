@@ -1,3 +1,5 @@
+import { FileExtension } from "../ImageExtenstionType";
+
 export type LoginRequest = {
   username: string;
   password: string;
@@ -21,4 +23,34 @@ export type GetPresignedUrlRequest = {
 export type UploadImageToS3Request = {
   presignedUrl: string;
   imageFile: File;
+};
+
+export type PresignedUrlRequest = {
+  imageFileExtension: FileExtension;
+};
+
+export type PopupCreateRequest = {
+  name: string;
+  imageUrl: string;
+  popupStartDate: string;
+  popupEndDate: string;
+  reservationOpenDateTime: string;
+  reservationCloseDateTime: string;
+  runOpenTime: string;
+  runCloseTime: string;
+  totalCapacity: number;
+  timeCapacity: number;
+  roadAddress: string;
+  detailAddress: string;
+  latitude: number;
+  longitude: number;
+};
+
+export type ChoiceCreateRequest = {
+  optionList: string[];
+};
+
+export type PopupWithChoicesRequest = {
+  popupCreateRequest: PopupCreateRequest;
+  choiceCreateRequestList: ChoiceCreateRequest[];
 };

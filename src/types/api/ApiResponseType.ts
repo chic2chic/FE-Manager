@@ -17,3 +17,7 @@ export type LoginResponse = {
 export type GetPresignedUrlResponse = {
   presignedUrl: string;
 };
+
+export type PostPopUpCreateResponse = {
+  popupId: string;
+};
