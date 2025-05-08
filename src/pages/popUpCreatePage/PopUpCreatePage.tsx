@@ -25,10 +25,11 @@ export default function PopUpCreatePage() {
   const reservStartCalendarRef = useRef<HTMLDivElement>(null);
   const reservEndCalendarRef = useRef<HTMLDivElement>(null);
 
-  const { formData, updateField } = usePopUpCreateStore();
-
   const [isAlertModalOpen, setIsAlertModalOpen] = useState<boolean>(false);
   const [isSaveModalOpen, setIsSaveModalOpen] = useState<boolean>(false);
+
+  const { formData, updatePopupField, isValidate } = usePopUpCreateStore();
+
   const navigate = useNavigate();
 
   const handleCancel = () => {
@@ -37,7 +38,12 @@ export default function PopUpCreatePage() {
 
   // TODO : 저장 기능 구현 -> React Query로 API 호출
   const handleSave = () => {
-    setIsSaveModalOpen(true);
+    const validation = isValidate();
+    if (validation.isValid) {
+      setIsSaveModalOpen(true);
+    } else {
+      alert(validation.message);
+    }
   };
 
   const handleSaveConfirmBtn = () => {
@@ -45,25 +51,75 @@ export default function PopUpCreatePage() {
     navigate("/popup-list");
   };
 
-  useEffect(() => {
-    updateField("popUpStartDate", startCalender.selectedDate);
-  }, [startCalender.selectedDate, updateField]);
+  // 날짜와 시간 형식 변환 헬퍼 함수
+  const formatDateToString = (date: Date): string => {
+    return date.toISOString().split("T")[0]; // YYYY-MM-DD 형식
+  };
+
+  const formatTimeToString = (hours: number): string => {
+    const paddedHours = String(Math.floor(hours)).padStart(2, "0");
+    return `${paddedHours}:00:00`;
+  };
+
+  const formatDateTimeToString = (date: Date, hours: number): string => {
+    const newDate = new Date(date);
+    newDate.setHours(hours, 0, 0, 0);
+    return newDate.toISOString(); // YYYY-MM-DDThh:mm:ss 형식
+  };
 
   useEffect(() => {
-    updateField("popUpEndDate", endCalender.selectedDate);
-  }, [endCalender.selectedDate, updateField]);
+    updatePopupField(
+      "popupStartDate",
+      formatDateToString(startCalender.selectedDate),
+    );
+  }, [startCalender.selectedDate, updatePopupField]);
 
   useEffect(() => {
-    updateField("reservStartDate", reservStartCalender.selectedDate);
-  }, [reservStartCalender.selectedDate, updateField]);
+    updatePopupField(
+      "popupEndDate",
+      formatDateToString(endCalender.selectedDate),
+    );
+  }, [endCalender.selectedDate, updatePopupField]);
 
   useEffect(() => {
-    updateField("reservEndDate", reservEndCalender.selectedDate);
-  }, [reservEndCalender.selectedDate, updateField]);
+    // 예약 시작 날짜가 변경되면 날짜+시간 정보 업데이트
+    if (formData.popupCreateRequest.runOpenTime) {
+      updatePopupField(
+        "reservationOpenDateTime",
+        formatDateTimeToString(
+          reservStartCalender.selectedDate,
+          parseInt(formData.popupCreateRequest.runOpenTime),
+        ),
+      );
+    }
+  }, [
+    reservStartCalender.selectedDate,
+    formData.popupCreateRequest.runOpenTime,
+    updatePopupField,
+  ]);
 
   useEffect(() => {
-    updateField("address", addressInfo);
-  }, [addressInfo, updateField]);
+    // 예약 종료 날짜가 변경되면 날짜+시간 정보 업데이트
+    if (formData.popupCreateRequest.runCloseTime) {
+      updatePopupField(
+        "reservationCloseDateTime",
+        formatDateTimeToString(
+          reservEndCalender.selectedDate,
+          parseInt(formData.popupCreateRequest.runCloseTime),
+        ),
+      );
+    }
+  }, [
+    reservEndCalender.selectedDate,
+    formData.popupCreateRequest.runCloseTime,
+    updatePopupField,
+  ]);
+
+  useEffect(() => {
+    updatePopupField("roadAddress", addressInfo.address);
+    updatePopupField("latitude", addressInfo.latitude);
+    updatePopupField("longitude", addressInfo.longitude);
+  }, [addressInfo, updatePopupField]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -106,6 +162,22 @@ export default function PopUpCreatePage() {
     reservEndCalender.isOpen,
   ]);
 
+  // 시간 값 추출 (문자열 -> 숫자)
+  const getTimeValue = (timeString: string): number => {
+    if (!timeString || timeString === "00:00:00") return 0;
+    return parseInt(timeString.split(":")[0]);
+  };
+
+  // 현재 운영 시간 값 가져오기
+  const openTime = getTimeValue(formData.popupCreateRequest.runOpenTime);
+  const closeTime = getTimeValue(formData.popupCreateRequest.runCloseTime);
+
+  // 현재 예약 시간 값 가져오기
+  const reservOpenTime = getTimeValue(formData.popupCreateRequest.runOpenTime);
+  const reservCloseTime = getTimeValue(
+    formData.popupCreateRequest.runCloseTime,
+  );
+
   return (
     <div className="flex flex-col py-[32px]">
       <img
@@ -126,7 +198,13 @@ export default function PopUpCreatePage() {
           <input
             type="file"
             accept="image/*"
-            onChange={() => {}}
+            onChange={e => {
+              if (e.target.files && e.target.files[0]) {
+                // 이미지 URL 처리 로직 (실제 구현 필요)
+                const imageUrl = URL.createObjectURL(e.target.files[0]);
+                updatePopupField("imageUrl", imageUrl);
+              }
+            }}
             className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
           />
         </div>
@@ -136,7 +214,7 @@ export default function PopUpCreatePage() {
             <PopUpInput
               placeholder="팝업명을 입력해주세요"
               cssOption="w-[480px]"
-              onChange={e => updateField("popUpTitle", e.target.value)}
+              onChange={e => updatePopupField("name", e.target.value)}
             />
           </div>
           <div className="flex gap-[30px] items-center relative">
@@ -167,10 +245,11 @@ export default function PopUpCreatePage() {
               cssOption="text-center w-[90px]"
               isOnlyNumber={true}
               isTimeFormat={true}
-              maxTime={formData.popUpEndTime || 24}
-              onChange={e =>
-                updateField("popUpOpenTime", Number(e.target.value))
-              }
+              maxTime={closeTime || 24}
+              onChange={e => {
+                const timeValue = Number(e.target.value);
+                updatePopupField("runOpenTime", formatTimeToString(timeValue));
+              }}
             />
             <span>-</span>
             <PopUpInput
@@ -178,10 +257,11 @@ export default function PopUpCreatePage() {
               cssOption="text-center w-[90px]"
               isOnlyNumber={true}
               isTimeFormat={true}
-              minTime={formData.popUpOpenTime || 0}
-              onChange={e =>
-                updateField("popUpEndTime", Number(e.target.value))
-              }
+              minTime={openTime || 0}
+              onChange={e => {
+                const timeValue = Number(e.target.value);
+                updatePopupField("runCloseTime", formatTimeToString(timeValue));
+              }}
             />
           </div>
           <div className="flex gap-[30px] items-baseline">
@@ -209,12 +289,20 @@ export default function PopUpCreatePage() {
                   maxTime={
                     reservStartCalender.selectedDate.getTime() ===
                     reservEndCalender.selectedDate.getTime()
-                      ? formData.reservEndTime || 24
+                      ? reservCloseTime || 24
                       : 24
                   }
-                  onChange={e =>
-                    updateField("reservOpenTime", Number(e.target.value))
-                  }
+                  onChange={e => {
+                    const timeValue = Number(e.target.value);
+                    // 예약 시작 시간 업데이트 및 datetime 업데이트
+                    updatePopupField(
+                      "reservationOpenDateTime",
+                      formatDateTimeToString(
+                        reservStartCalender.selectedDate,
+                        timeValue,
+                      ),
+                    );
+                  }}
                 />
               </div>
               <div
@@ -236,12 +324,20 @@ export default function PopUpCreatePage() {
                   minTime={
                     reservStartCalender.selectedDate.getTime() ===
                     reservEndCalender.selectedDate.getTime()
-                      ? formData.reservOpenTime || 0
+                      ? reservOpenTime || 0
                       : 0
                   }
-                  onChange={e =>
-                    updateField("reservEndTime", Number(e.target.value))
-                  }
+                  onChange={e => {
+                    const timeValue = Number(e.target.value);
+                    // 예약 종료 시간 업데이트 및 datetime 업데이트
+                    updatePopupField(
+                      "reservationCloseDateTime",
+                      formatDateTimeToString(
+                        reservEndCalender.selectedDate,
+                        timeValue,
+                      ),
+                    );
+                  }}
                 />
               </div>
             </div>
@@ -254,8 +350,10 @@ export default function PopUpCreatePage() {
               isOnlyNumber={true}
               isLimit={true}
               minTime={1}
-              maxTime={formData.entireMaxNum || 1000}
-              onChange={e => updateField("timeMaxNum", Number(e.target.value))}
+              maxTime={formData.popupCreateRequest.totalCapacity || 1000}
+              onChange={e =>
+                updatePopupField("timeCapacity", Number(e.target.value))
+              }
             />
           </div>
           <div className="flex gap-[30px] items-center">
@@ -265,16 +363,24 @@ export default function PopUpCreatePage() {
               cssOption="text-center w-[242px]"
               isOnlyNumber={true}
               isLimit={true}
-              minTime={formData.timeMaxNum || 1}
+              minTime={formData.popupCreateRequest.timeCapacity || 1}
               maxTime={1000}
               onChange={e =>
-                updateField("entireMaxNum", Number(e.target.value))
+                updatePopupField("totalCapacity", Number(e.target.value))
               }
             />
           </div>
           <div className="flex gap-[30px] items-center">
             <PopUpLabel label="위치" />
             <PostCode />
+          </div>
+          <div className="flex gap-[30px] items-center">
+            <PopUpLabel label="상세 주소" />
+            <PopUpInput
+              placeholder="상세 주소를 입력해주세요"
+              cssOption="w-[480px]"
+              onChange={e => updatePopupField("detailAddress", e.target.value)}
+            />
           </div>
         </div>
       </div>

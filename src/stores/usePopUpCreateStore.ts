@@ -1,102 +1,138 @@
 import { Questions } from "@/constants/popUpCreate/Questions";
-import { PopUpFormData } from "@/types/PopUpCreateFormType";
 import { create } from "zustand";
 
-const initialState: PopUpFormData = {
-  popUpTitle: "",
-  popUpStartDate: new Date(),
-  popUpEndDate: new Date(),
-  popUpOpenTime: 0,
-  popUpEndTime: 0,
-  reservStartDate: new Date(),
-  reservEndDate: new Date(),
-  reservOpenTime: 0,
-  reservEndTime: 0,
-  timeMaxNum: 0,
-  entireMaxNum: 0,
-  imageUrl: "",
-  address: {
-    address: "",
+// 팝업 생성 요청 인터페이스
+export type PopupCreateRequest = {
+  name: string;
+  imageUrl: string;
+  popupStartDate: string;
+  popupEndDate: string;
+  reservationOpenDateTime: string;
+  reservationCloseDateTime: string;
+  runOpenTime: string;
+  runCloseTime: string;
+  totalCapacity: number;
+  timeCapacity: number;
+  roadAddress: string;
+  detailAddress: string;
+  latitude: number;
+  longitude: number;
+};
+
+// 선택지 생성 요청 인터페이스
+export type ChoiceCreateRequest = {
+  optionList: string[];
+};
+
+// 전체 요청 구조 인터페이스
+export type PopupWithChoicesRequest = {
+  popupCreateRequest: PopupCreateRequest;
+  choiceCreateRequestList: ChoiceCreateRequest[];
+};
+
+// 초기 상태 정의 - PopupWithChoicesRequest 타입 사용
+const initialState: PopupWithChoicesRequest = {
+  popupCreateRequest: {
+    name: "",
+    imageUrl: "",
+    popupStartDate: new Date().toISOString().split("T")[0],
+    popupEndDate: new Date().toISOString().split("T")[0],
+    reservationOpenDateTime: new Date().toISOString(),
+    reservationCloseDateTime: new Date().toISOString(),
+    runOpenTime: "00:00:00",
+    runCloseTime: "00:00:00",
+    totalCapacity: 0,
+    timeCapacity: 0,
+    roadAddress: "",
     detailAddress: "",
     latitude: 0,
     longitude: 0,
   },
-  questions: Questions.map(q => ({ ...q, answers: Array(2).fill("") })),
+  choiceCreateRequestList: Questions.map(() => ({
+    optionList: Array(2).fill(""),
+  })),
 };
 
 type PopUpStore = {
-  formData: PopUpFormData;
-  updateField: <K extends keyof PopUpFormData>(
+  formData: PopupWithChoicesRequest;
+  updatePopupField: <K extends keyof PopupCreateRequest>(
     _field: K,
-    _value: PopUpFormData[K],
+    _value: PopupCreateRequest[K],
   ) => void;
-  updateQuestionAnswers: (_questionNumber: number, _answers: string[]) => void;
+  updateChoiceOptions: (_questionIndex: number, _optionList: string[]) => void;
   resetForm: () => void;
   isValidate: () => { isValid: boolean; message: string };
 };
 
 export const usePopUpCreateStore = create<PopUpStore>((set, get) => ({
   formData: { ...initialState },
-  updateField: (field, value) =>
-    set(state => ({ formData: { ...state.formData, [field]: value } })),
-  updateQuestionAnswers: (questionNumber, answers) =>
+
+  updatePopupField: (field, value) =>
     set(state => ({
-      ...state,
       formData: {
         ...state.formData,
-        questions: state.formData.questions.map(q =>
-          q.questionNumber === questionNumber ? { ...q, answers } : q,
+        popupCreateRequest: {
+          ...state.formData.popupCreateRequest,
+          [field]: value,
+        },
+      },
+    })),
+
+  updateChoiceOptions: (questionIndex, optionList) =>
+    set(state => ({
+      formData: {
+        ...state.formData,
+        choiceCreateRequestList: state.formData.choiceCreateRequestList.map(
+          (choice, index) =>
+            index === questionIndex ? { optionList } : choice,
         ),
       },
     })),
-  isValidate: () => {
-    const {
-      popUpTitle,
-      popUpStartDate,
-      popUpEndDate,
-      popUpOpenTime,
-      popUpEndTime,
-      reservStartDate,
-      reservEndDate,
-      timeMaxNum,
-      entireMaxNum,
-      // imageUrl,
-      address,
-      questions,
-    } = get().formData;
 
-    if (!popUpTitle) {
+  isValidate: () => {
+    const { popupCreateRequest, choiceCreateRequestList } = get().formData;
+
+    if (!popupCreateRequest.name) {
       return { isValid: false, message: "팝업명을 입력해주세요" };
     }
-    if (!popUpOpenTime) {
+    if (!popupCreateRequest.runOpenTime) {
       return { isValid: false, message: "운영 시작 시간을 입력해주세요" };
     }
-    if (!popUpEndTime) {
+    if (!popupCreateRequest.runCloseTime) {
       return { isValid: false, message: "운영 종료 시간을 입력해주세요" };
     }
-    if (!timeMaxNum) {
+    if (!popupCreateRequest.timeCapacity) {
       return { isValid: false, message: "시간별 수용 인원을 입력해주세요" };
     }
-    if (!entireMaxNum) {
+    if (!popupCreateRequest.totalCapacity) {
       return { isValid: false, message: "총 수용 인원을 입력해주세요" };
     }
-    if (!address.address) {
+    if (!popupCreateRequest.roadAddress) {
       return { isValid: false, message: "주소를 입력해주세요" };
     }
+
     // TODO : 상세주소 입력 공간 UI 생성 이후 Validation 검증
-    // if (!address.detailAddress) {
+    // if (!popupCreateRequest.detailAddress) {
     //   return { isValid: false, message: "상세 주소를 입력해주세요" };
     // }
-    // if (!imageUrl) {
+    // if (!popupCreateRequest.imageUrl) {
     //   return { isValid: false, message: "이미지를 업로드해주세요" };
     // }
 
-    if (popUpEndDate < popUpStartDate) {
+    // 날짜 유효성 검증
+    const startDate = new Date(popupCreateRequest.popupStartDate);
+    const endDate = new Date(popupCreateRequest.popupEndDate);
+    if (endDate < startDate) {
       return {
         isValid: false,
         message: "팝업 종료일은 시작일 이후여야 합니다",
       };
     }
+
+    const reservStartDate = new Date(
+      popupCreateRequest.reservationOpenDateTime,
+    );
+    const reservEndDate = new Date(popupCreateRequest.reservationCloseDateTime);
     if (reservEndDate < reservStartDate) {
       return {
         isValid: false,
@@ -104,16 +140,16 @@ export const usePopUpCreateStore = create<PopUpStore>((set, get) => ({
       };
     }
 
-    const validateQuestions = () => {
-      for (const question of questions) {
-        if (question.answers.some(answer => answer.trim() === "")) {
+    const validateChoices = () => {
+      for (const choice of choiceCreateRequestList) {
+        if (choice.optionList.some(option => option.trim() === "")) {
           return false;
         }
       }
       return true;
     };
 
-    if (!validateQuestions()) {
+    if (!validateChoices()) {
       return {
         isValid: false,
         message: "모든 설문 항목을 입력해주세요",
@@ -122,5 +158,6 @@ export const usePopUpCreateStore = create<PopUpStore>((set, get) => ({
 
     return { isValid: true, message: "" };
   },
+
   resetForm: () => set(() => ({ formData: { ...initialState } })),
 }));
