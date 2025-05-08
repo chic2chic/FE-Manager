@@ -1,9 +1,10 @@
 import axios, { AxiosError } from "axios";
-import { refreshAccessToken } from "@/apis/user/Auth";
+import { postRefreshAccessToken } from "@/apis/user/Auth";
 import { useAuthStore } from "@/stores/useAuthStore";
 
 export const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
+  withCredentials: true,
 });
 
 export const apiS3 = axios.create({});
@@ -31,7 +32,7 @@ api.interceptors.response.use(
       !originalRequest?.headers["X-Retry"]
     ) {
       try {
-        const refreshResponse = await refreshAccessToken();
+        const refreshResponse = await postRefreshAccessToken();
         const newAccessToken = refreshResponse.data.accessToken;
 
         useAuthStore.getState().setLogin(newAccessToken);
