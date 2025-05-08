@@ -9,11 +9,13 @@ import { useItemCreate } from "@/hooks/useItemCreate";
 import ItemCreateInputs from "@/pages/itemCreatePage/views/ItemCreateInputs";
 
 export default function ItemAddPage() {
+  const [itemPopUpId] = useState<number>(1); // 추후 zustand로 전역 상태 관리
   const [itemName, setItemName] = useState<string>("");
   const [itemPrice, setItemPrice] = useState<number>(0);
   const [itemStock, setItemStock] = useState<number>(0);
   const [itemMinStock, setItemMinStock] = useState<number>(0);
   const [itemLocation, setItemLocation] = useState<string>("");
+  const [imageFile, setImageFile] = useState<File | null>(null);
   const [isAlertModalOpen, setIsAlertModalOpen] = useState<boolean>(false);
   const [isSaveModalOpen, setIsSaveModalOpen] = useState<boolean>(false);
   const navigate = useNavigate();
@@ -26,19 +28,33 @@ export default function ItemAddPage() {
 
   const handleSave = () => {
     setIsSaveModalOpen(true);
-    return itemName && itemPrice && itemStock && itemMinStock && itemLocation;
+    return (
+      itemPopUpId &&
+      itemName &&
+      itemPrice &&
+      itemStock &&
+      itemMinStock &&
+      itemLocation &&
+      imageFile
+    );
   };
 
   const handleSaveConfirmBtn = async () => {
+    // createItem 호출
+    // createItem 안에다 위 state들 넘겨주면 생성됨
+    if (!imageFile) return alert("이미지를 선택해주세요.");
     await createItem({
-      name: itemName,
-      imageUrl: "presigned_url",
-      price: itemPrice,
-      stock: itemStock,
-      minStock: itemMinStock,
-      location: itemLocation,
+      imageFile,
+      data: {
+        popupId: itemPopUpId,
+        name: itemName,
+        price: itemPrice,
+        stock: itemStock,
+        minStock: itemMinStock,
+        location: itemLocation,
+        imageUrl: import.meta.env.VITE_TEST_IMAGE_URL,
+      },
     });
-
     setIsSaveModalOpen(false);
     navigate("/items");
   };
@@ -80,7 +96,7 @@ export default function ItemAddPage() {
       <div className="absolute left-[50%] mt-40 transform -translate-x-1/2 flex justify-center items-center gap-[53px]">
         <div className="relative w-[400px] h-[400px]">
           <img
-            src={TestImage}
+            src={imageFile ? URL.createObjectURL(imageFile) : TestImage}
             alt="상품 이미지"
             width={400}
             className="w-full h-full object-cover rounded-[20px]"
@@ -88,7 +104,10 @@ export default function ItemAddPage() {
           <input
             type="file"
             accept="image/*"
-            onChange={() => {}}
+            onChange={e => {
+              const file = e.target.files?.[0];
+              if (file) setImageFile(file);
+            }}
             className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
           />
         </div>

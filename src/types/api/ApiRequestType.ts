@@ -4,6 +4,7 @@ export type LoginRequest = {
 };
 
 export type ItemCreateRequest = {
+  popupId: number;
   name: string;
   imageUrl: string;
   price: number;

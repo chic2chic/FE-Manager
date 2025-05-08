@@ -1,1 +1,1 @@
-export type ImgType = "png" | "jpg" | "jpeg" | "webp";
+export type ImageType = "PNG" | "JPG" | "JPEG";

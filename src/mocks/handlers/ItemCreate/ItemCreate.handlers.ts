@@ -5,29 +5,35 @@ export const ItemCreateHandlers = [
   http.post("/items", async ({ request }) => {
     const requestBody = (await request.json()) as ItemCreateRequest;
 
-    if (requestBody.name === "error") {
-      return HttpResponse.json(
-        {
-          success: false,
-          status: 401,
-          data: {
-            errorClassName: "AUTHENTICATION_FAILED",
-            message: "생성 오류",
-          },
-          timestamp: new Date().toISOString(),
-        },
-        { status: 401 },
-      );
-    }
-
     return HttpResponse.json(
       {
         success: true,
         status: 201,
-        data: {},
+        data: {
+          ...requestBody,
+          imageUrl: import.meta.env.VITE_TEST_PRESIGNED_URL as string,
+        },
         timestamp: new Date().toISOString(),
       },
       { status: 201 },
     );
+  }),
+
+  http.post("/items/upload-url", async () => {
+    return HttpResponse.json(
+      {
+        success: true,
+        status: 200,
+        data: {
+          presignedUrl: import.meta.env.VITE_TEST_PRESIGNED_URL as string,
+        },
+        timestamp: new Date().toISOString(),
+      },
+      { status: 200 },
+    );
+  }),
+
+  http.put(import.meta.env.VITE_TEST_PRESIGNED_URL as string, async () => {
+    return new HttpResponse(null, { status: 200 });
   }),
 ];
