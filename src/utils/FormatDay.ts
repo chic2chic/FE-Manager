@@ -29,5 +29,5 @@ export function formatTimeToString(hours: number): string {
 export function formatDateTimeToString(date: Date, hours: number): string {
   const newDate = new Date(date);
   newDate.setHours(hours, 0, 0, 0);
-  return newDate.toISOString();
+  return newDate.toISOString().split(".")[0];
 }
