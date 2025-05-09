@@ -33,3 +33,10 @@ export type GetPopUpReadResponse = {
 export type GetPopUpListReadResponse = GetPopUpReadResponse[];
 
 export type GetItemListResponse = Record<string, ItemType[]>;
+
+export type ItemListType = Record<string, ItemType[]>;
+
+export type GetAvgPurchaseResponse = {
+  totalPrice: number;
+  todayPrice: number;
+};
