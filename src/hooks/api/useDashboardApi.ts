@@ -3,7 +3,7 @@ import { getAvgPurchase, getTodayReservation } from "@/apis/DashBoardApi";
 
 export const useAvgPurchaseApi = () => {
   const { data, isError, isLoading } = useQuery({
-    queryKey: ["avgPurchase"],
+    queryKey: ["avgPurchase", "dashboard"],
     queryFn: async () => {
       const res = await getAvgPurchase();
       return res.data;
@@ -15,7 +15,7 @@ export const useAvgPurchaseApi = () => {
 
 export const useTodayReservationApi = () => {
   const { data, isError, isLoading } = useQuery({
-    queryKey: ["todayReservation"],
+    queryKey: ["todayReservation", "dashboard"],
     queryFn: async () => {
       const res = await getTodayReservation();
       return res.data;
