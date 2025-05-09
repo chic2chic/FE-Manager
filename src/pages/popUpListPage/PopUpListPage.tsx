@@ -15,7 +15,7 @@ import check from "@/assets/webps/common/check.webp";
 import { usePopUpListReadApi } from "@/hooks/api/usePopUpListReadApi";
 
 export default function PopUpListPage() {
-  const { cards } = usePopUpListReadApi();
+  const { cards, isLoading, error } = usePopUpListReadApi();
   const navigate = useNavigate();
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
   const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
@@ -44,6 +44,8 @@ export default function PopUpListPage() {
     setIsAlertModalOpen(false);
     setPendingDeleteId(null);
   };
+  if (isLoading) return <div>로딩 중...</div>;
+  if (error) return <div>에러 발생!</div>;
 
   return (
     <div className="bg-gray03 min-h-screen pb-20">
@@ -55,7 +57,6 @@ export default function PopUpListPage() {
         className="pt-[22px] ml-10 cursor-pointer"
         onClick={() => navigate("/dashboard")}
       />
-
       {/* 나의 팝업 List */}
       <div className="mt-[80px] mx-auto w-[1360px] min-h-[600px] bg-gray01 pb-14 rounded-[50px]">
         <div className="flex items-start justify-between">
@@ -91,20 +92,23 @@ export default function PopUpListPage() {
               }}
               modules={[Pagination, Navigation]}
             >
-              {cards &&
+              {cards && cards.length > 0 ? (
                 cards.map(card => (
                   <SwiperSlide
                     key={card.popupId}
                     className="h-[342px] w-[286px] flex flex-col justify-center items-center"
                   >
                     <PopUpCard
-                      id={card.popupId}
-                      title={card.name}
-                      imagePath={card.imageUrl}
+                      popupId={card.popupId}
+                      name={card.name}
+                      imageUrl={card.imageUrl}
                       onDeleteClick={() => handleDelete(card.popupId)}
                     />
                   </SwiperSlide>
-                ))}
+                ))
+              ) : (
+                <div>팝업없노</div>
+              )}
             </Swiper>
             {/* prev & next 버튼 */}
             <div className="custom-prev absolute top-[110px] -translate-y-1/2 left-0 z-10 cursor-pointer">
@@ -124,7 +128,6 @@ export default function PopUpListPage() {
           </div>
         </div>
       </div>
-
       {/* Confirm 모달 */}
       <Modal
         isOpen={isConfirmModalOpen}
@@ -136,7 +139,6 @@ export default function PopUpListPage() {
         onConfirm={confirmDelete}
         onCancel={() => setIsConfirmModalOpen(false)}
       />
-
       {/* Alert 모달 */}
       <Modal
         isOpen={isAlertModalOpen}

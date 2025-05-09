@@ -6,6 +6,7 @@ import {
 
 export const getPopUpListRead =
   async (): ApiResponse<GetPopUpListReadResponse> => {
-    const response = await api.post("/popups");
+    const response = await api.get("/popups");
+    console.log("API 응답", response.data);
     return response.data;
   };
