@@ -1,9 +1,9 @@
-import { useDashboardApi } from "@/hooks/api/useDashboardApi";
+import { useAvgPurchaseApi } from "@/hooks/api/useDashboardApi";
 import { CountCard } from "@/pages/dashboardPage/views/CountCard";
 import DashBoardTitle from "@/pages/dashboardPage/views/DashBoardTitle";
 
 export default function DashBoardCustomerTransaction() {
-  const { data } = useDashboardApi();
+  const { data } = useAvgPurchaseApi();
 
   return (
     <div className="w-[414px] flex-col">
