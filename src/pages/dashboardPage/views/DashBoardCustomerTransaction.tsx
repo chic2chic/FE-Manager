@@ -1,10 +1,12 @@
-// src/pages/dashboardPage/views/DashBoardCustomerTransaction.tsx
 import { useDashboardApi } from "@/hooks/api/useDashboardApi";
 import { CountCard } from "@/pages/dashboardPage/views/CountCard";
 import DashBoardTitle from "@/pages/dashboardPage/views/DashBoardTitle";
 
 export default function DashBoardCustomerTransaction() {
-  const { data } = useDashboardApi();
+  const { data, isLoading, isError, error } = useDashboardApi();
+
+  if (isLoading) return <div>Loading…</div>;
+  if (isError) return <div>Error: {String(error)}</div>;
 
   const { totalPrice, todayPrice } = data!;
 
