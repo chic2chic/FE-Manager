@@ -27,7 +27,8 @@ export default function NoticeModal({ onClose }: Props) {
   return (
     <div
       ref={modalRef}
-      className="pt-1 px-5 w-[360px] max-h-[544px] absolute overflow-y-scroll top-[46px] right-[-18px] z-[130px] bg-white rounded-[20px] shadow-[0_0_10px_2px_rgba(0,0,0,0.15)]"
+      className={`pt-1 px-5 w-[360px] max-h-[544px] absolute top-[46px] right-[-18px] z-[130px] bg-white rounded-[20px] shadow-[0_0_10px_2px_rgba(0,0,0,0.15)] 
+        ${notifications && notifications.length > 0 ? "overflow-y-scroll" : "overflow-y-hidden"}`}
     >
       <div className="relative flex flex-col items-center">
         {notifications && notifications.length > 0 ? (
@@ -42,7 +43,9 @@ export default function NoticeModal({ onClose }: Props) {
             />
           ))
         ) : (
-          <>알림이 없습니다</>
+          <p className="py-20 text-[18px] text-gray10 font-medium">
+            <span className="text-main06">알림</span>이 없습니다
+          </p>
         )}
       </div>
     </div>

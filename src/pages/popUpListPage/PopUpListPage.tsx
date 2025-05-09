@@ -106,7 +106,7 @@ export default function PopUpListPage() {
                 ))
               ) : (
                 <div className="flex flex-col items-center justify-center">
-                  <p className="mt-18 text-[32px] text-gray10">
+                  <p className="mt-18 text-[32px] text-gray10 font-medium">
                     등록된 팝업이 없습니다.
                   </p>
                   <p className="mt-4 text-[20px] text-gray10">
