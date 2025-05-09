@@ -1,4 +1,4 @@
-import { deleteItem, getItemList } from "@/apis/ItemListApi";
+import { deleteItem, getItemList, patchItem } from "@/apis/ItemListApi";
 import { ErrorMessage } from "@/utils/ErrorMessage";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
@@ -29,5 +29,15 @@ export const useItemDeleteApi = () => {
       throw new Error(`아이템 삭제 에러 : ${ErrorMessage(error)}`);
     },
   });
-  return { deleteItemMutation };
+
+  const patchItemMutation = useMutation({
+    mutationFn: async (itemId: string) => {
+      await patchItem(itemId);
+    },
+    onError: error => {
+      throw new Error(`아이템 수정 에러 : ${ErrorMessage(error)}`);
+    },
+  });
+
+  return { deleteItemMutation, patchItemMutation };
 };

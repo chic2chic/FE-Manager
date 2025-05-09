@@ -13,3 +13,9 @@ export const deleteItem = async (itemId: string) => {
   const response = await api.delete(`/popups/${popupId}/items/${itemId}`);
   return response.data;
 };
+
+export const patchItem = async (itemId: string) => {
+  const popupId = usePopUpReadStore.getState().popupId;
+  const response = await api.patch(`/popup/${popupId}/items/${itemId}`);
+  return response.data;
+};

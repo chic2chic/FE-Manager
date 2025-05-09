@@ -5,6 +5,7 @@ export type ItemType = {
   stock: number;
   location: number;
   imageUrl: string;
+  minStock: number;
 };
 
 export type BestItemType = {

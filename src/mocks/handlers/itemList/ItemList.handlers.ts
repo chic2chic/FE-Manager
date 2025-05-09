@@ -12,6 +12,7 @@ const itemsDatabase: ItemListType = {
       imageUrl: TestImage,
       price: 5000,
       stock: 120,
+      minStock: 20,
     },
     {
       location: 2,
@@ -20,6 +21,7 @@ const itemsDatabase: ItemListType = {
       imageUrl: TestImage,
       price: 8900,
       stock: 85,
+      minStock: 15,
     },
     {
       location: 3,
@@ -28,6 +30,7 @@ const itemsDatabase: ItemListType = {
       imageUrl: TestImage,
       price: 12000,
       stock: 64,
+      minStock: 10,
     },
     {
       location: 4,
@@ -36,6 +39,7 @@ const itemsDatabase: ItemListType = {
       imageUrl: TestImage,
       price: 15000,
       stock: 42,
+      minStock: 8,
     },
   ],
   B: [
@@ -46,6 +50,7 @@ const itemsDatabase: ItemListType = {
       imageUrl: TestImage,
       price: 29000,
       stock: 37,
+      minStock: 5,
     },
     {
       location: 2,
@@ -54,6 +59,7 @@ const itemsDatabase: ItemListType = {
       imageUrl: TestImage,
       price: 45000,
       stock: 25,
+      minStock: 5,
     },
     {
       location: 3,
@@ -62,6 +68,7 @@ const itemsDatabase: ItemListType = {
       imageUrl: TestImage,
       price: 18500,
       stock: 58,
+      minStock: 10,
     },
     {
       location: 4,
@@ -70,6 +77,7 @@ const itemsDatabase: ItemListType = {
       imageUrl: TestImage,
       price: 34000,
       stock: 19,
+      minStock: 3,
     },
   ],
   C: [
@@ -80,6 +88,7 @@ const itemsDatabase: ItemListType = {
       imageUrl: TestImage,
       price: 12500,
       stock: 75,
+      minStock: 15,
     },
     {
       location: 2,
@@ -88,6 +97,7 @@ const itemsDatabase: ItemListType = {
       imageUrl: TestImage,
       price: 18000,
       stock: 42,
+      minStock: 10,
     },
     {
       location: 3,
@@ -96,6 +106,7 @@ const itemsDatabase: ItemListType = {
       imageUrl: TestImage,
       price: 9800,
       stock: 89,
+      minStock: 20,
     },
     {
       location: 4,
@@ -104,6 +115,7 @@ const itemsDatabase: ItemListType = {
       imageUrl: TestImage,
       price: 25000,
       stock: 31,
+      minStock: 5,
     },
   ],
   D: [
@@ -114,6 +126,7 @@ const itemsDatabase: ItemListType = {
       imageUrl: TestImage,
       price: 15000,
       stock: 120,
+      minStock: 25,
     },
     {
       location: 2,
@@ -122,6 +135,7 @@ const itemsDatabase: ItemListType = {
       imageUrl: TestImage,
       price: 59000,
       stock: 28,
+      minStock: 5,
     },
     {
       location: 3,
@@ -130,6 +144,7 @@ const itemsDatabase: ItemListType = {
       imageUrl: TestImage,
       price: 12000,
       stock: 95,
+      minStock: 20,
     },
     {
       location: 4,
@@ -138,6 +153,7 @@ const itemsDatabase: ItemListType = {
       imageUrl: TestImage,
       price: 38000,
       stock: 22,
+      minStock: 5,
     },
   ],
 };
