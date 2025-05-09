@@ -1,12 +1,12 @@
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 
-interface AuthState {
+type AuthState = {
   accessToken: string | null;
   isLogin: boolean;
   setLogin: (_token: string) => void;
   setLogout: () => void;
-}
+};
 
 export const useAuthStore = create<AuthState>()(
   persist(

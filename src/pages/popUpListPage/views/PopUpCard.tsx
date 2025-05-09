@@ -1,11 +1,26 @@
 import xWhite from "@/assets/webps/popUpList/x-white.webp";
+import { usePopUpReadStore } from "@/stores/usePopUpReadStore";
 import { GetPopUpReadResponse } from "@/types/api/ApiResponseType";
+import { useNavigate } from "react-router-dom";
 
 type Props = GetPopUpReadResponse & {
   onDeleteClick: () => void;
 };
 
-export default function PopUpCard({ name, imageUrl, onDeleteClick }: Props) {
+export default function PopUpCard({
+  popupId,
+  name,
+  imageUrl,
+  onDeleteClick,
+}: Props) {
+  const setPopUp = usePopUpReadStore(state => state.setPopUp);
+  const navigate = useNavigate();
+
+  const handleSelect = () => {
+    setPopUp({ popupId, name, imageUrl });
+    navigate("/dashboard");
+  };
+
   return (
     <>
       <div className="w-[286px] flex justify-center">
@@ -33,6 +48,7 @@ export default function PopUpCard({ name, imageUrl, onDeleteClick }: Props) {
         </div>
       </div>
       <span
+        onClick={handleSelect}
         lang="en"
         className="cursor-pointer w-[286px] break-words block text-center justify-center text-[34px] mt-[22px]"
       >
