@@ -23,7 +23,7 @@ export type UploadImageToS3Request = {
   imageFile: File;
 };
 
-export type PopupCreateRequest = {
+export type PopUpCreateRequest = {
   name: string;
   imageUrl: string;
   popupStartDate: string;
@@ -44,7 +44,7 @@ export type ChoiceCreateRequest = {
   optionList: string[];
 };
 
-export type PopupWithChoicesRequest = {
-  popupCreateRequest: PopupCreateRequest;
+export type PopUpWithChoicesRequest = {
+  popupCreateRequest: PopUpCreateRequest;
   choiceCreateRequestList: ChoiceCreateRequest[];
 };

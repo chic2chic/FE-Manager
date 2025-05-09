@@ -1,4 +1,4 @@
-import { PopupWithChoicesRequest } from "@/types/api/ApiRequestType";
+import { PopUpWithChoicesRequest } from "@/types/api/ApiRequestType";
 import { api } from "./config/Axios";
 import {
   ApiResponse,
@@ -6,7 +6,7 @@ import {
 } from "@/types/api/ApiResponseType";
 
 export const postPopUpCreate = async (
-  request: PopupWithChoicesRequest,
+  request: PopUpWithChoicesRequest,
 ): ApiResponse<PostPopUpCreateResponse> => {
   const response = await api.post("/popups", request);
   return response.data;

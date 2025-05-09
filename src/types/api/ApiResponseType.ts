@@ -21,3 +21,9 @@ export type GetPresignedUrlResponse = {
 export type PostPopUpCreateResponse = {
   popupId: string;
 };
+
+export type GetPopUpListReadResponse = {
+  popupId: number;
+  name: string;
+  imageUrl: string;
+};
