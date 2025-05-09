@@ -1,5 +1,5 @@
 import { Colors } from "@/constants/dashboard/Colors";
-import { ReservationChartType } from "@/types/ReservationType";
+import { ReservationChartResponse } from "@/types/api/ApiResponseType";
 
 /**
  * 요일별 예약자 수 데이터에 value 기준으로 색상을 매핑합니다.
@@ -8,7 +8,7 @@ import { ReservationChartType } from "@/types/ReservationType";
  */
 
 // ⭐️ value 기준 오름차순으로 color 매칭시키기 ⭐️
-export function reservationColorMapper(data: ReservationChartType[]) {
+export function reservationColorMapper(data: ReservationChartResponse[]) {
   // 1. value 기준 오름차순 정렬
   const sortedData = [...data].sort((a, b) => a.value - b.value);
 
