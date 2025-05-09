@@ -4,6 +4,6 @@ export type ReservationChartType = {
 };
 
 //export type TodayReservationType = {
-  //reservedCount: number;
-  //enteredCount: number;
+//reservedCount: number;
+//enteredCount: number;
 //};

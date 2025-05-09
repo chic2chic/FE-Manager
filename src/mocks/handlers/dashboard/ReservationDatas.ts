@@ -1,7 +1,5 @@
 import { TodayReservationResponse } from "@/types/api/ApiResponseType";
-import {
-  ReservationChartType,
-} from "@/types/ReservationType";
+import { ReservationChartType } from "@/types/ReservationType";
 import { http, HttpResponse } from "msw";
 
 export const ReservationChartDatas: ReservationChartType[] = [

@@ -13,10 +13,9 @@ export const getAvgPurchase = async (): ApiResponse<GetAvgPurchaseResponse> => {
   return response.data;
 };
 
-export const getTodayReservation = async (): ApiResponse<TodayReservationResponse> => {
-  const popupId = 1;
-  const response = await api.get(
-    `/popups/${popupId}/dashboard/entrants`,
-  );
-  return response.data;
-};
+export const getTodayReservation =
+  async (): ApiResponse<TodayReservationResponse> => {
+    const popupId = 1;
+    const response = await api.get(`/popups/${popupId}/dashboard/entrants`);
+    return response.data;
+  };

@@ -14,7 +14,7 @@ export const handlers = [
   ...popUpListReadHandlers,
   ...ItemListHandlers,
   ...DashboardHandlers,
-  ...EntrantsHandlers
+  ...EntrantsHandlers,
 ];
 
 export const worker = setupWorker(...handlers);
