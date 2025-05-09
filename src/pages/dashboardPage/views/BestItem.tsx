@@ -44,7 +44,7 @@ export default function BestItem() {
       <div className="flex justify-center gap-[60px] mt-2">
         {BestItems.map((item, index) => (
           <div
-            key={item.itemId}
+            key={item.id}
             className={`
               relative flex flex-col items-center justify-center
               w-[400px] rounded-[50px] px-[33px] pb-9
