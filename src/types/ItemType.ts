@@ -6,3 +6,10 @@ export type ItemType = {
   location: number;
   imageUrl: string;
 };
+
+export type BestItemType = {
+  id: number;
+  name: string;
+  price: number;
+  stock: number;
+};

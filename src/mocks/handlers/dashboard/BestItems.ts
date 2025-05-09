@@ -1,6 +1,6 @@
-import { ItemType } from "@/types/ItemType";
+import { BestItemType } from "@/types/ItemType";
 
-export const BestItems: ItemType[] = [
+export const BestItems: BestItemType[] = [
   {
     id: 1,
     name: "BLACKPINK IN YOUR AREA - THE POP-UP",
