@@ -22,3 +22,29 @@ export type UploadImageToS3Request = {
   presignedUrl: string;
   imageFile: File;
 };
+
+export type PopupCreateRequest = {
+  name: string;
+  imageUrl: string;
+  popupStartDate: string;
+  popupEndDate: string;
+  reservationOpenDateTime: string;
+  reservationCloseDateTime: string;
+  runOpenTime: string;
+  runCloseTime: string;
+  totalCapacity: number;
+  timeCapacity: number;
+  roadAddress: string;
+  detailAddress: string;
+  latitude: number;
+  longitude: number;
+};
+
+export type ChoiceCreateRequest = {
+  optionList: string[];
+};
+
+export type PopupWithChoicesRequest = {
+  popupCreateRequest: PopupCreateRequest;
+  choiceCreateRequestList: ChoiceCreateRequest[];
+};

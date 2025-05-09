@@ -8,7 +8,7 @@ export type GlobalResponse<T> = {
   timestamp: string;
 };
 
-export type NoResponse = Record<string, never>;
+export type NoResponse = null;
 
 export type LoginResponse = {
   accessToken: string;
@@ -16,4 +16,8 @@ export type LoginResponse = {
 
 export type GetPresignedUrlResponse = {
   presignedUrl: string;
+};
+
+export type PostPopUpCreateResponse = {
+  popupId: string;
 };

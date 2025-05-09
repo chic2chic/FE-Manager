@@ -9,3 +9,8 @@ export function formatTimestamp(timestamp: string) {
 
   return `${year}.${month}.${day} ${hours}:${minutes}`;
 }
+
+export function getTimeValue(timeString: string): number {
+  if (!timeString || timeString === "00:00:00") return 0;
+  return parseInt(timeString.split(":")[0]);
+}

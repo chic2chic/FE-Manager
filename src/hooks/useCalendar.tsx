@@ -15,7 +15,7 @@ import {
 import CalenderImg from "@/assets/webps/common/calender.webp";
 import RightArrowImg from "@/assets/webps/common/right-arrow-gray09.webp";
 
-export default function useCalender() {
+export default function useCalendar() {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -167,6 +167,7 @@ export default function useCalender() {
   return {
     isOpen,
     selectedDate,
+    setSelectedDate,
     setIsOpen,
     foldCalender,
     calender,

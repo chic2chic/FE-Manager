@@ -1,33 +1,33 @@
 import { postCreatePresignedUrl, putImageToS3 } from "@/apis/image/ImageApi";
-import { postItemCreate } from "@/apis/ItemCreateApi";
+import { postPopUpCreate } from "@/apis/PopUpCreateApi";
 import { ErrorMessage } from "@/utils/ErrorMessage";
 import { useMutation } from "@tanstack/react-query";
 
-export const useItemCreateApi = () => {
-  const getItemPresignedUrlMutation = useMutation({
+export const usePopUpCreateApi = () => {
+  const getPresignedUrlMutation = useMutation({
     mutationFn: postCreatePresignedUrl,
     onError: error => {
       throw new Error(`PresignedUrl 발급 에러 : ${ErrorMessage(error)}`);
     },
   });
 
-  const uploadItemImgToS3Mutation = useMutation({
+  const putImgToS3Mutation = useMutation({
     mutationFn: putImageToS3,
     onError: error => {
       throw new Error(`이미지 S3 업로드 에러 : ${ErrorMessage(error)}`);
     },
   });
 
-  const itemCreateMutation = useMutation({
-    mutationFn: postItemCreate,
+  const postPopUpCreateMutation = useMutation({
+    mutationFn: postPopUpCreate,
     onError: error => {
-      throw new Error(`상품 생성 에러 : ${ErrorMessage(error)}`);
+      throw new Error(`팝업 등록 에러 : ${ErrorMessage(error)}`);
     },
   });
 
   return {
-    getItemPresignedUrlMutation,
-    uploadItemImgToS3Mutation,
-    itemCreateMutation,
+    getPresignedUrlMutation,
+    putImgToS3Mutation,
+    postPopUpCreateMutation,
   };
 };

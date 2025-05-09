@@ -15,10 +15,10 @@ type Props = {
  */
 
 export default function QuestionnaireForm({ number, title }: Props) {
-  const { formData, updateQuestionAnswers } = usePopUpCreateStore();
-  const existingAnswers = formData.questions.find(
-    item => item.questionNumber === number,
-  )?.answers;
+  const { formData, updateChoiceOptions } = usePopUpCreateStore();
+
+  const existingAnswers =
+    formData.choiceCreateRequestList[number - 1].optionList; // 배열형태로 넘어오기 때문에 -1로 인덱싱 필요
   const [answers, setAnswers] = useState<string[]>(
     existingAnswers || Array(2).fill(""),
   );
@@ -51,8 +51,8 @@ export default function QuestionnaireForm({ number, title }: Props) {
   };
 
   useEffect(() => {
-    updateQuestionAnswers(number, answers);
-  }, [answers, number, updateQuestionAnswers]);
+    updateChoiceOptions(number - 1, answers);
+  }, [answers, number, updateChoiceOptions]);
 
   return (
     <div className="flex items-start ml-[220px] gap-[52px]">
