@@ -8,7 +8,7 @@ type Props = {
 };
 
 export default function NoticeModal({ onClose }: Props) {
-  const { notifications, isLoading, error } = useStockNotificationListApi();
+  const { notifications } = useStockNotificationListApi();
   const popupName = usePopUpReadStore.getState().name;
   const modalRef = useRef<HTMLDivElement>(null);
 
@@ -23,9 +23,6 @@ export default function NoticeModal({ onClose }: Props) {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [onClose]);
-
-  if (isLoading) return <div>로딩 중...</div>;
-  if (error) return <div>에러가 발생하였습니다.</div>;
 
   return (
     <div
