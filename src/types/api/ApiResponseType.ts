@@ -44,3 +44,13 @@ export type GetAvgPurchaseResponse = {
 export type EntrantsResponse = {
   enteredCount: number;
 };
+
+export type ReservationsResponse = {
+  reservedCount: number;
+  chart: ReservationChartResponse[];
+};
+
+export type ReservationChartResponse = {
+  day: string;
+  value: number;
+};
