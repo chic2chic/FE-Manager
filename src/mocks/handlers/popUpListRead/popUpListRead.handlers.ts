@@ -51,11 +51,14 @@ export const popUpList = [
 
 export const popUpListReadHandlers = [
   http.get("/popups", () => {
-    return HttpResponse.json({
-      success: true,
-      status: 200,
-      data: popUpList,
-      timestamp: new Date().toISOString(),
-    });
+    return HttpResponse.json(
+      {
+        success: true,
+        status: 200,
+        data: popUpList,
+        timestamp: new Date().toISOString(),
+      },
+      { status: 200 },
+    );
   }),
 ];
