@@ -28,3 +28,8 @@ export type ItemType = {
 };
 
 export type ItemListType = Record<string, ItemType[]>;
+
+export type GetAvgPurchaseResponse = {
+  totalPrice: number;
+  todayPrice: number;
+};

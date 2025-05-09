@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import itemImage from "@/assets/webps/itemList/item-img.webp";
 import Modal from "@/components/common/Modal";
 import { useNavigate } from "react-router-dom";
 import bin from "@/assets/webps/common/bin.webp";
@@ -9,16 +8,9 @@ import { ItemListType, ItemType } from "@/types/api/ApiResponseType";
 export default function ItemListPage() {
   const [itemList, setItemList] = useState<ItemListType>({});
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedItem, setSelectedItem] = useState<ItemType | null>(null);
+  const [selectedItem] = useState<ItemType | null>(null);
   const navigate = useNavigate();
   const [isDeleteConfirmOpen, setIsDeleteConfirmOpen] = useState(false);
-
-  const keys = Object.keys(itemList).values();
-
-  const handleOpenDeleteModal = (item: ItemType) => {
-    setSelectedItem(item);
-    setIsModalOpen(true);
-  };
 
   const handlerConfirm = () => {
     setIsModalOpen(false);
