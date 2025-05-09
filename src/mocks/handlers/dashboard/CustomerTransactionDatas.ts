@@ -7,7 +7,7 @@ export const CustomerTransactionDatas: GetAvgPurchaseResponse = {
 };
 
 export const DashboardHandlers = [
-  http.get("/CustomerTransactionDatas", () => {
+  http.get("/popups/1/dashboard/average-purchase", () => {
     return HttpResponse.json(
       {
         success: true,
