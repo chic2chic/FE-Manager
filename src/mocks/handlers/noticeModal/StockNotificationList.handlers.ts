@@ -60,7 +60,7 @@ export const stockNotificationList = [
 ];
 
 export const StockNotificationListHandlers = [
-  http.get("/popups/1/notifications/stock", () => {
+  http.get("/popups/:popupId/notifications/stock", () => {
     return HttpResponse.json(
       {
         success: true,
