@@ -4,8 +4,8 @@ import React, { useEffect, useRef } from "react";
 import PopUpLabel from "./PopUpLabel";
 import PopUpInput from "./PopUpInput";
 import {
-  PopupCreateRequest,
-  PopupWithChoicesRequest,
+  PopUpCreateRequest,
+  PopUpWithChoicesRequest,
 } from "@/types/api/ApiRequestType";
 import { formatDateTimeToString, formatDateToString } from "@/utils/FormatDay";
 import { getTimeValue } from "@/utils/FormatTimestamp";
@@ -13,10 +13,10 @@ import useClickOutside from "@/hooks/useClickOutside";
 import { addDays } from "date-fns";
 
 type Props = {
-  formData: PopupWithChoicesRequest;
-  updatePopupField: <K extends keyof PopupCreateRequest>(
+  formData: PopUpWithChoicesRequest;
+  updatePopupField: <K extends keyof PopUpCreateRequest>(
     _field: K,
-    _value: PopupCreateRequest[K],
+    _value: PopUpCreateRequest[K],
   ) => void;
   previewImage: string;
   handleUploadImage: (_e: React.ChangeEvent<HTMLInputElement>) => void;

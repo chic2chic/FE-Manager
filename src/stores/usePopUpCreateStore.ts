@@ -1,11 +1,11 @@
 import { Questions } from "@/constants/popUpCreate/Questions";
 import {
-  PopupCreateRequest,
-  PopupWithChoicesRequest,
+  PopUpCreateRequest,
+  PopUpWithChoicesRequest,
 } from "@/types/api/ApiRequestType";
 import { create } from "zustand";
 
-const initialState: PopupWithChoicesRequest = {
+const initialState: PopUpWithChoicesRequest = {
   popupCreateRequest: {
     name: "",
     imageUrl: "",
@@ -28,10 +28,10 @@ const initialState: PopupWithChoicesRequest = {
 };
 
 type PopUpStore = {
-  formData: PopupWithChoicesRequest;
-  updatePopupField: <K extends keyof PopupCreateRequest>(
+  formData: PopUpWithChoicesRequest;
+  updatePopupField: <K extends keyof PopUpCreateRequest>(
     _field: K,
-    _value: PopupCreateRequest[K],
+    _value: PopUpCreateRequest[K],
   ) => void;
   updateChoiceOptions: (_questionIndex: number, _optionList: string[]) => void;
   resetForm: () => void;

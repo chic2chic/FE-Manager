@@ -1,11 +1,11 @@
-import { PopUpCardType } from "@/types/PopUpCardType";
 import xWhite from "@/assets/webps/popUpList/x-white.webp";
+import { GetPopUpReadResponse } from "@/types/api/ApiResponseType";
 
-type Props = PopUpCardType & {
+type Props = GetPopUpReadResponse & {
   onDeleteClick: () => void;
 };
 
-export default function PopUpCard({ title, imagePath, onDeleteClick }: Props) {
+export default function PopUpCard({ name, imageUrl, onDeleteClick }: Props) {
   return (
     <>
       <div className="w-[286px] flex justify-center">
@@ -13,7 +13,7 @@ export default function PopUpCard({ title, imagePath, onDeleteClick }: Props) {
           {/* 이미지 */}
           <div className="w-[200px] h-[200px] rounded-full overflow-hidden">
             <img
-              src={imagePath}
+              src={imageUrl}
               alt="poster"
               width={40}
               height={40}
@@ -34,9 +34,9 @@ export default function PopUpCard({ title, imagePath, onDeleteClick }: Props) {
       </div>
       <span
         lang="en"
-        className="w-[286px] break-words block text-center justify-center text-[34px] mt-[22px]"
+        className="cursor-pointer w-[286px] break-words block text-center justify-center text-[34px] mt-[22px]"
       >
-        {title}
+        {name}
       </span>
     </>
   );

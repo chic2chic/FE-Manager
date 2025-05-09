@@ -1,6 +1,6 @@
 import {
   GetPresignedUrlRequest,
-  PopupWithChoicesRequest,
+  PopUpWithChoicesRequest,
 } from "@/types/api/ApiRequestType";
 import {
   GetPresignedUrlResponse,
@@ -42,7 +42,7 @@ export const PopUpCreateHandlers = [
   }),
 
   http.post("/popups", async ({ request }) => {
-    const requestBody = (await request.json()) as PopupWithChoicesRequest;
+    const requestBody = (await request.json()) as PopUpWithChoicesRequest;
     const isError = requestBody.popupCreateRequest.name === "error";
 
     console.log("popup 생성시 Request : ", requestBody);

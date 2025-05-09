@@ -4,7 +4,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
-import { PopUpCards } from "@/mocks/handlers/popUpList/PopUpCards";
 import PopUpCard from "@/pages/popUpListPage/views/PopUpCard";
 import Modal from "@/components/common/Modal";
 import logoImage from "@/assets/webps/common/logo-manager.webp";
@@ -13,12 +12,13 @@ import leftArrowGray09 from "@/assets/webps/common/left-arrow-gray09.webp";
 import rightArrowGray09 from "@/assets/webps/common/right-arrow-gray09.webp";
 import bin from "@/assets/webps/common/bin.webp";
 import check from "@/assets/webps/common/check.webp";
+import { usePopUpListReadApi } from "@/hooks/api/usePopUpListReadApi";
 
 export default function PopUpListPage() {
+  const { cards, isLoading, error } = usePopUpListReadApi();
   const navigate = useNavigate();
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
   const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
-  const [cards, setCards] = useState(PopUpCards);
   const [selectedCardId, setSelectedCardId] = useState<number | null>(null);
   const [pendingDeleteId, setPendingDeleteId] = useState<number | null>(null);
 
@@ -40,10 +40,13 @@ export default function PopUpListPage() {
     if (pendingDeleteId === null) return;
 
     // TO DO : 팝업 삭제 API 연결
-    setCards(prev => prev.filter(card => card.id !== pendingDeleteId));
+    // setCards(prev => prev.filter(card => card.id !== pendingDeleteId));
     setIsAlertModalOpen(false);
     setPendingDeleteId(null);
   };
+
+  if (isLoading) return <div>로딩 중...</div>;
+  if (error) return <div>에러가 발생하였습니다.</div>;
 
   return (
     <div className="bg-gray03 min-h-screen pb-20">
@@ -55,7 +58,6 @@ export default function PopUpListPage() {
         className="pt-[22px] ml-10 cursor-pointer"
         onClick={() => navigate("/dashboard")}
       />
-
       {/* 나의 팝업 List */}
       <div className="mt-[80px] mx-auto w-[1360px] min-h-[600px] bg-gray01 pb-14 rounded-[50px]">
         <div className="flex items-start justify-between">
@@ -91,39 +93,56 @@ export default function PopUpListPage() {
               }}
               modules={[Pagination, Navigation]}
             >
-              {cards.map(card => (
-                <SwiperSlide
-                  key={card.id}
-                  className="h-[342px] w-[286px] flex flex-col justify-center items-center"
-                >
-                  <PopUpCard
-                    id={card.id}
-                    title={card.title}
-                    imagePath={card.imagePath}
-                    onDeleteClick={() => handleDelete(card.id)}
-                  />
-                </SwiperSlide>
-              ))}
+              {cards && cards.length > 0 ? (
+                cards.map(card => (
+                  <SwiperSlide
+                    key={card.popupId}
+                    className="h-[342px] w-[286px] flex flex-col justify-center items-center"
+                  >
+                    <PopUpCard
+                      popupId={card.popupId}
+                      name={card.name}
+                      imageUrl={card.imageUrl}
+                      onDeleteClick={() => handleDelete(card.popupId)}
+                    />
+                  </SwiperSlide>
+                ))
+              ) : (
+                <div className="flex flex-col items-center justify-center">
+                  <p className="mt-18 text-[32px] text-gray10">
+                    등록된 팝업이 없습니다.
+                  </p>
+                  <p className="mt-4 text-[20px] text-gray10">
+                    우측 상단 <span className="text-main06">+ 버튼</span>을 눌러
+                    팝업을 등록해주세요!
+                  </p>
+                </div>
+              )}
             </Swiper>
             {/* prev & next 버튼 */}
-            <div className="custom-prev absolute top-[110px] -translate-y-1/2 left-0 z-10 cursor-pointer">
-              <img
-                src={leftArrowGray09}
-                alt="prev"
-                className="w-[35px] h-[35px]"
-              />
-            </div>
-            <div className="custom-next absolute top-[110px] -translate-y-1/2 right-0 z-10 cursor-pointer">
-              <img
-                src={rightArrowGray09}
-                alt="next"
-                className="w-[35px] h-[35px]"
-              />
-            </div>
+            {cards && cards.length > 0 ? (
+              <>
+                <div className="custom-prev absolute top-[110px] -translate-y-1/2 left-0 z-10 cursor-pointer">
+                  <img
+                    src={leftArrowGray09}
+                    alt="prev"
+                    className="w-[35px] h-[35px]"
+                  />
+                </div>
+                <div className="custom-next absolute top-[110px] -translate-y-1/2 right-0 z-10 cursor-pointer">
+                  <img
+                    src={rightArrowGray09}
+                    alt="next"
+                    className="w-[35px] h-[35px]"
+                  />
+                </div>
+              </>
+            ) : (
+              <></>
+            )}
           </div>
         </div>
       </div>
-
       {/* Confirm 모달 */}
       <Modal
         isOpen={isConfirmModalOpen}
@@ -135,7 +154,6 @@ export default function PopUpListPage() {
         onConfirm={confirmDelete}
         onCancel={() => setIsConfirmModalOpen(false)}
       />
-
       {/* Alert 모달 */}
       <Modal
         isOpen={isAlertModalOpen}
