@@ -1,8 +1,6 @@
 import { GetStockNotificationResponse } from "@/types/api/ApiResponseType";
 import { formatTimestamp } from "@/utils/FormatTimestamp";
 
-// 알림: api 10분에 한번씩 요청하기
-
 type Props = Omit<GetStockNotificationResponse, "notificationId"> & {
   popup: string;
 };
