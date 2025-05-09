@@ -1,6 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
 import { getAvgPurchase, getTodayReservation } from "@/apis/DashBoardApi";
-//import type { GetAvgPurchaseResponse, TodayReservationResponse } from "@/types/api/ApiResponseType";
 
 export const useAvgPurchaseApi = () => {
   const { data, isError, isLoading } = useQuery({
