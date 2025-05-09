@@ -76,7 +76,7 @@ export default function ItemDisplay({ displayName, items }: Props) {
         <Modal
           isOpen={isModalOpen}
           setIsOpen={setIsModalOpen}
-          content={`"${selectedItem.name} 상품을 삭제하시겠어요?`}
+          content={`${selectedItem.name} 상품을 삭제하시겠어요?`}
           image={bin}
           confirmText="삭제"
           cancelText="취소"
