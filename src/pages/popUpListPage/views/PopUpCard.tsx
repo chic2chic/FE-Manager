@@ -34,7 +34,7 @@ export default function PopUpCard({ name, imageUrl, onDeleteClick }: Props) {
       </div>
       <span
         lang="en"
-        className="w-[286px] break-words block text-center justify-center text-[34px] mt-[22px]"
+        className="cursor-pointer w-[286px] break-words block text-center justify-center text-[34px] mt-[22px]"
       >
         {name}
       </span>
