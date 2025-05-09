@@ -3,6 +3,7 @@ import { ItemType } from "@/types/ItemType";
 import bin from "@/assets/webps/common/bin.webp";
 import check from "@/assets/webps/common/check.webp";
 import { useState } from "react";
+import { useItemDeleteApi } from "@/hooks/api/useItemListApi";
 
 type Props = {
   displayName: string;
@@ -13,13 +14,19 @@ export default function ItemDisplay({ displayName, items }: Props) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState<ItemType | null>(null);
   const [isDeleteConfirmOpen, setIsDeleteConfirmOpen] = useState(false);
+  const { deleteItemMutation } = useItemDeleteApi();
 
   const handleOpenDeleteModal = (item: ItemType) => {
     setSelectedItem(item);
     setIsModalOpen(true);
   };
 
-  const handlerConfirm = () => {
+  const handlerConfirm = async () => {
+    if (!selectedItem) {
+      return null;
+    }
+
+    await deleteItemMutation.mutateAsync(selectedItem.itemId);
     setIsModalOpen(false);
     setIsDeleteConfirmOpen(true);
   };
