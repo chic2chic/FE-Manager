@@ -20,7 +20,7 @@ export default function NoticeItem({
         <div className="flex items-center gap-[6px]">
           <span
             lang="en"
-            className="text-[18px] max-w-[160px] truncate tracking-[-2%]"
+            className="text-[18px] max-w-[150px] truncate tracking-[-2%]"
           >
             {popup}
           </span>
