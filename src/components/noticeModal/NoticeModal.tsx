@@ -1,5 +1,6 @@
 import NoticeItem from "@/components/noticeModal/views/NoticeItem";
-import { NoticeItems } from "@/mocks/handlers/noticeModal/NoticeItems";
+import { useStockNotificationListApi } from "@/hooks/api/useStockNotificationListApi";
+import { usePopUpReadStore } from "@/stores/usePopUpReadStore";
 import { useEffect, useRef } from "react";
 
 type Props = {
@@ -7,6 +8,8 @@ type Props = {
 };
 
 export default function NoticeModal({ onClose }: Props) {
+  const { notifications, isLoading, error } = useStockNotificationListApi();
+  const popupName = usePopUpReadStore.getState().name;
   const modalRef = useRef<HTMLDivElement>(null);
 
   // 모달 바깥 클릭 시 닫기
@@ -21,22 +24,29 @@ export default function NoticeModal({ onClose }: Props) {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [onClose]);
 
+  if (isLoading) return <div>로딩 중...</div>;
+  if (error) return <div>에러가 발생하였습니다.</div>;
+
   return (
     <div
       ref={modalRef}
       className="pt-1 px-5 w-[360px] max-h-[544px] absolute overflow-scroll top-[46px] right-[-18px] z-[130px] bg-white rounded-[20px] shadow-[0_0_10px_2px_rgba(0,0,0,0.15)]"
     >
       <div className="relative flex flex-col items-center">
-        {NoticeItems.map(item => (
-          <NoticeItem
-            key={item.id}
-            type={item.type}
-            popup={item.popup}
-            title={item.title}
-            stockThreshold={item.stockThreshold}
-            timestamp={item.timestamp}
-          />
-        ))}
+        {notifications && notifications.length > 0 ? (
+          notifications.map(item => (
+            <NoticeItem
+              key={item.notificationId}
+              popularity={item.popularity}
+              popup={popupName}
+              name={item.name}
+              minStock={item.minStock}
+              notifiedAt={item.notifiedAt}
+            />
+          ))
+        ) : (
+          <>알림이 없습니다</>
+        )}
       </div>
     </div>
   );

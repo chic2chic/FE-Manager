@@ -40,3 +40,13 @@ export type GetAvgPurchaseResponse = {
   totalPrice: number;
   todayPrice: number;
 };
+
+export type GetStockNotificationResponse = {
+  notificationId: number;
+  popularity: string;
+  name: string;
+  minStock: number;
+  notifiedAt: string;
+};
+
+export type GetStockNotificationListResponse = GetStockNotificationResponse[];
