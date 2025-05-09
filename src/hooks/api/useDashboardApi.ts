@@ -13,7 +13,7 @@ export const useAvgPurchaseApi = () => {
   return { data, isError, isLoading };
 };
 
-export const useTodayReservationApi = () => {
+export const useTodayEntrantsApi = () => {
   const { data, isError, isLoading } = useQuery({
     queryKey: ["todayReservation", "dashboard"],
     queryFn: async () => {

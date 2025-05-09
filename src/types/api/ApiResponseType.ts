@@ -41,7 +41,6 @@ export type GetAvgPurchaseResponse = {
   todayPrice: number;
 };
 
-export type TodayReservationResponse = {
-  reservedCount: number;
+export type EntrantsResponse = {
   enteredCount: number;
 };

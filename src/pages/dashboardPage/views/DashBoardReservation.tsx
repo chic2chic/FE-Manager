@@ -2,10 +2,10 @@ import DashBoardTitle from "@/pages/dashboardPage/views/DashBoardTitle";
 import checkCalendar from "@/assets/webps/dashboard/check-calendar.webp";
 import { CountCard } from "@/pages/dashboardPage/views/CountCard";
 import ReservationByDayChart from "@/pages/dashboardPage/views/ReservationByDayChart";
-import { useTodayReservationApi } from "@/hooks/api/useDashboardApi";
+import { useTodayEntrantsApi } from "@/hooks/api/useDashboardApi";
 
 export default function DashBoardReservation() {
-  const { data } = useTodayReservationApi();
+  const { data } = useTodayEntrantsApi();
 
   return (
     <div className="w-[906px] flex-col">
@@ -16,7 +16,8 @@ export default function DashBoardReservation() {
             <CountCard
               title="예약자 수"
               bgCSS="bg-main01"
-              value={data.reservedCount.toLocaleString()}
+              // value={data.reservedCount.toLocaleString()}
+              value="100"
               valueCSS="text-main04 text-[64px]"
               unit="명"
               unitCSS="text-main04 text-[40px]"
