@@ -1,5 +1,3 @@
-import { ItemType } from "../ItemType";
-
 export type ApiResponse<T> = Promise<GlobalResponse<T>>;
 export type ApiResult<T> = Promise<T>;
 
