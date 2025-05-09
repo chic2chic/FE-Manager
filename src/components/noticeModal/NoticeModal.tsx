@@ -28,7 +28,7 @@ export default function NoticeModal({ onClose }: Props) {
     <div
       ref={modalRef}
       className={`pt-1 px-5 w-[360px] max-h-[544px] absolute top-[46px] right-[-18px] z-[130px] bg-white rounded-[20px] shadow-[0_0_10px_2px_rgba(0,0,0,0.15)] 
-        ${notifications && notifications.length > 0 ? "overflow-y-scroll" : "overflow-y-hidden"}`}
+        ${notifications && notifications.length > 0 ? "overflow-y-auto" : "overflow-y-hidden"}`}
     >
       <div className="relative flex flex-col items-center">
         {notifications && notifications.length > 0 ? (
