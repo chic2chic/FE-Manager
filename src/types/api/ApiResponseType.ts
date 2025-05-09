@@ -1,3 +1,5 @@
+import { ItemType } from "../ItemType";
+
 export type ApiResponse<T> = Promise<GlobalResponse<T>>;
 export type ApiResult<T> = Promise<T>;
 
@@ -29,3 +31,5 @@ export type GetPopUpReadResponse = {
 };
 
 export type GetPopUpListReadResponse = GetPopUpReadResponse[];
+
+export type GetItemListResponse = Record<string, ItemType[]>;

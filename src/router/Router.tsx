@@ -6,6 +6,7 @@ import ItemListPage from "@/pages/itemListPage/ItemListPage";
 import OnBoradingPage from "@/pages/onBoardingPage/OnBoardingPage";
 import PopUpCreatePage from "@/pages/popUpCreatePage/PopUpCreatePage";
 import PopUpListPage from "@/pages/popUpListPage/PopUpListPage";
+import Test from "@/Test";
 import { createBrowserRouter } from "react-router-dom";
 
 // TODO : 리팩토링 예정 - ProtectLayout 중복 사용
@@ -52,4 +53,5 @@ export const Router = createBrowserRouter([
       },
     ],
   },
+  { path: "/test", element: <Test /> },
 ]);
