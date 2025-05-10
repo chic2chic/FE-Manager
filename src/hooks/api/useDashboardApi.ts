@@ -1,5 +1,21 @@
 import { useQuery } from "@tanstack/react-query";
-import { getAvgPurchase, getTodayReservation } from "@/apis/DashBoardApi";
+import {
+  getAvgPurchase,
+  getCongestion,
+  getTodayReservation,
+} from "@/apis/DashBoardApi";
+
+export const useCongestionApi = () => {
+  const { data, isError, isLoading } = useQuery({
+    queryKey: ["congestion", "dashboard"],
+    queryFn: async () => {
+      const res = await getCongestion();
+      return res.data;
+    },
+  });
+
+  return { data, isError, isLoading };
+};
 
 export const useAvgPurchaseApi = () => {
   const { data, isError, isLoading } = useQuery({
