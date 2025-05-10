@@ -16,6 +16,7 @@ type Props = {
   placeholder: string;
   width?: number;
   height?: number;
+  isPatch?: boolean;
 };
 
 export default function CustomInput({
@@ -28,6 +29,7 @@ export default function CustomInput({
   placeholder,
   width = 500,
   height = 60,
+  isPatch = false,
 }: Props) {
   const numberHandler = (e: React.FormEvent<HTMLInputElement>) => {
     if (isOnlyNumber) {
@@ -48,15 +50,21 @@ export default function CustomInput({
       <p lang={titleType} className="text-[20px] font-semibold">
         {title}
       </p>
-      <input
-        className="border rounded-full pl-[24px] border-gray05 bg-gray02 placeholder:text-gray07 text-gray10 text-[19px] transition-all duration-200 focus:border-gray09 focus:outline-none"
-        style={{ width: `${width}px`, height: `${height}px` }}
-        type={inputType || "text"}
-        placeholder={placeholder}
-        onChange={onChange}
-        value={value}
-        onInput={isOnlyNumber ? numberHandler : undefined}
-      />
+      {isPatch ? (
+        <div className="border rounded-full pl-[24px] border-gray05 bg-gray02 placeholder:text-gray07 text-gray10 text-[19px] transition-all duration-200 focus:border-gray09 focus:outline-none">
+          {value}
+        </div>
+      ) : (
+        <input
+          className="border rounded-full pl-[24px] border-gray05 bg-gray02 placeholder:text-gray07 text-gray10 text-[19px] transition-all duration-200 focus:border-gray09 focus:outline-none"
+          style={{ width: `${width}px`, height: `${height}px` }}
+          type={inputType || "text"}
+          placeholder={placeholder}
+          onChange={onChange}
+          value={value}
+          onInput={isOnlyNumber ? numberHandler : undefined}
+        />
+      )}
     </div>
   );
 }

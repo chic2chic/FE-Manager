@@ -31,6 +31,10 @@ export const Router = createBrowserRouter([
             element: <ItemListPage />,
           },
           {
+            path: "/items/patch/:itemId",
+            element: <ItemCreatePage />,
+          },
+          {
             path: "/popup-create",
             element: <PopUpCreatePage />,
           },

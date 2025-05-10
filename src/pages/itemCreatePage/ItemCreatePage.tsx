@@ -1,15 +1,16 @@
 import CustomButton from "@/components/common/CustomButton";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TestImage from "@/assets/webps/onBoarding/test.png";
 import Modal from "@/components/common/Modal";
 import bin from "@/assets/webps/common/bin.webp";
 import check from "@/assets/webps/common/check.webp";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useItemCreate } from "@/hooks/useItemCreate";
 import ItemCreateInputs from "@/pages/itemCreatePage/views/ItemCreateInputs";
+import { usePopUpReadStore } from "@/stores/usePopUpReadStore";
 
-export default function ItemAddPage() {
-  const [itemPopUpId] = useState<number>(1); // 추후 zustand로 전역 상태 관리
+export default function ItemCreatePage() {
+  const popupId = usePopUpReadStore.getState().popupId;
   const [itemName, setItemName] = useState<string>("");
   const [itemPrice, setItemPrice] = useState<number>(0);
   const [itemStock, setItemStock] = useState<number>(0);
@@ -18,9 +19,17 @@ export default function ItemAddPage() {
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [isAlertModalOpen, setIsAlertModalOpen] = useState<boolean>(false);
   const [isSaveModalOpen, setIsSaveModalOpen] = useState<boolean>(false);
+  const [isPatch, setIsPatch] = useState<boolean>(false);
   const navigate = useNavigate();
 
   const { createItem } = useItemCreate();
+
+  const location = useLocation();
+  const item = location.state?.item;
+
+  useEffect(() => {
+    setIsPatch(isPatch);
+  }, [item]);
 
   const handleCancel = () => {
     setIsAlertModalOpen(true);
@@ -29,7 +38,7 @@ export default function ItemAddPage() {
   const handleSave = () => {
     setIsSaveModalOpen(true);
     return (
-      itemPopUpId &&
+      popupId &&
       itemName &&
       itemPrice &&
       itemStock &&
@@ -40,13 +49,11 @@ export default function ItemAddPage() {
   };
 
   const handleSaveConfirmBtn = async () => {
-    // createItem 호출
-    // createItem 안에다 위 state들 넘겨주면 생성됨
     if (!imageFile) return alert("이미지를 선택해주세요.");
     await createItem({
       imageFile,
       data: {
-        popupId: itemPopUpId,
+        popupId: popupId,
         name: itemName,
         price: itemPrice,
         stock: itemStock,
@@ -122,6 +129,7 @@ export default function ItemAddPage() {
           handleStock={handleStock}
           handleMinStock={handleMinStock}
           handleLocation={handleLocation}
+          isPatch={isPatch}
         />
       </div>
       <Modal

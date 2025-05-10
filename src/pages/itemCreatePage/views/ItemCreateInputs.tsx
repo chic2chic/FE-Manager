@@ -12,6 +12,7 @@ type Props = {
   handleStock: (_e: React.ChangeEvent<HTMLInputElement>) => void;
   handleMinStock: (_e: React.ChangeEvent<HTMLInputElement>) => void;
   handleLocation: (_e: React.ChangeEvent<HTMLInputElement>) => void;
+  isPatch: boolean;
 };
 
 export default function ItemCreateInputs({
@@ -25,6 +26,7 @@ export default function ItemCreateInputs({
   handleStock,
   handleMinStock,
   handleLocation,
+  isPatch,
 }: Props) {
   return (
     <div className="flex flex-col gap-[30px]">
@@ -33,6 +35,7 @@ export default function ItemCreateInputs({
         title="상품명"
         placeholder="상품명을 입력해주세요"
         onChange={handleName}
+        isPatch={isPatch}
       />
       <CustomInput
         value={price}
@@ -40,6 +43,7 @@ export default function ItemCreateInputs({
         title="가격"
         placeholder="가격을 입력해주세요"
         onChange={handlePrice}
+        isPatch={isPatch}
       />
       <CustomInput
         value={stock}
@@ -47,6 +51,7 @@ export default function ItemCreateInputs({
         title="수량"
         placeholder="상품 수량을 입력해주세요"
         onChange={handleStock}
+        isPatch={isPatch}
       />
       <CustomInput
         value={minStock}
@@ -59,6 +64,7 @@ export default function ItemCreateInputs({
         title="로케이션"
         placeholder="상품 로케이션을 입력해주세요"
         onChange={handleLocation}
+        isPatch={isPatch}
       />
     </div>
   );
