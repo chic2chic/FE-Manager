@@ -2,22 +2,25 @@ import DashBoardTitle from "@/pages/dashboardPage/views/DashBoardTitle";
 import checkCalendar from "@/assets/webps/dashboard/check-calendar.webp";
 import { CountCard } from "@/pages/dashboardPage/views/CountCard";
 import ReservationByDayChart from "@/pages/dashboardPage/views/ReservationByDayChart";
-import { useTodayEntrantsApi } from "@/hooks/api/useDashboardApi";
+import {
+  useTodayEntrantsApi,
+  useTodayReservationsApi,
+} from "@/hooks/api/useDashboardApi";
 
 export default function DashBoardReservation() {
-  const { data } = useTodayEntrantsApi();
+  const { data: entrantsData } = useTodayEntrantsApi();
+  const { data: reservationsData } = useTodayReservationsApi();
 
   return (
     <div className="w-[906px] flex-col">
       <DashBoardTitle title="예약 분석" />
-      {data && (
+      {entrantsData && reservationsData && (
         <div className="w-[1360px] h-[394px] flex gap-10">
           <div className="w-[314px] flex flex-col justify-between">
             <CountCard
               title="예약자 수"
               bgCSS="bg-main01"
-              // value={data.reservedCount.toLocaleString()}
-              value="100"
+              value={reservationsData.reservedCount.toLocaleString()}
               valueCSS="text-main04 text-[64px]"
               unit="명"
               unitCSS="text-main04 text-[40px]"
@@ -25,7 +28,7 @@ export default function DashBoardReservation() {
             <CountCard
               title="입장자 수"
               bgCSS="bg-purple02"
-              value={data.enteredCount.toLocaleString()}
+              value={entrantsData.enteredCount.toLocaleString()}
               valueCSS="text-purple06 text-[64px]"
               unit="명"
               unitCSS="text-purple06 text-[40px]"
@@ -45,7 +48,7 @@ export default function DashBoardReservation() {
                 요일별 예약자 수
               </span>
             </div>
-            <ReservationByDayChart />
+            <ReservationByDayChart data={reservationsData.chart} />
           </div>
         </div>
       )}
