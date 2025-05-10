@@ -1,6 +1,7 @@
-import { CongestionType } from "@/types/CongestionType";
+import { GetCongestionResponse } from "@/types/api/ApiResponseType";
+import { http, HttpResponse } from "msw";
 
-export const CongestionDatas: CongestionType = {
+export const congestionList: GetCongestionResponse = {
   mon: [
     { time: 6, value: 5 },
     { time: 8, value: 10 },
@@ -86,3 +87,17 @@ export const CongestionDatas: CongestionType = {
     { time: 24, value: 8 },
   ],
 };
+
+export const CongestionReadHandlers = [
+  http.get("/popups/:popupId/dashboard/congestion", () => {
+    return HttpResponse.json(
+      {
+        success: true,
+        status: 200,
+        data: congestionList,
+        timestamp: new Date().toISOString(),
+      },
+      { status: 200 },
+    );
+  }),
+];

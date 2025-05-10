@@ -1,8 +1,8 @@
 import CustomBlurDot from "@/components/common/CustomBlurDot";
 import CustomCursor from "@/components/common/CustomCursor";
 import CustomTooltip from "@/components/common/CustomTooltip";
-import { CongestionDatas } from "@/mocks/handlers/dashboard/ConjestionDatas";
-import { CongestionData } from "@/types/CongestionType";
+import { congestionList } from "@/mocks/handlers/dashboard/CongestionRead.handlers";
+import { GetCongestionTimeValue } from "@/types/api/ApiResponseType";
 
 import {
   AreaChart,
@@ -14,12 +14,12 @@ import {
 } from "recharts";
 
 type Props = {
-  dayData: CongestionData[];
+  dayData: GetCongestionTimeValue[];
 };
 
 export default function CongestionChart({ dayData }: Props) {
   // y축 최댓값: 모든 요일 데이터 중 가장 큰 value
-  const allValues = Object.values(CongestionDatas)
+  const allValues = Object.values(congestionList)
     .flat()
     .map(d => d.value);
 

@@ -2,12 +2,14 @@ import { useState } from "react";
 import { Days } from "@/constants/dashboard/Days";
 import { formatDay } from "@/utils/FormatDay";
 import DashBoardTitle from "@/pages/dashboardPage/views/DashBoardTitle";
-import { CongestionDatas } from "@/mocks/handlers/dashboard/ConjestionDatas";
 import CongestionChart from "@/pages/dashboardPage/views/CongestionChart";
+import { useCongestionApi } from "@/hooks/api/useDashboardApi";
 
 export default function DashBoardCongestion() {
   const today = new Date().getDay(); // 0(일) - 6(토)
   const [selectedDay, setSelectedDay] = useState(Days[today - 1]); // default: 오늘 요일이 기본으로 보임.
+  const { data } = useCongestionApi();
+  const dayData = data?.[selectedDay] ?? [];
 
   return (
     <div className="flex flex-col">
@@ -30,7 +32,7 @@ export default function DashBoardCongestion() {
 
         {/* 혼잡도 그래프 */}
         <div className="absolute bottom-6 w-[612px] h-[394px] bg-gray01 rounded-[40px] flex justify-center">
-          <CongestionChart dayData={CongestionDatas[selectedDay]} />
+          <CongestionChart dayData={dayData} />
         </div>
       </div>
     </div>
