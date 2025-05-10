@@ -11,7 +11,7 @@ import {
   Cell,
 } from "recharts";
 
-interface Props {
+type Props = {
   data: ReservationChartResponse[];
 }
 
