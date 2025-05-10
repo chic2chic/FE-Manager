@@ -1,3 +1,4 @@
+import { DayOfWeek } from "@/types/CongestionType";
 import { ItemType } from "../ItemType";
 
 export type ApiResponse<T> = Promise<GlobalResponse<T>>;
@@ -44,3 +45,12 @@ export type GetAvgPurchaseResponse = {
 export type EntrantsResponse = {
   enteredCount: number;
 };
+
+export type GetCongestionTimeValue = {
+  time: number;
+  value: number;
+};
+
+export type GetCongestionResponse = Partial<
+  Record<DayOfWeek, GetCongestionTimeValue[]>
+>;
