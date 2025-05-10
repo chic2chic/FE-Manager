@@ -2,14 +2,27 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { NavigationItems } from "@/constants/NavigationItems";
 import logoImage from "@/assets/webps/common/logo-manager.webp";
 import alarmImage from "@/assets/webps/common/alarm.webp";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import NoticeModal from "@/components/noticeModal/NoticeModal";
 import { useAuth } from "@/hooks/useAuth";
+import { useStockNotificationListApi } from "@/hooks/api/useStockNotificationListApi";
 
 export default function NavBar() {
   const { isLogin, logout } = useAuth();
   const navigate = useNavigate();
   const [isNoticeModalOpen, setIsNoticeModalOpen] = useState(false);
+  const [hasNewNotification, setHasNewNotification] = useState(false);
+  const previousLength = useRef(0);
+
+  const { notifications = [] } = useStockNotificationListApi();
+
+  useEffect(() => {
+    if (notifications.length > previousLength.current) {
+      setHasNewNotification(true);
+    }
+
+    previousLength.current = notifications.length;
+  }, [notifications]);
 
   return (
     <div className="fixed z-100 top-0 w-screen flex h-[80px] items-center justify-between px-10 border-b border-gray04 bg-gray01">
@@ -40,9 +53,15 @@ export default function NavBar() {
         <div className="relative">
           <div
             className={`${isNoticeModalOpen ? "bg-gray03" : "hover:bg-gray03"} transition rounded-[8px] w-9 h-9 flex justify-center items-center cursor-pointer`}
-            onClick={() => setIsNoticeModalOpen(true)}
+            onClick={() => {
+              setIsNoticeModalOpen(true);
+              setHasNewNotification(false);
+            }}
           >
             <img src={alarmImage} width={24} height={24} />
+            {hasNewNotification && (
+              <span className="absolute top-[2px] right-[2px] w-[8px] h-[8px] bg-main07 rounded-full" />
+            )}
           </div>
           {isNoticeModalOpen && (
             <NoticeModal onClose={() => setIsNoticeModalOpen(false)} />
