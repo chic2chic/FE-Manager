@@ -9,6 +9,7 @@ import {
   ReservationsHandlers,
 } from "./handlers/dashboard/ReservationDatas";
 import { ItemListHandlers } from "./handlers/itemList/ItemList.handlers";
+import { StockNotificationListHandlers } from "@/mocks/handlers/noticeModal/StockNotificationList.handlers";
 
 export const handlers = [
   ...AuthHandlers,
@@ -19,6 +20,7 @@ export const handlers = [
   ...DashboardHandlers,
   ...EntrantsHandlers,
   ...ReservationsHandlers,
+  ...StockNotificationListHandlers,
 ];
 
 export const worker = setupWorker(...handlers);

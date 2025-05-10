@@ -15,7 +15,7 @@ import check from "@/assets/webps/common/check.webp";
 import { usePopUpListReadApi } from "@/hooks/api/usePopUpListReadApi";
 
 export default function PopUpListPage() {
-  const { cards, isLoading, error } = usePopUpListReadApi();
+  const { cards } = usePopUpListReadApi();
   const navigate = useNavigate();
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
   const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
@@ -44,9 +44,6 @@ export default function PopUpListPage() {
     setIsAlertModalOpen(false);
     setPendingDeleteId(null);
   };
-
-  if (isLoading) return <div>로딩 중...</div>;
-  if (error) return <div>에러가 발생하였습니다.</div>;
 
   return (
     <div className="bg-gray03 min-h-screen pb-20">
@@ -109,7 +106,7 @@ export default function PopUpListPage() {
                 ))
               ) : (
                 <div className="flex flex-col items-center justify-center">
-                  <p className="mt-18 text-[32px] text-gray10">
+                  <p className="mt-18 text-[32px] text-gray10 font-medium">
                     등록된 팝업이 없습니다.
                   </p>
                   <p className="mt-4 text-[20px] text-gray10">
