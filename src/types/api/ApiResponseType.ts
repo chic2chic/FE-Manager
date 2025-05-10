@@ -40,3 +40,7 @@ export type GetAvgPurchaseResponse = {
   totalPrice: number;
   todayPrice: number;
 };
+
+export type EntrantsResponse = {
+  enteredCount: number;
+};

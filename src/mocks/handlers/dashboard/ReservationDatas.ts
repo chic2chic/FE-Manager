@@ -1,7 +1,6 @@
-import {
-  ReservationChartType,
-  TodayReservationType,
-} from "@/types/ReservationType";
+import { EntrantsResponse } from "@/types/api/ApiResponseType";
+import { ReservationChartType } from "@/types/ReservationType";
+import { http, HttpResponse } from "msw";
 
 export const ReservationChartDatas: ReservationChartType[] = [
   { day: "월", value: 220 },
@@ -13,7 +12,20 @@ export const ReservationChartDatas: ReservationChartType[] = [
   { day: "일", value: 310 },
 ];
 
-export const TodayReservationDatas: TodayReservationType = {
-  reservedCount: 240,
+export const TodayEntrantsDatas: EntrantsResponse = {
   enteredCount: 180,
 };
+
+export const EntrantsHandlers = [
+  http.get("/popups/:popupId/dashboard/entrants", () => {
+    return HttpResponse.json(
+      {
+        success: true,
+        status: 200,
+        data: TodayEntrantsDatas,
+        timestamp: new Date().toISOString(),
+      },
+      { status: 200 },
+    );
+  }),
+];

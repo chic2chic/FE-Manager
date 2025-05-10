@@ -5,6 +5,7 @@ import { DashboardHandlers } from "./handlers/dashboard/CustomerTransactionDatas
 import { PopUpCreateHandlers } from "@/mocks/handlers/popUpCreate/PopUpCreate.handlers";
 import { popUpListReadHandlers } from "@/mocks/handlers/popUpListRead/popUpListRead.handlers";
 import { ItemListHandlers } from "./handlers/itemList/ItemListRead.handlers";
+import { EntrantsHandlers } from "./handlers/dashboard/ReservationDatas";
 
 export const handlers = [
   ...AuthHandlers,
@@ -13,6 +14,7 @@ export const handlers = [
   ...popUpListReadHandlers,
   ...ItemListHandlers,
   ...DashboardHandlers,
+  ...EntrantsHandlers,
 ];
 
 export const worker = setupWorker(...handlers);
