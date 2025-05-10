@@ -4,8 +4,21 @@ import {
   getBestItems,
   getTodayEntrants,
   getTodayReservations,
+  getCongestion,
 } from "@/apis/DashBoardApi";
 import { GetBestItemsRequest } from "@/types/api/ApiRequestType";
+
+export const useCongestionApi = () => {
+  const { data, isError, isLoading } = useQuery({
+    queryKey: ["congestion", "dashboard"],
+    queryFn: async () => {
+      const res = await getCongestion();
+      return res.data;
+    },
+  });
+
+  return { data, isError, isLoading };
+};
 
 export const useAvgPurchaseApi = () => {
   const { data, isError, isLoading } = useQuery({
