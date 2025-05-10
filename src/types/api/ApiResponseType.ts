@@ -44,3 +44,13 @@ export type GetAvgPurchaseResponse = {
 export type EntrantsResponse = {
   enteredCount: number;
 };
+
+export type GetStockNotificationResponse = {
+  notificationId: number;
+  popularity: string;
+  name: string;
+  minStock: number;
+  notifiedAt: string;
+};
+
+export type GetStockNotificationListResponse = GetStockNotificationResponse[];
