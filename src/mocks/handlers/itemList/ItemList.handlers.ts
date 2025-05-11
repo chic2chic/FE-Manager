@@ -155,7 +155,7 @@ function findItemByIdAndSection(itemId: string) {
 
 export const ItemListHandlers = [
   // 아이템 목록 조회 API
-  http.get("/popups/1/items", async () => {
+  http.get("/popups/:popupId/items", async () => {
     return HttpResponse.json(
       {
         success: true,
@@ -168,7 +168,7 @@ export const ItemListHandlers = [
   }),
 
   // 아이템 삭제 API
-  http.delete("/popups/1/items/:itemId", async ({ params }) => {
+  http.delete("/popups/:popupId/items/:itemId", async ({ params }) => {
     const { itemId } = params;
 
     // 아이템 ID로 해당 섹션과 인덱스 찾기
