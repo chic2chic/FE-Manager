@@ -5,6 +5,7 @@ import check from "@/assets/webps/common/check.webp";
 import { useState } from "react";
 import { useItemDeleteApi } from "@/hooks/api/useItemListApi";
 import { useNavigate } from "react-router-dom";
+import { useSelectedItemStore } from "@/stores/useSelectedItemStore";
 
 type Props = {
   displayName: string;
@@ -13,9 +14,10 @@ type Props = {
 
 export default function ItemDisplay({ displayName, items }: Props) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedItem, setSelectedItem] = useState<ItemType | null>(null);
   const [isDeleteConfirmOpen, setIsDeleteConfirmOpen] = useState(false);
   const { deleteItemMutation } = useItemDeleteApi();
+  const { selectedItem, setSelectedItem, resetSelectedItem } =
+    useSelectedItemStore();
   const navigate = useNavigate();
 
   const handleOpenDeleteModal = (item: ItemType) => {
@@ -27,17 +29,15 @@ export default function ItemDisplay({ displayName, items }: Props) {
     if (!selectedItem) {
       return null;
     }
-
     await deleteItemMutation.mutateAsync(selectedItem.itemId);
     setIsModalOpen(false);
     setIsDeleteConfirmOpen(true);
+    resetSelectedItem();
   };
 
   const handlePatchBtn = (item: ItemType) => {
     setSelectedItem(item);
-    navigate(`/items/patch/${item.itemId}`, {
-      state: item,
-    });
+    navigate(`/items/patch/${item.itemId}`);
   };
 
   return (
@@ -48,8 +48,6 @@ export default function ItemDisplay({ displayName, items }: Props) {
         </div>
         <div className="flex-1 h-px bg-gray05" />
       </div>
-
-      {/* 상품 카드 리스트 */}
       <div
         className="grid grid-cols-4 gap-6 gap-y-14 "
         style={{ paddingLeft: "272px", paddingRight: "180px" }}

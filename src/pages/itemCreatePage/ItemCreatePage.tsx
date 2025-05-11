@@ -1,68 +1,76 @@
 import CustomButton from "@/components/common/CustomButton";
 import React, { useEffect, useState } from "react";
-import TestImage from "@/assets/webps/onBoarding/test.png";
+
 import Modal from "@/components/common/Modal";
 import bin from "@/assets/webps/common/bin.webp";
 import check from "@/assets/webps/common/check.webp";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useItemCreate } from "@/hooks/useItemCreate";
 import ItemCreateInputs from "@/pages/itemCreatePage/views/ItemCreateInputs";
 import { usePopUpReadStore } from "@/stores/usePopUpReadStore";
+import { useSelectedItemStore } from "@/stores/useSelectedItemStore";
+import { ValidateAllField } from "@/utils/ValidateAllField";
 
 export default function ItemCreatePage() {
   const popupId = usePopUpReadStore.getState().popupId;
+
   const [itemName, setItemName] = useState<string>("");
   const [itemPrice, setItemPrice] = useState<number>(0);
   const [itemStock, setItemStock] = useState<number>(0);
   const [itemMinStock, setItemMinStock] = useState<number>(0);
   const [itemLocation, setItemLocation] = useState<string>("");
   const [imageFile, setImageFile] = useState<File | null>(null);
+
   const [isAlertModalOpen, setIsAlertModalOpen] = useState<boolean>(false);
   const [isSaveModalOpen, setIsSaveModalOpen] = useState<boolean>(false);
-  const [isPatch, setIsPatch] = useState<boolean>(false);
+
   const navigate = useNavigate();
 
-  const { createItem } = useItemCreate();
-
   const location = useLocation();
-  const item = location.state?.item;
+  const { itemId } = useParams();
+  const isPatchMode = !!itemId;
 
-  useEffect(() => {
-    setIsPatch(isPatch);
-  }, [item]);
+  const { createItem, patchItem } = useItemCreate();
+  const { selectedItem, resetSelectedItem } = useSelectedItemStore();
 
   const handleCancel = () => {
     setIsAlertModalOpen(true);
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
+    if (!imageFile) return alert("이미지를 선택해주세요.");
+    const data = {
+      popupId,
+      name: itemName,
+      price: itemPrice,
+      stock: itemStock,
+      minStock: itemMinStock,
+      location: itemLocation,
+      imageUrl: URL.createObjectURL(imageFile),
+    };
+
+    if (!ValidateAllField(data)) {
+      return null;
+    }
+
+    const response = await createItem({ imageFile, data });
+
+    if (!response) {
+      return null;
+    }
     setIsSaveModalOpen(true);
-    return (
-      popupId &&
-      itemName &&
-      itemPrice &&
-      itemStock &&
-      itemMinStock &&
-      itemLocation &&
-      imageFile
-    );
   };
 
-  const handleSaveConfirmBtn = async () => {
-    if (!imageFile) return alert("이미지를 선택해주세요.");
-    await createItem({
-      imageFile,
-      data: {
-        popupId: popupId,
-        name: itemName,
-        price: itemPrice,
-        stock: itemStock,
-        minStock: itemMinStock,
-        location: itemLocation,
-        imageUrl: import.meta.env.VITE_TEST_IMAGE_URL,
-      },
+  const handlePatch = async () => {
+    await patchItem({
+      itemId: itemId!,
+      minStock: selectedItem?.minStock as number,
     });
-    setIsSaveModalOpen(false);
+    setIsSaveModalOpen(true);
+  };
+
+  const handleConfirmBtn = () => {
+    setIsAlertModalOpen(false);
     navigate("/items");
   };
 
@@ -86,36 +94,28 @@ export default function ItemCreatePage() {
     setItemLocation(e.target.value);
   };
 
+  useEffect(() => {
+    return () => {
+      const currentPath = location.pathname;
+      if (!currentPath.includes("/patch/")) {
+        resetSelectedItem();
+      }
+    };
+  }, []);
+
   return (
     <div className="flex flex-col">
-      <div className="flex gap-[14px] mt-[46px] mr-[80px] justify-end">
-        <CustomButton
-          label="취소"
-          cssOption="bg-gray01 border border-gray05 text-gray09 text-[20px] hover:bg-gray02 transition"
-          onClick={handleCancel}
-        />
-        <CustomButton
-          label="등록"
-          cssOption="bg-gray10 text-gray01 text-[20px] hover:opacity-50"
-          onClick={handleSave}
-        />
-      </div>
-      <div className="absolute left-[50%] mt-40 transform -translate-x-1/2 flex justify-center items-center gap-[53px]">
-        <div className="relative w-[400px] h-[400px]">
-          <img
-            src={imageFile ? URL.createObjectURL(imageFile) : TestImage}
-            alt="상품 이미지"
-            width={400}
-            className="w-full h-full object-cover rounded-[20px]"
+      <div>
+        <div className="flex gap-[14px] mt-[46px] mr-[80px] justify-end">
+          <CustomButton
+            label="취소"
+            cssOption="bg-gray01 border border-gray05 text-gray09 text-[20px] hover:bg-gray02 transition"
+            onClick={handleCancel}
           />
-          <input
-            type="file"
-            accept="image/*"
-            onChange={e => {
-              const file = e.target.files?.[0];
-              if (file) setImageFile(file);
-            }}
-            className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
+          <CustomButton
+            label={isPatchMode ? "수정" : "등록"}
+            cssOption="bg-gray10 text-gray01 text-[20px] hover:opacity-50"
+            onClick={isPatchMode ? handlePatch : handleSave}
           />
         </div>
         <ItemCreateInputs
@@ -129,27 +129,34 @@ export default function ItemCreatePage() {
           handleStock={handleStock}
           handleMinStock={handleMinStock}
           handleLocation={handleLocation}
-          isPatch={isPatch}
+          imageFile={imageFile}
+          handleImageFile={setImageFile}
+          isPatchMode={isPatchMode}
         />
       </div>
       <Modal
         isOpen={isAlertModalOpen}
         setIsOpen={setIsAlertModalOpen}
-        content="상품 등록을 취소하시겠어요?"
+        content={
+          isPatchMode
+            ? "상품 수정을 취소하시겠어요?"
+            : "상품 등록을 취소하시겠어요?"
+        }
         image={bin}
         confirmText="취소하기"
         cancelText="돌아가기"
         onConfirm={() => navigate("/items")}
         onCancel={() => setIsAlertModalOpen(false)}
       />
-
       <Modal
         isOpen={isSaveModalOpen}
         setIsOpen={setIsSaveModalOpen}
-        content="상품이 등록되었습니다"
+        content={
+          isPatchMode ? "상품이 수정되었습니다" : "상품이 등록되었습니다"
+        }
         image={check}
         confirmText="확인"
-        onConfirm={handleSaveConfirmBtn}
+        onConfirm={handleConfirmBtn}
       />
     </div>
   );
