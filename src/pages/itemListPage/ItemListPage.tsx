@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import { useItemListApi } from "@/hooks/api/usePopUpListApi";
 import ItemDisplay from "./views/ItemDisplay";
+import { useItemListApi } from "@/hooks/api/useItemListApi";
 
 export default function ItemListPage() {
   const { data } = useItemListApi();
