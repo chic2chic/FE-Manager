@@ -13,7 +13,7 @@ import {
 
 type Props = {
   data: ReservationChartResponse[];
-}
+};
 
 export default function ReservationByDayChart({ data }: Props) {
   const coloredData = reservationColorMapper(data);
