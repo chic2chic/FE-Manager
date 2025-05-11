@@ -1,5 +1,5 @@
 import CustomTooltip from "@/components/common/CustomTooltip";
-import { ReservationChartDatas } from "@/mocks/handlers/dashboard/ReservationDatas";
+import { ReservationChartResponse } from "@/types/api/ApiResponseType";
 import { reservationColorMapper } from "@/utils/ReservationColorMapper";
 import {
   BarChart,
@@ -11,10 +11,14 @@ import {
   Cell,
 } from "recharts";
 
-export default function ReservationByDayChart() {
-  const coloredData = reservationColorMapper(ReservationChartDatas);
+type Props = {
+  data: ReservationChartResponse[];
+};
+
+export default function ReservationByDayChart({ data }: Props) {
+  const coloredData = reservationColorMapper(data);
   // max값 기준 y축 눈금 100 단위로 만들기
-  const maxValue = Math.max(...ReservationChartDatas.map(d => d.value)); // value 중 가장 큰 수
+  const maxValue = Math.max(...data.map(d => d.value)); // value 중 가장 큰 수
   const roundedMax = Math.ceil(maxValue / 100) * 100; // 100 단위 올림
   const ticks = [];
 
