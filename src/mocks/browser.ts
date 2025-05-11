@@ -10,7 +10,6 @@ import {
 import { ItemCreateHandlers } from "./handlers/itemCreate/ItemCreate.handlers";
 import { StockNotificationListHandlers } from "@/mocks/handlers/noticeModal/StockNotificationList.handlers";
 import { ItemListHandlers } from "./handlers/itemList/ItemList.handlers";
-import { ItemCreateHandlers } from "./handlers/itemCreate/ItemCreate.handlers";
 
 export const handlers = [
   ...AuthHandlers,
