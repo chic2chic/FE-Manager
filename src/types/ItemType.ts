@@ -3,8 +3,9 @@ export type ItemType = {
   name: string;
   price: number;
   stock: number;
-  location: number;
+  location: string;
   imageUrl: string;
+  minStock: number;
 };
 
 export type BestItemType = {

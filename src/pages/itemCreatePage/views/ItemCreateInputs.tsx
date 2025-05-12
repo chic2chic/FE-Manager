@@ -1,5 +1,7 @@
 import CustomInput from "@/components/common/CustomInput";
+import { useSelectedItemStore } from "@/stores/useSelectedItemStore";
 import React from "react";
+import TestImage from "@/assets/webps/onBoarding/test.png";
 
 type Props = {
   name: string;
@@ -12,6 +14,9 @@ type Props = {
   handleStock: (_e: React.ChangeEvent<HTMLInputElement>) => void;
   handleMinStock: (_e: React.ChangeEvent<HTMLInputElement>) => void;
   handleLocation: (_e: React.ChangeEvent<HTMLInputElement>) => void;
+  imageFile: File | null;
+  handleImageFile: (_file: File) => void;
+  isPatchMode: boolean;
 };
 
 export default function ItemCreateInputs({
@@ -25,41 +30,79 @@ export default function ItemCreateInputs({
   handleStock,
   handleMinStock,
   handleLocation,
+  imageFile,
+  handleImageFile,
+  isPatchMode,
 }: Props) {
+  const { selectedItem, updateField } = useSelectedItemStore();
+
+  const handlePatchMinStock = (e: React.ChangeEvent<HTMLInputElement>) => {
+    updateField("minStock", Number(e.target.value));
+  };
+
   return (
-    <div className="flex flex-col gap-[30px]">
-      <CustomInput
-        value={name}
-        title="상품명"
-        placeholder="상품명을 입력해주세요"
-        onChange={handleName}
-      />
-      <CustomInput
-        value={price}
-        isOnlyNumber={true}
-        title="가격"
-        placeholder="가격을 입력해주세요"
-        onChange={handlePrice}
-      />
-      <CustomInput
-        value={stock}
-        isOnlyNumber={true}
-        title="수량"
-        placeholder="상품 수량을 입력해주세요"
-        onChange={handleStock}
-      />
-      <CustomInput
-        value={minStock}
-        title="발주 기준 수량"
-        placeholder="상품 발주 기준 수량을 입력해주세요"
-        onChange={handleMinStock}
-      />
-      <CustomInput
-        value={location}
-        title="로케이션"
-        placeholder="상품 로케이션을 입력해주세요"
-        onChange={handleLocation}
-      />
+    <div className="absolute left-[50%] mt-40 transform -translate-x-1/2 flex justify-center items-center gap-[53px]">
+      <div className="relative w-[400px] h-[400px]">
+        {/* 이미지 */}
+        <img
+          src={imageFile ? URL.createObjectURL(imageFile) : TestImage}
+          alt="상품 이미지"
+          width={400}
+          className="w-full h-full object-cover rounded-[20px]"
+        />
+        {!isPatchMode && (
+          <input
+            type="file"
+            accept="image/*"
+            onChange={e => {
+              const file = e.target.files?.[0];
+              if (file) handleImageFile(file);
+            }}
+            className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
+          />
+        )}
+        {isPatchMode && (
+          <div className="absolute inset-0 rounded-[20px] bg-gray10/30 flex items-center justify-center" />
+        )}
+      </div>
+      <div className="flex flex-col gap-[30px]">
+        <CustomInput
+          value={isPatchMode && selectedItem ? selectedItem.name : name}
+          title="상품명"
+          placeholder="상품명을 입력해주세요"
+          onChange={handleName}
+          isPatchMode={isPatchMode}
+        />
+        <CustomInput
+          value={isPatchMode && selectedItem ? selectedItem.price : price}
+          isOnlyNumber={true}
+          title="가격"
+          placeholder="가격을 입력해주세요"
+          onChange={handlePrice}
+          isPatchMode={isPatchMode}
+        />
+        <CustomInput
+          value={isPatchMode && selectedItem ? selectedItem.stock : stock}
+          isOnlyNumber={true}
+          title="수량"
+          placeholder="상품 수량을 입력해주세요"
+          onChange={handleStock}
+          isPatchMode={isPatchMode}
+        />
+        <CustomInput
+          value={isPatchMode && selectedItem ? selectedItem.minStock : minStock}
+          title="발주 기준 수량"
+          placeholder="상품 발주 기준 수량을 입력해주세요"
+          onChange={isPatchMode ? handlePatchMinStock : handleMinStock}
+        />
+        <CustomInput
+          value={isPatchMode && selectedItem ? selectedItem.location : location}
+          title="로케이션"
+          placeholder="상품 로케이션을 입력해주세요"
+          onChange={handleLocation}
+          isPatchMode={isPatchMode}
+        />
+      </div>
     </div>
   );
 }

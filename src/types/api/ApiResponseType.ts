@@ -64,3 +64,14 @@ export type GetStockNotificationResponse = {
 };
 
 export type GetStockNotificationListResponse = GetStockNotificationResponse[];
+
+export type PatchItemResponse = {
+  itemId: string;
+  popupId: string;
+  name: string;
+  imageUrl: string;
+  price: number;
+  stock: number;
+  minStock: number;
+  location: string;
+};

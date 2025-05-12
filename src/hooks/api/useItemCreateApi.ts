@@ -1,5 +1,5 @@
 import { postCreatePresignedUrl, putImageToS3 } from "@/apis/image/ImageApi";
-import { postItemCreate } from "@/apis/ItemCreateApi";
+import { patchItem, postItemCreate } from "@/apis/ItemCreateApi";
 import { ErrorMessage } from "@/utils/ErrorMessage";
 import { useMutation } from "@tanstack/react-query";
 
@@ -25,9 +25,17 @@ export const useItemCreateApi = () => {
     },
   });
 
+  const patchItemMutation = useMutation({
+    mutationFn: patchItem,
+    onError: error => {
+      throw new Error(`아이템 패치 에러 : ${ErrorMessage(error)}`);
+    },
+  });
+
   return {
     getItemPresignedUrlMutation,
     uploadItemImgToS3Mutation,
     itemCreateMutation,
+    patchItemMutation,
   };
 };

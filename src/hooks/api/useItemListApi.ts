@@ -29,5 +29,6 @@ export const useItemDeleteApi = () => {
       throw new Error(`아이템 삭제 에러 : ${ErrorMessage(error)}`);
     },
   });
+
   return { deleteItemMutation };
 };

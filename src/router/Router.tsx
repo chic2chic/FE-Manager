@@ -1,7 +1,7 @@
 import GlobalLayout from "@/components/layouts/GlobalLayout";
 import ProtectLayout from "@/components/layouts/ProtectLayout";
 import DashBoardPage from "@/pages/dashboardPage/DashBoardPage";
-import ItemAddPage from "@/pages/itemCreatePage/ItemCreatePage";
+import ItemCreatePage from "@/pages/itemCreatePage/ItemCreatePage";
 import ItemListPage from "@/pages/itemListPage/ItemListPage";
 import OnBoradingPage from "@/pages/onBoardingPage/OnBoardingPage";
 import PopUpCreatePage from "@/pages/popUpCreatePage/PopUpCreatePage";
@@ -24,11 +24,15 @@ export const Router = createBrowserRouter([
           },
           {
             path: "/items/create",
-            element: <ItemAddPage />,
+            element: <ItemCreatePage />,
           },
           {
             path: "/items",
             element: <ItemListPage />,
+          },
+          {
+            path: "/items/patch/:itemId",
+            element: <ItemCreatePage />,
           },
           {
             path: "/popup-create",

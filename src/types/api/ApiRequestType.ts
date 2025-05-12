@@ -48,3 +48,8 @@ export type PopUpWithChoicesRequest = {
   popupCreateRequest: PopUpCreateRequest;
   choiceCreateRequestList: ChoiceCreateRequest[];
 };
+
+export type PatchItemRequest = {
+  itemId: string;
+  minStock: number;
+};
