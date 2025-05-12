@@ -1,19 +1,19 @@
 import { useState, useRef, useEffect } from "react";
 import optionBar from "@/assets/webps/common/option-bar.webp";
 
-interface DropdownFilterProps {
-  value: string;
-  options: readonly string[];
-  onChange: (_value: string) => void;
+interface DropdownFilterProps<T extends string | number> {
+  value: T;
+  options: readonly T[];
+  onChange: (_value: T) => void;
   buttonGap?: string;
 }
 
-export function DropdownFilter({
+export function DropdownFilter<T extends string | number>({
   value,
   options,
   onChange,
   buttonGap,
-}: DropdownFilterProps) {
+}: DropdownFilterProps<T>) {
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 

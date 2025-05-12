@@ -11,6 +11,7 @@ import { ItemCreateHandlers } from "./handlers/itemCreate/ItemCreate.handlers";
 import { StockNotificationListHandlers } from "@/mocks/handlers/noticeModal/StockNotificationList.handlers";
 import { ItemListHandlers } from "./handlers/itemList/ItemList.handlers";
 import { LogoutHandlers } from "./Logout.handlers";
+import { BestItemsHandlers } from "./handlers/dashboard/BestItems";
 
 export const handlers = [
   ...AuthHandlers,
@@ -23,6 +24,7 @@ export const handlers = [
   ...ReservationsHandlers,
   ...StockNotificationListHandlers,
   ...LogoutHandlers,
+  ...BestItemsHandlers,
 ];
 
 export const worker = setupWorker(...handlers);
