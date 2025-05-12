@@ -13,6 +13,7 @@ import { ItemListHandlers } from "./handlers/itemList/ItemList.handlers";
 import { LogoutHandlers } from "./Logout.handlers";
 import { BestItemsHandlers } from "./handlers/dashboard/BestItems";
 import { CongestionReadHandlers } from "@/mocks/handlers/dashboard/CongestionRead.handlers";
+import { ItemCreateHandlers } from "./handlers/itemCreate/ItemCreate.handlers";
 
 export const handlers = [
   ...AuthHandlers,
