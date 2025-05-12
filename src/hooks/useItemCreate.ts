@@ -12,10 +12,11 @@ export const useItemCreate = () => {
     uploadItemImgToS3Mutation,
     itemCreateMutation,
     patchItemMutation,
+    onProgress,
+    postItemAddExcelMutation,
   } = useItemCreateApi();
 
   const uploadImage = async (imageFile: File): Promise<string> => {
-    // 이미지 확장자 추출
     const imageFileExtension = imageFile.name
       .split(".")
       .pop()
@@ -46,7 +47,6 @@ export const useItemCreate = () => {
   }) => {
     try {
       const imageUrl = await uploadImage(imageFile);
-
       const itemForm: ItemCreateRequest = {
         ...data,
         imageUrl,
@@ -72,5 +72,13 @@ export const useItemCreate = () => {
     }
   };
 
-  return { createItem, patchItem };
+  const createItemExcel = async (excelFile: File) => {
+    try {
+      const response = await postItemAddExcelMutation.mutateAsync(excelFile);
+      return response.status;
+    } catch (error) {
+      throw new Error(`엑셀 등록 오류: ${ErrorMessage(error)}`);
+    }
+  };
+  return { createItem, patchItem, createItemExcel, onProgress };
 };

@@ -53,3 +53,8 @@ export type PatchItemRequest = {
   itemId: string;
   minStock: number;
 };
+
+export type ItemAddExcelRequest = {
+  excelFile: File;
+  onProgress?: (_percentage: number) => void;
+};
