@@ -61,4 +61,15 @@ export const popUpListReadHandlers = [
       { status: 200 },
     );
   }),
+  http.delete("/popups/:popupId", () => {
+    return HttpResponse.json(
+      {
+        success: true,
+        status: 200,
+        data: null,
+        timestamp: new Date().toISOString(),
+      },
+      { status: 200 },
+    );
+  }),
 ];
