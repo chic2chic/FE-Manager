@@ -10,6 +10,7 @@ import {
 import { ItemCreateHandlers } from "./handlers/itemCreate/ItemCreate.handlers";
 import { StockNotificationListHandlers } from "@/mocks/handlers/noticeModal/StockNotificationList.handlers";
 import { ItemListHandlers } from "./handlers/itemList/ItemList.handlers";
+import { LogoutHandlers } from "./Logout.handlers";
 
 export const handlers = [
   ...AuthHandlers,
@@ -21,6 +22,7 @@ export const handlers = [
   ...EntrantsHandlers,
   ...ReservationsHandlers,
   ...StockNotificationListHandlers,
+  ...LogoutHandlers,
 ];
 
 export const worker = setupWorker(...handlers);

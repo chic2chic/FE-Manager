@@ -5,20 +5,24 @@ import { useAuthApi } from "@/hooks/api/useAuthApi";
 
 export const useAuth = () => {
   const { isLogin, setLogin, setLogout } = useAuthStore();
-  const mutate = useAuthApi();
+  const { postLoginMutation, postLogoutMutation } = useAuthApi();
 
   const login = async ({ username, password }: LoginRequest) => {
     try {
-      const response = await mutate.mutateAsync({ username, password });
+      const response = await postLoginMutation.mutateAsync({
+        username,
+        password,
+      });
       setLogin(response.data.accessToken);
     } catch (error) {
       throw new Error(`로그인 오류 ${ErrorMessage(error)}`);
     }
   };
 
-  const logout = () => {
-    setLogout();
+  const logout = async () => {
+    const response = await postLogoutMutation.mutateAsync();
+    if (response.status === 200) setLogout();
   };
 
-  return { isLogin, login, logout, error: mutate.error };
+  return { isLogin, login, logout };
 };
