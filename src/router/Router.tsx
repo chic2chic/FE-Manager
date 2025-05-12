@@ -31,7 +31,7 @@ export const Router = createBrowserRouter([
             element: <ItemListPage />,
           },
           {
-            path: "/items/patch/:itemId",
+            path: "/items/:itemId/edit",
             element: <ItemCreatePage />,
           },
           {
