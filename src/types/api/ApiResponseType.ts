@@ -75,3 +75,11 @@ export type PatchItemResponse = {
   minStock: number;
   location: string;
 };
+
+export type GetBestItemsResponse = {
+  itemId: number;
+  title: string;
+  imagePath: string;
+  price: number;
+  stock: number;
+}[];

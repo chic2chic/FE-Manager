@@ -1,9 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import {
   getAvgPurchase,
+  getBestItems,
   getTodayEntrants,
   getTodayReservations,
 } from "@/apis/DashBoardApi";
+import { GetBestItemsRequest } from "@/types/api/ApiRequestType";
 
 export const useAvgPurchaseApi = () => {
   const { data, isError, isLoading } = useQuery({
@@ -34,6 +36,18 @@ export const useTodayReservationsApi = () => {
     queryKey: ["todayReservation", "dashboard"],
     queryFn: async () => {
       const res = await getTodayReservations();
+      return res.data;
+    },
+  });
+
+  return { data, isError, isLoading };
+};
+
+export const useBestItemsApi = (params: GetBestItemsRequest) => {
+  const { data, isError, isLoading } = useQuery({
+    queryKey: ["top3", "dashboard", params],
+    queryFn: async () => {
+      const res = await getBestItems(params);
       return res.data;
     },
   });

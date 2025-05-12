@@ -1,3 +1,5 @@
+import { AgeOptionsType, GenderOptionsType } from "../DashboardType";
+
 export type LoginRequest = {
   username: string;
   password: string;
@@ -57,4 +59,9 @@ export type PatchItemRequest = {
 export type ItemAddExcelRequest = {
   excelFile: File;
   onProgress?: (_percentage: number) => void;
+};
+
+export type GetBestItemsRequest = {
+  gender: GenderOptionsType;
+  age: AgeOptionsType;
 };

@@ -7,10 +7,3 @@ export type ItemType = {
   imageUrl: string;
   minStock: number;
 };
-
-export type BestItemType = {
-  id: number;
-  name: string;
-  price: number;
-  stock: number;
-};
