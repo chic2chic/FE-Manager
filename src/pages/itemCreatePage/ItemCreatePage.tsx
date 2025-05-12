@@ -97,7 +97,7 @@ export default function ItemCreatePage() {
   useEffect(() => {
     return () => {
       const currentPath = location.pathname;
-      if (!currentPath.includes("/patch/")) {
+      if (!currentPath.includes("/edit")) {
         resetSelectedItem();
       }
     };
