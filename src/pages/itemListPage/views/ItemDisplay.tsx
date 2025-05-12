@@ -37,7 +37,7 @@ export default function ItemDisplay({ displayName, items }: Props) {
 
   const handlePatchBtn = (item: ItemType) => {
     setSelectedItem(item);
-    navigate(`/items/patch/${item.itemId}`);
+    navigate(`/items/${item.itemId}/edit`);
   };
 
   return (

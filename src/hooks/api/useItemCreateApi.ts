@@ -1,9 +1,13 @@
 import { postCreatePresignedUrl, putImageToS3 } from "@/apis/image/ImageApi";
 import { patchItem, postItemCreate } from "@/apis/ItemCreateApi";
+import { postItemAddExcel } from "@/apis/ItemListApi";
 import { ErrorMessage } from "@/utils/ErrorMessage";
 import { useMutation } from "@tanstack/react-query";
+import { useState } from "react";
 
 export const useItemCreateApi = () => {
+  const [onProgress, setOnProgress] = useState<number>(0);
+
   const getItemPresignedUrlMutation = useMutation({
     mutationFn: postCreatePresignedUrl,
     onError: error => {
@@ -32,10 +36,33 @@ export const useItemCreateApi = () => {
     },
   });
 
+  const postItemAddExcelMutation = useMutation({
+    mutationFn: (excelFile: File) =>
+      postItemAddExcel({
+        excelFile,
+        onProgress: percentage => {
+          setOnProgress(percentage);
+        },
+      }),
+    onSuccess: () => {
+      setOnProgress(100);
+    },
+    onError: error => {
+      setOnProgress(0);
+      throw new Error(`엑셀 업로드 오류 : ${ErrorMessage(error)}`);
+    },
+  });
+
   return {
     getItemPresignedUrlMutation,
     uploadItemImgToS3Mutation,
     itemCreateMutation,
     patchItemMutation,
+    postItemAddExcelMutation,
+    resetProgressState: () => {
+      setOnProgress(0);
+      postItemAddExcelMutation.reset();
+    },
+    onProgress,
   };
 };

@@ -1,8 +1,7 @@
 import TestImage from "@/assets/webps/onBoarding/test.png";
 import { ItemListType } from "@/types/api/ApiResponseType";
-import { http, HttpResponse } from "msw";
+import { delay, http, HttpResponse } from "msw";
 
-// 섹션별 아이템 데이터를 전역 객체로 관리
 const itemsDatabase: ItemListType = {
   A: [
     {
@@ -158,7 +157,6 @@ const itemsDatabase: ItemListType = {
   ],
 };
 
-// 아이템 ID로 해당 아이템이 있는 섹션과 인덱스를 찾는 함수
 function findItemByIdAndSection(itemId: string) {
   for (const [section, items] of Object.entries(itemsDatabase)) {
     const itemIndex = items.findIndex(item => item.itemId === itemId);
@@ -170,27 +168,23 @@ function findItemByIdAndSection(itemId: string) {
 }
 
 export const ItemListHandlers = [
-  // 아이템 목록 조회 API
   http.get("/popups/:popupId/items", async () => {
     return HttpResponse.json(
       {
         success: true,
         status: 200,
-        data: itemsDatabase, // 현재 데이터베이스 상태를 그대로 반환
+        data: itemsDatabase,
         timestamp: new Date().toISOString(),
       },
       { status: 200 },
     );
   }),
 
-  // 아이템 삭제 API
   http.delete("/popups/:popupId/items/:itemId", async ({ params }) => {
     const { itemId } = params;
 
-    // 아이템 ID로 해당 섹션과 인덱스 찾기
     const { section, itemIndex } = findItemByIdAndSection(String(itemId));
 
-    // 아이템이 존재하면 삭제
     if (section && itemIndex !== -1) {
       itemsDatabase[section].splice(itemIndex, 1);
       console.log(`아이템 "${itemId}" 삭제됨. (섹션: ${section})`);
@@ -207,5 +201,31 @@ export const ItemListHandlers = [
       },
       { status: 200 },
     );
+  }),
+
+  http.post("/popups/:popupId/items/excel", async ({ request }) => {
+    const formData = await request.formData();
+    const file = formData.get("form-data");
+
+    if (!file) {
+      return HttpResponse.json(
+        {
+          success: false,
+          status: 400,
+          data: null,
+          timestamp: new Date().toISOString(),
+        },
+        { status: 400 },
+      );
+    }
+
+    await delay(3000);
+
+    return HttpResponse.json({
+      success: true,
+      status: 201,
+      data: null,
+      timestamp: new Date().toISOString(),
+    });
   }),
 ];
