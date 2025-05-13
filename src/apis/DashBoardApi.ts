@@ -9,9 +9,8 @@ import {
   GetConversionResponse,
   VisitorStatsResponse,
 } from "@/types/api/ApiResponseType";
-import { api } from "./config/Axios";
-import { usePopUpReadStore } from "@/stores/usePopUpReadStore";
 import { GetBestItemsRequest } from "@/types/api/ApiRequestType";
+import { apiPopUp } from "./config/PopUpApi";
 
 export const getCongestion = async (): ApiResponse<GetCongestionResponse> => {
   const popupId = usePopUpReadStore.getState().popupId;
@@ -20,16 +19,12 @@ export const getCongestion = async (): ApiResponse<GetCongestionResponse> => {
 };
 
 export const getAvgPurchase = async (): ApiResponse<GetAvgPurchaseResponse> => {
-  const popupId = usePopUpReadStore.getState().popupId;
-  const response = await api.get(
-    `/popups/${popupId}/dashboard/average-purchase`,
-  );
+  const response = await apiPopUp.get(`/dashboard/average-purchase`);
   return response.data;
 };
 
 export const getTodayEntrants = async (): ApiResponse<EntrantsResponse> => {
-  const popupId = usePopUpReadStore.getState().popupId;
-  const response = await api.get(`/popups/${popupId}/dashboard/entrants`);
+  const response = await apiPopUp.get(`/dashboard/entrants`);
   return response.data;
 };
 
@@ -42,8 +37,7 @@ export const getQuestionnaire =
 
 export const getTodayReservations =
   async (): ApiResponse<ReservationsResponse> => {
-    const popupId = usePopUpReadStore.getState().popupId;
-    const res = await api.get(`/popups/${popupId}/dashboard/reservations`);
+    const res = await apiPopUp.get(`/dashboard/reservations`);
     return res.data;
   };
 
@@ -51,9 +45,8 @@ export const getBestItems = async ({
   gender,
   age,
 }: GetBestItemsRequest): ApiResponse<GetBestItemsResponse> => {
-  const popupId = usePopUpReadStore.getState().popupId;
-  const response = await api.get(
-    `/popups/${popupId}/items/trending?gender=${gender}&age=${age}`,
+  const response = await apiPopUp.get(
+    `/items/trending?gender=${gender}&age=${age}`,
   );
   return response.data;
 };
