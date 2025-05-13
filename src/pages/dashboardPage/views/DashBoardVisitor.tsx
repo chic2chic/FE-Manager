@@ -1,5 +1,6 @@
 import DashBoardTitle from "@/pages/dashboardPage/views/DashBoardTitle";
 import { mapGenderData, mapAgeData } from "@/utils/VisitorColorMapper";
+
 import VisitorPieChart, {
   SegmentDatum,
 } from "@/pages/dashboardPage/views/VisitorPieChart";
@@ -10,7 +11,7 @@ export default function DashBoardVisitor() {
 
   if (isLoading) return <p>로딩 중...</p>;
   if (isError) return <p>에러 발생</p>;
-  
+
   const genderData: SegmentDatum[] = mapGenderData(gender);
   const ageData: SegmentDatum[] = mapAgeData(age);
 

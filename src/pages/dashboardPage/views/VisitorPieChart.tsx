@@ -6,6 +6,7 @@ export type SegmentDatum = {
   name: string;
   count: number;
   rawFill: string;
+  ratio: number; // ✅ 퍼센트 추가
 };
 
 type TooltipPayloadItem = {
