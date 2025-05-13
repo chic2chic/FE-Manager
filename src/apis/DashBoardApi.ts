@@ -29,8 +29,7 @@ export const getTodayEntrants = async (): ApiResponse<EntrantsResponse> => {
 
 export const getQuestionnaire =
   async (): ApiResponse<QuestionnaireListResponse> => {
-    const popupId = usePopUpReadStore.getState().popupId;
-    const response = await api.get(`/popups/${popupId}/dashboard/surveys`);
+    const response = await apiPopUp.get(`/dashboard/surveys`);
     return response.data;
   };
 
@@ -51,15 +50,11 @@ export const getBestItems = async ({
 };
 
 export const getConversion = async (): ApiResponse<GetConversionResponse> => {
-  const popupId = usePopUpReadStore.getState().popupId;
-  const response = await api.get(
-    `/popups/${popupId}/dashboard/conversion-ratio`,
-  );
+  const response = await apiPopUp.get(`/dashboard/conversion-ratio`);
   return response.data;
 };
 
 export const getVisitorStats = async (): ApiResponse<VisitorStatsResponse> => {
-  const popupId = usePopUpReadStore.getState().popupId;
-  const response = await api.get(`/popups/${popupId}/dashboard/visitors`);
+  const response = await apiPopUp.get(`/dashboard/visitors`);
   return response.data;
 };

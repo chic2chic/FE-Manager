@@ -1,27 +1,27 @@
 import { setupWorker } from "msw/browser";
 import { AuthHandlers } from "@/mocks/handlers/onBoarding/Auth.handlers";
-import { DashboardHandlers } from "./handlers/dashboard/CustomerTransactionDatas";
 import { PopUpCreateHandlers } from "@/mocks/handlers/popUpCreate/PopUpCreate.handlers";
-import {
-  EntrantsHandlers,
-  ReservationsHandlers,
-} from "./handlers/dashboard/ReservationDatas";
 import { ItemCreateHandlers } from "./handlers/itemCreate/ItemCreate.handlers";
 import { StockNotificationListHandlers } from "@/mocks/handlers/noticeModal/StockNotificationList.handlers";
 import { ItemListHandlers } from "./handlers/itemList/ItemList.handlers";
 import { LogoutHandlers } from "./Logout.handlers";
-import { BestItemsHandlers } from "./handlers/dashboard/BestItems";
 import { CongestionReadHandlers } from "@/mocks/handlers/dashboard/CongestionRead.handlers";
-import { QuestionnaireHandlers } from "./handlers/dashboard/Questionnaire";
 import { ConversionReadHandlers } from "@/mocks/handlers/dashboard/ConversionRead.handlers";
-import { VisitorStatsHandlers } from "./handlers/dashboard/VisitorDatas";
-import { popUpListReadHandlers } from "./handlers/popUpListRead/PopUpListRead.handlers";
+import { DashboardHandlers } from "./handlers/dashboard/CustomerTransactionDatas.handlers";
+import {
+  EntrantsHandlers,
+  ReservationsHandlers,
+} from "./handlers/dashboard/ReservationDatas.handlers";
+import { BestItemsHandlers } from "./handlers/dashboard/BestItems.handlers";
+import { QuestionnaireHandlers } from "./handlers/dashboard/Questionnaire.handlers";
+import { VisitorStatsHandlers } from "./handlers/dashboard/VisitorDatas.handlers";
+import { PopUpListReadHandlers } from "./handlers/popUpListRead/PopUpListRead.handlers";
 
 export const handlers = [
   ...AuthHandlers,
   ...ItemCreateHandlers,
   ...PopUpCreateHandlers,
-  ...popUpListReadHandlers,
+  ...PopUpListReadHandlers,
   ...ItemListHandlers,
   ...DashboardHandlers,
   ...EntrantsHandlers,
