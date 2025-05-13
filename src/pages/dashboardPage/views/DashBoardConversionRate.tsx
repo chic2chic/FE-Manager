@@ -1,4 +1,8 @@
 import { useConversionApi } from "@/hooks/api/useDashboardApi";
+import {
+  LowConversionDatas,
+  TopConversionDatas,
+} from "@/mocks/handlers/dashboard/ConversionRateDatas.handlers";
 import { ConversionRateChart } from "@/pages/dashboardPage/views/ConversionRateChart";
 import DashBoardTitle from "@/pages/dashboardPage/views/DashBoardTitle";
 

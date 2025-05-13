@@ -1,9 +1,12 @@
 import DashBoardTitle from "@/pages/dashboardPage/views/DashBoardTitle";
 import { mapGenderData, mapAgeData } from "@/utils/VisitorColorMapper";
-
 import VisitorPieChart, {
   SegmentDatum,
 } from "@/pages/dashboardPage/views/VisitorPieChart";
+import {
+  VisitorAgeData,
+  VisitorGenderData,
+} from "@/mocks/handlers/dashboard/VisitorDatas.handlers";
 import { useVisitorStatsApi } from "@/hooks/api/useDashboardApi";
 
 export default function DashBoardVisitor() {

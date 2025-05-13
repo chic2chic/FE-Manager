@@ -13,8 +13,7 @@ import { GetBestItemsRequest } from "@/types/api/ApiRequestType";
 import { apiPopUp } from "./config/PopUpApi";
 
 export const getCongestion = async (): ApiResponse<GetCongestionResponse> => {
-  const popupId = usePopUpReadStore.getState().popupId;
-  const response = await api.get(`/popups/${popupId}/dashboard/congestion`);
+  const response = await apiPopUp.get(`/dashboard/congestion`);
   return response.data;
 };
 
