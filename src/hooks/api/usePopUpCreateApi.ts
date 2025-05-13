@@ -7,6 +7,7 @@ export const usePopUpCreateApi = () => {
   const queryClient = useQueryClient();
   const getPresignedUrlMutation = useMutation({
     mutationFn: postCreatePresignedUrl,
+    throwOnError: true,
     onError: error => {
       throw new Error(`PresignedUrl 발급 에러 : ${ErrorMessage(error)}`);
     },
@@ -14,6 +15,7 @@ export const usePopUpCreateApi = () => {
 
   const putImgToS3Mutation = useMutation({
     mutationFn: putImageToS3,
+    throwOnError: true,
     onError: error => {
       throw new Error(`이미지 S3 업로드 에러 : ${ErrorMessage(error)}`);
     },
@@ -24,6 +26,7 @@ export const usePopUpCreateApi = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["popUpList"] });
     },
+    throwOnError: true,
     onError: error => {
       throw new Error(`팝업 등록 에러 : ${ErrorMessage(error)}`);
     },

@@ -60,7 +60,7 @@ export default function NavBar() {
           >
             <img src={alarmImage} width={24} height={24} />
             {hasNewNotification && (
-              <span className="absolute top-[2px] right-[2px] w-[8px] h-[8px] bg-main07 rounded-full" />
+              <span className="absolute top-[3px] right-[3px] w-[7px] h-[7px] bg-main07 rounded-full" />
             )}
           </div>
           {isNoticeModalOpen && (

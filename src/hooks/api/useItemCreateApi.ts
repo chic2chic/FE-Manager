@@ -11,6 +11,7 @@ export const useItemCreateApi = () => {
 
   const getItemPresignedUrlMutation = useMutation({
     mutationFn: postCreatePresignedUrl,
+    throwOnError: true,
     onError: error => {
       throw new Error(`PresignedUrl 발급 에러 : ${ErrorMessage(error)}`);
     },
@@ -18,6 +19,7 @@ export const useItemCreateApi = () => {
 
   const uploadItemImgToS3Mutation = useMutation({
     mutationFn: putImageToS3,
+    throwOnError: true,
     onError: error => {
       throw new Error(`이미지 S3 업로드 에러 : ${ErrorMessage(error)}`);
     },
@@ -28,6 +30,7 @@ export const useItemCreateApi = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["itemList"] });
     },
+    throwOnError: true,
     onError: error => {
       throw new Error(`상품 생성 에러 : ${ErrorMessage(error)}`);
     },
@@ -38,6 +41,7 @@ export const useItemCreateApi = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["itemList"] });
     },
+    throwOnError: true,
     onError: error => {
       throw new Error(`아이템 패치 에러 : ${ErrorMessage(error)}`);
     },
@@ -55,6 +59,7 @@ export const useItemCreateApi = () => {
       setOnProgress(100);
       queryClient.invalidateQueries({ queryKey: ["itemList"] });
     },
+    throwOnError: true,
     onError: error => {
       setOnProgress(0);
       throw new Error(`엑셀 업로드 오류 : ${ErrorMessage(error)}`);
