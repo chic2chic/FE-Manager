@@ -13,9 +13,9 @@ export default function GlobalLayout() {
   }
 
   return (
-    <div className="box-border">
+    <div className="box-border min-h-screen flex flex-col">
       {isContainNavBar && <NavBar />}
-      <div className={isContainNavBar ? "mt-[80px]" : ""}>
+      <div className={`flex-grow ${isContainNavBar ? "mt-[80px]" : ""}`}>
         <CustomErrorBoundary>
           <Outlet />
         </CustomErrorBoundary>

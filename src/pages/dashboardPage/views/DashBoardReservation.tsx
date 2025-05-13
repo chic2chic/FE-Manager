@@ -52,7 +52,7 @@ export default function DashBoardReservation() {
             {reservationsData && reservationsData.chart.length > 0 ? (
               <ReservationByDayChart data={reservationsData.chart} />
             ) : (
-              <div>
+              <div className="w-[552px] h-[394px] -translate-x-6 pt-[22px] pb-[30px]">
                 <NoDataCompt />
               </div>
             )}

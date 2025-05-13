@@ -21,6 +21,7 @@ export default function ItemCreatePage() {
   const [itemMinStock, setItemMinStock] = useState<number>(0);
   const [itemLocation, setItemLocation] = useState<string>("");
   const [imageFile, setImageFile] = useState<File | null>(null);
+  const [alertMessage, setAlertMessage] = useState<string>("");
 
   const [isAlertModalOpen, setIsAlertModalOpen] = useState<boolean>(false);
   const [isSaveModalOpen, setIsSaveModalOpen] = useState<boolean>(false);
@@ -51,7 +52,7 @@ export default function ItemCreatePage() {
     };
 
     if (!ValidateAllField(data)) {
-      return null;
+      setAlertMessage("데이터를 모두 입력해주세요");
     }
 
     const response = await createItem({ imageFile, data });
@@ -119,6 +120,7 @@ export default function ItemCreatePage() {
               cssOption="bg-gray10 text-gray01 text-[20px] hover:opacity-50"
               onClick={isPatchMode ? handlePatch : handleSave}
             />
+            {alertMessage}
           </div>
           <ItemCreateInputs
             name={itemName}

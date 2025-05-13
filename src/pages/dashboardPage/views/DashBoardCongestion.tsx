@@ -5,9 +5,10 @@ import DashBoardTitle from "@/pages/dashboardPage/views/DashBoardTitle";
 import CongestionChart from "@/pages/dashboardPage/views/CongestionChart";
 import { useCongestionApi } from "@/hooks/api/useDashboardApi";
 import { DayOfWeek } from "@/types/CongestionType";
+import NoDataCompt from "@/components/common/NoDataComp";
 
 export default function DashBoardCongestion() {
-  const [selectedDay, setSelectedDay] = useState<DayOfWeek | null>(null);
+  const [selectedDay, setSelectedDay] = useState<DayOfWeek>(Days[0]);
   const { data, isLoading } = useCongestionApi();
 
   useEffect(() => {
@@ -16,6 +17,8 @@ export default function DashBoardCongestion() {
       setSelectedDay(Days[today === 0 ? 6 : today - 1]);
     }
   }, [data, selectedDay]);
+
+  const dayData = selectedDay && data ? data[selectedDay] || [] : [];
 
   return (
     <div className="flex flex-col">
@@ -35,15 +38,20 @@ export default function DashBoardCongestion() {
             </button>
           ))}
         </div>
-
+        {data && dayData.length > 0 ? (
+          <div className="absolute bottom-6 w-[612px] h-[394px] bg-gray01 rounded-[40px] flex justify-center">
+            {isLoading || !selectedDay ? (
+              <span className="text-gray06 text-[18px]">로딩 중...</span>
+            ) : (
+              <CongestionChart dayData={data?.[selectedDay] ?? []} />
+            )}
+          </div>
+        ) : (
+          <div className="flex justify-center absolute bottom-6 w-[612px] h-[394px]">
+            <NoDataCompt />
+          </div>
+        )}
         {/* 혼잡도 그래프 */}
-        <div className="absolute bottom-6 w-[612px] h-[394px] bg-gray01 rounded-[40px] flex justify-center">
-          {isLoading || !selectedDay ? (
-            <span className="text-gray06 text-[18px]">로딩 중...</span>
-          ) : (
-            <CongestionChart dayData={data?.[selectedDay] ?? []} />
-          )}
-        </div>
       </div>
     </div>
   );

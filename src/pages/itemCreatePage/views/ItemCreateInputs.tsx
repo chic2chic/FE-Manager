@@ -41,7 +41,7 @@ export default function ItemCreateInputs({
   };
 
   return (
-    <div className="absolute left-[50%] mt-40 transform -translate-x-1/2 flex justify-center items-center gap-[53px]">
+    <div className="absolute left-[50%] mt-[40px] transform -translate-x-1/2 flex justify-center items-center gap-[53px]">
       <div className="relative w-[400px] h-[400px]">
         {/* 이미지 */}
         <img
