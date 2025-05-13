@@ -4,7 +4,7 @@ import CustomTooltip from "@/components/common/CustomTooltip";
 
 export type SegmentDatum = {
   name: string;
-  value: number;
+  count: number;
   rawFill: string;
 };
 
@@ -100,7 +100,7 @@ export default function VisitorPieChart({
             data={data}
             innerRadius={innerRadius}
             outerRadius={RADIUS}
-            dataKey="value"
+            dataKey="count"
             cx="50%"
             cy="50%"
           >

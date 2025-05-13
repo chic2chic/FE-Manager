@@ -121,3 +121,14 @@ export type GetConversionResponse = {
   low: GetConversionItemResponse[];
   high: GetConversionItemResponse[];
 };
+
+export type VisitorStatsResponse = {
+  gender: VisitorStat[];
+  age: VisitorStat[];
+};
+
+export type VisitorStat = {
+  name: string;
+  count: number;
+  ratio: number;
+};

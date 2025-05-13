@@ -7,6 +7,7 @@ import {
   GetCongestionResponse,
   QuestionnaireListResponse,
   GetConversionResponse,
+  VisitorStatsResponse,
 } from "@/types/api/ApiResponseType";
 import { api } from "./config/Axios";
 import { usePopUpReadStore } from "@/stores/usePopUpReadStore";
@@ -62,5 +63,11 @@ export const getConversion = async (): ApiResponse<GetConversionResponse> => {
   const response = await api.get(
     `/popups/${popupId}/dashboard/conversion-ratio`,
   );
+  return response.data;
+};
+
+export const getVisitorStats = async (): ApiResponse<VisitorStatsResponse> => {
+  const popupId = usePopUpReadStore.getState().popupId;
+  const response = await api.get(`/popups/${popupId}/dashboard/visitors`);
   return response.data;
 };

@@ -1,16 +1,18 @@
 import DashBoardTitle from "@/pages/dashboardPage/views/DashBoardTitle";
 import { mapGenderData, mapAgeData } from "@/utils/VisitorColorMapper";
-import {
-  VisitorGenderData,
-  VisitorAgeData,
-} from "@/mocks/handlers/dashboard/VisitorDatas";
 import VisitorPieChart, {
   SegmentDatum,
 } from "@/pages/dashboardPage/views/VisitorPieChart";
+import { useVisitorStatsApi } from "@/hooks/api/useDashboardApi";
 
 export default function DashBoardVisitor() {
-  const genderData: SegmentDatum[] = mapGenderData(VisitorGenderData);
-  const ageData: SegmentDatum[] = mapAgeData(VisitorAgeData);
+  const { gender, age, isLoading, isError } = useVisitorStatsApi();
+
+  if (isLoading) return <p>로딩 중...</p>;
+  if (isError) return <p>에러 발생</p>;
+  
+  const genderData: SegmentDatum[] = mapGenderData(gender);
+  const ageData: SegmentDatum[] = mapAgeData(age);
 
   return (
     <div className="flex flex-col w-[660px] mx-auto">

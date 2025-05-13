@@ -15,6 +15,7 @@ import { BestItemsHandlers } from "./handlers/dashboard/BestItems";
 import { CongestionReadHandlers } from "@/mocks/handlers/dashboard/CongestionRead.handlers";
 import { QuestionnaireHandlers } from "./handlers/dashboard/Questionnaire";
 import { ConversionReadHandlers } from "@/mocks/handlers/dashboard/ConversionRead.handlers";
+import { VisitorStatsHandlers } from "./handlers/dashboard/VisitorDatas";
 
 export const handlers = [
   ...AuthHandlers,
@@ -31,6 +32,7 @@ export const handlers = [
   ...CongestionReadHandlers,
   ...QuestionnaireHandlers,
   ...ConversionReadHandlers,
+  ...VisitorStatsHandlers,
 ];
 
 export const worker = setupWorker(...handlers);
