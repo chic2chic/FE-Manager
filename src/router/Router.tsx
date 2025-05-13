@@ -8,16 +8,23 @@ import PopUpCreatePage from "@/pages/popUpCreatePage/PopUpCreatePage";
 import PopUpListPage from "@/pages/popUpListPage/PopUpListPage";
 import { createBrowserRouter } from "react-router-dom";
 
-// TODO : 리팩토링 예정 - ProtectLayout 중복 사용
 export const Router = createBrowserRouter([
   {
     path: "/",
     element: <GlobalLayout />,
     children: [
       {
+        path: "/onboarding",
+        element: <OnBoradingPage />,
+      },
+      {
         path: "/",
         element: <ProtectLayout />,
         children: [
+          {
+            path: "/popup-list",
+            element: <PopUpListPage />,
+          },
           {
             path: "dashboard",
             element: <DashBoardPage />,
@@ -39,20 +46,6 @@ export const Router = createBrowserRouter([
             element: <PopUpCreatePage />,
           },
         ],
-      },
-    ],
-  },
-  {
-    path: "/onboarding",
-    element: <OnBoradingPage />,
-  },
-  {
-    path: "/",
-    element: <ProtectLayout />,
-    children: [
-      {
-        path: "/popup-list",
-        element: <PopUpListPage />,
       },
     ],
   },
