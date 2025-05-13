@@ -111,8 +111,8 @@ export const useVisitorStatsApi = () => {
   });
 
   return {
-    gender: data?.gender ?? [],
-    age: data?.age ?? [],
+    gender: data?.gender,
+    age: data?.age,
     isLoading,
     isError,
   };
