@@ -6,6 +6,7 @@ import {
   useTodayEntrantsApi,
   useTodayReservationsApi,
 } from "@/hooks/api/useDashboardApi";
+import NoDataCompt from "@/components/common/NoDataComp";
 
 export default function DashBoardReservation() {
   const { data: entrantsData } = useTodayEntrantsApi();
@@ -48,7 +49,13 @@ export default function DashBoardReservation() {
                 요일별 예약자 수
               </span>
             </div>
-            <ReservationByDayChart data={reservationsData.chart} />
+            {reservationsData && reservationsData.chart.length > 0 ? (
+              <ReservationByDayChart data={reservationsData.chart} />
+            ) : (
+              <div>
+                <NoDataCompt />
+              </div>
+            )}
           </div>
         </div>
       )}

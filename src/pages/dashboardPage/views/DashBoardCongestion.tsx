@@ -12,8 +12,8 @@ export default function DashBoardCongestion() {
 
   useEffect(() => {
     if (data && !selectedDay) {
-      const today = new Date().getDay(); // 0(일) - 6(토)
-      setSelectedDay(Days[today === 0 ? 6 : today - 1]); // default: 오늘 요일이 기본으로 보임.
+      const today = new Date().getDay();
+      setSelectedDay(Days[today === 0 ? 6 : today - 1]);
     }
   }, [data, selectedDay]);
 

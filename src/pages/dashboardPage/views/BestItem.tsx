@@ -5,6 +5,7 @@ import itemImage from "@/assets/webps/itemList/item-img.webp";
 import DashBoardTitle from "@/pages/dashboardPage/views/DashBoardTitle";
 import { AgeOptionsType, GenderOptionsType } from "@/types/DashboardType";
 import { useBestItemsApi } from "@/hooks/api/useDashboardApi";
+import NoDataCompt from "@/components/common/NoDataComp";
 
 const cardBgClass: Record<number, string> = {
   1: "bg-purple01",
@@ -50,7 +51,7 @@ export default function BestItem() {
 
       {/* 베스트 상품 리스트 */}
       <div className="flex justify-center gap-[60px] mt-2">
-        {data &&
+        {data && data.length > 0 ? (
           data.map((item, index) => (
             <div
               key={item.itemId}
@@ -93,7 +94,12 @@ export default function BestItem() {
                 </div>
               </div>
             </div>
-          ))}
+          ))
+        ) : (
+          <div>
+            <NoDataCompt />
+          </div>
+        )}
       </div>
     </div>
   );

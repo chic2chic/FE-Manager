@@ -94,7 +94,16 @@ export const CongestionReadHandlers = [
       {
         success: true,
         status: 200,
-        data: congestionList,
+        // data: congestionList,
+        data: {
+          mon: [],
+          tue: [],
+          wed: [],
+          thu: [],
+          fri: [],
+          sat: [],
+          sun: [],
+        },
         timestamp: new Date().toISOString(),
       },
       { status: 200 },

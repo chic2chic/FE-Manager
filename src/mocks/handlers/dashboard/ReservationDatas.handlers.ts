@@ -44,7 +44,8 @@ export const ReservationsHandlers = [
       {
         success: true,
         status: 200,
-        data: TodayReservationDatas,
+        // data: TodayReservationDatas,
+        data: { reservedCount: 0, chart: [] } as ReservationsResponse,
         timestamp: new Date().toISOString(),
       },
       { status: 200 },
