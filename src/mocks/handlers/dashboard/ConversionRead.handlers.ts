@@ -1,45 +1,6 @@
 import { GetConversionResponse } from "@/types/api/ApiResponseType";
 import { http, HttpResponse } from "msw";
 
-// export const TopConversionDatas: ConversionRateType[] = [
-//   {
-//     name: "KRUNK ORANGE",
-//     interested: 200,
-//     purchased: 240,
-//     conversionRate: 120,
-//   },
-//   {
-//     name: "POSTER SET",
-//     interested: 170,
-//     purchased: 180,
-//     conversionRate: 106,
-//   },
-//   {
-//     name: "KRUNK ORANGE",
-//     interested: 210,
-//     purchased: 160,
-//     conversionRate: 76,
-//   },
-//   {
-//     name: "POSTER SET",
-//     interested: 200,
-//     purchased: 110,
-//     conversionRate: 55,
-//   },
-//   {
-//     name: "KRUNK ORANGE",
-//     interested: 230,
-//     purchased: 120,
-//     conversionRate: 52,
-//   },
-//   {
-//     name: "POSTER SET",
-//     interested: 220,
-//     purchased: 90,
-//     conversionRate: 41,
-//   },
-// ];
-
 export const ConversionList: GetConversionResponse = {
   low: [
     { name: "POSTER SET", interested: 230, purchased: 20, conversionRatio: 9 },
