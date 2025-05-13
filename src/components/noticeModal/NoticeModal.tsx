@@ -9,7 +9,7 @@ type Props = {
 
 export default function NoticeModal({ onClose }: Props) {
   const { notifications } = useStockNotificationListApi();
-  const popupName = usePopUpReadStore.getState().name;
+  const popUpName = usePopUpReadStore.getState().name;
   const modalRef = useRef<HTMLDivElement>(null);
 
   // 모달 바깥 클릭 시 닫기
@@ -36,7 +36,7 @@ export default function NoticeModal({ onClose }: Props) {
             <NoticeItem
               key={item.notificationId}
               popularity={item.popularity}
-              popup={popupName}
+              popUp={popUpName}
               name={item.name}
               minStock={item.minStock}
               notifiedAt={item.notifiedAt}

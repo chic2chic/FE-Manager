@@ -2,12 +2,12 @@ import { GetStockNotificationResponse } from "@/types/api/ApiResponseType";
 import { formatTimestamp } from "@/utils/FormatTimestamp";
 
 type Props = Omit<GetStockNotificationResponse, "notificationId"> & {
-  popup: string;
+  popUp: string;
 };
 
 export default function NoticeItem({
   popularity,
-  popup,
+  popUp,
   name,
   notifiedAt,
   minStock,
@@ -20,7 +20,7 @@ export default function NoticeItem({
             lang="en"
             className="text-[18px] max-w-[150px] truncate tracking-[-2%]"
           >
-            {popup}
+            {popUp}
           </span>
           {popularity === "hot" && (
             <div

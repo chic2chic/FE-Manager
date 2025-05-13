@@ -5,7 +5,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 export const usePopUpDeleteApi = () => {
   const queryClient = useQueryClient();
   const deletePopUpMutation = useMutation({
-    mutationFn: (popupId: string) => deletePopUp(popupId),
+    mutationFn: (popUpId: string) => deletePopUp(popUpId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["popUpList"] });
     },

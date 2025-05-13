@@ -4,7 +4,6 @@ import {
   GetPopUpListReadResponse,
   NoResponse,
 } from "@/types/api/ApiResponseType";
-import { apiPopUp } from "./config/PopUpApi";
 
 export const getPopUpListRead =
   async (): ApiResponse<GetPopUpListReadResponse> => {
@@ -12,7 +11,7 @@ export const getPopUpListRead =
     return response.data;
   };
 
-export const deletePopUp = async (): ApiResponse<NoResponse> => {
-  const response = await apiPopUp.delete("");
+export const deletePopUp = async (popUpId: string): ApiResponse<NoResponse> => {
+  const response = await api.delete(`/popups/${popUpId}`);
   return response.data;
 };

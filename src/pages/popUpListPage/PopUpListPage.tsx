@@ -22,7 +22,6 @@ export default function PopUpListPage() {
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
   const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
   const [selectedCardId, setSelectedCardId] = useState<number | null>(null);
-  // const [pendingDeleteId, setPendingDeleteId] = useState<number | null>(null);
 
   const handleDelete = (id: number) => {
     setIsConfirmModalOpen(true);
