@@ -29,6 +29,7 @@ export const useItemDeleteApi = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["itemList"] });
     },
+    throwOnError: true,
     onError: error => {
       throw new Error(`아이템 삭제 에러 : ${ErrorMessage(error)}`);
     },
