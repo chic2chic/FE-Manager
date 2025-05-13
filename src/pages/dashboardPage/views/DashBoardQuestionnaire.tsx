@@ -5,6 +5,7 @@ import DashBoardTitle from "@/pages/dashboardPage/views/DashBoardTitle";
 import CustomTooltip from "@/components/common/CustomTooltip";
 import { useQuestionnaireApi } from "@/hooks/api/useDashboardApi";
 import { QuestionnaireResponse } from "@/types/api/ApiResponseType";
+import { Questions } from "@/constants/popUpCreate/Questions";
 
 const options = ["1번 문항", "2번 문항", "3번 문항", "4번 문항"];
 const SIZE = 300;
@@ -52,8 +53,13 @@ export default function DashBoardQuestionnaire() {
   if (isLoading) return <p>로딩 중...</p>;
   if (isError || !surveys) return <p>데이터를 불러오는 데 실패했습니다.</p>;
 
+  const matchQuestion = (selected: string): string => {
+    const questionNumber = findQuestionNumber(selected);
+    const target = Questions.find(q => q.questionNumber === questionNumber);
+    return `Q${target?.questionNumber}. ${target?.title}`;
+  };
+
   const matched = matchQA(selectedQuestion, surveys);
-  const questionNumber = findQuestionNumber(selectedQuestion);
 
   return (
     <div className="flex flex-col">
@@ -69,7 +75,7 @@ export default function DashBoardQuestionnaire() {
       </div>
       <div className="w-[1360px] h-[662px] bg-gray02 rounded-[50px] px-[60px] py-[45px]">
         <p className="font-semibold text-[36px]">
-          Q{questionNumber}. 문항 {questionNumber}
+          {matchQuestion(selectedQuestion)}
         </p>
         <div className="flex">
           <div className="w-[1240px] h-[490px] bg-gray01 mt-[40px] rounded-[40px] px-[40px] py-[30px] flex justify-between">
