@@ -93,3 +93,19 @@ export type GetCongestionTimeValue = {
 export type GetCongestionResponse = Partial<
   Record<DayOfWeek, GetCongestionTimeValue[]>
 >;
+
+export type QuestionnaireListResponse = {
+  totalCount: number;
+  surveys: QuestionnaireResponse[];
+};
+
+export type QuestionnaireResponse = {
+  surveyNumber: number;
+  contents: SurveyContent[];
+};
+
+export type SurveyContent = {
+  title: string;
+  selectedCount: number;
+  ratio: number;
+};

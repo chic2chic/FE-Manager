@@ -13,6 +13,7 @@ import { ItemListHandlers } from "./handlers/itemList/ItemList.handlers";
 import { LogoutHandlers } from "./Logout.handlers";
 import { BestItemsHandlers } from "./handlers/dashboard/BestItems";
 import { CongestionReadHandlers } from "@/mocks/handlers/dashboard/CongestionRead.handlers";
+import { QuestionnaireHandlers } from "./handlers/dashboard/Questionnaire";
 
 export const handlers = [
   ...AuthHandlers,
@@ -27,6 +28,7 @@ export const handlers = [
   ...LogoutHandlers,
   ...BestItemsHandlers,
   ...CongestionReadHandlers,
+  ...QuestionnaireHandlers,
 ];
 
 export const worker = setupWorker(...handlers);
