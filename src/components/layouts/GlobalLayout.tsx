@@ -1,4 +1,4 @@
-import { Outlet, useLocation } from "react-router-dom";
+import { Navigate, Outlet, useLocation } from "react-router-dom";
 import CustomErrorBoundary from "@/components/boundary/CustomErrorBoundary";
 import NavBar from "@/components/common/NavBar";
 
@@ -7,6 +7,11 @@ export default function GlobalLayout() {
   const isContainNavBar = !["/onboarding"].some(path =>
     location.pathname.includes(path),
   );
+
+  if (location.pathname === "/") {
+    return <Navigate to="/popup-list" replace />;
+  }
+
   return (
     <div className="box-border">
       {isContainNavBar && <NavBar />}
