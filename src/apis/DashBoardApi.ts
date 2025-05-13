@@ -6,6 +6,7 @@ import {
   GetBestItemsResponse,
   GetCongestionResponse,
   QuestionnaireListResponse,
+  GetConversionResponse,
 } from "@/types/api/ApiResponseType";
 import { api } from "./config/Axios";
 import { usePopUpReadStore } from "@/stores/usePopUpReadStore";
@@ -52,6 +53,14 @@ export const getBestItems = async ({
   const popupId = usePopUpReadStore.getState().popupId;
   const response = await api.get(
     `/popups/${popupId}/items/trending?gender=${gender}&age=${age}`,
+  );
+  return response.data;
+};
+
+export const getConversion = async (): ApiResponse<GetConversionResponse> => {
+  const popupId = usePopUpReadStore.getState().popupId;
+  const response = await api.get(
+    `/popups/${popupId}/dashboard/conversion-ratio`,
   );
   return response.data;
 };

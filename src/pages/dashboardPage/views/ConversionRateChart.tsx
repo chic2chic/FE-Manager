@@ -1,6 +1,6 @@
 import CustomBlurDot from "@/components/common/CustomBlurDot";
 import CustomCursor from "@/components/common/CustomCursor";
-import { ConversionRateType } from "@/types/ConversionRateType";
+import { GetConversionItemResponse } from "@/types/api/ApiResponseType";
 import { useCallback } from "react";
 import {
   ResponsiveContainer,
@@ -15,7 +15,7 @@ import {
 } from "recharts";
 
 type Props = {
-  data: ConversionRateType[];
+  data: GetConversionItemResponse[];
   barColor: string;
   lineColor: string;
   tooltipColorClass: {
@@ -45,7 +45,7 @@ export const ConversionRateChart = ({
         payload.find(p => p.dataKey === "interested")?.value ?? 0;
       const purchased =
         payload.find(p => p.dataKey === "purchased")?.value ?? 0;
-      const conversionRate = payload[0]?.payload?.conversionRate ?? 0;
+      const conversionRatio = payload[0]?.payload?.conversionRatio ?? 0;
 
       return (
         <div className="bg-white border border-gray02 rounded-md p-3 shadow-sm">
@@ -70,7 +70,7 @@ export const ConversionRateChart = ({
             구매전환율:
             <span className={`${tooltipColorClass.rate}`}>
               {" "}
-              {conversionRate}
+              {conversionRatio}
             </span>
             %
           </p>

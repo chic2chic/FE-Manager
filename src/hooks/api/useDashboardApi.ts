@@ -6,6 +6,7 @@ import {
   getTodayReservations,
   getCongestion,
   getQuestionnaire,
+  getConversion,
 } from "@/apis/DashBoardApi";
 import { GetBestItemsRequest } from "@/types/api/ApiRequestType";
 
@@ -84,4 +85,16 @@ export const useQuestionnaireApi = () => {
     isLoading,
     isError,
   };
+};
+
+export const useConversionApi = () => {
+  const { data, isError, isLoading } = useQuery({
+    queryKey: ["conversion", "dashboard"],
+    queryFn: async () => {
+      const res = await getConversion();
+      return res.data;
+    },
+  });
+
+  return { data, isError, isLoading };
 };

@@ -1,15 +1,21 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Days } from "@/constants/dashboard/Days";
 import { formatDay } from "@/utils/FormatDay";
 import DashBoardTitle from "@/pages/dashboardPage/views/DashBoardTitle";
 import CongestionChart from "@/pages/dashboardPage/views/CongestionChart";
 import { useCongestionApi } from "@/hooks/api/useDashboardApi";
+import { DayOfWeek } from "@/types/CongestionType";
 
 export default function DashBoardCongestion() {
-  const today = new Date().getDay(); // 0(일) - 6(토)
-  const [selectedDay, setSelectedDay] = useState(Days[today - 1]); // default: 오늘 요일이 기본으로 보임.
-  const { data } = useCongestionApi();
-  const dayData = data?.[selectedDay] ?? [];
+  const [selectedDay, setSelectedDay] = useState<DayOfWeek | null>(null);
+  const { data, isLoading } = useCongestionApi();
+
+  useEffect(() => {
+    if (data && !selectedDay) {
+      const today = new Date().getDay(); // 0(일) - 6(토)
+      setSelectedDay(Days[today === 0 ? 6 : today - 1]); // default: 오늘 요일이 기본으로 보임.
+    }
+  }, [data, selectedDay]);
 
   return (
     <div className="flex flex-col">
@@ -32,7 +38,11 @@ export default function DashBoardCongestion() {
 
         {/* 혼잡도 그래프 */}
         <div className="absolute bottom-6 w-[612px] h-[394px] bg-gray01 rounded-[40px] flex justify-center">
-          <CongestionChart dayData={dayData} />
+          {isLoading || !selectedDay ? (
+            <span className="text-gray06 text-[18px]">로딩 중...</span>
+          ) : (
+            <CongestionChart dayData={data?.[selectedDay] ?? []} />
+          )}
         </div>
       </div>
     </div>
