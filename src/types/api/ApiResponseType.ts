@@ -109,3 +109,15 @@ export type SurveyContent = {
   selectedCount: number;
   ratio: number;
 };
+
+export type GetConversionItemResponse = {
+  name: string;
+  interested: number;
+  purchased: number;
+  conversionRatio: number;
+};
+
+export type GetConversionResponse = {
+  low: GetConversionItemResponse[];
+  high: GetConversionItemResponse[];
+};
