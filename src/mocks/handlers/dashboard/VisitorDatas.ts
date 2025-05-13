@@ -1,7 +1,6 @@
 import { VisitorStatsResponse } from "@/types/api/ApiResponseType";
 import { http, HttpResponse } from "msw";
 
-
 export const visitorStatsMockData: VisitorStatsResponse = {
   gender: [
     { name: "남성", count: 200, ratio: 50 },
@@ -24,7 +23,7 @@ export const VisitorStatsHandlers = [
         data: visitorStatsMockData,
         timestamp: new Date().toISOString(),
       },
-      { status: 200 }
+      { status: 200 },
     );
   }),
 ];

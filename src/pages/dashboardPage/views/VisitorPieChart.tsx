@@ -6,7 +6,7 @@ export type SegmentDatum = {
   name: string;
   count: number;
   rawFill: string;
-  ratio: number; 
+  ratio: number;
 };
 
 type TooltipPayloadItem = {
