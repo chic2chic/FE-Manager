@@ -2,10 +2,11 @@ import { postCreatePresignedUrl, putImageToS3 } from "@/apis/image/ImageApi";
 import { patchItem, postItemCreate } from "@/apis/ItemCreateApi";
 import { postItemAddExcel } from "@/apis/ItemListApi";
 import { ErrorMessage } from "@/utils/ErrorMessage";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 
 export const useItemCreateApi = () => {
+  const queryClient = useQueryClient();
   const [onProgress, setOnProgress] = useState<number>(0);
 
   const getItemPresignedUrlMutation = useMutation({
@@ -24,6 +25,9 @@ export const useItemCreateApi = () => {
 
   const itemCreateMutation = useMutation({
     mutationFn: postItemCreate,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["itemList"] });
+    },
     onError: error => {
       throw new Error(`상품 생성 에러 : ${ErrorMessage(error)}`);
     },
@@ -31,6 +35,9 @@ export const useItemCreateApi = () => {
 
   const patchItemMutation = useMutation({
     mutationFn: patchItem,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["itemList"] });
+    },
     onError: error => {
       throw new Error(`아이템 패치 에러 : ${ErrorMessage(error)}`);
     },
@@ -46,6 +53,7 @@ export const useItemCreateApi = () => {
       }),
     onSuccess: () => {
       setOnProgress(100);
+      queryClient.invalidateQueries({ queryKey: ["itemList"] });
     },
     onError: error => {
       setOnProgress(0);
