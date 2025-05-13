@@ -10,6 +10,7 @@ import ItemCreateInputs from "@/pages/itemCreatePage/views/ItemCreateInputs";
 import { usePopUpReadStore } from "@/stores/usePopUpReadStore";
 import { useSelectedItemStore } from "@/stores/useSelectedItemStore";
 import { ValidateAllField } from "@/utils/ValidateAllField";
+import CustomErrorBoundary from "@/components/boundary/CustomErrorBoundary";
 
 export default function ItemCreatePage() {
   const popupId = usePopUpReadStore.getState().popupId;
@@ -104,60 +105,62 @@ export default function ItemCreatePage() {
   }, []);
 
   return (
-    <div className="flex flex-col">
-      <div>
-        <div className="flex gap-[14px] mt-[46px] mr-[80px] justify-end">
-          <CustomButton
-            label="취소"
-            cssOption="bg-gray01 border border-gray05 text-gray09 text-[20px] hover:bg-gray02 transition"
-            onClick={handleCancel}
-          />
-          <CustomButton
-            label={isPatchMode ? "수정" : "등록"}
-            cssOption="bg-gray10 text-gray01 text-[20px] hover:opacity-50"
-            onClick={isPatchMode ? handlePatch : handleSave}
+    <CustomErrorBoundary>
+      <div className="flex flex-col">
+        <div>
+          <div className="flex gap-[14px] mt-[46px] mr-[80px] justify-end">
+            <CustomButton
+              label="취소"
+              cssOption="bg-gray01 border border-gray05 text-gray09 text-[20px] hover:bg-gray02 transition"
+              onClick={handleCancel}
+            />
+            <CustomButton
+              label={isPatchMode ? "수정" : "등록"}
+              cssOption="bg-gray10 text-gray01 text-[20px] hover:opacity-50"
+              onClick={isPatchMode ? handlePatch : handleSave}
+            />
+          </div>
+          <ItemCreateInputs
+            name={itemName}
+            price={itemPrice}
+            stock={itemStock}
+            minStock={itemMinStock}
+            location={itemLocation}
+            handleName={handleName}
+            handlePrice={handlePrice}
+            handleStock={handleStock}
+            handleMinStock={handleMinStock}
+            handleLocation={handleLocation}
+            imageFile={imageFile}
+            handleImageFile={setImageFile}
+            isPatchMode={isPatchMode}
           />
         </div>
-        <ItemCreateInputs
-          name={itemName}
-          price={itemPrice}
-          stock={itemStock}
-          minStock={itemMinStock}
-          location={itemLocation}
-          handleName={handleName}
-          handlePrice={handlePrice}
-          handleStock={handleStock}
-          handleMinStock={handleMinStock}
-          handleLocation={handleLocation}
-          imageFile={imageFile}
-          handleImageFile={setImageFile}
-          isPatchMode={isPatchMode}
+        <Modal
+          isOpen={isAlertModalOpen}
+          setIsOpen={setIsAlertModalOpen}
+          content={
+            isPatchMode
+              ? "상품 수정을 취소하시겠어요?"
+              : "상품 등록을 취소하시겠어요?"
+          }
+          image={bin}
+          confirmText="취소하기"
+          cancelText="돌아가기"
+          onConfirm={() => navigate("/items")}
+          onCancel={() => setIsAlertModalOpen(false)}
+        />
+        <Modal
+          isOpen={isSaveModalOpen}
+          setIsOpen={setIsSaveModalOpen}
+          content={
+            isPatchMode ? "상품이 수정되었습니다" : "상품이 등록되었습니다"
+          }
+          image={check}
+          confirmText="확인"
+          onConfirm={handleConfirmBtn}
         />
       </div>
-      <Modal
-        isOpen={isAlertModalOpen}
-        setIsOpen={setIsAlertModalOpen}
-        content={
-          isPatchMode
-            ? "상품 수정을 취소하시겠어요?"
-            : "상품 등록을 취소하시겠어요?"
-        }
-        image={bin}
-        confirmText="취소하기"
-        cancelText="돌아가기"
-        onConfirm={() => navigate("/items")}
-        onCancel={() => setIsAlertModalOpen(false)}
-      />
-      <Modal
-        isOpen={isSaveModalOpen}
-        setIsOpen={setIsSaveModalOpen}
-        content={
-          isPatchMode ? "상품이 수정되었습니다" : "상품이 등록되었습니다"
-        }
-        image={check}
-        confirmText="확인"
-        onConfirm={handleConfirmBtn}
-      />
-    </div>
+    </CustomErrorBoundary>
   );
 }

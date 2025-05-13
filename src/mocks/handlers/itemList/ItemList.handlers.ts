@@ -176,7 +176,7 @@ export const ItemListHandlers = [
         data: itemsDatabase,
         timestamp: new Date().toISOString(),
       },
-      { status: 200 },
+      { status: 403 },
     );
   }),
 

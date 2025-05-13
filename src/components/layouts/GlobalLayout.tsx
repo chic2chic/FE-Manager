@@ -4,7 +4,7 @@ import NavBar from "@/components/common/NavBar";
 
 export default function GlobalLayout() {
   const location = useLocation();
-  const isContainNavBar = !["/onboarding", "/popup-list"].some(path =>
+  const isContainNavBar = !["/onboarding"].some(path =>
     location.pathname.includes(path),
   );
   return (

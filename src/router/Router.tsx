@@ -26,7 +26,7 @@ export const Router = createBrowserRouter([
             element: <PopUpListPage />,
           },
           {
-            path: "dashboard",
+            path: "/dashboard",
             element: <DashBoardPage />,
           },
           {
