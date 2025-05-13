@@ -5,6 +5,7 @@ import {
   getTodayEntrants,
   getTodayReservations,
   getCongestion,
+  getQuestionnaire,
 } from "@/apis/DashBoardApi";
 import { GetBestItemsRequest } from "@/types/api/ApiRequestType";
 
@@ -66,4 +67,21 @@ export const useBestItemsApi = (params: GetBestItemsRequest) => {
   });
 
   return { data, isError, isLoading };
+};
+
+export const useQuestionnaireApi = () => {
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ["questionnaire", "dashboard"],
+    queryFn: async () => {
+      const response = await getQuestionnaire();
+      return response.data;
+    },
+  });
+
+  return {
+    surveys: data?.surveys,
+    totalCount: data?.totalCount,
+    isLoading,
+    isError,
+  };
 };

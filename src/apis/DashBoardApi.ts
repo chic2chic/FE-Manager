@@ -5,6 +5,7 @@ import {
   ReservationsResponse,
   GetBestItemsResponse,
   GetCongestionResponse,
+  QuestionnaireListResponse,
 } from "@/types/api/ApiResponseType";
 import { api } from "./config/Axios";
 import { usePopUpReadStore } from "@/stores/usePopUpReadStore";
@@ -29,6 +30,13 @@ export const getTodayEntrants = async (): ApiResponse<EntrantsResponse> => {
   const response = await api.get(`/popups/${popupId}/dashboard/entrants`);
   return response.data;
 };
+
+export const getQuestionnaire =
+  async (): ApiResponse<QuestionnaireListResponse> => {
+    const popupId = usePopUpReadStore.getState().popupId;
+    const response = await api.get(`/popups/${popupId}/dashboard/surveys`);
+    return response.data;
+  };
 
 export const getTodayReservations =
   async (): ApiResponse<ReservationsResponse> => {
