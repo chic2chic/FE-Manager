@@ -1,9 +1,10 @@
 import { postCreatePresignedUrl, putImageToS3 } from "@/apis/image/ImageApi";
 import { postPopUpCreate } from "@/apis/PopUpCreateApi";
 import { ErrorMessage } from "@/utils/ErrorMessage";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 export const usePopUpCreateApi = () => {
+  const queryClient = useQueryClient();
   const getPresignedUrlMutation = useMutation({
     mutationFn: postCreatePresignedUrl,
     onError: error => {
@@ -20,6 +21,9 @@ export const usePopUpCreateApi = () => {
 
   const postPopUpCreateMutation = useMutation({
     mutationFn: postPopUpCreate,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["popUpList"] });
+    },
     onError: error => {
       throw new Error(`팝업 등록 에러 : ${ErrorMessage(error)}`);
     },
