@@ -1,16 +1,21 @@
 import DashBoardTitle from "@/pages/dashboardPage/views/DashBoardTitle";
 import { mapGenderData, mapAgeData } from "@/utils/VisitorColorMapper";
-import {
-  VisitorGenderData,
-  VisitorAgeData,
-} from "@/mocks/handlers/dashboard/VisitorDatas";
+
 import VisitorPieChart, {
   SegmentDatum,
 } from "@/pages/dashboardPage/views/VisitorPieChart";
+import { useVisitorStatsApi } from "@/hooks/api/useDashboardApi";
 
 export default function DashBoardVisitor() {
-  const genderData: SegmentDatum[] = mapGenderData(VisitorGenderData);
-  const ageData: SegmentDatum[] = mapAgeData(VisitorAgeData);
+  const { gender, age } = useVisitorStatsApi();
+
+  const isGenderDataExist = gender && gender.length > 0;
+  const isAgeDataExsit = age && age.length > 0;
+
+  const genderData: SegmentDatum[] = mapGenderData(
+    isGenderDataExist ? gender : [],
+  );
+  const ageData: SegmentDatum[] = mapAgeData(isAgeDataExsit ? age : []);
 
   return (
     <div className="flex flex-col w-[660px] mx-auto">

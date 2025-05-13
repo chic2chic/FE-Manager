@@ -3,6 +3,8 @@
  * rechart 라이브러리를 활용한 그래프에서 사용되는 툴팁입니다
  */
 
+import { SegmentDatum } from "@/pages/dashboardPage/views/VisitorPieChart";
+
 type Props = {
   active?: boolean;
   payload?: {
@@ -37,6 +39,10 @@ export default function CustomTooltip({
       payload[0].payload?.rawFill ??
       "#000";
 
+    const value = payload[0].value;
+    const segmentPayload = payload[0].payload as SegmentDatum;
+    const ratio = segmentPayload?.ratio;
+
     return (
       <div className="bg-white border border-gray02 rounded-md p-3 shadow-sm">
         <p className="text-[18px] text-gray09 font-semibold mb-1">
@@ -45,8 +51,11 @@ export default function CustomTooltip({
         </p>
         <p className="text-[17px] text-gray07 font-semibold">
           {unitPrefix}
-          <span style={{ color: dynamicColor }}> {payload[0].value}</span>
+          <span style={{ color: dynamicColor }}> {value}</span>
           {unitSuffix}
+          {ratio !== undefined && (
+            <span style={{ color: dynamicColor }}> ({ratio}%)</span>
+          )}
         </p>
       </div>
     );

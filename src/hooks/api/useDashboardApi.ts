@@ -7,8 +7,10 @@ import {
   getCongestion,
   getQuestionnaire,
   getConversion,
+  getVisitorStats,
 } from "@/apis/DashBoardApi";
 import { GetBestItemsRequest } from "@/types/api/ApiRequestType";
+import { VisitorStatsResponse } from "@/types/api/ApiResponseType";
 
 export const useCongestionApi = () => {
   const { data, isError, isLoading } = useQuery({
@@ -97,4 +99,21 @@ export const useConversionApi = () => {
   });
 
   return { data, isError, isLoading };
+};
+
+export const useVisitorStatsApi = () => {
+  const { data, isLoading, isError } = useQuery<VisitorStatsResponse>({
+    queryKey: ["visitorStats", "dashboard"],
+    queryFn: async () => {
+      const res = await getVisitorStats();
+      return res.data;
+    },
+  });
+
+  return {
+    gender: data?.gender,
+    age: data?.age,
+    isLoading,
+    isError,
+  };
 };
