@@ -7,13 +7,15 @@ import VisitorPieChart, {
 import { useVisitorStatsApi } from "@/hooks/api/useDashboardApi";
 
 export default function DashBoardVisitor() {
-  const { gender, age, isLoading, isError } = useVisitorStatsApi();
+  const { gender, age } = useVisitorStatsApi();
 
-  if (isLoading) return <p>로딩 중...</p>;
-  if (isError) return <p>에러 발생</p>;
+  const isGenderDataExist = gender && gender.length > 0;
+  const isAgeDataExsit = age && age.length > 0;
 
-  const genderData: SegmentDatum[] = mapGenderData(gender);
-  const ageData: SegmentDatum[] = mapAgeData(age);
+  const genderData: SegmentDatum[] = mapGenderData(
+    isGenderDataExist ? gender : [],
+  );
+  const ageData: SegmentDatum[] = mapAgeData(isAgeDataExsit ? age : []);
 
   return (
     <div className="flex flex-col w-[660px] mx-auto">
