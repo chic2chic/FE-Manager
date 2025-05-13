@@ -10,23 +10,23 @@ export const dayOfWeekMap: Record<DayOfWeek, string> = {
   sun: "일",
 };
 
-export function formatDay(day: DayOfWeek): string {
+export function FormatDay(day: DayOfWeek): string {
   return dayOfWeekMap[day];
 }
 
 // YYYY-MM-DD
-export function formatDateToString(date: Date): string {
+export function FormatDateToString(date: Date): string {
   return date.toISOString().split("T")[0];
 }
 
 // 12:00:00
-export function formatTimeToString(hours: number): string {
+export function FormatTimeToString(hours: number): string {
   const paddedHours = String(Math.floor(hours)).padStart(2, "0");
   return `${paddedHours}:00:00`;
 }
 
 // YYYY-MM-DDThh:mm:ss
-export function formatDateTimeToString(date: Date, hours: number): string {
+export function FormatDateTimeToString(date: Date, hours: number): string {
   const newDate = new Date(date);
   newDate.setHours(hours, 0, 0, 0);
   return newDate.toISOString().split(".")[0];

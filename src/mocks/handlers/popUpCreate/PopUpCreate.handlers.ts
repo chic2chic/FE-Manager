@@ -41,7 +41,7 @@ export const PopUpCreateHandlers = [
     return HttpResponse.json({}, { status: 200 });
   }),
 
-  http.post("/popups/1/items", async ({ request }) => {
+  http.post("/popups", async ({ request }) => {
     const requestBody = (await request.json()) as PopUpWithChoicesRequest;
     const isError = requestBody.popupCreateRequest.name === "error";
 

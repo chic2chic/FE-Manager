@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Days } from "@/constants/dashboard/Days";
-import { formatDay } from "@/utils/FormatDay";
+import { FormatDay } from "@/utils/FormatDay";
 import DashBoardTitle from "@/pages/dashboardPage/views/DashBoardTitle";
 import CongestionChart from "@/pages/dashboardPage/views/CongestionChart";
 import { useCongestionApi } from "@/hooks/api/useDashboardApi";
@@ -31,7 +31,7 @@ export default function DashBoardCongestion() {
                 ${selectedDay === day && "bg-white border-mint07 border-2 rounded-full"}
               `}
             >
-              {formatDay(day)}
+              {FormatDay(day)}
             </button>
           ))}
         </div>
