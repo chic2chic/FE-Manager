@@ -5,11 +5,8 @@ import {
   getTodayEntrants,
   getTodayReservations,
   getCongestion,
-<<<<<<< HEAD
   getQuestionnaire,
-=======
   getConversion,
->>>>>>> 3893222 ([LCR-132] feat: api hook 구현)
 } from "@/apis/DashBoardApi";
 import { GetBestItemsRequest } from "@/types/api/ApiRequestType";
 
@@ -88,7 +85,8 @@ export const useQuestionnaireApi = () => {
     isLoading,
     isError,
   };
-  
+};
+
 export const useConversionApi = () => {
   const { data, isError, isLoading } = useQuery({
     queryKey: ["conversion", "dashboard"],
