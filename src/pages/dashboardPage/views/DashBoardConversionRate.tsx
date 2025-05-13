@@ -1,7 +1,7 @@
 import {
   LowConversionDatas,
   TopConversionDatas,
-} from "@/mocks/handlers/dashboard/ConversionRateDatas";
+} from "@/mocks/handlers/dashboard/ConversionRead.handlers";
 import { ConversionRateChart } from "@/pages/dashboardPage/views/ConversionRateChart";
 import DashBoardTitle from "@/pages/dashboardPage/views/DashBoardTitle";
 
