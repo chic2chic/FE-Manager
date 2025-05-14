@@ -32,7 +32,7 @@ export const useItemCreateApi = () => {
     },
     throwOnError: true,
     onError: error => {
-      throw new Error(`상품 생성 에러 : ${ErrorMessage(error)}`);
+      throw new Error(`상품 생성 에러: ${ErrorMessage(error)}`);
     },
   });
 

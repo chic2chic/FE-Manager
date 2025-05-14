@@ -49,7 +49,7 @@ export const popUpList = [
   },
 ];
 
-export const popUpListReadHandlers = [
+export const PopUpListReadHandlers = [
   http.get("/popups", () => {
     return HttpResponse.json(
       {

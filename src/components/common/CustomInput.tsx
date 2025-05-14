@@ -17,6 +17,7 @@ type Props = {
   width?: number;
   height?: number;
   isPatchMode?: boolean;
+  onKeyDown?: (_e: React.KeyboardEvent) => void;
 };
 
 export default function CustomInput({
@@ -30,6 +31,7 @@ export default function CustomInput({
   width = 500,
   height = 60,
   isPatchMode = false,
+  onKeyDown,
 }: Props) {
   const numberHandler = (e: React.FormEvent<HTMLInputElement>) => {
     if (isOnlyNumber) {
@@ -69,6 +71,7 @@ export default function CustomInput({
           onChange={onChange}
           value={value}
           onInput={isOnlyNumber ? numberHandler : undefined}
+          onKeyDown={onKeyDown ? onKeyDown : () => {}}
         />
       )}
     </div>

@@ -9,7 +9,6 @@ import {
   getConversion,
   getVisitorStats,
 } from "@/apis/DashBoardApi";
-import { GetBestItemsRequest } from "@/types/api/ApiRequestType";
 import { VisitorStatsResponse } from "@/types/api/ApiResponseType";
 
 export const useCongestionApi = () => {
@@ -60,11 +59,11 @@ export const useTodayReservationsApi = () => {
   return { data, isError, isLoading };
 };
 
-export const useBestItemsApi = (params: GetBestItemsRequest) => {
+export const useBestItemsApi = () => {
   const { data, isError, isLoading } = useQuery({
-    queryKey: ["top3", "dashboard", params],
+    queryKey: ["top3", "dashboard"],
     queryFn: async () => {
-      const res = await getBestItems(params);
+      const res = await getBestItems();
       return res.data;
     },
   });

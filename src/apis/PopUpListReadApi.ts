@@ -11,7 +11,7 @@ export const getPopUpListRead =
     return response.data;
   };
 
-export const deletePopUp = async (popupId: string): ApiResponse<NoResponse> => {
-  const response = await api.delete(`/popups/${popupId}`);
+export const deletePopUp = async (popUpId: string): ApiResponse<NoResponse> => {
+  const response = await api.delete(`/popups/${popUpId}`);
   return response.data;
 };

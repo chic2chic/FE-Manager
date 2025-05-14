@@ -7,7 +7,7 @@ import {
   PopUpCreateRequest,
   PopUpWithChoicesRequest,
 } from "@/types/api/ApiRequestType";
-import { formatDateTimeToString, formatDateToString } from "@/utils/FormatDay";
+import { FormatDateTimeToString, FormatDateToString } from "@/utils/FormatDay";
 import { getTimeValue } from "@/utils/FormatTimestamp";
 import useClickOutside from "@/hooks/useClickOutside";
 import { addDays } from "date-fns";
@@ -47,12 +47,14 @@ export default function PopUpInfoArea({
     // 초기값 설정 - 처음 렌더링시에만 실행
     if (!popupCreateRequest.popupStartDate) {
       startCalender.setSelectedDate(today);
-      updatePopupField("popupStartDate", formatDateToString(today));
+
+      updatePopupField("popupStartDate", FormatDateToString(today));
     }
 
     if (!popupCreateRequest.popupEndDate) {
       endCalender.setSelectedDate(tomorrow);
-      updatePopupField("popupEndDate", formatDateToString(tomorrow));
+
+      updatePopupField("popupEndDate", FormatDateToString(tomorrow));
     }
 
     if (!popupCreateRequest.reservationOpenDateTime) {
@@ -60,7 +62,7 @@ export default function PopUpInfoArea({
       reservStartCalender.setSelectedDate(today);
       updatePopupField(
         "reservationOpenDateTime",
-        formatDateTimeToString(today, 0),
+        FormatDateTimeToString(today, 0),
       );
     }
 
@@ -69,7 +71,7 @@ export default function PopUpInfoArea({
       reservEndCalender.setSelectedDate(tomorrow);
       updatePopupField(
         "reservationCloseDateTime",
-        formatDateTimeToString(tomorrow, 0),
+        FormatDateTimeToString(tomorrow, 0),
       );
     }
   }, []);
@@ -85,14 +87,15 @@ export default function PopUpInfoArea({
   useEffect(() => {
     updatePopupField(
       "popupStartDate",
-      formatDateToString(startCalender.selectedDate),
+      FormatDateToString(startCalender.selectedDate),
     );
 
     // 1. 종료일이 시작일보다 이전이면 시작일+1로 설정
     if (endCalender.selectedDate <= startCalender.selectedDate) {
       const newEndDate = addDays(startCalender.selectedDate, 1);
       endCalender.setSelectedDate(newEndDate);
-      updatePopupField("popupEndDate", formatDateToString(newEndDate));
+
+      updatePopupField("popupEndDate", FormatDateToString(newEndDate));
     }
 
     // 2. 예약 시작일이 팝업 시작일보다 이전이면 팝업 시작일로 설정
@@ -100,7 +103,7 @@ export default function PopUpInfoArea({
       reservStartCalender.setSelectedDate(startCalender.selectedDate);
       updatePopupField(
         "reservationOpenDateTime",
-        formatDateTimeToString(
+        FormatDateTimeToString(
           startCalender.selectedDate,
           getTimeValue(popupCreateRequest.reservationOpenDateTime) || 0,
         ),
@@ -115,7 +118,7 @@ export default function PopUpInfoArea({
   useEffect(() => {
     updatePopupField(
       "popupEndDate",
-      formatDateToString(endCalender.selectedDate),
+      FormatDateToString(endCalender.selectedDate),
     );
 
     // 예약 종료일이 팝업 종료일보다 이후면 팝업 종료일로 설정
@@ -123,7 +126,7 @@ export default function PopUpInfoArea({
       reservEndCalender.setSelectedDate(endCalender.selectedDate);
       updatePopupField(
         "reservationCloseDateTime",
-        formatDateTimeToString(
+        FormatDateTimeToString(
           endCalender.selectedDate,
           getTimeValue(popupCreateRequest.reservationCloseDateTime) || 0,
         ),
@@ -135,7 +138,7 @@ export default function PopUpInfoArea({
   useEffect(() => {
     updatePopupField(
       "reservationOpenDateTime",
-      formatDateTimeToString(
+      FormatDateTimeToString(
         reservStartCalender.selectedDate,
         getTimeValue(popupCreateRequest.reservationOpenDateTime) || 0,
       ),
@@ -149,7 +152,7 @@ export default function PopUpInfoArea({
   useEffect(() => {
     updatePopupField(
       "reservationCloseDateTime",
-      formatDateTimeToString(
+      FormatDateTimeToString(
         reservEndCalender.selectedDate,
         getTimeValue(popupCreateRequest.reservationCloseDateTime) || 0,
       ),
@@ -170,7 +173,7 @@ export default function PopUpInfoArea({
       reservEndCalender.setSelectedDate(newReservEndDate);
       updatePopupField(
         "reservationCloseDateTime",
-        formatDateTimeToString(
+        FormatDateTimeToString(
           newReservEndDate,
           getTimeValue(popupCreateRequest.reservationCloseDateTime) || 0,
         ),
@@ -181,7 +184,7 @@ export default function PopUpInfoArea({
       reservEndCalender.setSelectedDate(maxDate);
       updatePopupField(
         "reservationCloseDateTime",
-        formatDateTimeToString(
+        FormatDateTimeToString(
           maxDate,
           getTimeValue(popupCreateRequest.reservationCloseDateTime) || 0,
         ),
@@ -337,7 +340,7 @@ export default function PopUpInfoArea({
                 onChange={e =>
                   updatePopupField(
                     "reservationOpenDateTime",
-                    formatDateTimeToString(
+                    FormatDateTimeToString(
                       reservStartCalender.selectedDate,
                       Number(e.target.value),
                     ),
@@ -364,10 +367,11 @@ export default function PopUpInfoArea({
                 isOnlyNumber={true}
                 isTimeFormat={true}
                 minTime={timeConstraints.closeMinTime}
+                maxTime={24}
                 onChange={e =>
                   updatePopupField(
                     "reservationCloseDateTime",
-                    formatDateTimeToString(
+                    FormatDateTimeToString(
                       reservEndCalender.selectedDate,
                       Number(e.target.value),
                     ),

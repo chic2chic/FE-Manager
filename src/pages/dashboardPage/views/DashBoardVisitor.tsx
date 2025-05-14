@@ -1,10 +1,10 @@
 import DashBoardTitle from "@/pages/dashboardPage/views/DashBoardTitle";
 import { mapGenderData, mapAgeData } from "@/utils/VisitorColorMapper";
-
 import VisitorPieChart, {
   SegmentDatum,
 } from "@/pages/dashboardPage/views/VisitorPieChart";
 import { useVisitorStatsApi } from "@/hooks/api/useDashboardApi";
+import NoDataComp from "@/components/common/NoDataComp";
 
 export default function DashBoardVisitor() {
   const { gender, age } = useVisitorStatsApi();
@@ -30,14 +30,20 @@ export default function DashBoardVisitor() {
           나이
         </div>
 
-        <div className="w-full h-full bg-gray01 rounded-[40px] p-[24px] flex gap-[100px] justify-center items-center">
-          <VisitorPieChart
-            data={genderData}
-            gradIdPrefix="genderGrad"
-            innerRadius={40}
-          />
-          <VisitorPieChart data={ageData} gradIdPrefix="ageGrad" />
-        </div>
+        {isGenderDataExist && isAgeDataExsit ? (
+          <div className="w-full h-full bg-gray01 rounded-[40px] p-[24px] flex gap-[100px] justify-center items-center">
+            <VisitorPieChart
+              data={genderData}
+              gradIdPrefix="genderGrad"
+              innerRadius={40}
+            />
+            <VisitorPieChart data={ageData} gradIdPrefix="ageGrad" />
+          </div>
+        ) : (
+          <div className="w-full h-full rounded-[40px] p-[24px] flex gap-[100px] justify-center items-center">
+            <NoDataComp />
+          </div>
+        )}
       </div>
     </div>
   );

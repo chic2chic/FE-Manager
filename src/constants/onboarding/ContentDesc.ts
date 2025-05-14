@@ -1,4 +1,6 @@
 import TestImage from "@/assets/webps/onBoarding/test.png";
+import OnBoarding2 from "@/assets/webps/onBoarding/onBorading2.webp";
+import OnBoarding3 from "@/assets/webps/onBoarding/onBorading3.webp";
 
 export type OnBoardingContentType = {
   id: number;
@@ -20,27 +22,18 @@ export const ContentDesc: OnBoardingContentType[] = [
   },
   {
     id: 2,
-    title: "혼잡도 분석을 받아보세요!",
-    imagePath: TestImage,
+    title: "대쉬보드 서비스",
+    imagePath: OnBoarding2,
     desc: [
-      "실시간으로 매장에 있는 인원을 확인할 수 있어요",
+      "스토어의 데이터를 시각적으로 접근해보세요",
       "PoPI",
-      "의 혼잡도 분석으로 피크 타임을 미리 예측하세요!",
+      "가 제공하는 데이터 분석을 활용해보세요!",
     ],
   },
   {
     id: 3,
-    title: "체류시간 분석 리포트",
-    imagePath: TestImage,
-    desc: [
-      "어떤 상품이 팬들의 시선을 가장 오래 사로잡나요? ",
-      "카메라 기반 체류시간 분석으로 인기 상품을 발견하세요!",
-    ],
-  },
-  {
-    id: 4,
-    title: "설문지를 작성해보세요!",
-    imagePath: TestImage,
+    title: "설문지 분석 서비스",
+    imagePath: OnBoarding3,
     desc: [
       "K-pop 팬들의 취향은 빠르게 변합니다.",
       "설문지를 작성하고 분석 리포트를 받아보세요!",

@@ -36,11 +36,11 @@ export const ItemCreateHandlers = [
     return HttpResponse.json(
       {
         success: true,
-        status: 201,
+        status: 400,
         data: null,
         timestamp: new Date().toISOString(),
       },
-      { status: 201 },
+      { status: 400 },
     );
   }),
 

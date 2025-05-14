@@ -41,8 +41,14 @@ export default function PopUpInput({
       const numValue = parseInt(e.target.value, 10);
       let correctedValue = numValue;
 
-      if (numValue < minTime) correctedValue = minTime;
-      if (numValue > maxTime) correctedValue = maxTime;
+      if (isTimeFormat) {
+        const effectiveMaxTime = Math.min(maxTime, 24);
+        if (numValue < minTime) correctedValue = minTime;
+        if (numValue > effectiveMaxTime) correctedValue = effectiveMaxTime;
+      } else if (isLimit) {
+        if (numValue < minTime) correctedValue = minTime;
+        if (numValue > maxTime) correctedValue = maxTime;
+      }
 
       if (numValue !== correctedValue) {
         setValue(String(correctedValue));

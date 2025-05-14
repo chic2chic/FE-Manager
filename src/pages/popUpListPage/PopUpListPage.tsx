@@ -6,7 +6,6 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 import PopUpCard from "@/pages/popUpListPage/views/PopUpCard";
 import Modal from "@/components/common/Modal";
-import logoImage from "@/assets/webps/common/logo-manager.webp";
 import plusWhite from "@/assets/webps/popUpList/plus-white.webp";
 import leftArrowGray09 from "@/assets/webps/common/left-arrow-gray09.webp";
 import rightArrowGray09 from "@/assets/webps/common/right-arrow-gray09.webp";
@@ -22,7 +21,6 @@ export default function PopUpListPage() {
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
   const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
   const [selectedCardId, setSelectedCardId] = useState<number | null>(null);
-  // const [pendingDeleteId, setPendingDeleteId] = useState<number | null>(null);
 
   const handleDelete = (id: number) => {
     setIsConfirmModalOpen(true);
@@ -48,17 +46,9 @@ export default function PopUpListPage() {
   };
 
   return (
-    <div className="bg-gray03 min-h-screen pb-20">
-      <img
-        src={logoImage}
-        alt="logo"
-        width={225}
-        height={36}
-        className="pt-[22px] ml-10 cursor-pointer"
-        onClick={() => navigate("/dashboard")}
-      />
+    <div className="bg-gray03 min-h-screen pb-10 pt-10">
       {/* 나의 팝업 List */}
-      <div className="mt-[80px] mx-auto w-[1360px] min-h-[600px] bg-gray01 pb-14 rounded-[50px]">
+      <div className="mx-auto w-[1360px] min-h-[600px] bg-gray01 pb-14 rounded-[50px]">
         <div className="flex items-start justify-between">
           <div className="ml-11 mt-[52px] flex items-center">
             <span className="text-[36px] tracking-[-2%] text-gray10">

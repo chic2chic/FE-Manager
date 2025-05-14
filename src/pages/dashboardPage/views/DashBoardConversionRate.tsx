@@ -1,9 +1,12 @@
+import NoDataCompt from "@/components/common/NoDataComp";
 import { useConversionApi } from "@/hooks/api/useDashboardApi";
 import { ConversionRateChart } from "@/pages/dashboardPage/views/ConversionRateChart";
 import DashBoardTitle from "@/pages/dashboardPage/views/DashBoardTitle";
 
 export default function DashBoardConversionRate() {
   const { data } = useConversionApi();
+  const isLowDataExist = data && data.low.length > 0;
+  const isHighDataExist = data && data.high.length > 0;
 
   return (
     <div className="flex flex-col">
@@ -13,8 +16,10 @@ export default function DashBoardConversionRate() {
           <div className="mt-7 flex text-gray09 font-medium text-[28px]">
             하위 상품 TOP 6
           </div>
-          <div className="absolute bottom-6 w-[612px] h-[394px] bg-gray01 rounded-[40px] flex justify-center">
-            {data && (
+          <div
+            className={`absolute bottom-6 w-[612px] h-[394px] ${isLowDataExist ? "bg-gray01" : ""} rounded-[40px] flex justify-center`}
+          >
+            {isLowDataExist ? (
               <ConversionRateChart
                 data={data.low}
                 barColor="#FFDCEA"
@@ -29,6 +34,10 @@ export default function DashBoardConversionRate() {
                   purchased: "#FFB4D1",
                 }}
               />
+            ) : (
+              <div className="absolute bottom-6 w-[612px] h-[394px]">
+                <NoDataCompt />
+              </div>
             )}
           </div>
         </div>
@@ -36,8 +45,10 @@ export default function DashBoardConversionRate() {
           <div className="mt-7 flex text-gray09 font-medium text-[28px]">
             상위 상품 TOP 6
           </div>
-          <div className="absolute bottom-6 w-[612px] h-[394px] bg-gray01 rounded-[40px] flex justify-center">
-            {data && (
+          <div
+            className={`absolute bottom-6 w-[612px] h-[394px] ${isHighDataExist ? "bg-gray01" : ""} rounded-[40px] flex justify-center`}
+          >
+            {isHighDataExist ? (
               <ConversionRateChart
                 data={data.high}
                 barColor="#C5EFE8"
@@ -52,6 +63,10 @@ export default function DashBoardConversionRate() {
                   purchased: "#C5EFE8",
                 }}
               />
+            ) : (
+              <div className="absolute bottom-6 w-[612px] h-[394px]">
+                <NoDataCompt />
+              </div>
             )}
           </div>
         </div>

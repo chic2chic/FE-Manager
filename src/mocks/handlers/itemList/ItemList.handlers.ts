@@ -173,7 +173,8 @@ export const ItemListHandlers = [
       {
         success: true,
         status: 200,
-        data: itemsDatabase,
+        // data: itemsDatabase,
+        data: [],
         timestamp: new Date().toISOString(),
       },
       { status: 200 },
