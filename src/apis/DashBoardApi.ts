@@ -9,7 +9,6 @@ import {
   GetConversionResponse,
   VisitorStatsResponse,
 } from "@/types/api/ApiResponseType";
-import { GetBestItemsRequest } from "@/types/api/ApiRequestType";
 import { apiPopUp } from "./config/PopUpApi";
 
 export const getCongestion = async (): ApiResponse<GetCongestionResponse> => {
@@ -39,13 +38,8 @@ export const getTodayReservations =
     return res.data;
   };
 
-export const getBestItems = async ({
-  gender,
-  age,
-}: GetBestItemsRequest): ApiResponse<GetBestItemsResponse> => {
-  const response = await apiPopUp.get(
-    `/items/trending?gender=${gender}&age=${age}`,
-  );
+export const getBestItems = async (): ApiResponse<GetBestItemsResponse> => {
+  const response = await apiPopUp.get(`/items/trending`);
   return response.data;
 };
 

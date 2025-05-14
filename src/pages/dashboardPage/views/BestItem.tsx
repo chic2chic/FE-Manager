@@ -1,9 +1,5 @@
-import { useState } from "react";
-import { GenderOptions, AgeOptions } from "@/constants/dashboard/PersonInfo";
-import { DropdownFilter } from "@/components/common/DropdownFilter";
 import itemImage from "@/assets/webps/itemList/item-img.webp";
 import DashBoardTitle from "@/pages/dashboardPage/views/DashBoardTitle";
-import { AgeOptionsType, GenderOptionsType } from "@/types/DashboardType";
 import { useBestItemsApi } from "@/hooks/api/useDashboardApi";
 import NoDataCompt from "@/components/common/NoDataComp";
 
@@ -20,33 +16,13 @@ const badgeBgClass: Record<number, string> = {
 };
 
 export default function BestItem() {
-  const [gender, setGender] = useState<GenderOptionsType>("남성");
-  const [age, setAge] = useState<AgeOptionsType>(10);
-  const { data } = useBestItemsApi({ gender, age });
-
-  const handleAgeChange = (value: string) => {
-    const numericAge = parseInt(value.replace("대", ""));
-    setAge(numericAge as AgeOptionsType);
-  };
+  const { data } = useBestItemsApi();
 
   return (
     <div>
       {/* 헤더 + 카테고리 */}
       <div className="flex items-start gap-6">
         <DashBoardTitle title="실시간 인기상품" />
-        {/* 필터 버튼 바로 옆에 위치 */}
-        <div className="flex gap-4 ">
-          <DropdownFilter
-            value={gender}
-            options={GenderOptions}
-            onChange={setGender}
-          />
-          <DropdownFilter
-            value={`${age}대`}
-            options={AgeOptions}
-            onChange={handleAgeChange}
-          />
-        </div>
       </div>
 
       {/* 베스트 상품 리스트 */}
