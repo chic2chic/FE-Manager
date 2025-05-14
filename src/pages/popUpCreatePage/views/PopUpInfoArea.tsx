@@ -11,6 +11,7 @@ import { FormatDateTimeToString, FormatDateToString } from "@/utils/FormatDay";
 import { getTimeValue } from "@/utils/FormatTimestamp";
 import useClickOutside from "@/hooks/useClickOutside";
 import { addDays } from "date-fns";
+import NoImageComp from "@/components/common/NoImageComp";
 
 type Props = {
   formData: PopUpWithChoicesRequest;
@@ -74,7 +75,6 @@ export default function PopUpInfoArea({
         FormatDateTimeToString(tomorrow, 0),
       );
     }
-    validateReservEndDate();
   }, []);
 
   const calenderRefs = {
@@ -225,15 +225,18 @@ export default function PopUpInfoArea({
   useClickOutside(refs, isOpenStates, index => closeHandlers[index]());
 
   return (
-    <div className="flex justify-center gap-[30px] mt-[60px]">
+    <div className="flex justify-center gap-[50px] mt-[60px]">
       {/* 이미지 업로드 영역 */}
-      <div className="relative w-[312px] h-[440px]">
-        <img
-          src={previewImage}
-          alt="상품 이미지"
-          width={400}
-          className="w-full h-full object-cover rounded-[20px]"
-        />
+      <div className={`relative w-[312px] h-[440px]`}>
+        {previewImage ? (
+          <img
+            src={previewImage}
+            alt="팝업 이미지"
+            className="w-full h-full object-cover rounded-[20px]"
+          />
+        ) : (
+          <NoImageComp width={312} height={440} />
+        )}
         <input
           type="file"
           accept="image/*"

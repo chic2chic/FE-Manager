@@ -1,7 +1,7 @@
 import CustomInput from "@/components/common/CustomInput";
 import { useSelectedItemStore } from "@/stores/useSelectedItemStore";
 import React from "react";
-import TestImage from "@/assets/webps/onBoarding/test.png";
+import NoImageComp from "@/components/common/NoImageComp";
 
 type Props = {
   name: string;
@@ -44,12 +44,17 @@ export default function ItemCreateInputs({
     <div className="absolute left-[50%] mt-[40px] transform -translate-x-1/2 flex justify-center items-center gap-[53px]">
       <div className="relative w-[400px] h-[400px]">
         {/* 이미지 */}
-        <img
-          src={imageFile ? URL.createObjectURL(imageFile) : TestImage}
-          alt="상품 이미지"
-          width={400}
-          className="w-full h-full object-cover rounded-[20px]"
-        />
+        {imageFile ? (
+          <img
+            src={URL.createObjectURL(imageFile)}
+            alt="상품 이미지"
+            width={400}
+            className="w-full h-full object-cover rounded-[20px]"
+          />
+        ) : (
+          <NoImageComp width={400} height={400} />
+        )}
+
         {!isPatchMode && (
           <input
             type="file"
