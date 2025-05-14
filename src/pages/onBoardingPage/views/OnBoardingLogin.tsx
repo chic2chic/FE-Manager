@@ -27,6 +27,13 @@ export default function OnBoradingLogin() {
     setIsOpenModal(false);
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter") {
+      e.preventDefault(); // 엔터 키의 기본 동작 방지
+      handleLogin();
+    }
+  };
+
   return (
     <div className="flex flex-col gap-[34px] items-center">
       <div className="flex flex-col gap-4">
@@ -52,6 +59,7 @@ export default function OnBoradingLogin() {
           value={password}
           width={500}
           height={60}
+          onKeyDown={handleKeyDown}
         />
       </div>
       <button

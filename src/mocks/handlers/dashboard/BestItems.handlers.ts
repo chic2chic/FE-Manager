@@ -1,5 +1,6 @@
 import { http, HttpResponse } from "msw";
 import TestImage from "@/assets/webps/onBoarding/test.png";
+import { GetBestItemsResponse } from "@/types/api/ApiResponseType";
 
 export const BestItems = [
   {
@@ -37,8 +38,8 @@ export const BestItemsHandlers = [
       {
         success: true,
         status: 200,
-        // data: BestItems as GetBestItemsResponse,
-        data: [],
+        data: BestItems as GetBestItemsResponse,
+        // data: [],
         timestamp: new Date().toISOString(),
       },
       { status: 200 },

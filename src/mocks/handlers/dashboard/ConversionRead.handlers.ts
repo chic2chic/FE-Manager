@@ -71,8 +71,8 @@ export const ConversionReadHandlers = [
       {
         success: true,
         status: 200,
-        // data: ConversionList,
-        data: { low: [], high: [] },
+        data: ConversionList,
+        // data: { low: [], high: [] },
         timestamp: new Date().toISOString(),
       },
       { status: 200 },

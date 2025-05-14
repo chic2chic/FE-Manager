@@ -367,6 +367,7 @@ export default function PopUpInfoArea({
                 isOnlyNumber={true}
                 isTimeFormat={true}
                 minTime={timeConstraints.closeMinTime}
+                maxTime={24}
                 onChange={e =>
                   updatePopupField(
                     "reservationCloseDateTime",
