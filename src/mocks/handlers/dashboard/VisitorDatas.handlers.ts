@@ -20,7 +20,8 @@ export const VisitorStatsHandlers = [
       {
         success: true,
         status: 200,
-        data: visitorStatsMockData,
+        // data: visitorStatsMockData,
+        data: { gender: [], age: [] },
         timestamp: new Date().toISOString(),
       },
       { status: 200 },
