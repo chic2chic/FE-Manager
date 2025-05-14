@@ -50,26 +50,26 @@ export default function BestItem() {
       </div>
 
       {/* 베스트 상품 리스트 */}
-      <div className="flex justify-center gap-[60px] mt-2">
-        {data && data.length > 0 ? (
-          data.map((item, index) => (
+      {data && data.length > 0 ? (
+        <div className="flex justify-center gap-[60px] mt-2">
+          {data.map((item, index) => (
             <div
               key={item.itemId}
               className={`
-              relative flex flex-col items-center justify-center
-              w-[400px] rounded-[50px] px-[33px] pb-9
-              ${cardBgClass[index + 1]}
-            `}
+                relative flex flex-col items-center justify-center
+                w-[400px] rounded-[50px] px-[33px] pb-9
+                ${cardBgClass[index + 1]}
+              `}
             >
               {/* 순위 뱃지 */}
               <div
                 className={`
-                absolute -top-[20px] -left-[20px]
-                w-[56px] h-[56px] rounded-full
-                text-white font-bold text-[30px]
-                flex items-center justify-center 
-                ${badgeBgClass[index + 1]}
-              `}
+                  absolute -top-[20px] -left-[20px]
+                  w-[56px] h-[56px] rounded-full
+                  text-white font-bold text-[30px]
+                  flex items-center justify-center 
+                  ${badgeBgClass[index + 1]}
+                `}
               >
                 {index + 1}
               </div>
@@ -94,13 +94,13 @@ export default function BestItem() {
                 </div>
               </div>
             </div>
-          ))
-        ) : (
-          <div>
-            <NoDataCompt />
-          </div>
-        )}
-      </div>
+          ))}
+        </div>
+      ) : (
+        <div className="flex justify-center gap-[60px] mt-2 h-[300px]">
+          <NoDataCompt />
+        </div>
+      )}
     </div>
   );
 }
