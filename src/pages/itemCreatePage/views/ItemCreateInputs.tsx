@@ -94,6 +94,7 @@ export default function ItemCreateInputs({
           title="발주 기준 수량"
           placeholder="상품 발주 기준 수량을 입력해주세요"
           onChange={isPatchMode ? handlePatchMinStock : handleMinStock}
+          maxValue={isPatchMode && selectedItem ? selectedItem.stock : stock}
         />
         <CustomInput
           value={isPatchMode && selectedItem ? selectedItem.location : location}
