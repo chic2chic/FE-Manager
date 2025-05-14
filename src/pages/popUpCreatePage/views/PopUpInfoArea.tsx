@@ -74,6 +74,7 @@ export default function PopUpInfoArea({
         FormatDateTimeToString(tomorrow, 0),
       );
     }
+    validateReservEndDate();
   }, []);
 
   const calenderRefs = {
@@ -223,24 +224,6 @@ export default function PopUpInfoArea({
 
   useClickOutside(refs, isOpenStates, index => closeHandlers[index]());
 
-  // 시간 제약 조건 계산
-  const getTimeConstraints = () => {
-    const isSameReservDay =
-      reservStartCalender.selectedDate.getTime() ===
-      reservEndCalender.selectedDate.getTime();
-
-    return {
-      openMaxTime: isSameReservDay
-        ? getTimeValue(popupCreateRequest.reservationCloseDateTime) || 24
-        : 24,
-      closeMinTime: isSameReservDay
-        ? getTimeValue(popupCreateRequest.reservationOpenDateTime) || 0
-        : 0,
-    };
-  };
-
-  const timeConstraints = getTimeConstraints();
-
   return (
     <div className="flex justify-center gap-[30px] mt-[60px]">
       {/* 이미지 업로드 영역 */}
@@ -336,7 +319,6 @@ export default function PopUpInfoArea({
                 cssOption="text-center w-[90px]"
                 isOnlyNumber={true}
                 isTimeFormat={true}
-                maxTime={timeConstraints.openMaxTime}
                 onChange={e =>
                   updatePopupField(
                     "reservationOpenDateTime",
@@ -366,8 +348,6 @@ export default function PopUpInfoArea({
                 cssOption="text-center w-[90px]"
                 isOnlyNumber={true}
                 isTimeFormat={true}
-                minTime={timeConstraints.closeMinTime}
-                maxTime={24}
                 onChange={e =>
                   updatePopupField(
                     "reservationCloseDateTime",
