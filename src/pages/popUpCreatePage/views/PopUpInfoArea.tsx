@@ -288,7 +288,9 @@ export default function PopUpInfoArea({
             isOnlyNumber={true}
             isTimeFormat={true}
             maxTime={Number(popupCreateRequest.runCloseTime) || 24}
-            onChange={e => updatePopupField("runOpenTime", e.target.value)}
+            onChange={e =>
+              updatePopupField("runOpenTime", `${e.target.value}:00:00`)
+            }
           />
           <span>-</span>
           <PopUpInput
@@ -297,7 +299,9 @@ export default function PopUpInfoArea({
             isOnlyNumber={true}
             isTimeFormat={true}
             minTime={Number(popupCreateRequest.runOpenTime) || 0}
-            onChange={e => updatePopupField("runCloseTime", e.target.value)}
+            onChange={e =>
+              updatePopupField("runCloseTime", `${e.target.value}:00:00`)
+            }
           />
         </div>
 
