@@ -44,9 +44,15 @@ export default function ItemCreateInputs({
     <div className="absolute left-[50%] mt-[40px] transform -translate-x-1/2 flex justify-center items-center gap-[53px]">
       <div className="relative w-[400px] h-[400px]">
         {/* 이미지 */}
-        {imageFile ? (
+        {imageFile || (isPatchMode && selectedItem?.imageUrl) ? (
           <img
-            src={URL.createObjectURL(imageFile)}
+            src={
+              isPatchMode && selectedItem?.imageUrl
+                ? selectedItem.imageUrl
+                : imageFile
+                  ? URL.createObjectURL(imageFile)
+                  : ""
+            }
             alt="상품 이미지"
             width={400}
             className="w-full h-full object-cover rounded-[20px]"
