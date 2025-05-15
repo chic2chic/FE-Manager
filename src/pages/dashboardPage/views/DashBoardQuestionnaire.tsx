@@ -6,6 +6,7 @@ import CustomTooltip from "@/components/common/CustomTooltip";
 import { useQuestionnaireApi } from "@/hooks/api/useDashboardApi";
 import { QuestionnaireResponse } from "@/types/api/ApiResponseType";
 import { Questions } from "@/constants/popUpCreate/Questions";
+import Loading from "@/components/common/Loading";
 
 const options = ["1번 문항", "2번 문항", "3번 문항", "4번 문항"];
 const SIZE = 300;
@@ -29,29 +30,38 @@ const findQuestionTotal = (questionnaireData: QuestionnaireResponse) => {
 // 선택된 문항 번호에 해당하는 설문 데이터 반환
 const matchQA = (
   selected: string,
-  surveys: QuestionnaireResponse[],
-): QuestionnaireResponse & { total: number } => {
+  surveys?: QuestionnaireResponse[],
+): (QuestionnaireResponse & { total: number }) | null => {
+  if (!surveys || surveys.length === 0) {
+    return null;
+  }
+
   const questionNumber = findQuestionNumber(selected);
   const found = surveys.find(q => q.surveyNumber === questionNumber);
 
   if (!found) {
-    throw new Error("설문 항목을 찾을 수 없습니다.");
+    return null;
   }
 
   const total = findQuestionTotal(found);
   return { ...found, total };
 };
 
+const isZeroTotal = (questionnaireData: QuestionnaireResponse): boolean => {
+  return questionnaireData.contents.every(
+    content => content.selectedCount === 0,
+  );
+};
+
 export default function DashBoardQuestionnaire() {
   const [selectedQuestion, setSelectedQuestion] = useState(options[0]);
-  const { surveys, isLoading, isError } = useQuestionnaireApi();
+  const { surveys } = useQuestionnaireApi();
+
+  const isLoading = true;
 
   const handleQuestion = (selected: string) => {
     setSelectedQuestion(selected);
   };
-
-  if (isLoading) return <p>로딩 중...</p>;
-  if (isError || !surveys) return <p>데이터를 불러오는 데 실패했습니다.</p>;
 
   const matchQuestion = (selected: string): string => {
     const questionNumber = findQuestionNumber(selected);
@@ -60,6 +70,29 @@ export default function DashBoardQuestionnaire() {
   };
 
   const matched = matchQA(selectedQuestion, surveys);
+
+  // 로딩 중이거나 데이터가 없을 때
+  if (isLoading || !matched) {
+    return (
+      <div className="flex flex-col">
+        <div className="relative flex gap-[20px]">
+          <DashBoardTitle title="설문지 분석" />
+          <div className="ml-2">
+            <DropdownFilter
+              value={selectedQuestion}
+              options={options}
+              onChange={handleQuestion}
+            />
+          </div>
+        </div>
+        <div className="w-[1360px] h-[662px] bg-gray02 rounded-[50px] px-[60px] py-[45px] flex items-center justify-center">
+          <p className="text-[24px] text-gray08">
+            {isLoading ? <Loading /> : "설문 데이터가 없습니다."}
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col">
@@ -92,68 +125,80 @@ export default function DashBoardQuestionnaire() {
                 </div>
               ))}
             </div>
-
             {/* 오른쪽 - 파이 차트 */}
             <div className="flex flex-col items-end h-full">
               <p className="text-[20px] font-medium text-gray08">
                 전체 응시자 수: {matched.total}명
               </p>
               <div className="flex justify-center gap-[80px] items-center">
-                <PieChart width={SIZE} height={SIZE}>
-                  <Tooltip
-                    cursor={{ fill: "transparent" }}
-                    content={(props: TooltipProps<number, string>) => {
-                      if (
-                        !props.active ||
-                        !props.payload ||
-                        props.payload.length === 0
-                      )
-                        return null;
+                {isZeroTotal(matched) ? (
+                  // 모든 항목의 값이 0인 경우 메시지 표시
+                  <div className="flex items-center justify-center w-[300px] h-[300px]">
+                    <p className="text-[20px] text-gray08 text-center">
+                      아직 응답한 데이터가 없습니다.
+                    </p>
+                  </div>
+                ) : (
+                  // 정상적인 파이 차트 표시
+                  <PieChart width={SIZE} height={SIZE}>
+                    <Tooltip
+                      cursor={{ fill: "transparent" }}
+                      content={(props: TooltipProps<number, string>) => {
+                        if (
+                          !props.active ||
+                          !props.payload ||
+                          props.payload.length === 0
+                        )
+                          return null;
 
-                      const targetPayload = props.payload[0].payload;
-                      return (
-                        <CustomTooltip
-                          active={props.active}
-                          payload={[
-                            {
-                              value: targetPayload.selectedCount,
-                              name: targetPayload.title,
-                              dataKey: "selectedCount",
-                            },
-                          ]}
-                          label={targetPayload.title}
-                          unitSuffix="명"
-                          highlightColor={
-                            colorSet[
-                              props.payload[0].dataKey === "selectedCount"
-                                ? matched.contents.findIndex(
-                                    c => c.title === targetPayload.title,
-                                  ) % colorSet.length
-                                : 0
-                            ]
-                          }
+                        const targetPayload = props.payload[0].payload;
+                        return (
+                          <CustomTooltip
+                            active={props.active}
+                            payload={[
+                              {
+                                value: targetPayload.selectedCount,
+                                name: targetPayload.title,
+                                dataKey: "selectedCount",
+                              },
+                            ]}
+                            label={targetPayload.title}
+                            unitSuffix="명"
+                            highlightColor={
+                              colorSet[
+                                props.payload[0].dataKey === "selectedCount"
+                                  ? matched.contents.findIndex(
+                                      c => c.title === targetPayload.title,
+                                    ) % colorSet.length
+                                  : 0
+                              ]
+                            }
+                          />
+                        );
+                      }}
+                    />
+
+                    <Pie
+                      data={matched.contents}
+                      innerRadius={0}
+                      outerRadius={RADIUS}
+                      dataKey="selectedCount"
+                      nameKey="title"
+                      cx="50%"
+                      cy="50%"
+                      paddingAngle={0}
+                    >
+                      {matched.contents.map((_, idx) => (
+                        <Cell
+                          key={idx}
+                          fill={colorSet[idx % colorSet.length]}
                         />
-                      );
-                    }}
-                  />
-
-                  <Pie
-                    data={matched.contents}
-                    innerRadius={0}
-                    outerRadius={RADIUS}
-                    dataKey="selectedCount"
-                    nameKey="title"
-                    cx="50%"
-                    cy="50%"
-                    paddingAngle={0}
-                  >
-                    {matched.contents.map((_, idx) => (
-                      <Cell key={idx} fill={colorSet[idx % colorSet.length]} />
-                    ))}
-                  </Pie>
-                </PieChart>
+                      ))}
+                    </Pie>
+                  </PieChart>
+                )}
                 <div className="grid grid-cols-2 gap-x-6 gap-y-4 h-[100px]">
-                  {matched.contents.map((_, idx) => (
+                  {matched.contents.map((content, idx) => (
                     <div key={idx} className="flex items-center gap-2">
                       <span
                         className="w-[38px] h-[18px] rounded-[8px]"
@@ -161,7 +206,14 @@ export default function DashBoardQuestionnaire() {
                           backgroundColor: colorSet[idx % colorSet.length],
                         }}
                       />
-                      <span>{idx + 1}번</span>
+                      <span className="flex gap-2">
+                        <span>{idx + 1}번</span>
+                        {isZeroTotal(matched) && (
+                          <span className="text-gray06">
+                            ({content.selectedCount}명)
+                          </span>
+                        )}
+                      </span>
                     </div>
                   ))}
                 </div>
