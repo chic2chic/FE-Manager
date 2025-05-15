@@ -196,8 +196,8 @@ export default function PopUpInfoArea({
   // 주소 정보 업데이트
   useEffect(() => {
     updatePopupField("roadAddress", addressInfo.address);
-    updatePopupField("latitude", addressInfo.latitude);
-    updatePopupField("longitude", addressInfo.latitude);
+    updatePopupField("latitude", Number(addressInfo.latitude));
+    updatePopupField("longitude", Number(addressInfo.longitude));
   }, [addressInfo, updatePopupField]);
 
   // 캘린더 외부 클릭 감지
