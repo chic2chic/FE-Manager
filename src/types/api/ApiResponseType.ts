@@ -53,7 +53,7 @@ export type ReservationsResponse = {
 
 export type ReservationChartResponse = {
   day: string;
-  value: number;
+  reservedCount: number;
 };
 
 export type GetStockNotificationResponse = {
