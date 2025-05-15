@@ -26,7 +26,7 @@ export const ReservationChartDatas: ReservationChartResponse[] = [
 ];
 
 export const TodayEntrantsDatas: EntrantsResponse = {
-  enteredCount: 180,
+  entrantCount: 0,
 };
 
 export const TodayReservationDatas: ReservationsResponse = {

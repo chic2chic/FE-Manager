@@ -43,7 +43,7 @@ export type GetAvgPurchaseResponse = {
 };
 
 export type EntrantsResponse = {
-  enteredCount: number;
+  entrantCount: number;
 };
 
 export type ReservationsResponse = {

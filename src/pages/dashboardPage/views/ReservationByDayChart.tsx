@@ -49,7 +49,7 @@ export default function ReservationByDayChart({ data }: Props) {
           cursor={{ fill: "transparent" }}
           content={<CustomTooltip unitPrefix="평균" unitSuffix="명" />}
         />
-        <Bar dataKey="value" radius={10} barSize={35}>
+        <Bar dataKey="reservedCount" radius={10} barSize={35}>
           {coloredData.map((entry, index) => (
             <Cell key={index} fill={entry.fill} />
           ))}
