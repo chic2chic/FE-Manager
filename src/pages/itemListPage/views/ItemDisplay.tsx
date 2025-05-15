@@ -55,7 +55,7 @@ export default function ItemDisplay({ displayName, items }: Props) {
         {items.map(item => (
           <div key={item.itemId} className="flex flex-col items-center">
             {/* 상품 이미지 */}
-            <div className="relative w-[200px] h-[200px] mb-3 overflow-hidden">
+            <div className="relative w-[240px] h-[240px] mb-3 overflow-hidden">
               <img
                 src={item.imageUrl}
                 alt={item.name}
@@ -64,7 +64,9 @@ export default function ItemDisplay({ displayName, items }: Props) {
             </div>
 
             {/* 상품명 + 버튼 */}
-            <p className="font-bold text-[20px] mb-1">{item.name}</p>
+            <p className="font-bold text-[20px] mb-2 w-[280px] text-center break-keep">
+              {item.name}
+            </p>
             <p className="text-[16px] text-gray08 mb-1">
               {item.price.toLocaleString()}원
             </p>

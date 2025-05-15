@@ -16,7 +16,7 @@ const itemsDatabase: ItemListType = {
     {
       location: "2",
       itemId: "life002",
-      name: "친환경 세제",
+      name: "DAZED A형 (제니) : 홀리데이 에디션 [2021]",
       imageUrl: TestImage,
       price: 8900,
       stock: 85,
