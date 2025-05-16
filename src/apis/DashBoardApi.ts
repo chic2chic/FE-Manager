@@ -39,7 +39,7 @@ export const getTodayReservations =
   };
 
 export const getBestItems = async (): ApiResponse<GetBestItemsResponse> => {
-  const response = await apiPopUp.get(`/items/trending`);
+  const response = await apiPopUp.get(`/dashboard/trending`);
   return response.data;
 };
 
