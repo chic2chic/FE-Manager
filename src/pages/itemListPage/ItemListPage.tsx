@@ -33,7 +33,7 @@ export default function ItemListPage() {
       {isDataExist ? (
         Object.entries(data).map(([k, v]) => (
           <div key={k}>
-            <ItemDisplay displayName={k} items={v} />
+            <ItemDisplay displayName={k.toUpperCase()} items={v} />
           </div>
         ))
       ) : (

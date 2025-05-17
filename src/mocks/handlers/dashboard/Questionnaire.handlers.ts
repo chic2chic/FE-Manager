@@ -7,19 +7,19 @@ export const QuestionnaireDatas: QuestionnaireListResponse = {
     {
       surveyNumber: 1,
       contents: [
-        { title: "포토 카드", selectedCount: 400, ratio: 32 },
-        { title: "앨범 (CD)", selectedCount: 350, ratio: 28 },
-        { title: "디지털 음원", selectedCount: 200, ratio: 16 },
+        { title: "포토 카드", selectedCount: 0, ratio: 0 },
+        { title: "앨범 (CD)", selectedCount: 0, ratio: 0 },
+        { title: "디지털 음원", selectedCount: 0, ratio: 0 },
       ],
     },
     {
       surveyNumber: 2,
       contents: [
-        { title: "콘서트", selectedCount: 520, ratio: 42 },
-        { title: "팬미팅", selectedCount: 380, ratio: 30 },
-        { title: "사인회", selectedCount: 290, ratio: 23 },
-        { title: "팬티켓팅", selectedCount: 180, ratio: 14 },
-        { title: "음악방송", selectedCount: 150, ratio: 12 },
+        { title: "콘서트", selectedCount: 0, ratio: 0 },
+        { title: "팬미팅", selectedCount: 0, ratio: 0 },
+        { title: "사인회", selectedCount: 0, ratio: 0 },
+        { title: "팬티켓팅", selectedCount: 0, ratio: 0 },
+        { title: "음악방송", selectedCount: 0, ratio: 0 },
       ],
     },
     {

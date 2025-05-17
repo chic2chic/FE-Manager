@@ -10,7 +10,9 @@ import { ReservationChartResponse } from "@/types/api/ApiResponseType";
 // ⭐️ value 기준 오름차순으로 color 매칭시키기 ⭐️
 export function reservationColorMapper(data: ReservationChartResponse[]) {
   // 1. value 기준 오름차순 정렬
-  const sortedData = [...data].sort((a, b) => a.value - b.value);
+  const sortedData = [...data].sort(
+    (a, b) => a.reservedCount - b.reservedCount,
+  );
 
   // 2. 요일 -> 색상 매칭
   const dayToColorMap = new Map(

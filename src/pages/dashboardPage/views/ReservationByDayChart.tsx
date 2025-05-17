@@ -18,7 +18,7 @@ type Props = {
 export default function ReservationByDayChart({ data }: Props) {
   const coloredData = reservationColorMapper(data);
   // max값 기준 y축 눈금 100 단위로 만들기
-  const maxValue = Math.max(...data.map(d => d.value)); // value 중 가장 큰 수
+  const maxValue = Math.max(...data.map(d => d.reservedCount)); // value 중 가장 큰 수
   const roundedMax = Math.ceil(maxValue / 100) * 100; // 100 단위 올림
   const ticks = [];
 
@@ -49,7 +49,7 @@ export default function ReservationByDayChart({ data }: Props) {
           cursor={{ fill: "transparent" }}
           content={<CustomTooltip unitPrefix="평균" unitSuffix="명" />}
         />
-        <Bar dataKey="value" radius={10} barSize={35}>
+        <Bar dataKey="reservedCount" radius={10} barSize={35}>
           {coloredData.map((entry, index) => (
             <Cell key={index} fill={entry.fill} />
           ))}

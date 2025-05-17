@@ -1,6 +1,7 @@
 import xWhite from "@/assets/webps/popUpList/x-white.webp";
 import { usePopUpReadStore } from "@/stores/usePopUpReadStore";
 import { GetPopUpReadResponse } from "@/types/api/ApiResponseType";
+import { useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 
 type Props = GetPopUpReadResponse & {
@@ -15,9 +16,21 @@ export default function PopUpCard({
 }: Props) {
   const setPopUp = usePopUpReadStore(state => state.setPopUp);
   const navigate = useNavigate();
+  const isNameContainPopUp = name.includes("팝업스토어");
+  const queryClient = useQueryClient();
+
+  let firstLine = "";
+  let secondLine = "";
+
+  if (isNameContainPopUp) {
+    const parts = name.split("팝업스토어");
+    firstLine = parts[0];
+    secondLine = "팝업스토어" + (parts[1] || "");
+  }
 
   const handleSelect = () => {
     setPopUp({ popupId, name, imageUrl });
+    queryClient.clear();
     navigate("/dashboard");
   };
 
@@ -52,7 +65,20 @@ export default function PopUpCard({
         lang="en"
         className="cursor-pointer w-[286px] break-words block text-center justify-center text-[34px] mt-[22px]"
       >
-        {name}
+        {isNameContainPopUp ? (
+          <>
+            <span lang="en" className="block text-[34px]">
+              {firstLine}
+            </span>
+            <span lang="en" className="block text-[34px]">
+              {secondLine}
+            </span>
+          </>
+        ) : (
+          <span lang="en" className="block text-[34px]">
+            {name}
+          </span>
+        )}
       </span>
     </>
   );

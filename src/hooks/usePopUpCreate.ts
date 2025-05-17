@@ -34,7 +34,7 @@ export const usePopUpCreate = () => {
       ...formData,
       popupCreateRequest: {
         ...formData.popupCreateRequest,
-        imageUrl: presignedUrl,
+        imageUrl: presignedUrl.split("?")[0],
       },
     });
   };

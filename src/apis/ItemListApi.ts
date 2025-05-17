@@ -22,7 +22,7 @@ export const postItemAddExcel = async ({
   onProgress,
 }: ItemAddExcelRequest): ApiResponse<NoResponse> => {
   const formData = new FormData();
-  formData.append("form-data", excelFile);
+  formData.append("itemFile", excelFile);
 
   const config = {
     headers: {
