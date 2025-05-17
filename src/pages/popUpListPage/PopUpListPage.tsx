@@ -62,7 +62,9 @@ export default function PopUpListPage() {
           {/* plus button */}
           <div
             className="cursor-pointer flex justify-center items-center w-[70px] h-[70px] rounded-full bg-main07 mt-[50px] mr-11"
-            onClick={() => navigate("/popup-create")}
+            onClick={() => {
+              navigate("/popup-create");
+            }}
           >
             <img src={plusWhite} alt="plus button" width={36} height={36} />
           </div>
