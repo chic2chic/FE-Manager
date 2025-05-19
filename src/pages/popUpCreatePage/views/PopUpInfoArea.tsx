@@ -11,6 +11,7 @@ import { FormatDateTimeToString, FormatDateToString } from "@/utils/FormatDay";
 import { getTimeValue } from "@/utils/FormatTimestamp";
 import useClickOutside from "@/hooks/useClickOutside";
 import { addDays } from "date-fns";
+import NoImageComp from "@/components/common/NoImageComp";
 
 type Props = {
   formData: PopUpWithChoicesRequest;
@@ -195,8 +196,8 @@ export default function PopUpInfoArea({
   // 주소 정보 업데이트
   useEffect(() => {
     updatePopupField("roadAddress", addressInfo.address);
-    updatePopupField("latitude", addressInfo.latitude);
-    updatePopupField("longitude", addressInfo.latitude);
+    updatePopupField("latitude", Number(addressInfo.latitude));
+    updatePopupField("longitude", Number(addressInfo.longitude));
   }, [addressInfo, updatePopupField]);
 
   // 캘린더 외부 클릭 감지
@@ -223,34 +224,19 @@ export default function PopUpInfoArea({
 
   useClickOutside(refs, isOpenStates, index => closeHandlers[index]());
 
-  // 시간 제약 조건 계산
-  const getTimeConstraints = () => {
-    const isSameReservDay =
-      reservStartCalender.selectedDate.getTime() ===
-      reservEndCalender.selectedDate.getTime();
-
-    return {
-      openMaxTime: isSameReservDay
-        ? getTimeValue(popupCreateRequest.reservationCloseDateTime) || 24
-        : 24,
-      closeMinTime: isSameReservDay
-        ? getTimeValue(popupCreateRequest.reservationOpenDateTime) || 0
-        : 0,
-    };
-  };
-
-  const timeConstraints = getTimeConstraints();
-
   return (
-    <div className="flex justify-center gap-[30px] mt-[60px]">
+    <div className="flex justify-center gap-[50px] mt-[60px]">
       {/* 이미지 업로드 영역 */}
-      <div className="relative w-[312px] h-[440px]">
-        <img
-          src={previewImage}
-          alt="상품 이미지"
-          width={400}
-          className="w-full h-full object-cover rounded-[20px]"
-        />
+      <div className={`relative w-[312px] h-[440px]`}>
+        {previewImage ? (
+          <img
+            src={previewImage}
+            alt="팝업 이미지"
+            className="w-full h-full object-cover rounded-[20px]"
+          />
+        ) : (
+          <NoImageComp width={312} height={440} />
+        )}
         <input
           type="file"
           accept="image/*"
@@ -302,7 +288,9 @@ export default function PopUpInfoArea({
             isOnlyNumber={true}
             isTimeFormat={true}
             maxTime={Number(popupCreateRequest.runCloseTime) || 24}
-            onChange={e => updatePopupField("runOpenTime", e.target.value)}
+            onChange={e =>
+              updatePopupField("runOpenTime", `${e.target.value}:00:00`)
+            }
           />
           <span>-</span>
           <PopUpInput
@@ -311,7 +299,9 @@ export default function PopUpInfoArea({
             isOnlyNumber={true}
             isTimeFormat={true}
             minTime={Number(popupCreateRequest.runOpenTime) || 0}
-            onChange={e => updatePopupField("runCloseTime", e.target.value)}
+            onChange={e =>
+              updatePopupField("runCloseTime", `${e.target.value}:00:00`)
+            }
           />
         </div>
 
@@ -336,7 +326,6 @@ export default function PopUpInfoArea({
                 cssOption="text-center w-[90px]"
                 isOnlyNumber={true}
                 isTimeFormat={true}
-                maxTime={timeConstraints.openMaxTime}
                 onChange={e =>
                   updatePopupField(
                     "reservationOpenDateTime",
@@ -366,8 +355,6 @@ export default function PopUpInfoArea({
                 cssOption="text-center w-[90px]"
                 isOnlyNumber={true}
                 isTimeFormat={true}
-                minTime={timeConstraints.closeMinTime}
-                maxTime={24}
                 onChange={e =>
                   updatePopupField(
                     "reservationCloseDateTime",

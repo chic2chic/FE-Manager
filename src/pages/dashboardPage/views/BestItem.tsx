@@ -1,4 +1,3 @@
-import itemImage from "@/assets/webps/itemList/item-img.webp";
 import DashBoardTitle from "@/pages/dashboardPage/views/DashBoardTitle";
 import { useBestItemsApi } from "@/hooks/api/useDashboardApi";
 import NoDataCompt from "@/components/common/NoDataComp";
@@ -53,7 +52,7 @@ export default function BestItem() {
               {/* 상품 이미지 */}
               <div className="mb-6">
                 <img
-                  src={itemImage}
+                  src={item.imagePath}
                   alt={item.title}
                   className="w-[334px] h-[334px] object-cover mt-9 mb-4"
                 />

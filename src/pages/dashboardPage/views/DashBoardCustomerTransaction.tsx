@@ -14,7 +14,7 @@ export default function DashBoardCustomerTransaction() {
             <CountCard
               title="팝업 기간 내"
               bgCSS="bg-mint02"
-              value={data.totalPrice.toLocaleString()}
+              value={data.totalPrice}
               valueCSS="text-mint08 text-[56px]"
               unit="원"
               unitCSS="text-mint08 text-[40px]"
@@ -22,7 +22,7 @@ export default function DashBoardCustomerTransaction() {
             <CountCard
               title="TODAY"
               bgCSS="bg-blue02"
-              value={data.todayPrice.toLocaleString()}
+              value={data.todayPrice}
               valueCSS="text-blue07 text-[56px]"
               unit="원"
               unitCSS="text-blue07 text-[40px]"

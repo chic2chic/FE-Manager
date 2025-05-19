@@ -2,7 +2,7 @@ type Props = {
   bgCSS: string;
   title: string;
   valueCSS: string;
-  value: string;
+  value: number;
   unitCSS: string;
   unit: string;
 };
@@ -26,7 +26,7 @@ export function CountCard({
       <p
         className={`text-[64px] ${valueCSS} font-regular tracking-[-1.8px] leading-[74px]`}
       >
-        {value.toLocaleString()}
+        {Number(value).toLocaleString()}
         <span className={`ml-[3px] mb-1 ${unitCSS}`}>{unit}</span>
       </p>
     </div>

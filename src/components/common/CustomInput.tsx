@@ -1,9 +1,3 @@
-/**
- * @Description
- * 온보딩 로그인 페이지에서 사용되는 타이틀 & 인풋 태그입니다
- * 온보딩 페이지와 상품 등록 페이지에서 공통적으로 사용됩니다
- */
-
 import React from "react";
 
 type Props = {
@@ -18,6 +12,7 @@ type Props = {
   height?: number;
   isPatchMode?: boolean;
   onKeyDown?: (_e: React.KeyboardEvent) => void;
+  maxValue?: number;
 };
 
 export default function CustomInput({
@@ -32,6 +27,7 @@ export default function CustomInput({
   height = 60,
   isPatchMode = false,
   onKeyDown,
+  maxValue,
 }: Props) {
   const numberHandler = (e: React.FormEvent<HTMLInputElement>) => {
     if (isOnlyNumber) {
@@ -46,6 +42,13 @@ export default function CustomInput({
       }
     }
   };
+
+  const adjustedValue =
+    maxValue !== undefined && typeof value === "number"
+      ? value > maxValue
+        ? maxValue
+        : value
+      : value;
 
   return (
     <div className="flex flex-col gap-2">
@@ -69,7 +72,7 @@ export default function CustomInput({
           type={inputType || "text"}
           placeholder={placeholder}
           onChange={onChange}
-          value={value}
+          value={adjustedValue}
           onInput={isOnlyNumber ? numberHandler : undefined}
           onKeyDown={onKeyDown ? onKeyDown : () => {}}
         />

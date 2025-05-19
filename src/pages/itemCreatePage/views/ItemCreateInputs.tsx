@@ -1,7 +1,7 @@
 import CustomInput from "@/components/common/CustomInput";
 import { useSelectedItemStore } from "@/stores/useSelectedItemStore";
 import React from "react";
-import TestImage from "@/assets/webps/onBoarding/test.png";
+import NoImageComp from "@/components/common/NoImageComp";
 
 type Props = {
   name: string;
@@ -44,12 +44,23 @@ export default function ItemCreateInputs({
     <div className="absolute left-[50%] mt-[40px] transform -translate-x-1/2 flex justify-center items-center gap-[53px]">
       <div className="relative w-[400px] h-[400px]">
         {/* 이미지 */}
-        <img
-          src={imageFile ? URL.createObjectURL(imageFile) : TestImage}
-          alt="상품 이미지"
-          width={400}
-          className="w-full h-full object-cover rounded-[20px]"
-        />
+        {imageFile || (isPatchMode && selectedItem?.imageUrl) ? (
+          <img
+            src={
+              isPatchMode && selectedItem?.imageUrl
+                ? selectedItem.imageUrl
+                : imageFile
+                  ? URL.createObjectURL(imageFile)
+                  : ""
+            }
+            alt="상품 이미지"
+            width={400}
+            className="w-full h-full object-cover rounded-[20px]"
+          />
+        ) : (
+          <NoImageComp width={400} height={400} />
+        )}
+
         {!isPatchMode && (
           <input
             type="file"
@@ -94,6 +105,7 @@ export default function ItemCreateInputs({
           title="발주 기준 수량"
           placeholder="상품 발주 기준 수량을 입력해주세요"
           onChange={isPatchMode ? handlePatchMinStock : handleMinStock}
+          maxValue={isPatchMode && selectedItem ? selectedItem.stock : stock}
         />
         <CustomInput
           value={isPatchMode && selectedItem ? selectedItem.location : location}

@@ -12,6 +12,8 @@ export default function DashBoardReservation() {
   const { data: entrantsData } = useTodayEntrantsApi();
   const { data: reservationsData } = useTodayReservationsApi();
 
+  console.log(reservationsData);
+
   return (
     <div className="w-[906px] flex-col">
       <DashBoardTitle title="예약 분석" />
@@ -21,7 +23,7 @@ export default function DashBoardReservation() {
             <CountCard
               title="예약자 수"
               bgCSS="bg-main01"
-              value={reservationsData.reservedCount.toLocaleString()}
+              value={reservationsData.reservedCount}
               valueCSS="text-main04 text-[64px]"
               unit="명"
               unitCSS="text-main04 text-[40px]"
@@ -29,7 +31,7 @@ export default function DashBoardReservation() {
             <CountCard
               title="입장자 수"
               bgCSS="bg-purple02"
-              value={entrantsData.enteredCount.toLocaleString()}
+              value={entrantsData.entrantCount}
               valueCSS="text-purple06 text-[64px]"
               unit="명"
               unitCSS="text-purple06 text-[40px]"

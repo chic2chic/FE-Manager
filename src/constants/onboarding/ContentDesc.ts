@@ -39,4 +39,13 @@ export const ContentDesc: OnBoardingContentType[] = [
       "설문지를 작성하고 분석 리포트를 받아보세요!",
     ],
   },
+  {
+    id: 4,
+    title: "발주 제안 서비스",
+    imagePath: OnBoarding3,
+    desc: [
+      "지정된 발주 수량보다 재고 수량이 적다면",
+      "알림으로 빠르게 발주 제안을 받아보세요!",
+    ],
+  },
 ];

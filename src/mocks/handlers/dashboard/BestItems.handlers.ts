@@ -27,7 +27,7 @@ export const BestItems = [
 ];
 
 export const BestItemsHandlers = [
-  http.get("/popups/:popupId/items/trending", ({ request }) => {
+  http.get("/popups/:popupId/dashboard/trending", ({ request }) => {
     const url = new URL(request.url);
     const gender = url.searchParams.get("gender");
     const age = url.searchParams.get("age");

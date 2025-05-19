@@ -34,12 +34,12 @@ export const popUpList = [
   },
   {
     popupId: 7,
-    name: "ENHYPEN DARK MOON POP-UP",
+    name: "ENHY 팝업스토어 MOON POP-UP",
     imageUrl: TestImage,
   },
   {
     popupId: 8,
-    name: "IVE THE REALITY: STARSHIP STAGE",
+    name: "IVE THE REALITY: 팝업스토어",
     imageUrl: TestImage,
   },
   {

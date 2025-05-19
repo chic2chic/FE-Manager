@@ -43,7 +43,7 @@ export type GetAvgPurchaseResponse = {
 };
 
 export type EntrantsResponse = {
-  enteredCount: number;
+  entrantCount: number;
 };
 
 export type ReservationsResponse = {
@@ -53,7 +53,7 @@ export type ReservationsResponse = {
 
 export type ReservationChartResponse = {
   day: string;
-  value: number;
+  reservedCount: number;
 };
 
 export type GetStockNotificationResponse = {

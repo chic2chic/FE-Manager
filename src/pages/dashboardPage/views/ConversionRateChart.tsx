@@ -112,15 +112,31 @@ export const ConversionRateChart = ({
       >
         <XAxis
           dataKey="name"
-          tick={{
-            fill: "#59595A",
-            fontSize: 16,
-            fontWeight: 600,
-            width: 80,
-          }}
           axisLine={false}
           tickLine={false}
           interval={0}
+          tick={props => {
+            const { x, y, payload } = props;
+            const value = payload.value;
+            const displayValue =
+              value.length > 7 ? `${value.substring(0, 7)}...` : value;
+
+            return (
+              <g transform={`translate(${x},${y})`}>
+                <text
+                  x={0}
+                  y={0}
+                  dy={16}
+                  textAnchor="middle"
+                  fill="#59595A"
+                  fontSize={16}
+                  fontWeight={600}
+                >
+                  {displayValue}
+                </text>
+              </g>
+            );
+          }}
         />
         <YAxis hide padding={{ bottom: 10 }} />
         <Tooltip cursor={<CustomCursor y1={60} />} content={CustomTooltip} />

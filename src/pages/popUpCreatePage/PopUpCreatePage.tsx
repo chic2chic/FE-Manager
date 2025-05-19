@@ -1,5 +1,4 @@
 import leftArrowImg from "@/assets/webps/popUpCreate/left-arrow.webp";
-import TestImage from "@/assets/webps/onBoarding/test.png";
 import React, { useEffect, useState } from "react";
 import { usePopUpCreateStore } from "@/stores/usePopUpCreateStore";
 import Modal from "@/components/common/Modal";
@@ -15,7 +14,7 @@ export default function PopUpCreatePage() {
   const [isSaveModalOpen, setIsSaveModalOpen] = useState<boolean>(false);
 
   const [imageFile, setImageFile] = useState<File | null>(null);
-  const [previewImage, setPreviewImage] = useState<string>(TestImage);
+  const [previewImage, setPreviewImage] = useState<string>("");
   const [alertMessage, setAlertMessage] = useState<string>("");
 
   const { formData, updatePopupField, isValidate, resetForm } =
