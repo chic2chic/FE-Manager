@@ -38,3 +38,7 @@ pnpm-debug.log*
 
 # https pem 파일
 localhost*
+
+test-results
+playwright-report
+tests/auth.json
