@@ -1,10 +1,6 @@
 import { defineConfig, devices } from "@playwright/test";
 import path from "path";
-import dotenv from "dotenv";
 import process from "process";
-
-dotenv.config();
-dotenv.config({ path: ".env.production" });
 
 const isCI = !!process.env.CI;
 
@@ -18,7 +14,7 @@ export default defineConfig({
   globalSetup: path.resolve("./tests/global-setup.ts"),
 
   use: {
-    baseURL: "http://localhost:3000",
+    baseURL: `${isCI ? process.env.VITE_DNS_URL : "http://localhost:3000"}`,
     trace: "on-first-retry",
     storageState: "tests/auth.json",
   },

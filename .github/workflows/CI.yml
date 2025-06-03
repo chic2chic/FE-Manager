@@ -58,7 +58,8 @@ jobs:
       - name: E2E 테스트
         run: npx playwright test
         env:
-          VITE_API_URL: dev-api.ceo.popi.today
+          VITE_DNS_URL: ${{ secrets.VITE_DNS_URL }}
+          VITE_API_URL: ${{ secrets.VITE_API_URL }}
           VITE_KAKAO_MAP_API_KEY: ${{ secrets.VITE_KAKAO_MAP_API_KEY }}
           VITE_TEST_PRESIGNED_URL: ${{ secrets.VITE_TEST_PRESIGNED_URL }}
 
