@@ -19,6 +19,7 @@ export default defineConfig({
     baseURL: `${isCI ? process.env.VITE_DNS_URL : "http://localhost:3000"}`,
     trace: "on-first-retry",
     storageState: "tests/auth.json",
+    testIdAttribute: "data-pw",
   },
 
   projects: [

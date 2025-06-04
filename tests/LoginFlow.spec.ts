@@ -15,14 +15,24 @@ test.describe("로그인 테스트", () => {
     await expect(page).toHaveURL("/popup-list");
   });
 
+  test("유효하지 않은 계정으로 로그인을 진행하면, 로그인이 거절된다.", async ({
+    page,
+  }) => {
+    await page.getByPlaceholder("아이디를 입력해주세요").fill("1");
+    await page.getByPlaceholder("비밀번호를 입력해주세요").fill("1");
+    await page.getByRole("button", { name: "login" }).click();
+
+    await expect(page.getByText("로그인에 실패했습니다.")).toBeTruthy();
+  });
+
   test("첫 번째 팝업을 선택하면 대시보드 이동한다.", async ({ page }) => {
     await page.goto("/popup-list");
 
-    // const clickableElement = page
-    //   .locator('span[class*="cursor-pointer"]')
-    //   .first();
+    const clickableElement = page
+      .locator('span[class*="cursor-pointer"]')
+      .first();
 
-    const clickableElement = page.locator('span[id^="popup-name-"]').first();
+    await clickableElement.waitFor({ state: "visible" });
 
     await expect(clickableElement).toBeVisible();
     await clickableElement.click();
