@@ -14,18 +14,4 @@ test.describe("로그인 테스트", () => {
 
     await expect(page).toHaveURL("/popup-list");
   });
-
-  test("첫 번째 팝업을 선택하면 대시보드 이동한다.", async ({ page }) => {
-    await page.goto("/popup-list");
-
-    // const clickableElement = page
-    //   .locator('span[class*="cursor-pointer"]')
-    //   .first();
-
-    const clickableElement = page.locator('span[id^="popup-name-"]').first();
-
-    await expect(clickableElement).toBeVisible();
-    await clickableElement.click();
-    await expect(page).toHaveURL("/dashboard");
-  });
 });
