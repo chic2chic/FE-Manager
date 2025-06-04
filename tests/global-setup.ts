@@ -25,7 +25,6 @@ async function globalSetup(config: FullConfig) {
     await page.click('button:has-text("login")');
 
     await page.waitForTimeout(3000);
-
     await page.context().storageState({ path: authFile });
   } finally {
     await browser.close();
