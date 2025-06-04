@@ -1,8 +1,10 @@
 import { defineConfig, devices } from "@playwright/test";
 import path from "path";
 import process from "process";
+import dotenv from "dotenv";
 
 const isCI = !!process.env.CI;
+dotenv.config();
 
 export default defineConfig({
   testDir: "./tests",

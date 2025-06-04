@@ -15,8 +15,6 @@ export default function GlobalLayout() {
     return <Navigate to="/onBoarding" replace />;
   }
 
-  console.log(isContainNavBar);
-
   return (
     <div className="box-border min-h-screen flex flex-col">
       {isContainNavBar && <NavBar />}
