@@ -10,7 +10,21 @@ test.describe("로그인 테스트", () => {
   }) => {
     await page.getByPlaceholder("아이디를 입력해주세요").fill("manager1");
     await page.getByPlaceholder("비밀번호를 입력해주세요").fill("password1");
+
+    const responsePromise = page.waitForResponse(
+      response =>
+        response.url().includes("/auth/login") && response.status() === 200,
+    );
+
     await page.getByRole("button", { name: "login" }).click();
+
+    const response = await responsePromise;
+
+    expect(response.status()).toBe(200);
+    const responseBody = await response.json();
+
+    expect(responseBody.data).toHaveProperty("accessToken");
+    expect(responseBody.success).toBe(true);
 
     await expect(page).toHaveURL("/popup-list");
   });
