@@ -1,5 +1,6 @@
 import NoticeItem from "@/components/noticeModal/views/NoticeItem";
 import { useStockNotificationListApi } from "@/hooks/api/useStockNotificationListApi";
+import { useNotificationStore } from "@/stores/useNotificationStore";
 import { usePopUpReadStore } from "@/stores/usePopUpReadStore";
 import { useEffect, useRef } from "react";
 
@@ -8,9 +9,25 @@ type Props = {
 };
 
 export default function NoticeModal({ onClose }: Props) {
-  const { notifications } = useStockNotificationListApi();
   const popUpName = usePopUpReadStore.getState().name;
   const modalRef = useRef<HTMLDivElement>(null);
+  const { notifications } = useNotificationStore(state => state);
+  const { notifications: initialNotis } = useStockNotificationListApi();
+  const setNotifications = useNotificationStore(
+    state => state.setNotifications,
+  );
+
+  useEffect(() => {
+    if (initialNotis && initialNotis.length > 0) {
+      const mapped = initialNotis.map(item => ({
+        id: String(item.notificationId),
+        message: `${item.name}의 재고가 최소 수량(${item.minStock}) 이하입니다.`,
+        read: false,
+      }));
+
+      setNotifications(mapped);
+    }
+  }, [initialNotis]);
 
   // 모달 바깥 클릭 시 닫기
   useEffect(() => {
