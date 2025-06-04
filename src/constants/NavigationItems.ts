@@ -7,4 +7,8 @@ export const NavigationItems = [
     title: "상품관리",
     url: "/items",
   },
+  {
+    title: "발주관리",
+    url: "/order-list",
+  },
 ];

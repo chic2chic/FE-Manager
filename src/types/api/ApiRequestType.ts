@@ -58,3 +58,8 @@ export type ItemAddExcelRequest = {
   excelFile: File;
   onProgress?: (_percentage: number) => void;
 };
+
+export type GetOrderListRequest = {
+  lastId: string | undefined;
+  size: number;
+};
