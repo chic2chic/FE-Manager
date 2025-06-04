@@ -1,6 +1,7 @@
 import { OrderListItemType } from "@/types/OrderListPageType";
 import { PendingActionType } from "../OrderListPage";
 import { useState } from "react";
+import { FormatDateTimeToString } from "@/utils/FormatDay";
 
 type Props = {
   item: OrderListItemType;
@@ -53,18 +54,6 @@ export default function OrderListItem({
     }
   };
 
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString);
-    return date.toLocaleString("ko-KR", {
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit",
-      hour: "2-digit",
-      minute: "2-digit",
-      hour12: false,
-    });
-  };
-
   return (
     <tr className="hover:bg-gray02 transition-colors duration-150">
       <td className="px-6 py-4 whitespace-nowrap text-lg font-medium text-gray10">
@@ -95,7 +84,10 @@ export default function OrderListItem({
         )}
       </td>
       <td className="px-6 py-4 whitespace-nowrap text-center text-lg text-gray09">
-        {formatDate(item.lastRestockDate)}
+        {FormatDateTimeToString(new Date(item.lastRestockDate), 24).replace(
+          "T",
+          " ",
+        )}
       </td>
       <td className="px-6 py-4 whitespace-nowrap text-center">
         {getStateText(item)}

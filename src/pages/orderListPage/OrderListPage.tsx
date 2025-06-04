@@ -48,12 +48,12 @@ export default function OrderListPage() {
 
   return (
     <div className="min-h-screen p-6">
-      <div className="bg-gray01 rounded-lg border border-gray04 overflow-hidden">
-        <div className="px-6 py-4 border-b border-gray04">
+      <div className="bg-gray01 rounded-lg overflow-hidden">
+        <div className="px-6 py-4">
           <h2 className="text-3xl font-semibold text-gray10">주문 목록</h2>
         </div>
 
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto border border-gray04 rounded-lg">
           <table className="w-full">
             <colgroup className="hidden lg:table-column-group">
               <col width={100} />
