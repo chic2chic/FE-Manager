@@ -38,8 +38,8 @@ export type GetItemListResponse = Record<string, ItemType[]>;
 export type ItemListType = Record<string, ItemType[]>;
 
 export type GetAvgPurchaseResponse = {
-  totalPrice: number;
-  todayPrice: number;
+  totalAverageAmount: number;
+  todayAverageAmount: number;
 };
 
 export type EntrantsResponse = {
