@@ -4,6 +4,7 @@ import DashBoardPage from "@/pages/dashboardPage/DashBoardPage";
 import ItemCreatePage from "@/pages/itemCreatePage/ItemCreatePage";
 import ItemListPage from "@/pages/itemListPage/ItemListPage";
 import OnBoradingPage from "@/pages/onBoardingPage/OnBoardingPage";
+import OrderListPage from "@/pages/orderListPage/OrderListPage";
 import PopUpCreatePage from "@/pages/popUpCreatePage/PopUpCreatePage";
 import PopUpListPage from "@/pages/popUpListPage/PopUpListPage";
 import { createBrowserRouter } from "react-router-dom";
@@ -44,6 +45,10 @@ export const Router = createBrowserRouter([
           {
             path: "/popup-create",
             element: <PopUpCreatePage />,
+          },
+          {
+            path: "/order-list",
+            element: <OrderListPage />,
           },
         ],
       },

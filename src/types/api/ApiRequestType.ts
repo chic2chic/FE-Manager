@@ -1,3 +1,5 @@
+import { OrderItemStatus } from "../OrderListPageType";
+
 export type LoginRequest = {
   username: string;
   password: string;
@@ -57,4 +59,15 @@ export type PatchItemRequest = {
 export type ItemAddExcelRequest = {
   excelFile: File;
   onProgress?: (_percentage: number) => void;
+};
+
+export type GetOrderListRequest = {
+  lastOrderItemId: number | undefined;
+  size: number;
+};
+
+export type PostChangeOrderItemRequest = {
+  orderItemId: number;
+  qty: number;
+  status: Omit<OrderItemStatus, "PENDING">;
 };

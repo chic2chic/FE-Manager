@@ -16,6 +16,7 @@ import { BestItemsHandlers } from "./handlers/dashboard/BestItems.handlers";
 import { QuestionnaireHandlers } from "./handlers/dashboard/Questionnaire.handlers";
 import { VisitorStatsHandlers } from "./handlers/dashboard/VisitorDatas.handlers";
 import { PopUpListReadHandlers } from "./handlers/popUpListRead/PopUpListRead.handlers";
+import { OrderListHandlers } from "./handlers/orderList/OrderList.handlers";
 
 export const handlers = [
   ...AuthHandlers,
@@ -33,6 +34,7 @@ export const handlers = [
   ...QuestionnaireHandlers,
   ...ConversionReadHandlers,
   ...VisitorStatsHandlers,
+  ...OrderListHandlers,
 ];
 
 export const worker = setupWorker(...handlers);
