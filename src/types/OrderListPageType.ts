@@ -1,8 +1,10 @@
-export type OrderListItem = {
-  orderId: string;
+export type OrderListItemType = {
+  orderItemId: number;
   itemName: string;
-  recommendQuantity: number;
-  realQuantity: number;
-  lastUpdated: string;
-  state: string;
+  recommendCount: number;
+  realCount: number;
+  lastRestockDate: string;
+  status: OrderItemStatus;
 };
+
+export type OrderItemStatus = "CANCELLED" | "COMPLETED" | "PENDING";

@@ -1,42 +1,49 @@
-import { useGetOrderListApi } from "@/hooks/api/useOrderListApi";
+import {
+  useGetOrderListApi,
+  usePostChangeOrderItemStatus,
+} from "@/hooks/api/useOrderListApi";
+import OrderListItem from "./views/OrderListItem";
+import Modal from "@/components/common/Modal";
+import check from "@/assets/webps/common/check.webp";
+import bin from "@/assets/webps/common/bin.webp";
+import { useState } from "react";
+import { OrderItemStatus, OrderListItemType } from "@/types/OrderListPageType";
+import { useNavigate } from "react-router-dom";
+
+export type PendingActionType = {
+  item: OrderListItemType;
+  status: Omit<OrderItemStatus, "PENDING">;
+};
 
 export default function OrderListPage() {
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useGetOrderListApi({ size: 5 });
   const orderList = data?.pages.flatMap(item => item.data.content);
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const [showConfirmModal, setShowConfirmModal] = useState<boolean>(false);
+  const [pendingAction, setPendingAction] = useState<PendingActionType | null>(
+    null,
+  );
+  const navigate = useNavigate();
 
-  const getStateText = (state: string) => {
-    switch (state) {
-      case "PENDING":
-        return (
-          <div className="flex w-full justify-center gap-2">
-            <button className="cursor-pointer px-4 py-2 border rounded-full bg-gray10 text-gray01 hover:bg-gray08">
-              승인
-            </button>
-            <button className="cursor-pointer px-4 py-2 border rounded-full hover:bg-gray03">
-              취소
-            </button>
-          </div>
-        );
-      case "CONFIRMED":
-        return <span>완료</span>;
-      case "CANCELLED":
-        return <span>취소</span>;
-      default:
-        return state;
+  const { mutate: postChangeOrderItemStatus } = usePostChangeOrderItemStatus();
+
+  const handleUpdate = () => {
+    if (!pendingAction) {
+      return;
     }
+    postChangeOrderItemStatus({
+      orderItemId: pendingAction?.item.orderItemId,
+      qty: pendingAction?.item.realCount,
+      status: pendingAction?.status,
+    });
+    setShowModal(false);
+    setShowConfirmModal(true);
   };
 
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString);
-    return date.toLocaleString("ko-KR", {
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit",
-      hour: "2-digit",
-      minute: "2-digit",
-      hour12: false,
-    });
+  const changePendingAction = (request: PendingActionType) => {
+    setPendingAction(request);
+    setShowModal(true);
   };
 
   return (
@@ -48,6 +55,14 @@ export default function OrderListPage() {
 
         <div className="overflow-x-auto">
           <table className="w-full">
+            <colgroup className="hidden lg:table-column-group">
+              <col width={100} />
+              <col width="*" />
+              <col width={200} />
+              <col width={200} />
+              <col width={300} />
+              <col width={200} />
+            </colgroup>
             <thead>
               <tr className="bg-gray02 border-b border-gray04">
                 <th className="px-6 py-4 text-left text-xl font-medium text-gray10 uppercase">
@@ -73,36 +88,12 @@ export default function OrderListPage() {
             <tbody className="bg-gray01 divide-y divide-gray04">
               {orderList && orderList.length > 0 ? (
                 orderList.map((item, idx) => (
-                  <tr
+                  <OrderListItem
+                    item={item}
+                    idx={idx}
                     key={idx}
-                    className="hover:bg-gray02 transition-colors duration-150"
-                  >
-                    <td className="px-6 py-4 whitespace-nowrap text-lg font-medium text-gray10">
-                      {idx + 1}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-lg font-medium text-gray10">
-                        {item.itemName}
-                      </div>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-center">
-                      <div className="text-lg font-semibold text-gray10">
-                        {item.recommendQuantity}
-                      </div>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-center">
-                      <input
-                        className="text-lg font-semibold text-gray10 w-20 px-2 py-1 border border-gray05 rounded bg-gray01 text-center"
-                        placeholder={String(item.realQuantity)}
-                      />
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-center text-lg text-gray09">
-                      {formatDate(item.lastUpdated)}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-center">
-                      {getStateText(item.state)}
-                    </td>
-                  </tr>
+                    changePendingAction={changePendingAction}
+                  />
                 ))
               ) : (
                 <tr>
@@ -131,6 +122,28 @@ export default function OrderListPage() {
           <p className="text-gray08 text-xl">모든 주문을 확인했습니다.</p>
         )}
       </div>
+
+      <Modal
+        isOpen={showModal}
+        setIsOpen={setShowModal}
+        content={`${pendingAction?.status === "COMPLETED" ? "발주를 승인하시겠습니까?" : "발주를 취소하시겠습니까?"}`}
+        image={bin}
+        confirmText="확인"
+        cancelText="취소"
+        onConfirm={() => handleUpdate()}
+        onCancel={() => setShowModal(false)}
+      />
+      <Modal
+        isOpen={showConfirmModal}
+        setIsOpen={setShowConfirmModal}
+        content={`완료되었습니다`}
+        image={check}
+        confirmText="확인"
+        onConfirm={() => {
+          setShowConfirmModal(false);
+          navigate("/order-list");
+        }}
+      />
     </div>
   );
 }

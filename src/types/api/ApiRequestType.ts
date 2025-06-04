@@ -1,3 +1,5 @@
+import { OrderItemStatus } from "../OrderListPageType";
+
 export type LoginRequest = {
   username: string;
   password: string;
@@ -60,6 +62,12 @@ export type ItemAddExcelRequest = {
 };
 
 export type GetOrderListRequest = {
-  lastId: string | undefined;
+  lastOrderItemId: number | undefined;
   size: number;
+};
+
+export type PostChangeOrderItemRequest = {
+  orderItemId: number;
+  qty: number;
+  status: Omit<OrderItemStatus, "PENDING">;
 };

@@ -1,6 +1,6 @@
 import { DayOfWeek } from "@/types/CongestionType";
 import { ItemType } from "../ItemType";
-import { OrderListItem } from "../OrderListPageType";
+import { OrderListItemType } from "../OrderListPageType";
 
 export type ApiResponse<T> = Promise<GlobalResponse<T>>;
 export type ApiResult<T> = Promise<T>;
@@ -135,6 +135,6 @@ export type VisitorStat = {
 };
 
 export type GetOrderListResponse = {
-  content: OrderListItem[];
+  content: OrderListItemType[];
   isLast: boolean;
 };

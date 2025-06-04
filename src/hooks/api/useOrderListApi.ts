@@ -1,10 +1,16 @@
-import { getOrderList } from "@/apis/OrderListApi";
-import { useInfiniteQuery } from "@tanstack/react-query";
+import { getOrderList, postChangeOrderItemStatus } from "@/apis/OrderListApi";
+import { PostChangeOrderItemRequest } from "@/types/api/ApiRequestType";
+import {
+  useInfiniteQuery,
+  useMutation,
+  useQueryClient,
+} from "@tanstack/react-query";
 
 export const useGetOrderListApi = ({ size }: { size: number }) => {
   return useInfiniteQuery({
     queryKey: ["orderItem"],
-    queryFn: ({ pageParam }) => getOrderList({ lastId: pageParam, size }),
+    queryFn: ({ pageParam }) =>
+      getOrderList({ lastOrderItemId: pageParam, size }),
     getNextPageParam: response => {
       const lastPage = response.data;
 
@@ -13,8 +19,17 @@ export const useGetOrderListApi = ({ size }: { size: number }) => {
       }
 
       const lastItem = lastPage.content[lastPage.content.length - 1];
-      return lastItem.orderId;
+      return lastItem.orderItemId;
     },
-    initialPageParam: undefined as string | undefined,
+    initialPageParam: undefined as number | undefined,
+  });
+};
+
+export const usePostChangeOrderItemStatus = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: ({ orderItemId, qty, status }: PostChangeOrderItemRequest) =>
+      postChangeOrderItemStatus({ orderItemId, qty, status }),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["orderItem"] }),
   });
 };
