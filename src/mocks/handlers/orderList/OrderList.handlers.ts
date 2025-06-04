@@ -326,7 +326,7 @@ export const OrderListHandlers = [
     );
 
     if (itemIndex !== -1) {
-      mockOrderItems[itemIndex].status = requestBody.status as any;
+      mockOrderItems[itemIndex].status = requestBody.status;
       mockOrderItems[itemIndex].realCount = requestBody.qty;
       console.log(
         `Updated item ${orderItemId} status to ${requestBody.status}`,
