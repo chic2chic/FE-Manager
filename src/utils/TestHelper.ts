@@ -13,7 +13,7 @@ export async function NavigateDashboard(page: Page) {
   await page.goto("/popup-list");
   await page.waitForLoadState("networkidle");
 
-  const allPopups = page.locator('span[id^="popup-name-"]');
+  const allPopups = page.locator('span[data-testid^="popup-card-"]');
   const firstPopup = allPopups.first();
 
   await firstPopup.waitFor({ state: "visible" });

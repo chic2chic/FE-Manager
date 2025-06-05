@@ -71,7 +71,7 @@ test.describe("헬퍼함수 기능 테스트 - 팝업 리스트 조회 및 대�
 
     // 조회된 데이터가 있을 경우와 없을 경우를 if문을 통해 분기 처리
     if (numOfPopupFromAPI !== 0) {
-      const allPopups = page.locator('span[id^="popup-name-"]');
+      const allPopups = page.locator('span[data-testid^="popup-card-"]');
       await expect(allPopups.first()).toBeVisible();
 
       const numOfPopupOnScreen = await allPopups.count();
