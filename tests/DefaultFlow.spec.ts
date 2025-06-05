@@ -1,6 +1,6 @@
 import test, { expect } from "playwright/test";
 
-test.describe("헬퍼함수 기능 테스트", () => {
+test.describe("헬퍼함수 기능 테스트 - 로그인", () => {
   test.beforeEach(async ({ page }) => {
     await page.goto("/onboarding");
   });
@@ -46,5 +46,46 @@ test.describe("헬퍼함수 기능 테스트", () => {
     expect(responseBody.data).toHaveProperty("errorClassName");
 
     await expect(page.getByText("로그인에 실패했습니다")).toBeVisible();
+  });
+});
+
+test.describe("헬퍼함수 기능 테스트 - 팝업 리스트 조회 및 대쉬보드 이동", () => {
+  test("팝업 리스트 조회가 가능하고 팝업이 있다면, 클릭시 대시보드 페이지로 이동한다. \n 만약 팝업이 없다면, 등록된 팝업이 없다는 문구가 보인다.", async ({
+    page,
+  }) => {
+    // given & when - 팝업 리스트 이동시 조회 API 호출
+    const [responsePromise] = await Promise.all([
+      page.waitForResponse(response => {
+        const url = response.url();
+        return url.endsWith("/popups") && response.request().method() === "GET";
+      }),
+      page.goto("/popup-list"),
+    ]);
+
+    await page.waitForLoadState("networkidle"); // 네트워크가 안정화될 때까지 대기 -> waitFor과 동일한 효과 기대 가능
+
+    // then - 조회 결과 검증
+    expect(responsePromise.status()).toBe(200);
+    const responseBody = await responsePromise.json();
+    const numOfPopupFromAPI = responseBody.data.length;
+
+    // 조회된 데이터가 있을 경우와 없을 경우를 if문을 통해 분기 처리
+    if (numOfPopupFromAPI !== 0) {
+      const allPopups = page.locator('span[data-testid^="popup-card-"]');
+      await expect(allPopups.first()).toBeVisible();
+
+      const numOfPopupOnScreen = await allPopups.count();
+
+      expect(numOfPopupFromAPI).toBeGreaterThan(0);
+      expect(numOfPopupFromAPI).toBe(numOfPopupOnScreen);
+
+      const firstPopup = allPopups.first();
+      await firstPopup.click({ timeout: 3000 });
+
+      await expect(page).toHaveURL("/dashboard");
+    } else {
+      await expect(page.getByText("등록된 팝업이 없습니다.")).toBeVisible();
+    }
+    await page.waitForLoadState("networkidle");
   });
 });

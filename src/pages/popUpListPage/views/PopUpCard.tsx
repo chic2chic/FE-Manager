@@ -63,7 +63,7 @@ export default function PopUpCard({
       <span
         onClick={handleSelect}
         lang="en"
-        id={`popup-name-${popupId}`}
+        data-testid={`popup-card-${popupId}`}
         className="cursor-pointer w-[286px] break-words block text-center justify-center text-[34px] mt-[22px]"
       >
         {isNameContainPopUp ? (
