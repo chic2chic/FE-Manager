@@ -26,6 +26,23 @@ export default defineConfig({
       name: "chromium",
       use: { ...devices["Desktop Chrome"] },
     },
+    {
+      name: "setup",
+      testMatch: /.*\.setup\.ts/,
+    },
+    {
+      name: "default-helper-func",
+      testMatch: /.*DefaultFlow\.spec\.ts/,
+      use: {
+        storageState: undefined,
+      },
+      dependencies: ["setup"],
+    },
+    {
+      name: "core",
+      testMatch: /^(?!.*DefaultFlow).*\.spec\.ts$/,
+      dependencies: ["default-helper-func"],
+    },
   ],
 
   ...(isCI

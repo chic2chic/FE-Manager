@@ -2,8 +2,8 @@ import { GetAvgPurchaseResponse } from "@/types/api/ApiResponseType";
 import { http, HttpResponse } from "msw";
 
 export const CustomerTransactionDatas: GetAvgPurchaseResponse = {
-  totalAverageAmount: 89600,
-  todayAverageAmount: 124600,
+  totalAverageAmount: 0,
+  todayAverageAmount: 0,
 };
 
 export const DashboardHandlers = [
