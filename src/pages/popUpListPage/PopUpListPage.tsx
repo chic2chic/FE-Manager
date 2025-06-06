@@ -81,10 +81,10 @@ export default function PopUpListPage() {
               <>
                 <Swiper
                   className="popup-swiper w-[1010px] mx-auto"
-                  centeredSlides={true}
+                  centeredSlides={false}
                   slidesPerView={3}
                   spaceBetween={72}
-                  loop={true}
+                  loop={false}
                   navigation={{
                     prevEl: ".custom-prev",
                     nextEl: ".custom-next",
