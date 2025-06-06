@@ -62,7 +62,7 @@ test.describe("팝업스토어 등록 Flow", () => {
     await sharedPage.route("**/daumcdn.net/**", route => route.abort());
     await sharedPage.route("**/daum.net/**", route => route.abort());
 
-    // Mock 설정
+    // Mock 설정 - 실제 성공 요청의 주소 사용
     await sharedPage.addInitScript(() => {
       /* eslint-disable @typescript-eslint/no-explicit-any */
       (window as any).daum = {
@@ -70,7 +70,7 @@ test.describe("팝업스토어 등록 Flow", () => {
           return {
             embed: function () {
               options.oncomplete({
-                jibunAddress: "서울 강동구 상일동 537",
+                jibunAddress: "서울 강동구 천호동 287-5", // 실제 성공 요청과 동일
               });
             },
           };
@@ -81,7 +81,7 @@ test.describe("팝업스토어 등록 Flow", () => {
               return {
                 addressSearch: function (_address: string, callback: any) {
                   callback(
-                    [{ y: "37.555477116434", x: "127.175078958849" }],
+                    [{ y: "37.5493603874142", x: "127.128169354749" }], // 실제 성공 요청의 좌표
                     "OK",
                   );
                 },
@@ -109,7 +109,7 @@ test.describe("팝업스토어 등록 Flow", () => {
 
     await sharedPage.waitForTimeout(2000);
 
-    await expect(addressInput).toHaveValue("서울 강동구 상일동 537");
+    await expect(addressInput).toHaveValue("서울 강동구 천호동 287-5");
   });
 
   test("팝업 정보 필드를 모두 채운다.", async () => {
@@ -117,28 +117,36 @@ test.describe("팝업스토어 등록 Flow", () => {
 
     await sharedPage
       .locator('[data-testid="popup-create-input-name"]')
-      .fill("테스트 팝업스토어");
+      .fill("12");
+
+    // 시간 입력
     await sharedPage
       .locator('[data-testid="popup-create-run-open-time"]')
-      .fill("9");
+      .fill("12");
     await sharedPage
       .locator('[data-testid="popup-create-run-close-time"]')
-      .fill("18");
+      .fill("12");
+
+    // 용량 입력
     await sharedPage
       .locator('[data-testid="popup-create-time-capacity"]')
-      .fill("30");
+      .fill("12");
     await sharedPage
       .locator('[data-testid="popup-create-total-capacity"]')
-      .fill("300");
+      .fill("12");
+
+    // 예약 시간 입력
     await sharedPage
       .locator('[data-testid="popup-create-reserv-open"]')
-      .fill("10");
+      .fill("3");
     await sharedPage
       .locator('[data-testid="popup-create-reserv-close"]')
-      .fill("24");
+      .fill("3");
+
+    // 상세 주소
     await sharedPage
       .locator('[data-testid="popup-create-detail-address"]')
-      .fill("3층");
+      .fill("12");
   });
 
   test("팝업 등록 페이지에서 이미지를 업로드하면, Preview 이미지가 생성된다.", async () => {
@@ -237,6 +245,8 @@ test.describe("팝업스토어 등록 Flow", () => {
 
     const saveBtn = sharedPage.locator('[data-testid="popup-create-save-btn"]');
     await saveBtn.click();
+
+    await sharedPage.waitForTimeout(3000);
 
     await expect(sharedPage.getByText("팝업이 등록되었습니다")).toBeVisible();
   });
