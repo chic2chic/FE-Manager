@@ -62,12 +62,14 @@ export function useDaumPostcode() {
       <div
         className="flex items-center justify-between border border-gray05 rounded-full px-5 w-[480px] h-[54px]"
         onClick={openPostcode}
+        data-testid="postcode-search-button"
       >
         <input
           placeholder="주소 검색"
           className="cursor-pointer focus:outline-none w-full h-[54px] bg-transparent"
           value={addressInfo.address}
           readOnly
+          data-testid="postcode-address-input"
         />
         <img
           className="cursor-pointer ml-3"
@@ -84,7 +86,7 @@ export function useDaumPostcode() {
         >
           <div
             className="bg-white p-4 rounded-[20px] relative w-[600px] h-[600px]"
-            onClick={e => e.stopPropagation}
+            onClick={e => e.stopPropagation()}
           >
             <button
               onClick={closePostcode}
