@@ -9,7 +9,7 @@ export default function DashBoardConversionRate() {
   const isHighDataExist = data && data.high.length > 0;
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col" data-testid="dashboard-conversionRate">
       <DashBoardTitle title="구매전환율" />
       <div className="flex justify-between">
         <div className="relative w-[660px] h-[510px] bg-gray02 rounded-[50px] px-6 flex justify-center">

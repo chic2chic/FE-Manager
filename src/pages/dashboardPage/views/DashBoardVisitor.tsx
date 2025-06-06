@@ -18,7 +18,10 @@ export default function DashBoardVisitor() {
   const ageData: SegmentDatum[] = mapAgeData(isAgeDataExsit ? age : []);
 
   return (
-    <div className="flex flex-col w-[660px] mx-auto">
+    <div
+      className="flex flex-col w-[660px] mx-auto"
+      data-testid="dashboard-visitor"
+    >
       <DashBoardTitle title="팝업스토어 방문자 분석" />
 
       <div className="relative bg-gray02 rounded-[50px] pt-[92px] pb-[24px] px-[24px] h-[510px]">

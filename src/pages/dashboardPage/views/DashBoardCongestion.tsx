@@ -21,7 +21,7 @@ export default function DashBoardCongestion() {
   const dayData = selectedDay && data ? data[selectedDay] || [] : [];
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col" data-testid="dashboard-congestion">
       <DashBoardTitle title="혼잡도 분석" />
       <div className="relative w-[660px] h-[510px] bg-gray02 rounded-[50px] px-6">
         {/* 요일 버튼 */}
