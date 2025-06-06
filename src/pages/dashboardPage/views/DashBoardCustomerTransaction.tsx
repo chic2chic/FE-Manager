@@ -6,7 +6,7 @@ export default function DashBoardCustomerTransaction() {
   const { data } = useAvgPurchaseApi();
 
   return (
-    <div className="w-[414px] flex-col">
+    <div className="w-[414px] flex-col" data-testid="dashboard-transaction">
       <DashBoardTitle title="1인 평균 구매액" />
       <div className="flex h-[394px] flex-col justify-between">
         {data && (

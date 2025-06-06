@@ -18,7 +18,7 @@ export default function BestItem() {
   const { data } = useBestItemsApi();
 
   return (
-    <div>
+    <div data-testid="dashboard-bestItems">
       {/* 헤더 + 카테고리 */}
       <div className="flex items-start gap-6">
         <DashBoardTitle title="실시간 인기상품" />
@@ -35,6 +35,7 @@ export default function BestItem() {
                 w-[400px] rounded-[50px] px-[33px] pb-9
                 ${cardBgClass[index + 1]}
               `}
+              data-testid={`dashboard-bestItems-${index}`}
             >
               {/* 순위 뱃지 */}
               <div
