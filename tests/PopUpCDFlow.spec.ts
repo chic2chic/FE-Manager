@@ -117,7 +117,7 @@ test.describe("팝업스토어 등록 Flow", () => {
 
     await sharedPage
       .locator('[data-testid="popup-create-input-name"]')
-      .fill("12");
+      .fill("테스트 팝업");
 
     // 시간 입력
     await sharedPage
@@ -184,7 +184,7 @@ test.describe("팝업스토어 등록 Flow", () => {
     await expect(noImageComponent).not.toBeVisible();
   });
 
-  test("설문지를 Q1, Q2 기준으로 찾아서 입력한다", async () => {
+  test("설문지를 Q1, Q2 기준으로 찾아서 입력하고 팝업을 등록한다.", async () => {
     await sharedPage.waitForLoadState("networkidle");
 
     // Wide 버튼 클릭
@@ -244,10 +244,100 @@ test.describe("팝업스토어 등록 Flow", () => {
     await sharedPage.waitForTimeout(1500);
 
     const saveBtn = sharedPage.locator('[data-testid="popup-create-save-btn"]');
-    await saveBtn.click();
+
+    const [presignedResponse, createPopupResponse] = await Promise.all([
+      sharedPage.waitForResponse(response => {
+        const url = response.url();
+        return (
+          url.includes("presigned-url") &&
+          response.request().method() === "POST"
+        );
+      }),
+      sharedPage.waitForResponse(response => {
+        const url = response.url();
+        return url.endsWith("popups") && response.request().method() === "POST";
+      }),
+      saveBtn.click(),
+    ]);
+
+    expect(presignedResponse.status()).toBe(200);
+    expect(createPopupResponse.status()).toBe(201);
+
+    const presignedResponseBody = await presignedResponse.json();
+    const createPopUpResponseBody = await createPopupResponse.json();
+
+    expect(presignedResponseBody.data.presignedUrl).toBeTruthy();
+    expect(createPopUpResponseBody.data.popupId).toBeTruthy();
 
     await sharedPage.waitForTimeout(3000);
 
     await expect(sharedPage.getByText("팝업이 등록되었습니다")).toBeVisible();
+  });
+
+  test("위에서 등록한 팝업을 찾아서 삭제할 수 있다.", async () => {
+    // given - 생성한 테스트 팝업 요소를 추출합니다.
+    await sharedPage.goto("/popup-list");
+    await sharedPage.waitForLoadState("networkidle");
+
+    let popupText = sharedPage.getByText("테스트 팝업");
+    let isPopupVisible = await popupText.isVisible();
+
+    // 만약 없으면 오른쪽 화살표를 눌러서 계속 찾습니다.
+    for (let attempt = 0; attempt < 5; attempt++) {
+      if (isPopupVisible) {
+        break;
+      }
+
+      if (attempt < 4) {
+        const nextButton = sharedPage.locator(".custom-next");
+        const canGoNext = await nextButton.evaluate(
+          el => !el.classList.contains("cursor-not-allowed"),
+        );
+
+        if (canGoNext) {
+          await nextButton.click();
+          await sharedPage.waitForTimeout(800);
+
+          popupText = sharedPage.getByText("테스트 팝업");
+          isPopupVisible = await popupText.isVisible();
+        } else {
+          break;
+        }
+      }
+    }
+
+    if (!isPopupVisible) {
+      throw new Error("테스트 팝업을 찾을 수 없습니다.");
+    }
+
+    const popupCard = popupText.locator(
+      "xpath=ancestor::div[contains(@class, 'swiper-slide')]",
+    );
+
+    await popupCard.hover();
+
+    const deleteButton = popupCard.locator(
+      'div[data-testid="popup-delete-btn"]',
+    );
+    await expect(deleteButton).toBeVisible();
+
+    await deleteButton.click();
+
+    await expect(sharedPage.getByText("팝업을 삭제하시겠어요?")).toBeVisible();
+    const realDeleteButton = sharedPage.getByRole("button", { name: "삭제" });
+    await expect(realDeleteButton).toBeVisible();
+
+    // when - 삭제 모달을 열고 삭제 버튼을 클릭
+    const [deleteResponse] = await Promise.all([
+      sharedPage.waitForResponse(
+        response =>
+          response.url().includes("/popups") &&
+          response.request().method() === "DELETE",
+      ),
+      realDeleteButton.click(),
+    ]);
+
+    // then - 리스폰스의 status가 200이면 Delete 성공
+    expect(deleteResponse.status()).toBe(200);
   });
 });

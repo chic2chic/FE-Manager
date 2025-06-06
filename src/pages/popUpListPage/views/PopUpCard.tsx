@@ -36,7 +36,10 @@ export default function PopUpCard({
 
   return (
     <>
-      <div className="w-[286px] flex justify-center">
+      <div
+        className="w-[286px] flex justify-center"
+        data-testid="popup-list-card"
+      >
         <div className="relative group cursor-pointer shadow-[0_4px_12px_rgba(0,0,0,0.4)] bg-gradient-to-br from-black via-gray08 to-black h-[240px] w-[240px] rounded-[62px] flex items-center justify-center">
           {/* 이미지 */}
           <div className="w-[200px] h-[200px] rounded-full overflow-hidden">
@@ -54,6 +57,7 @@ export default function PopUpCard({
             <div
               onClick={onDeleteClick}
               className="cursor-pointer w-[74px] h-[74px] bg-main07 rounded-full flex items-center justify-center"
+              data-testid="popup-delete-btn"
             >
               <img src={xWhite} width={32} height={32} alt="x button" />
             </div>

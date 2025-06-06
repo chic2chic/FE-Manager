@@ -81,7 +81,6 @@ export default function PopUpListPage() {
             onClick={() => {
               navigate("/popup-create");
             }}
-            data-testid="popup-create-btn"
           >
             <img src={plusWhite} alt="plus button" width={36} height={36} />
           </div>
