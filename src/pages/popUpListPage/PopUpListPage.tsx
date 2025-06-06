@@ -1,9 +1,10 @@
 import "swiper/css";
 import "swiper/css/pagination";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
+import { Swiper as SwiperType } from "swiper";
 import PopUpCard from "@/pages/popUpListPage/views/PopUpCard";
 import Modal from "@/components/common/Modal";
 import plusWhite from "@/assets/webps/popUpList/plus-white.webp";
@@ -22,6 +23,9 @@ export default function PopUpListPage() {
   const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
   const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
   const [selectedCardId, setSelectedCardId] = useState<number | null>(null);
+  const [isBeginning, setIsBeginning] = useState(true);
+  const [isEnd, setIsEnd] = useState(false);
+  const swiperRef = useRef<SwiperType | null>(null);
 
   const handleDelete = (id: number) => {
     setIsConfirmModalOpen(true);
@@ -46,6 +50,17 @@ export default function PopUpListPage() {
     setIsAlertModalOpen(false);
   };
 
+  const handleSlideChange = (swiper: SwiperType) => {
+    setIsBeginning(swiper.isBeginning);
+    setIsEnd(swiper.isEnd);
+  };
+
+  const handleSwiperInit = (swiper: SwiperType) => {
+    swiperRef.current = swiper;
+    setIsBeginning(swiper.isBeginning);
+    setIsEnd(swiper.isEnd);
+  };
+
   return (
     <div className="bg-gray03 min-h-screen pb-10 pt-10">
       {/* 나의 팝업 List */}
@@ -65,6 +80,7 @@ export default function PopUpListPage() {
             onClick={() => {
               navigate("/popup-create");
             }}
+            data-testid="popup-create-btn"
           >
             <img src={plusWhite} alt="plus button" width={36} height={36} />
           </div>
@@ -90,6 +106,8 @@ export default function PopUpListPage() {
                     nextEl: ".custom-next",
                   }}
                   modules={[Pagination, Navigation]}
+                  onSlideChange={handleSlideChange}
+                  onSwiper={handleSwiperInit}
                 >
                   {cards && cards.length > 0 ? (
                     cards.map(card => (
@@ -120,14 +138,24 @@ export default function PopUpListPage() {
                 {/* prev & next 버튼 */}
                 {cards && cards.length > 0 && (
                   <>
-                    <div className="custom-prev absolute top-[110px] -translate-y-1/2 left-0 z-10 cursor-pointer">
+                    <div
+                      className={`custom-prev absolute top-[110px] -translate-y-1/2 left-0 z-10 cursor-pointer transition-opacity duration-200 ${
+                        isBeginning
+                          ? "opacity-30 cursor-not-allowed"
+                          : "opacity-100"
+                      }`}
+                    >
                       <img
                         src={leftArrowGray09}
                         alt="prev"
                         className="w-[35px] h-[35px]"
                       />
                     </div>
-                    <div className="custom-next absolute top-[110px] -translate-y-1/2 right-0 z-10 cursor-pointer">
+                    <div
+                      className={`custom-next absolute top-[110px] -translate-y-1/2 right-0 z-10 cursor-pointer transition-opacity duration-200 ${
+                        isEnd ? "opacity-30 cursor-not-allowed" : "opacity-100"
+                      }`}
+                    >
                       <img
                         src={rightArrowGray09}
                         alt="next"
