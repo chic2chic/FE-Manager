@@ -23,10 +23,6 @@ export default defineConfig({
 
   projects: [
     {
-      name: "chromium",
-      use: { ...devices["Desktop Chrome"] },
-    },
-    {
       name: "setup",
       testMatch: /.*\.setup\.ts/,
     },
@@ -41,6 +37,9 @@ export default defineConfig({
     {
       name: "core",
       testMatch: /^(?!.*DefaultFlow).*\.spec\.ts$/,
+      use: {
+        ...devices["Desktop Chrome"],
+      },
       dependencies: ["default-helper-func"],
     },
   ],

@@ -1,4 +1,7 @@
+import path from "path";
 import { Page } from "playwright/test";
+import fs from "fs";
+import process from "process";
 
 /**
  * 해당 함수는 E2E 테스트에서 공통적으로 적용되는
@@ -19,4 +22,24 @@ export async function NavigateDashboard(page: Page) {
   await firstPopup.waitFor({ state: "visible" });
   await firstPopup.dispatchEvent("click");
   await page.waitForURL("/dashboard");
+}
+
+/**
+ * package.json이랑 동일한 위치를 루트 디렉토리 Path로 인식합니다.
+ * 프로젝트 루트 경로를 반환해줍니다.
+ *
+ * @returns 루트 디렉토리 Path를 뱉어줍니다.
+ */
+export function findProjectRoot(): string {
+  let currentPath = process.cwd();
+
+  while (currentPath !== path.dirname(currentPath)) {
+    const packageJsonPath = path.join(currentPath, "package.json");
+    if (fs.existsSync(packageJsonPath)) {
+      return currentPath;
+    }
+    currentPath = path.dirname(currentPath);
+  }
+
+  throw new Error("프로젝트 루트를 찾을 수 없습니다.");
 }

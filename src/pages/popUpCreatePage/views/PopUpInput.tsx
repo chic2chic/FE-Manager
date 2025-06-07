@@ -9,6 +9,7 @@ type Props = {
   minTime?: number;
   maxTime?: number;
   onChange: (_e: React.ChangeEvent<HTMLInputElement>) => void;
+  "data-testid"?: string;
 };
 
 export default function PopUpInput({
@@ -20,6 +21,7 @@ export default function PopUpInput({
   minTime = 0,
   maxTime = 24,
   onChange,
+  "data-testid": dataTestId,
 }: Props) {
   const [value, setValue] = useState("");
 
@@ -76,6 +78,7 @@ export default function PopUpInput({
       onInput={isOnlyNumber ? numberHandler : undefined}
       onBlur={isTimeFormat || isLimit ? handleBlur : undefined}
       maxLength={isTimeFormat ? 2 : undefined}
+      data-testid={dataTestId}
     />
   );
 }
