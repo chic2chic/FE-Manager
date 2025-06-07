@@ -1,3 +1,5 @@
+import MinusBtn from "@/assets/webps/popUpCreate/minus.webp";
+import { motion } from "framer-motion";
 import React from "react";
 
 type Props = {
@@ -29,24 +31,22 @@ export default function QuestionnaireInput({
   questionNumber,
 }: Props) {
   return (
-    <div className="relative flex items-center">
+    <div className="flex items-center gap-[12px]">
       <input
-        type="text"
+        className="pl-[30px] py-[23px] text-[20px] rounded-[20px] border border-gray05 w-[458px] placeholder:font-semibold placeholder:tracking-[-2%] placeholder:text-gray05 placeholder:text-[20px] transition-all duration-200 focus:border-gray09 focus:outline-none"
+        placeholder="답변 내용을 입력하세요"
         value={value}
         onChange={e => handleAnswer(idx, e)}
-        placeholder={`답변 옵션 ${idx + 1}`}
-        className="pl-[30px] py-[23px] text-[20px] rounded-[20px] border border-gray05 w-[458px]"
         data-testid={`questionnaire-input-${idx}`}
       />
-      {canDelete && (
-        <button
-          onClick={() => handleSub(idx)}
-          className="absolute right-[20px] text-gray07 hover:text-red-500"
-          data-testid={`questionnaire-input-${questionNumber}-${idx}`}
-        >
-          ✕
-        </button>
-      )}
+      <button
+        className={`${canDelete ? "block" : "hidden"} cursor-pointer hover:opacity-80`}
+        onClick={() => handleSub(idx)}
+        disabled={!canDelete}
+        data-testid={`questionnaire-input-${questionNumber}-${idx}`}
+      >
+        <motion.img src={MinusBtn} alt="마이너스 버튼" width={32} height={32} />
+      </button>
     </div>
   );
 }
