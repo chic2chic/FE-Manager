@@ -12,8 +12,6 @@ export default function DashBoardReservation() {
   const { data: entrantsData } = useTodayEntrantsApi();
   const { data: reservationsData } = useTodayReservationsApi();
 
-  console.log(reservationsData);
-
   return (
     <div className="w-[906px] flex-col" data-testid="dashboard-reservation">
       <DashBoardTitle title="예약 분석" />
