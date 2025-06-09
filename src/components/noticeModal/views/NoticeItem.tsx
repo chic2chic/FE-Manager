@@ -22,7 +22,7 @@ export default function NoticeItem({
           >
             {popUp}
           </span>
-          {popularity === "hot" && (
+          {popularity?.toUpperCase() === "HOT" && (
             <div
               lang="en"
               className="bg-gradient-to-r from-[#FF458D] to-[#FF67A2] rounded-full px-2 py-1 flex justify-center items-center text-[12px] text-gray01"
@@ -40,7 +40,7 @@ export default function NoticeItem({
         <span className="font-semibold text-gray10">{name}</span> 재고가
         <span className="font-semibold"> {minStock}개 미만</span>이에요!
       </p>
-      {popularity === "hot" && (
+      {popularity?.toUpperCase() === "HOT" && (
         <p className="text-[14px] mt-[2px] text-main04">
           <strong>인기 상품</strong>이니 서둘러주세요
         </p>
