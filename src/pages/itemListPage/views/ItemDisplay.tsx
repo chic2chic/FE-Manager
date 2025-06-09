@@ -64,7 +64,10 @@ export default function ItemDisplay({ displayName, items }: Props) {
             </div>
 
             {/* 상품명 + 버튼 */}
-            <p className="font-bold text-[20px] mb-2 w-[280px] text-center break-keep">
+            <p
+              id={`test-product-name-${item.itemId}`} // ← 테스트용 ID 추가
+              className="font-bold text-[20px] mb-2 w-[280px] text-center break-keep"
+            >
               {item.name}
             </p>
             <p className="text-[16px] text-gray08 mb-1">

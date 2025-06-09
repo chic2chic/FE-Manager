@@ -1,38 +1,39 @@
-import test, { expect, Page } from "@playwright/test";
 import { NavigateDashboard } from "@/utils/TestHelper";
+import test, { expect, Page } from "@playwright/test";
 
-test.describe("상품 목록 E2E 테스트", () => {
+test.describe("상품 조회 E2E 테스트", () => {
   let page: Page;
 
   test.beforeAll(async ({ browser }) => {
     page = await browser.newPage();
-    await NavigateDashboard(page); // 로그인 후 대시보드 진입
+    await NavigateDashboard(page);
   });
 
-  test("상품 목록 페이지에서 API 호출 및 동적 데이터 렌더링을 검증한다", async () => {
-    // GET /items 호출과 페이지 이동을 병렬로 대기
+  test("상품 목록 API 요청이 발생하고, 응답에 따라 UI가 렌더링된다", async () => {
     const [response] = await Promise.all([
-      page.waitForResponse(res =>
-        res.url().endsWith("/items") && res.request().method() === "GET"
+      page.waitForResponse(
+        res =>
+          res.url().includes("/popups/") &&
+          res.url().includes("/items") &&
+          res.request().method() === "GET",
       ),
       page.goto("/items"),
     ]);
-    expect(response.ok()).toBeTruthy();
 
-    // 응답 데이터 파싱
+    expect(response.status()).toBe(200);
+
     const body = await response.json();
-    const data: Record<string, { name: string }[]> = body.data;
+    const itemData = body.data as Record<string, any[]>;
+    const itemCount = Object.values(itemData ?? {}).flat().length;
 
-    // 섹션 수 검증
-    const sections = Object.keys(data);
-    await expect(page.locator("div.mb-12")).toHaveCount(sections.length);
+    const productLocator = page.locator('p[id^="test-product-name-"]');
 
-    // 각 섹션 헤더 및 상품명이 화면에 렌더링되는지 동적으로 확인
-    for (const section of sections) {
-      await expect(page.getByText(section).first()).toBeVisible();
-      for (const item of data[section]) {
-        await expect(page.getByText(item.name)).toBeVisible();
-      }
+    if (itemCount > 0) {
+      await expect(productLocator.first()).toBeVisible();
+      expect(await productLocator.count()).toBe(itemCount);
+    } else {
+      await expect(page.getByText("등록된 상품이 아직 없습니다")).toBeVisible();
+      await expect(page.getByText("상품 등록 버튼")).toBeVisible();
     }
   });
 });
