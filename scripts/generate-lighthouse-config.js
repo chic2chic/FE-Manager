@@ -43,9 +43,10 @@ function generateLighthouseConfig() {
               : undefined,
             // 추가 설정
             preset: "desktop",
+            throttlingMethod: "provided",
             throttling: {
-              rttMs: 40,
-              throughputKbps: 10240,
+              rttMs: 0,
+              throughputKbps: 0,
               cpuSlowdownMultiplier: 1,
               requestLatencyMs: 0,
               downloadThroughputKbps: 0,
