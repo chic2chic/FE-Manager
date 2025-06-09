@@ -1,17 +1,17 @@
 const fs = require("fs");
 
-module.exports = async function (page) {
-  // 인증이 필요한 URL 체크
-  const currentUrl = page.url();
+module.exports = async function (page, url) {
+  console.log(`테스트 URL: ${url}`);
+
   const needsAuth = ["/popup-list", "/dashboard"];
-  const requiresLogin = needsAuth.some(path => currentUrl.includes(path));
+  const requiresLogin = needsAuth.some(path => url.includes(path));
 
   if (!requiresLogin) {
-    console.log(`${currentUrl} - 인증 불필요`);
+    console.log(`${url} - 인증 불필요`);
     return;
   }
 
-  console.log(`${currentUrl} - 인증 필요, 토큰 설정 중...`);
+  console.log(`${url} - 인증 필요, 토큰 설정 중...`);
 
   try {
     // 저장된 인증 정보 읽기
