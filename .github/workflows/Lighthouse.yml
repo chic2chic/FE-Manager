@@ -1,0 +1,49 @@
+name: Lighthouse CI
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    if: contains(github.event.head_commit.message, '[perf]')
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Chrome 설치
+        run: |
+          wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+          sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable
+
+      - name: 의존성 설치
+        run: |
+          npm install
+          npm install -g @lhci/cli
+          # scripts 폴더 의존성도 설치
+          cd scripts && npm install
+
+      - name: 앱 빌드 및 시작
+        run: |
+          npm run build 
+          npm run preview &
+          npx wait-on http://localhost:4173
+
+      - name: 인증 설정
+        run: node scripts/auth-setup.js
+
+      - name: Lighthouse 설정 생성
+        run: node scripts/generate-lighthouse-config.js
+
+      - name: Lighthouse CI 실행
+        run: lhci autorun
+        env:
+          TEST_EMAIL: ${{ secrets.TEST_EMAIL }}
+          TEST_PASSWORD: ${{ secrets.TEST_PASSWORD }}
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
+          CHROME_PATH: /usr/bin/google-chrome-stable
