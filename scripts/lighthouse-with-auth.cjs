@@ -14,7 +14,6 @@ module.exports = async function (page, url) {
   console.log(`${url} - 인증 필요, 토큰 설정 중...`);
 
   try {
-    // 저장된 인증 정보 읽기
     if (fs.existsSync("./auth-data.json")) {
       const authData = JSON.parse(fs.readFileSync("./auth-data.json", "utf8"));
 
