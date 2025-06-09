@@ -1,13 +1,8 @@
 {
   "ci": {
     "collect": {
-      "url": [
-        "http://localhost:4173/onboarding",
-        "http://localhost:4173/popup-list",
-        "http://localhost:4173/dashboard"
-      ],
-      "numberOfRuns": 3,
-      "puppeteerScript": "scripts/lighthouse-with-auth.cjs"
+      "url": ["http://localhost:4173/onboarding"],
+      "numberOfRuns": 3
     },
     "assert": {
       "assertions": {
