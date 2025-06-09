@@ -20,6 +20,7 @@ export default function ItemListPage() {
           전체 상품 등록
         </button>
         <button
+          id="item-create-button"
           onClick={() => navigate("/items/create")}
           className="cursor-pointer px-4 py-2 bg-gray01 border border-gray10 text-gray10 rounded-full text-[20px] font-semibold hover:bg-gray10 hover:text-gray01 transition-colors duration-300"
         >

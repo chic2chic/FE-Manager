@@ -67,6 +67,7 @@ export default function CustomInput({
         </div>
       ) : (
         <input
+          id={`input-${title.replace(/\s+/g, "")}`}
           className="border rounded-full pl-[24px] border-gray05 bg-gray02 placeholder:text-gray07 text-gray10 text-[19px] transition-all duration-200 focus:border-gray09 focus:outline-none"
           style={{ width: `${width}px`, height: `${height}px` }}
           type={inputType || "text"}

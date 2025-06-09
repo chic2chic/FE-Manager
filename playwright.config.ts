@@ -16,16 +16,13 @@ export default defineConfig({
   globalSetup: path.resolve("./tests/global-setup.ts"),
 
   use: {
-    baseURL: `${isCI ? process.env.VITE_DNS_URL : "http://localhost:3000"}`,
+    // baseURL: `${isCI ? process.env.VITE_DNS_URL : "http://localhost:3000"}`,
+    baseURL: "http://localhost:4173",
     trace: "on-first-retry",
     storageState: "tests/auth.json",
   },
 
   projects: [
-    {
-      name: "chromium",
-      use: { ...devices["Desktop Chrome"] },
-    },
     {
       name: "setup",
       testMatch: /.*\.setup\.ts/,
@@ -41,6 +38,9 @@ export default defineConfig({
     {
       name: "core",
       testMatch: /^(?!.*DefaultFlow).*\.spec\.ts$/,
+      use: {
+        ...devices["Desktop Chrome"],
+      },
       dependencies: ["default-helper-func"],
     },
   ],
