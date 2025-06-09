@@ -1,0 +1,22 @@
+{
+  "ci": {
+    "collect": {
+      "url": [
+        "http://localhost:3000/onboarding",
+        "http://localhost:3000/popup-list",
+        "http://localhost:3000/dashboard"
+      ],
+      "numberOfRuns": 3,
+      "puppeteerScript": "./lighthouse-with-auth.mjs"
+    },
+    "assert": {
+      "assertions": {
+        "categories:performance": ["warn", { "minScore": 0.8 }],
+        "categories:accessibility": ["error", { "minScore": 0.9 }]
+      }
+    },
+    "upload": {
+      "target": "temporary-public-storage"
+    }
+  }
+}

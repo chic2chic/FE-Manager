@@ -1,0 +1,36 @@
+name: Lighthouse CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+
+      - name: 의존성 설치
+        run: |
+          npm install
+          npm install -g @lhci/cli
+
+      - name: 앱 빌드 및 시작
+        run: |
+          npm run build 
+          NODE_ENV=production npm start &
+          npx wait-on http://localhost:3000
+        env:
+          TEST_EMAIL: ${{ secrets.TEST_EMAIL }}
+          TEST_PASSWORD: ${{ secrets.TEST_PASSWORD }}
+
+      - name: Lighthouse CI 실행
+        run: lhci autorun
+        env:
+          TEST_EMAIL: ${{ secrets.TEST_EMAIL }}
+          TEST_PASSWORD: ${{ secrets.TEST_PASSWORD }}
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
