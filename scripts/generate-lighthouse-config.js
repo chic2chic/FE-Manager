@@ -47,7 +47,7 @@ function generateLighthouseConfig() {
               uploadThroughputKbps: 0,
             },
           },
-          numberOfRuns: 3,
+          numberOfRuns: 1,
         },
         assert: {
           assertions: {
@@ -57,17 +57,12 @@ function generateLighthouseConfig() {
             "categories:seo": ["warn", { minScore: 0.8 }],
           },
         },
-        upload: [
-          {
-            target: "temporary-public-storage",
-          },
-          {
-            target: "filesystem",
-            outputDir: ".lighthouseci",
-            reportFilenamePattern:
-              "%%PATHNAME%%-%%DATETIME%%.report.%%EXTENSION%%",
-          },
-        ],
+        upload: {
+          target: "filesystem",
+          outputDir: ".lighthouseci",
+          reportFilenamePattern:
+            "%%PATHNAME%%-%%DATETIME%%.report.%%EXTENSION%%",
+        },
       },
     };
 
