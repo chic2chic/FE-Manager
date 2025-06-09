@@ -47,7 +47,7 @@ function generateLighthouseConfig() {
               uploadThroughputKbps: 0,
             },
           },
-          numberOfRuns: 1,
+          numberOfRuns: 3,
         },
         assert: {
           assertions: {
