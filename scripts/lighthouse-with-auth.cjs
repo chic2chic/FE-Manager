@@ -1,6 +1,6 @@
 const fs = require("fs");
 
-module.exports = async function (page, url) {
+module.exports = async function ({ page, url }) {
   console.log(`테스트 URL: ${url}`);
 
   const needsAuth = ["/popup-list", "/dashboard"];

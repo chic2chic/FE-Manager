@@ -32,11 +32,28 @@ async function setupAuth() {
 
     await page.click("button:not([disabled])");
 
-    // 로그인 완료 대기
-    await page.waitForFunction(
-      () => !window.location.href.includes("/onboarding"),
-      { timeout: 10000 },
-    );
+    // 더 긴 대기시간과 다른 조건으로 시도
+    try {
+      await page.waitForFunction(
+        () => !window.location.href.includes("/onboarding"),
+        { timeout: 15000 },
+      );
+    } catch (timeoutError) {
+      // 타임아웃이면 현재 URL 확인
+      const currentUrl = await page.url();
+      console.log("현재 URL:", currentUrl);
+
+      // URL이 변경되지 않았더라도 localStorage에 토큰이 있는지 확인
+      const hasToken = await page.evaluate(() => {
+        const authStorage = localStorage.getItem("auth-storage");
+        return !!authStorage;
+      });
+
+      if (!hasToken) {
+        throw new Error("로그인 실패: 토큰이 생성되지 않았습니다");
+      }
+      console.log("URL은 변경되지 않았지만 토큰은 존재합니다");
+    }
 
     // 인증 정보 추출
     const authData = await page.evaluate(() => {
@@ -59,6 +76,8 @@ async function setupAuth() {
 
     fs.writeFileSync("./auth-data.json", JSON.stringify(authInfo, null, 2));
     console.log("인증 정보 저장 완료");
+    console.log("토큰:", authData ? "있음" : "없음");
+    console.log("쿠키 개수:", cookies.length);
 
     await browser.close();
     return authInfo;
