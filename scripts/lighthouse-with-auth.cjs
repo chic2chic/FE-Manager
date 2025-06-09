@@ -1,7 +1,9 @@
-const lighthouse = require("lighthouse");
-const chromeLauncher = require("chrome-launcher");
-const puppeteer = require("puppeteer");
-const fs = require("fs");
+const path = require("path");
+const lighthouse = require(path.join(__dirname, "../node_modules/lighthouse"));
+const chromeLauncher = require(
+  path.join(__dirname, "../node_modules/chrome-launcher"),
+);
+const puppeteer = require(path.join(__dirname, "../node_modules/puppeteer"));
 const process = require("process");
 
 async function loginAndGetAuth() {
