@@ -16,8 +16,7 @@ export default defineConfig({
   globalSetup: path.resolve("./tests/global-setup.ts"),
 
   use: {
-    // baseURL: `${isCI ? process.env.VITE_DNS_URL : "http://localhost:3000"}`,
-    baseURL: "http://localhost:4173",
+    baseURL: `${isCI ? process.env.VITE_DNS_URL : "http://localhost:3000"}`,
     trace: "on-first-retry",
     storageState: "tests/auth.json",
   },
