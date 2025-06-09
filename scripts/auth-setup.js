@@ -1,17 +1,19 @@
 const fs = require("fs");
+const path = require("path");
 
 async function setupAuth() {
   try {
-    console.log("API 로그인 시작");
+    console.log("JWT 토큰 획득 중...");
 
+    // API를 통해 JWT 토큰 획득
     const response = await fetch("https://dev-api.ceo.popi.today/auth/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        username: "manager1",
-        password: "password1",
+        username: process.env.TEST_EMAIL || "manager1",
+        password: process.env.TEST_PASSWORD || "password1",
       }),
     });
 
@@ -28,52 +30,41 @@ async function setupAuth() {
       throw new Error("로그인 실패 또는 토큰이 없습니다");
     }
 
-    const token = data.data.accessToken;
+    const accessToken = data.data.accessToken;
+    console.log("JWT 토큰 획득 성공");
 
-    // Set-Cookie 헤더에서 쿠키 추출
-    const cookies = [];
-    const setCookieHeader = response.headers.get("set-cookie");
-    if (setCookieHeader) {
-      // 쿠키 파싱
-      const cookieStrings = Array.isArray(setCookieHeader)
-        ? setCookieHeader
-        : [setCookieHeader];
-      cookieStrings.forEach(cookieString => {
-        const [nameValue] = cookieString.trim().split(";");
-        const [name, value] = nameValue.split("=");
-        if (name && value) {
-          cookies.push({
-            name: name.trim(),
-            value: value.trim(),
-            domain: "localhost",
-            path: "/",
-          });
-        }
-      });
-    }
-
-    const authInfo = {
-      token: token,
-      cookies: cookies,
+    // 토큰을 파일로 저장 (Lighthouse에서 사용할 수 있도록)
+    const authData = {
+      accessToken,
       timestamp: new Date().toISOString(),
+      expiresIn: data.data.expiresIn || 3600, // 기본 1시간
     };
 
-    fs.writeFileSync("./auth-data.json", JSON.stringify(authInfo, null, 2));
+    const authFilePath = path.join(__dirname, "auth-token.json");
+    fs.writeFileSync(authFilePath, JSON.stringify(authData, null, 2));
+    console.log(`토큰 저장 완료: ${authFilePath}`);
 
-    console.log("인증 정보 저장 완료");
-    console.log("토큰:", token ? "있음" : "없음");
-    console.log("토큰 길이:", token.length);
-    console.log("쿠키 개수:", cookies.length);
+    // 환경 변수로도 설정 (같은 프로세스 내에서 사용)
+    process.env.ACCESS_TOKEN = accessToken;
 
-    return authInfo;
+    return accessToken;
   } catch (error) {
-    console.error("API 로그인 실패:", error);
+    console.error("인증 설정 실패:", error.message);
     throw error;
   }
 }
 
+// 직접 실행될 때
 if (require.main === module) {
-  setupAuth().catch(console.error);
+  setupAuth()
+    .then(token => {
+      console.log("인증 설정 완료!");
+      process.exit(0);
+    })
+    .catch(error => {
+      console.error("인증 설정 실패:", error);
+      process.exit(1);
+    });
 }
 
-module.exports = setupAuth;
+module.exports = { setupAuth };
