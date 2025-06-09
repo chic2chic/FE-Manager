@@ -232,6 +232,7 @@ export default function PopUpInfoArea({
           <img
             src={previewImage}
             alt="팝업 이미지"
+            data-testid="popup-create-preview-img"
             className="w-full h-full object-cover rounded-[20px]"
           />
         ) : (
@@ -241,6 +242,7 @@ export default function PopUpInfoArea({
           type="file"
           accept="image/*"
           onChange={handleUploadImage}
+          data-testid="popup-create-img-btn"
           className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
         />
       </div>
@@ -254,6 +256,7 @@ export default function PopUpInfoArea({
             placeholder="팝업명을 입력해주세요"
             cssOption="w-[480px]"
             onChange={e => updatePopupField("name", e.target.value)}
+            data-testid="popup-create-input-name"
           />
         </div>
 
@@ -291,6 +294,7 @@ export default function PopUpInfoArea({
             onChange={e =>
               updatePopupField("runOpenTime", `${e.target.value}:00:00`)
             }
+            data-testid="popup-create-run-open-time"
           />
           <span>-</span>
           <PopUpInput
@@ -302,6 +306,7 @@ export default function PopUpInfoArea({
             onChange={e =>
               updatePopupField("runCloseTime", `${e.target.value}:00:00`)
             }
+            data-testid="popup-create-run-close-time"
           />
         </div>
 
@@ -335,6 +340,7 @@ export default function PopUpInfoArea({
                     ),
                   )
                 }
+                data-testid="popup-create-reserv-open"
               />
             </div>
 
@@ -364,6 +370,7 @@ export default function PopUpInfoArea({
                     ),
                   )
                 }
+                data-testid="popup-create-reserv-close"
               />
             </div>
           </div>
@@ -382,6 +389,7 @@ export default function PopUpInfoArea({
             onChange={e =>
               updatePopupField("timeCapacity", Number(e.target.value))
             }
+            data-testid="popup-create-time-capacity"
           />
         </div>
         <div className="flex gap-[30px] items-center">
@@ -396,6 +404,7 @@ export default function PopUpInfoArea({
             onChange={e =>
               updatePopupField("totalCapacity", Number(e.target.value))
             }
+            data-testid="popup-create-total-capacity"
           />
         </div>
 
@@ -410,6 +419,7 @@ export default function PopUpInfoArea({
             placeholder="상세 주소를 입력해주세요"
             cssOption="w-[480px]"
             onChange={e => updatePopupField("detailAddress", e.target.value)}
+            data-testid="popup-create-detail-address"
           />
         </div>
       </div>

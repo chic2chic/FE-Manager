@@ -65,6 +65,7 @@ export default function PopUpQuestionnaire({
       <motion.div
         className="cursor-pointer flex flex-col items-center gap-[12px] pt-6 pb-16 px-6 mx-auto bg-gray01 rounded-lg justify-center w-[250px]"
         onClick={toggleOpen}
+        data-testid="popup-create-wideBtn"
       >
         <p className="font-semibold text-[28px]">설문지 작성</p>
         <img
@@ -74,11 +75,15 @@ export default function PopUpQuestionnaire({
           height={41}
         />
       </motion.div>
-      <div className="text-center font-medium text-main07 text-[20px]">
+      <div
+        className="text-center font-medium text-main07 text-[20px]"
+        data-testid="popup-create-alert-message"
+      >
         {alertMessage}
       </div>
       {isOpen && (
         <button
+          data-testid="popup-create-save-btn"
           className="rounded-full my-0 mx-auto bg-gray10 text-gray01 py-[16px] px-[42px] cursor-pointer text-[24px] font-medium tracking-[0.2px] mb-30 hover:opacity-80"
           onClick={handleSave}
         >

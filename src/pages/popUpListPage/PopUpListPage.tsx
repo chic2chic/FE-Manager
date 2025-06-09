@@ -76,11 +76,11 @@ export default function PopUpListPage() {
           </div>
           {/* plus button */}
           <div
+            data-testid="popup-create-btn"
             className="cursor-pointer flex justify-center items-center w-[70px] h-[70px] rounded-full bg-main07 mt-[50px] mr-11"
             onClick={() => {
               navigate("/popup-create");
             }}
-            data-testid="popup-create-btn"
           >
             <img src={plusWhite} alt="plus button" width={36} height={36} />
           </div>

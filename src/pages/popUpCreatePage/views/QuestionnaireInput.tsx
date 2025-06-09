@@ -8,6 +8,7 @@ type Props = {
   handleSub: (_idx: number) => void;
   handleAnswer: (_idx: number, _e: React.ChangeEvent<HTMLInputElement>) => void;
   canDelete: boolean;
+  questionNumber: number;
 };
 
 /**
@@ -27,6 +28,7 @@ export default function QuestionnaireInput({
   handleSub,
   handleAnswer,
   canDelete,
+  questionNumber,
 }: Props) {
   return (
     <div className="flex items-center gap-[12px]">
@@ -35,11 +37,13 @@ export default function QuestionnaireInput({
         placeholder="답변 내용을 입력하세요"
         value={value}
         onChange={e => handleAnswer(idx, e)}
+        data-testid={`questionnaire-input-${idx}`}
       />
       <button
         className={`${canDelete ? "block" : "hidden"} cursor-pointer hover:opacity-80`}
         onClick={() => handleSub(idx)}
         disabled={!canDelete}
+        data-testid={`questionnaire-input-${questionNumber}-${idx}`}
       >
         <motion.img src={MinusBtn} alt="마이너스 버튼" width={32} height={32} />
       </button>
