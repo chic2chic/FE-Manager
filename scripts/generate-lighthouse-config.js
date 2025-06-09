@@ -23,6 +23,7 @@ function generateLighthouseConfig() {
       ci: {
         collect: {
           url: [
+            "http://localhost:4173/onboarding",
             "http://localhost:4173/popup-list",
             "http://localhost:4173/dashboard",
           ],
