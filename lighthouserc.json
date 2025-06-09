@@ -7,7 +7,7 @@
         "http://localhost:4173/dashboard"
       ],
       "numberOfRuns": 3,
-      "puppeteerScript": "scripts/lighthouse-with-auth.cjs",
+      "puppeteerScript": "scripts/lighthouse-with-auth.js",
       "settings": {
         "formFactor": "desktop",
         "screenEmulation": {
