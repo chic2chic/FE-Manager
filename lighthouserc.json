@@ -7,7 +7,7 @@
         "http://localhost:4173/dashboard"
       ],
       "numberOfRuns": 3,
-      "puppeteerScript": "./lighthouse-with-auth.js"
+      "puppeteerScript": "scripts/lighthouse-with-auth.js"
     },
     "assert": {
       "assertions": {
