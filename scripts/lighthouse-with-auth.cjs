@@ -1,17 +1,38 @@
 const fs = require("fs");
 
-module.exports = async function ({ page, url }) {
-  console.log(`테스트 URL: ${url}`);
+module.exports = async function (page, url) {
+  // URL 파라미터 디버깅
+  console.log("받은 파라미터들:");
+  console.log("- page:", typeof page);
+  console.log("- url:", url);
+  console.log("- url 타입:", typeof url);
 
-  const needsAuth = ["/popup-list", "/dashboard"];
-  const requiresLogin = needsAuth.some(path => url.includes(path));
-
-  if (!requiresLogin) {
-    console.log(`${url} - 인증 불필요`);
+  // URL 추출 시도
+  let testUrl;
+  if (typeof url === "string") {
+    testUrl = url;
+  } else if (url && typeof url === "object") {
+    testUrl = url.href || url.url || url.toString();
+  } else if (typeof page === "string") {
+    // 파라미터 순서가 바뀐 경우
+    testUrl = page;
+    page = url;
+  } else {
+    console.log("URL을 추출할 수 없습니다. arguments:", Array.from(arguments));
     return;
   }
 
-  console.log(`${url} - 인증 필요, 토큰 설정 중...`);
+  console.log(`테스트 URL: ${testUrl}`);
+
+  const needsAuth = ["/popup-list", "/dashboard"];
+  const requiresLogin = needsAuth.some(path => testUrl.includes(path));
+
+  if (!requiresLogin) {
+    console.log(`${testUrl} - 인증 불필요`);
+    return;
+  }
+
+  console.log(`${testUrl} - 인증 필요, 토큰 설정 중...`);
 
   try {
     if (fs.existsSync("./auth-data.json")) {
