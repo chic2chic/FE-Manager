@@ -65,7 +65,7 @@ export default function ItemDisplay({ displayName, items }: Props) {
 
             {/* 상품명 + 버튼 */}
             <p
-              id={`test-product-name-${item.itemId}`} // ← 테스트용 ID 추가
+              id={`test-product-name-${item.itemId}`}
               className="font-bold text-[20px] mb-2 w-[280px] text-center break-keep"
             >
               {item.name}

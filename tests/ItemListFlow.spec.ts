@@ -1,3 +1,4 @@
+import { GetItemListResponse } from "@/types/api/ApiResponseType";
 import { NavigateDashboard } from "@/utils/TestHelper";
 import test, { expect, Page } from "@playwright/test";
 
@@ -23,7 +24,7 @@ test.describe("상품 조회 E2E 테스트", () => {
     expect(response.status()).toBe(200);
 
     const body = await response.json();
-    const itemData = body.data as Record<string, any[]>;
+    const itemData = body.data as GetItemListResponse;
     const itemCount = Object.values(itemData ?? {}).flat().length;
 
     const productLocator = page.locator('p[id^="test-product-name-"]');
