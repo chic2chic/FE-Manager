@@ -152,7 +152,7 @@ module.exports = async function (url) {
 if (require.main === module) {
   async function main() {
     try {
-      console.log("인증된 Lighthouse 실행 시작...");
+      console.log("인증된 Lighthouse 실행 시작");
       const result = await runLighthouseWithAuth(
         "http://localhost:4173/dashboard",
       );
