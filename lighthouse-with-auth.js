@@ -1,8 +1,8 @@
-import lighthouse from "lighthouse";
-import * as chromeLauncher from "chrome-launcher";
-import puppeteer from "puppeteer";
-import fs from "fs";
-import process from "process";
+const lighthouse = require("lighthouse");
+const chromeLauncher = require("chrome-launcher");
+const puppeteer = require("puppeteer");
+const fs = require("fs");
+const process = require("process");
 
 async function loginAndGetAuth() {
   const browser = await puppeteer.launch({
@@ -13,9 +13,9 @@ async function loginAndGetAuth() {
 
   try {
     console.log("로그인 시작...");
-    console.log("페이지 이동 중: http://localhost:3000/onboarding");
+    console.log("페이지 이동 중: http://localhost:4173/onboarding");
 
-    await page.goto("http://localhost:3000/onboarding", {
+    await page.goto("http://localhost:4173/onboarding", {
       waitUntil: "networkidle0",
       timeout: 30000,
     });
@@ -85,7 +85,7 @@ async function loginAndGetAuth() {
 }
 
 async function runLighthouseWithAuth(url) {
-  const needsAuth = ["/popup-list", "/dashboard", "/popup/create"];
+  const needsAuth = ["/popup-list", "/dashboard"];
   const requiresLogin = needsAuth.some(path => url.includes(path));
 
   let authData = null;
@@ -141,16 +141,18 @@ async function runLighthouseWithAuth(url) {
   }
 }
 
-export default async function (url) {
+// CommonJS export
+module.exports = async function (url) {
   return await runLighthouseWithAuth(url);
-}
+};
 
-if (import.meta.url === `file://${process.argv[1]}`) {
+// 직접 실행시에만 main 함수 실행
+if (require.main === module) {
   async function main() {
     try {
       console.log("인증된 Lighthouse 실행 시작...");
       const result = await runLighthouseWithAuth(
-        "http://localhost:3000/dashboard",
+        "http://localhost:4173/dashboard",
       );
 
       const htmlReport = Array.isArray(result.report)
