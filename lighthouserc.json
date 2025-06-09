@@ -2,9 +2,9 @@
   "ci": {
     "collect": {
       "url": [
-        "http://localhost:3000/onboarding",
-        "http://localhost:3000/popup-list",
-        "http://localhost:3000/dashboard"
+        "http://localhost:4173/onboarding",
+        "http://localhost:4173/popup-list",
+        "http://localhost:4173/dashboard"
       ],
       "numberOfRuns": 3,
       "puppeteerScript": "./lighthouse-with-auth.mjs"

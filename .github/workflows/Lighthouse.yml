@@ -22,8 +22,8 @@ jobs:
       - name: 앱 빌드 및 시작
         run: |
           npm run build 
-          NODE_ENV=production npm start &
-          npx wait-on http://localhost:3000
+          npm run preview  &
+          npx wait-on http://localhost:4173
         env:
           TEST_EMAIL: ${{ secrets.TEST_EMAIL }}
           TEST_PASSWORD: ${{ secrets.TEST_PASSWORD }}
