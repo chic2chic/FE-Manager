@@ -12,10 +12,8 @@ export default function DashBoardReservation() {
   const { data: entrantsData } = useTodayEntrantsApi();
   const { data: reservationsData } = useTodayReservationsApi();
 
-  console.log(reservationsData);
-
   return (
-    <div className="w-[906px] flex-col">
+    <div className="w-[906px] flex-col" data-testid="dashboard-reservation">
       <DashBoardTitle title="예약 분석" />
       {entrantsData && reservationsData && (
         <div className="w-[1360px] h-[394px] flex gap-10">

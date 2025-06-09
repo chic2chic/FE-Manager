@@ -72,7 +72,10 @@ export default function DashBoardQuestionnaire() {
   // 로딩 중이거나 데이터가 없을 때
   if (isLoading || !matched) {
     return (
-      <div className="flex flex-col">
+      <div
+        className="flex flex-col"
+        data-testid="dashboard-questionnaire-data-empty"
+      >
         <div className="relative flex gap-[20px]">
           <DashBoardTitle title="설문지 분석" />
           <div className="ml-2">
@@ -93,7 +96,10 @@ export default function DashBoardQuestionnaire() {
   }
 
   return (
-    <div className="flex flex-col">
+    <div
+      className="flex flex-col"
+      data-testid="dashboard-questionnaire-data-exist"
+    >
       <div className="relative flex gap-[20px]">
         <DashBoardTitle title="설문지 분석" />
         <div className="ml-2">
