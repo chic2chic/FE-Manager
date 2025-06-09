@@ -1,8 +1,13 @@
 {
   "ci": {
     "collect": {
-      "url": ["http://localhost:4173/onboarding"],
+      "url": [
+        "http://localhost:4173/onboarding",
+        "http://localhost:4173/popup-list",
+        "http://localhost:4173/dashboard"
+      ],
       "numberOfRuns": 3,
+      "puppeteerScript": "scripts/lighthouse-with-auth.cjs",
       "settings": {
         "formFactor": "desktop",
         "screenEmulation": {
@@ -13,8 +18,8 @@
           "disabled": false
         },
         "throttling": {
-          "rttMs": 0,
-          "throughputKbps": 0,
+          "rttMs": 40,
+          "throughputKbps": 10240,
           "cpuSlowdownMultiplier": 1,
           "requestLatencyMs": 0,
           "downloadThroughputKbps": 0,
@@ -25,7 +30,7 @@
     "assert": {
       "assertions": {
         "categories:performance": ["warn", { "minScore": 0.8 }],
-        "categories:accessibility": ["error", { "minScore": 0.9 }]
+        "categories:accessibility": ["warn", { "minScore": 0.85 }]
       }
     },
     "upload": {

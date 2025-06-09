@@ -7,7 +7,7 @@ import prettier from "eslint-plugin-prettier";
 import tseslint from "typescript-eslint";
 
 export default tseslint.config(
-  { ignores: ["dist", "scripts/lighthouse-with-auth.cjs"] },
+  { ignores: ["dist", "scripts/*"] },
   {
     files: ["eslint.config.js", "*.js"],
     ...js.configs.recommended,

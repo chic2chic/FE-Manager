@@ -27,12 +27,20 @@ jobs:
         run: |
           npm install
           npm install -g @lhci/cli
+          # scripts 폴더 의존성도 설치
+          cd scripts && npm install
 
       - name: 앱 빌드 및 시작
         run: |
           npm run build 
           npm run preview &
           npx wait-on http://localhost:4173
+        env:
+          TEST_EMAIL: ${{ secrets.TEST_EMAIL }}
+          TEST_PASSWORD: ${{ secrets.TEST_PASSWORD }}
+
+      - name: 인증 설정
+        run: node scripts/auth-setup.js
         env:
           TEST_EMAIL: ${{ secrets.TEST_EMAIL }}
           TEST_PASSWORD: ${{ secrets.TEST_PASSWORD }}
