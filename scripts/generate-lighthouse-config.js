@@ -12,7 +12,7 @@ function generateLighthouseConfig() {
       accessToken = authData.accessToken;
       console.log("저장된 토큰 로드 완료");
     } else {
-      console.warn("토큰 파일이 없습니다. auth-setup.js를 먼저 실행하세요.");
+      console.warn("토큰 파일이 없습니다. auth-setup.js를 먼저 실행하세요!");
     }
 
     const lighthouseConfig = {
