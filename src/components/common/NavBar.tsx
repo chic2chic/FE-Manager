@@ -5,28 +5,27 @@ import alarmImage from "@/assets/webps/common/alarm.webp";
 import { useEffect, useRef, useState } from "react";
 import NoticeModal from "@/components/noticeModal/NoticeModal";
 import { useAuth } from "@/hooks/useAuth";
-import { useStockNotificationListApi } from "@/hooks/api/useStockNotificationListApi";
 import { usePopUpReadStore } from "@/stores/usePopUpReadStore";
+import { connectNotificationSocket } from "@/utils/NotificationSocket";
+import { useNotificationStore } from "@/stores/useNotificationStore";
 
 export default function NavBar() {
   const { isLogin, logout } = useAuth();
   const navigate = useNavigate();
   const [isNoticeModalOpen, setIsNoticeModalOpen] = useState(false);
-  const [hasNewNotification, setHasNewNotification] = useState(false);
-  const previousLength = useRef(0);
   const location = useLocation();
   const isNotPopUpListPage = !location.pathname.includes("popup-list");
-  const { name } = usePopUpReadStore();
+  const { name, popupId } = usePopUpReadStore();
+  const { hasNewNotification, clearNewFlag } = useNotificationStore();
 
-  const { notifications = [] } = useStockNotificationListApi();
-
+  // WebSocket 연결 (NavBar가 처음 렌더링될 때)
+  const connected = useRef(false);
   useEffect(() => {
-    if (notifications.length > previousLength.current) {
-      setHasNewNotification(true);
+    if (popupId && !connected.current) {
+      connectNotificationSocket("1", popupId);
+      connected.current = true;
     }
-
-    previousLength.current = notifications.length;
-  }, [notifications]);
+  }, [popupId]);
 
   return (
     <div
@@ -74,7 +73,7 @@ export default function NavBar() {
                 className={`${isNoticeModalOpen ? "bg-gray03" : "hover:bg-gray03"} transition rounded-[8px] w-9 h-9 flex justify-center items-center cursor-pointer`}
                 onClick={() => {
                   setIsNoticeModalOpen(true);
-                  setHasNewNotification(false);
+                  clearNewFlag(); // 모달 열면 빨간 점 지우기
                 }}
               >
                 <img src={alarmImage} width={24} height={24} />

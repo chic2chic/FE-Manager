@@ -1,34 +1,38 @@
 import { create } from "zustand";
 
 export type Notification = {
-  id: string;
-  message: string;
+  notificationId: string;
   read: boolean;
+  name: string;
+  popularity: string;
+  minStock: number;
+  notifiedAt: string;
 };
 
 type NotificationState = {
-  notifications: Notification[];
-  hasNewNotification: boolean;
-  addNotification: (_noti: Notification) => void;
-  markAsRead: (_id: string) => void;
-  setNotifications: (_notis: Notification[]) => void;
+  realtimeNotis: Notification[]; // 실시간 알림 (WebSocket)
+  historicalNotis: Notification[]; // 기존 알림 (GET API)
+  hasNewNotification: boolean; // 빨간 점 표시 여부
+  addRealtimeNoti: (_noti: Notification) => void;
+  setHistoricalNotis: (_notis: Notification[]) => void;
   clearNewFlag: () => void;
 };
 
 export const useNotificationStore = create<NotificationState>(set => ({
-  notifications: [],
+  realtimeNotis: [],
+  historicalNotis: [],
   hasNewNotification: false,
-  setNotifications: notis => set({ notifications: notis }),
-  addNotification: noti =>
+
+  addRealtimeNoti: noti =>
     set(state => ({
-      notifications: [noti, ...state.notifications],
+      realtimeNotis: [noti, ...state.realtimeNotis],
       hasNewNotification: true,
     })),
-  markAsRead: id =>
-    set(state => ({
-      notifications: state.notifications.map(n =>
-        n.id === id ? { ...n, read: true } : n,
-      ),
+
+  setHistoricalNotis: notis =>
+    set(() => ({
+      historicalNotis: notis,
     })),
+
   clearNewFlag: () => set({ hasNewNotification: false }),
 }));
