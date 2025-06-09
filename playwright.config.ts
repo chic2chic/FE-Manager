@@ -41,9 +41,6 @@ export default defineConfig({
         ...devices["Desktop Chrome"],
       },
       dependencies: ["default-helper-func"],
-      use: {
-        ...devices["Desktop Chrome"],
-      },
     },
   ],
 
