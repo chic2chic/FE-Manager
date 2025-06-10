@@ -5,6 +5,7 @@ type Props = {
 };
 
 export default function OnBoardingContents({ info }: Props) {
+  //
   return (
     <div className="flex gap-[74px] items-center">
       <div>
