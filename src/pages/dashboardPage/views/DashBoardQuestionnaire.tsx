@@ -7,6 +7,7 @@ import { useQuestionnaireApi } from "@/hooks/api/useDashboardApi";
 import { QuestionnaireResponse } from "@/types/api/ApiResponseType";
 import { Questions } from "@/constants/popUpCreate/Questions";
 import Loading from "@/components/common/Loading";
+import NoDataComp from "@/components/common/NoDataComp";
 
 const options = ["1번 문항", "2번 문항", "3번 문항", "4번 문항"];
 const SIZE = 300;
@@ -88,7 +89,7 @@ export default function DashBoardQuestionnaire() {
         </div>
         <div className="w-[1360px] h-[662px] bg-gray02 rounded-[50px] px-[60px] py-[45px] flex items-center justify-center">
           <p className="text-[24px] text-gray08">
-            {isLoading ? <Loading /> : "설문 데이터가 없습니다."}
+            {isLoading ? <Loading /> : <NoDataComp />}
           </p>
         </div>
       </div>

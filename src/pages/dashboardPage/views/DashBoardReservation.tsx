@@ -15,7 +15,7 @@ export default function DashBoardReservation() {
   return (
     <div className="w-[906px] flex-col" data-testid="dashboard-reservation">
       <DashBoardTitle title="예약 분석" />
-      {entrantsData && reservationsData && (
+      {entrantsData && reservationsData ? (
         <div className="w-[1360px] h-[394px] flex gap-10">
           <div className="w-[314px] flex flex-col justify-between">
             <CountCard
@@ -57,6 +57,10 @@ export default function DashBoardReservation() {
               </div>
             )}
           </div>
+        </div>
+      ) : (
+        <div className="w-[906px] h-[394px] -translate-x-6 pt-[22px] pb-[30px] bg-gray02 rounded-[50px]">
+          <NoDataCompt />
         </div>
       )}
     </div>

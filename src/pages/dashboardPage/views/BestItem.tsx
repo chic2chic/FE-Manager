@@ -129,7 +129,7 @@ const BestItemRoot = () => {
           ))}
         </div>
       ) : (
-        <div className="flex justify-center gap-[60px] mt-2 h-[300px]">
+        <div className="flex justify-center gap-[60px] mt-2 h-[512px] bg-gray02 rounded-[50px]">
           <NoDataCompt />
         </div>
       )}
