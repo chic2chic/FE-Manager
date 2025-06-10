@@ -99,7 +99,7 @@ const BestItemCard = ({ item, index }: BestItemCardProps) => {
   );
 };
 
-export default function BestItem() {
+const BestItemRoot = () => {
   const { data, isLoading } = useBestItemsApi();
 
   return (
@@ -135,4 +135,10 @@ export default function BestItem() {
       )}
     </div>
   );
-}
+};
+
+BestItemRoot.Image = BestItemImage;
+BestItemRoot.Card = BestItemCard;
+
+const BestItem = BestItemRoot;
+export default BestItem;
