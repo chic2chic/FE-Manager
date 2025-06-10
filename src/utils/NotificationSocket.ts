@@ -5,8 +5,9 @@ import { useAuthStore } from "@/stores/useAuthStore";
 
 let client: Client;
 
+// 소켓 연결
 export const connectNotificationSocket = (
-  managerId: string,
+  managerId: number,
   popupId: number,
 ) => {
   if (client?.connected) return;
@@ -37,4 +38,11 @@ export const connectNotificationSocket = (
     },
   });
   client.activate();
+};
+
+// 소켓 연결 해제
+export const disconnectNotificationSocket = () => {
+  if (client && client.connected) {
+    client.deactivate();
+  }
 };
