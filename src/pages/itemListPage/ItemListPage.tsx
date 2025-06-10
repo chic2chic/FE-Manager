@@ -3,12 +3,12 @@ import ItemDisplay from "./views/ItemDisplay";
 import { useItemListApi } from "@/hooks/api/useItemListApi";
 import ItemCreateExcelModal from "./views/ItemCreateExcelModal";
 import { useState } from "react";
+import ConditionalComponent from "@/components/common/ConditionalComponent";
 
 export default function ItemListPage() {
   const { data } = useItemListApi();
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const isDataExist = data && Object.keys(data).some(d => data[d]);
 
   return (
     <div className="py-8 flex flex-col min-h-[calc(100vh-200px)]">
@@ -27,27 +27,33 @@ export default function ItemListPage() {
           상품 등록
         </button>
       </div>
+
       {isModalOpen && (
         <ItemCreateExcelModal closeModal={() => setIsModalOpen(false)} />
       )}
 
-      {isDataExist ? (
-        Object.entries(data).map(([k, v]) => (
-          <div key={k}>
-            <ItemDisplay displayName={k.toUpperCase()} items={v} />
+      <ConditionalComponent
+        when={data}
+        fallback={
+          <div className="flex flex-col items-center justify-center flex-grow">
+            <p className="text-[32px] text-gray10 font-medium">
+              등록된 상품이 아직 없습니다
+            </p>
+            <p className="mt-4 text-[20px] text-gray10">
+              우측 상단 <span className="text-main06">상품 등록 버튼</span>을
+              눌러 상품을 등록해주세요!
+            </p>
           </div>
-        ))
-      ) : (
-        <div className="flex flex-col items-center justify-center flex-grow">
-          <p className="text-[32px] text-gray10 font-medium">
-            등록된 상품이 아직 없습니다
-          </p>
-          <p className="mt-4 text-[20px] text-gray10">
-            우측 상단 <span className="text-main06">상품 등록 버튼</span>을 눌러
-            상품을 등록해주세요!
-          </p>
-        </div>
-      )}
+        }
+      >
+        {data =>
+          Object.entries(data).map(([k, v]) => (
+            <div key={k}>
+              <ItemDisplay displayName={k.toUpperCase()} items={v} />
+            </div>
+          ))
+        }
+      </ConditionalComponent>
     </div>
   );
 }

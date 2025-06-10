@@ -17,6 +17,7 @@ export default defineConfig({
 
   use: {
     baseURL: `${isCI ? process.env.VITE_DNS_URL : "http://localhost:3000"}`,
+    // baseURL: process.env.VITE_API_URL,
     trace: "on-first-retry",
     storageState: "tests/auth.json",
   },
