@@ -63,6 +63,7 @@ export default function NoticeModal({ onClose }: Props) {
               name={item.name ?? ""}
               minStock={item.minStock ?? 0}
               notifiedAt={item.notifiedAt ?? ""}
+              onClose={onClose}
             />
           ))
         ) : (
