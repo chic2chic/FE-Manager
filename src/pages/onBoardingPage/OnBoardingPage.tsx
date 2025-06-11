@@ -43,7 +43,6 @@ export default function OnBoradingPage() {
           </button>
           <div className="w-full max-w-[1100px] md:max-w-[1000px] flex items-center">
             {activeidx === 0 ? (
-              // ✅ 첫 번째 슬라이드는 Swiper 바깥에서 직접 렌더링
               <OnBoardingContents info={ContentDesc[0]} />
             ) : (
               <Swiper
@@ -53,7 +52,7 @@ export default function OnBoradingPage() {
                 onSlideChange={(swiper: SwiperType) => {
                   setActiveidx(swiper.activeIndex);
                 }}
-                initialSlide={1} // ✅ 1번 슬라이드부터 시작
+                initialSlide={1}
                 className="w-full"
                 slidesPerView={1}
               >
