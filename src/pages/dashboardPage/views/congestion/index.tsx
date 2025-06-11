@@ -15,11 +15,11 @@ const Congestion = () => {
 
   // 오늘 요일에 맞는 버튼 자동 선택
   useEffect(() => {
-    if (data && !selectedDay) {
+    if (data) {
       const today = new Date().getDay();
       setSelectedDay(Days[today === 0 ? 6 : today - 1]);
     }
-  }, [data, selectedDay]);
+  }, [data]);
 
   return (
     <div className="flex flex-col" data-testid="dashboard-congestion">

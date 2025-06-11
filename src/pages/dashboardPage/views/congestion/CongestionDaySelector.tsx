@@ -1,6 +1,7 @@
 import { Days } from "@/constants/dashboard/Days";
 import { FormatDay } from "@/utils/FormatDay";
 import { DayOfWeek } from "@/types/CongestionType";
+import React from "react";
 
 type Props = {
   selectedDay: DayOfWeek;
@@ -25,4 +26,4 @@ const CongestionDaySelector = ({ selectedDay, onChange }: Props) => {
   );
 };
 
-export default CongestionDaySelector;
+export default React.memo(CongestionDaySelector);
