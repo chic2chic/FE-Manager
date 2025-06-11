@@ -28,7 +28,11 @@ export const QueryComponent = <T,>({
 }: Props<T>) => {
   if (isLoading) return <>{loadingFallback}</>;
   if (isError) return <>{errorFallback}</>;
-  if (!data || (Array.isArray(data) && data.length === 0)) {
+  if (
+    data === null ||
+    data === undefined ||
+    (Array.isArray(data) && data.length === 0)
+  ) {
     return emptyFallback ? <>{emptyFallback}</> : null;
   }
   return <>{children(data)}</>;

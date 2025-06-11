@@ -6,63 +6,110 @@ import {
   useTodayEntrantsApi,
   useTodayReservationsApi,
 } from "@/hooks/api/useDashboardApi";
-import NoDataCompt from "@/components/common/NoDataComp";
+import Skeleton from "@/components/common/Skeleton";
+import NoDataComp from "@/components/common/NoDataComp";
+import { QueryComponent } from "@/components/common/QueryComponent";
 
 export default function DashBoardReservation() {
-  const { data: entrantsData } = useTodayEntrantsApi();
-  const { data: reservationsData } = useTodayReservationsApi();
+  const entrants = useTodayEntrantsApi();
+  const reservations = useTodayReservationsApi();
 
   return (
     <div className="w-[906px] flex-col" data-testid="dashboard-reservation">
       <DashBoardTitle title="예약 분석" />
-      {entrantsData && reservationsData ? (
-        <div className="w-[1360px] h-[394px] flex gap-10">
-          <div className="w-[314px] flex flex-col justify-between">
-            <CountCard
-              title="예약자 수"
-              bgCSS="bg-main01"
-              value={reservationsData.reservedCount}
-              valueCSS="text-main04 text-[64px]"
-              unit="명"
-              unitCSS="text-main04 text-[40px]"
+      <div className="w-[906px] h-[394px] flex justify-between">
+        {/* CountCard 2개 */}
+        <div className="w-[314px] flex flex-col justify-between">
+          {/* 예약자 수 */}
+          <QueryComponent
+            data={reservations.data}
+            isLoading={reservations.isLoading}
+            isError={reservations.isError}
+            loadingFallback={
+              <div className="rounded-[40px] w-[314px] h-[180px] flex justify-center items-center overflow-hidden">
+                <Skeleton />
+              </div>
+            }
+            emptyFallback={
+              <div className="bg-gray02 rounded-[40px] w-[314px] h-[180px] flex justify-center items-center">
+                <NoDataComp />
+              </div>
+            }
+          >
+            {data => (
+              <CountCard
+                title="예약자 수"
+                bgCSS="bg-main01"
+                value={data.reservedCount}
+                valueCSS="text-main04 text-[64px]"
+                unit="명"
+                unitCSS="text-main04 text-[40px]"
+              />
+            )}
+          </QueryComponent>
+
+          {/* 입장자 수 */}
+          <QueryComponent
+            data={entrants.data}
+            isLoading={entrants.isLoading}
+            isError={entrants.isError}
+            loadingFallback={
+              <div className="rounded-[40px] w-[314px] h-[180px] flex justify-center items-center overflow-hidden">
+                <Skeleton />
+              </div>
+            }
+            emptyFallback={
+              <div className="bg-gray02 rounded-[40px] w-[314px] h-[180px] flex justify-center items-center">
+                <NoDataComp />
+              </div>
+            }
+          >
+            {data => (
+              <CountCard
+                title="입장자 수"
+                bgCSS="bg-purple02"
+                value={data.entrantCount}
+                valueCSS="text-purple06 text-[64px]"
+                unit="명"
+                unitCSS="text-purple06 text-[40px]"
+              />
+            )}
+          </QueryComponent>
+        </div>
+
+        {/* 요일별 예약자 수 */}
+        <div className="flex flex-col justify-between w-[552px] h-[394px] bg-gray02 rounded-[50px] px-[30px] pt-[22px] pb-[30px]">
+          <div className="flex ml-[92px] gap-[10px] items-center">
+            <img
+              src={checkCalendar}
+              alt="check calendar"
+              width={60}
+              height={60}
             />
-            <CountCard
-              title="입장자 수"
-              bgCSS="bg-purple02"
-              value={entrantsData.entrantCount}
-              valueCSS="text-purple06 text-[64px]"
-              unit="명"
-              unitCSS="text-purple06 text-[40px]"
-            />
+            <span className="font-[500] text-gray10 text-[30px]">
+              요일별 예약자 수
+            </span>
           </div>
 
-          {/* 요일별 예약자 수 */}
-          <div className="flex flex-col justify-between w-[552px] h-[394px] bg-gray02 rounded-[50px] px-[30px] pt-[22px] pb-[30px]">
-            <div className="flex ml-[92px] gap-[10px] items-center left-[122px] top-[22px]">
-              <img
-                src={checkCalendar}
-                alt="check calendar"
-                width={60}
-                height={60}
-              />
-              <span className="font-[500] text-gray10 text-[30px]">
-                요일별 예약자 수
-              </span>
-            </div>
-            {reservationsData && reservationsData.chart.length > 0 ? (
-              <ReservationByDayChart data={reservationsData.chart} />
-            ) : (
-              <div className="w-[552px] h-[394px] -translate-x-6 pt-[22px] pb-[30px]">
-                <NoDataCompt />
+          <QueryComponent
+            data={reservations.data?.chart ?? []}
+            isLoading={reservations.isLoading}
+            isError={reservations.isError}
+            loadingFallback={
+              <div className="w-full h-full rounded-[20px] flex justify-center items-center overflow-hidden">
+                <Skeleton />
               </div>
-            )}
-          </div>
+            }
+            emptyFallback={
+              <div className="w-full h-full flex justify-center items-center">
+                <NoDataComp />
+              </div>
+            }
+          >
+            {chartData => <ReservationByDayChart data={chartData} />}
+          </QueryComponent>
         </div>
-      ) : (
-        <div className="w-[906px] h-[394px] -translate-x-6 pt-[22px] pb-[30px] bg-gray02 rounded-[50px]">
-          <NoDataCompt />
-        </div>
-      )}
+      </div>
     </div>
   );
 }
