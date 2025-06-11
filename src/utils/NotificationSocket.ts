@@ -17,7 +17,7 @@ export const connectNotificationSocket = (
 
   client = new Client({
     webSocketFactory: () => new SockJS(`${baseURL}/ws`),
-    reconnectDelay: 5000,
+    reconnectDelay: 60000,
     connectHeaders: {
       Authorization: `Bearer ${token}`,
     },

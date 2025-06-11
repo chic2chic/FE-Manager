@@ -3,7 +3,7 @@ import { CountCard } from "@/pages/dashboardPage/views/CountCard";
 import DashBoardTitle from "@/pages/dashboardPage/views/DashBoardTitle";
 import NoDataComp from "@/components/common/NoDataComp";
 import Skeleton from "@/components/common/Skeleton";
-import { QueryComponent } from "@/components/common/QueryComponent";
+import QueryComponent from "@/components/common/QueryComponent";
 
 export default function DashBoardCustomerTransaction() {
   const { data, isLoading, isError } = useAvgPurchaseApi();

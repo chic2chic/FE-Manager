@@ -3,7 +3,7 @@ import { useConversionApi } from "@/hooks/api/useDashboardApi";
 import { ConversionRateChart } from "@/pages/dashboardPage/views/ConversionRateChart";
 import DashBoardTitle from "@/pages/dashboardPage/views/DashBoardTitle";
 import Skeleton from "@/components/common/Skeleton";
-import { QueryComponent } from "@/components/common/QueryComponent";
+import QueryComponent from "@/components/common/QueryComponent";
 
 export default function DashBoardConversionRate() {
   const { data, isLoading, isError } = useConversionApi();

@@ -3,7 +3,7 @@ import { mapGenderData, mapAgeData } from "@/utils/VisitorColorMapper";
 import VisitorPieChart from "@/pages/dashboardPage/views/VisitorPieChart";
 import { useVisitorStatsApi } from "@/hooks/api/useDashboardApi";
 import NoDataComp from "@/components/common/NoDataComp";
-import { QueryComponent } from "@/components/common/QueryComponent";
+import QueryComponent from "@/components/common/QueryComponent";
 import Skeleton from "@/components/common/Skeleton";
 
 export default function DashBoardVisitor() {

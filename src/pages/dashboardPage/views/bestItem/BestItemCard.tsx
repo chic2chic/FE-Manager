@@ -1,5 +1,5 @@
-import { BestItemCardImage } from "@/pages/dashboardPage/views/bestItem/BestItemCardImage";
-import { memo } from "react";
+import React from "react";
+import BestItemCardImage from "@/pages/dashboardPage/views/bestItem/BestItemCardImage";
 
 type BestItemCardProps = {
   item: {
@@ -25,10 +25,7 @@ const badgeBgClass: Record<number, string> = {
 };
 
 // Card UI
-export const BestItemCard = memo(function BestItemCard({
-  item,
-  index,
-}: BestItemCardProps) {
+const BestItemCard = ({ item, index }: BestItemCardProps) => {
   return (
     <div
       key={item.itemId}
@@ -59,4 +56,6 @@ export const BestItemCard = memo(function BestItemCard({
       </div>
     </div>
   );
-});
+};
+
+export default React.memo(BestItemCard);
