@@ -2,9 +2,9 @@ import DashBoardCongestion from "@/pages/dashboardPage/views/DashBoardCongestion
 import DashBoardCustomerTransaction from "@/pages/dashboardPage/views/DashBoardCustomerTransaction";
 import DashBoardReservation from "@/pages/dashboardPage/views/DashBoardReservation";
 import DashBoardConversionRate from "@/pages/dashboardPage/views/DashBoardConversionRate";
-import BestItem from "@/pages/dashboardPage/views/BestItem";
 import DashBoardVisitor from "@/pages/dashboardPage/views/DashBoardVisitor";
 import DashBoardQuestionnaire from "@/pages/dashboardPage/views/DashBoardQuestionnaire";
+import BestItem from "@/pages/dashboardPage/views/bestItem";
 
 export default function DashBoardPage() {
   return (
