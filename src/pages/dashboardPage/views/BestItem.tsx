@@ -1,8 +1,9 @@
 import DashBoardTitle from "@/pages/dashboardPage/views/DashBoardTitle";
 import { useBestItemsApi } from "@/hooks/api/useDashboardApi";
-import NoDataCompt from "@/components/common/NoDataComp";
 import Skeleton from "@/components/common/Skeleton";
 import { useState } from "react";
+import { QueryComponent } from "@/components/common/QueryComponent";
+import NoDataComp from "@/components/common/NoDataComp";
 
 type BestItemImageProps = {
   src: string;
@@ -100,7 +101,7 @@ const BestItemCard = ({ item, index }: BestItemCardProps) => {
 };
 
 const BestItemRoot = () => {
-  const { data, isLoading } = useBestItemsApi();
+  const { data, isLoading, isError } = useBestItemsApi();
 
   return (
     <div data-testid="dashboard-bestItems">
@@ -109,30 +110,36 @@ const BestItemRoot = () => {
         <DashBoardTitle title="실시간 인기상품" />
       </div>
 
-      {/* 인기 상품 카드 */}
-      {isLoading ? (
-        // Skeleton UI
-        <div className="flex justify-center gap-[60px] mt-2">
-          {[1, 2, 3].map(i => (
-            <div
-              key={i}
-              className="w-[400px] h-[512px] rounded-[50px] overflow-hidden"
-            >
-              <Skeleton />
-            </div>
-          ))}
-        </div>
-      ) : data && data.length > 0 ? (
-        <div className="flex justify-center gap-[60px] mt-2">
-          {data.map((item, index) => (
-            <BestItemCard key={item.itemId} item={item} index={index} />
-          ))}
-        </div>
-      ) : (
-        <div className="flex justify-center gap-[60px] mt-2 h-[512px] bg-gray02 rounded-[50px]">
-          <NoDataCompt />
-        </div>
-      )}
+      <QueryComponent
+        data={data}
+        isLoading={isLoading}
+        isError={isError}
+        loadingFallback={
+          <div className="flex justify-center gap-[60px] mt-2">
+            {[1, 2, 3].map(i => (
+              <div
+                key={i}
+                className="w-[400px] h-[512px] rounded-[50px] overflow-hidden"
+              >
+                <Skeleton />
+              </div>
+            ))}
+          </div>
+        }
+        emptyFallback={
+          <div className="flex justify-center gap-[60px] mt-2 h-[512px] bg-gray02 rounded-[50px]">
+            <NoDataComp />
+          </div>
+        }
+      >
+        {data => (
+          <div className="flex justify-center gap-[60px] mt-2">
+            {data.map((item, index) => (
+              <BestItem.Card key={item.itemId} item={item} index={index} />
+            ))}
+          </div>
+        )}
+      </QueryComponent>
     </div>
   );
 };

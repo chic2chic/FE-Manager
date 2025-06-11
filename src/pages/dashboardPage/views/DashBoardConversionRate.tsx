@@ -1,4 +1,4 @@
-import NoDataCompt from "@/components/common/NoDataComp";
+import NoDataComp from "@/components/common/NoDataComp";
 import { useConversionApi } from "@/hooks/api/useDashboardApi";
 import { ConversionRateChart } from "@/pages/dashboardPage/views/ConversionRateChart";
 import DashBoardTitle from "@/pages/dashboardPage/views/DashBoardTitle";
@@ -36,7 +36,7 @@ export default function DashBoardConversionRate() {
               />
             ) : (
               <div className="absolute bottom-6 w-[612px] h-[394px]">
-                <NoDataCompt />
+                <NoDataComp />
               </div>
             )}
           </div>
@@ -65,7 +65,7 @@ export default function DashBoardConversionRate() {
               />
             ) : (
               <div className="absolute bottom-6 w-[612px] h-[394px]">
-                <NoDataCompt />
+                <NoDataComp />
               </div>
             )}
           </div>

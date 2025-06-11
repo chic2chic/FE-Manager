@@ -10,11 +10,11 @@ export default function DashBoardPage() {
   return (
     <div className="w-[1360px] mx-auto flex flex-col gap-[70px] pt-[50px] pb-[86px]">
       <BestProduct />
-      <div className="flex gap-[70px]">
+      <div className="flex w-[1360px] justify-between">
         <DashBoardCongestion />
         <DashBoardVisitor />
       </div>
-      <div className="flex gap-10">
+      <div className="flex w-[1360px] justify-between">
         <DashBoardReservation />
         <DashBoardCustomerTransaction />
       </div>

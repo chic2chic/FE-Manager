@@ -6,7 +6,7 @@ import {
   useTodayEntrantsApi,
   useTodayReservationsApi,
 } from "@/hooks/api/useDashboardApi";
-import NoDataCompt from "@/components/common/NoDataComp";
+import NoDataComp from "@/components/common/NoDataComp";
 
 export default function DashBoardReservation() {
   const { data: entrantsData } = useTodayEntrantsApi();
@@ -16,7 +16,7 @@ export default function DashBoardReservation() {
     <div className="w-[906px] flex-col" data-testid="dashboard-reservation">
       <DashBoardTitle title="예약 분석" />
       {entrantsData && reservationsData ? (
-        <div className="w-[1360px] h-[394px] flex gap-10">
+        <div className="w-[906px] h-[394px] flex justify-between">
           <div className="w-[314px] flex flex-col justify-between">
             <CountCard
               title="예약자 수"
@@ -52,15 +52,15 @@ export default function DashBoardReservation() {
             {reservationsData && reservationsData.chart.length > 0 ? (
               <ReservationByDayChart data={reservationsData.chart} />
             ) : (
-              <div className="w-[552px] h-[394px] -translate-x-6 pt-[22px] pb-[30px]">
-                <NoDataCompt />
+              <div className="w-[552px] h-[394px] pt-[22px] pb-[30px]">
+                <NoDataComp />
               </div>
             )}
           </div>
         </div>
       ) : (
-        <div className="w-[906px] h-[394px] -translate-x-6 pt-[22px] pb-[30px] bg-gray02 rounded-[50px]">
-          <NoDataCompt />
+        <div className="w-[906px] h-[394px] pt-[22px] pb-[30px] bg-gray02 rounded-[50px]">
+          <NoDataComp />
         </div>
       )}
     </div>

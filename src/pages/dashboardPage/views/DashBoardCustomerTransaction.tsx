@@ -1,7 +1,7 @@
 import { useAvgPurchaseApi } from "@/hooks/api/useDashboardApi";
 import { CountCard } from "@/pages/dashboardPage/views/CountCard";
 import DashBoardTitle from "@/pages/dashboardPage/views/DashBoardTitle";
-import NoDataCompt from "@/components/common/NoDataComp";
+import NoDataComp from "@/components/common/NoDataComp";
 
 export default function DashBoardCustomerTransaction() {
   const { data } = useAvgPurchaseApi();
@@ -31,7 +31,7 @@ export default function DashBoardCustomerTransaction() {
           </>
         ) : (
           <div className="flex justify-center h-[394px] bg-gray02 rounded-[50px]">
-            <NoDataCompt />
+            <NoDataComp />
           </div>
         )}
       </div>
