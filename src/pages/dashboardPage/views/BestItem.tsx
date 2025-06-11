@@ -101,7 +101,7 @@ const BestItemCard = ({ item, index }: BestItemCardProps) => {
 };
 
 const BestItemRoot = () => {
-  const { data, isLoading, isError } = useBestItemsApi();
+  const { data: bestItemData, isLoading, isError } = useBestItemsApi();
 
   return (
     <div data-testid="dashboard-bestItems">
@@ -111,7 +111,7 @@ const BestItemRoot = () => {
       </div>
 
       <QueryComponent
-        data={data}
+        data={bestItemData}
         isLoading={isLoading}
         isError={isError}
         loadingFallback={

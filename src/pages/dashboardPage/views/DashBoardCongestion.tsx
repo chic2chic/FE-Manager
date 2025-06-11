@@ -41,7 +41,7 @@ export default function DashBoardCongestion() {
 
         {/* 그래프 영역 */}
         <QueryComponent
-          data={data?.[selectedDay] ?? []}
+          data={data?.[selectedDay]}
           isLoading={isLoading}
           isError={isError}
           loadingFallback={
