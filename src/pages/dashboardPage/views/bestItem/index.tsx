@@ -1,9 +1,9 @@
-import DashBoardTitle from "@/pages/dashboardPage/views/DashBoardTitle";
 import { useBestItemsApi } from "@/hooks/api/useDashboardApi";
 import Skeleton from "@/components/common/Skeleton";
-import { QueryComponent } from "@/components/common/QueryComponent";
+import QueryComponent from "@/components/common/QueryComponent";
 import NoDataComp from "@/components/common/NoDataComp";
-import { BestItemCard } from "@/pages/dashboardPage/views/bestItem/BestItemCard";
+import BestItemCard from "@/pages/dashboardPage/views/bestItem/BestItemCard";
+import DashBoardTitle from "@/pages/dashboardPage/views/DashBoardTitle";
 
 const BestItem = () => {
   const { data: bestItemData, isLoading, isError } = useBestItemsApi();

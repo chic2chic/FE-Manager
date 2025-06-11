@@ -8,7 +8,7 @@ import {
 } from "@/hooks/api/useDashboardApi";
 import Skeleton from "@/components/common/Skeleton";
 import NoDataComp from "@/components/common/NoDataComp";
-import { QueryComponent } from "@/components/common/QueryComponent";
+import QueryComponent from "@/components/common/QueryComponent";
 
 export default function DashBoardReservation() {
   const entrants = useTodayEntrantsApi();

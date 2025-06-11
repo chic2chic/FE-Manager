@@ -8,7 +8,7 @@ import { QuestionnaireResponse } from "@/types/api/ApiResponseType";
 import { Questions } from "@/constants/popUpCreate/Questions";
 import NoDataComp from "@/components/common/NoDataComp";
 import Skeleton from "@/components/common/Skeleton";
-import { QueryComponent } from "@/components/common/QueryComponent";
+import QueryComponent from "@/components/common/QueryComponent";
 
 const options = ["1번 문항", "2번 문항", "3번 문항", "4번 문항"];
 const SIZE = 300;

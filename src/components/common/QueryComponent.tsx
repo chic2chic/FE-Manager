@@ -13,7 +13,7 @@ type Props<T> = {
   children: (_data: T) => React.ReactNode;
 };
 
-export const QueryComponent = <T,>({
+const QueryComponent = <T,>({
   data,
   isLoading,
   isError,
@@ -37,3 +37,5 @@ export const QueryComponent = <T,>({
   }
   return <>{children(data)}</>;
 };
+
+export default QueryComponent;

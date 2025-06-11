@@ -1,18 +1,19 @@
 import { useEffect, useState } from "react";
 import { Days } from "@/constants/dashboard/Days";
-import { FormatDay } from "@/utils/FormatDay";
-import DashBoardTitle from "@/pages/dashboardPage/views/DashBoardTitle";
-import CongestionChart from "@/pages/dashboardPage/views/CongestionChart";
 import { useCongestionApi } from "@/hooks/api/useDashboardApi";
 import { DayOfWeek } from "@/types/CongestionType";
+import DashBoardTitle from "@/pages/dashboardPage/views/DashBoardTitle";
 import NoDataComp from "@/components/common/NoDataComp";
-import { QueryComponent } from "@/components/common/QueryComponent";
+import QueryComponent from "@/components/common/QueryComponent";
 import Skeleton from "@/components/common/Skeleton";
+import CongestionChart from "@/pages/dashboardPage/views/congestion/CongestionChart";
+import CongestionDaySelector from "@/pages/dashboardPage/views/congestion/CongestionDaySelector";
 
-export default function DashBoardCongestion() {
+const Congestion = () => {
   const [selectedDay, setSelectedDay] = useState<DayOfWeek>(Days[0]);
   const { data, isLoading, isError } = useCongestionApi();
 
+  // 오늘 요일에 맞는 버튼 자동 선택
   useEffect(() => {
     if (data && !selectedDay) {
       const today = new Date().getDay();
@@ -25,20 +26,10 @@ export default function DashBoardCongestion() {
       <DashBoardTitle title="혼잡도 분석" />
       <div className="relative w-[660px] h-[510px] bg-gray02 rounded-[50px] px-6">
         {/* 요일 버튼 */}
-        <div className="mt-5 flex justify-center gap-6 mb-4">
-          {Days.map(day => (
-            <button
-              key={day}
-              onClick={() => setSelectedDay(day)}
-              className={`cursor-pointer w-[54px] h-[54px] text-gray09 rounded-full flex items-center justify-center font-medium text-[24px]
-                ${selectedDay === day && "bg-white border-mint07 border-2 rounded-full"}
-              `}
-            >
-              {FormatDay(day)}
-            </button>
-          ))}
-        </div>
-
+        <CongestionDaySelector
+          selectedDay={selectedDay}
+          onChange={setSelectedDay}
+        />
         {/* 그래프 영역 */}
         <QueryComponent
           data={data?.[selectedDay]}
@@ -55,13 +46,16 @@ export default function DashBoardCongestion() {
             </div>
           }
         >
-          {dayData => (
+          {data => (
             <div className="absolute bottom-6 w-[612px] h-[394px] bg-gray01 rounded-[40px] flex justify-center">
-              <CongestionChart dayData={dayData} />
+              {/* 혼잡도 분석 그래프 */}
+              <CongestionChart dayData={data} />
             </div>
           )}
         </QueryComponent>
       </div>
     </div>
   );
-}
+};
+
+export default Congestion;
