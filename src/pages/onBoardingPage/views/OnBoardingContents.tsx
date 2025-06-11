@@ -1,3 +1,5 @@
+import React from "react";
+import ConditionalComponent from "@/components/common/ConditionalComponent";
 import { OnBoardingContentType } from "@/constants/onboarding/ContentDesc";
 
 type Props = {
@@ -18,31 +20,37 @@ export default function OnBoardingContents({ info }: Props) {
         <p className="font-bold text-[40px]  text-main06">0{info.id}</p>
         <p className="font-bold text-[44px]">{info.title}</p>
         <div className="text-[26px] font-medium">
-          {info.desc.map((item, idx, arr) => {
-            if (item.startsWith("PoPI")) {
-              return (
+          {info.desc.map((item, idx, arr) => (
+            <React.Fragment key={idx}>
+              <ConditionalComponent when={item.startsWith("PoPI")}>
                 <span
-                  key={idx}
                   lang="en"
                   className="text-[28px] md:text-[22px] text-main04"
                 >
                   {item}
                 </span>
-              );
-            } else if (idx > 0 && arr[idx - 1].startsWith("PoPI")) {
-              return (
-                <span className="md:text-[22px]" key={idx}>
-                  {item}
-                </span>
-              );
-            } else {
-              return (
-                <p key={idx} className="text-[26px] md:text-[22px] font-medium">
-                  {item}
-                </p>
-              );
-            }
-          })}
+              </ConditionalComponent>
+
+              <ConditionalComponent
+                when={
+                  !item.startsWith("PoPI") &&
+                  idx > 0 &&
+                  arr[idx - 1].startsWith("PoPI")
+                }
+              >
+                <span className="md:text-[22px]">{item}</span>
+              </ConditionalComponent>
+
+              <ConditionalComponent
+                when={
+                  !item.startsWith("PoPI") &&
+                  !(idx > 0 && arr[idx - 1].startsWith("PoPI"))
+                }
+              >
+                <p className="text-[26px] md:text-[22px] font-medium">{item}</p>
+              </ConditionalComponent>
+            </React.Fragment>
+          ))}
         </div>
       </div>
     </div>
