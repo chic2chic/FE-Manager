@@ -1,7 +1,7 @@
+import React from "react";
 import { Days } from "@/constants/dashboard/Days";
 import { FormatDay } from "@/utils/FormatDay";
 import { DayOfWeek } from "@/types/CongestionType";
-import React from "react";
 
 type Props = {
   selectedDay: DayOfWeek;

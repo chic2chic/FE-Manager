@@ -10,7 +10,6 @@ import {
 import CustomBlurDot from "@/components/common/CustomBlurDot";
 import CustomCursor from "@/components/common/CustomCursor";
 import CustomTooltip from "@/components/common/CustomTooltip";
-import React from "react";
 
 type Props = {
   dayData: GetCongestionTimeValue[];
@@ -64,4 +63,4 @@ const CongestionChart = ({ dayData }: Props) => {
   );
 };
 
-export default React.memo(CongestionChart);
+export default CongestionChart;
