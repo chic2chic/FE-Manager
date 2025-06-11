@@ -10,7 +10,7 @@ export const connectNotificationSocket = (
   managerId: number,
   popupId: number,
 ) => {
-  if (client?.active || client?.connected) return;
+  if (client?.connected) return;
 
   const baseURL = import.meta.env.VITE_API_URL;
   const token = useAuthStore.getState().accessToken;
