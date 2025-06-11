@@ -16,10 +16,10 @@ export default function DashBoardVisitor() {
 
       <div className="relative bg-gray02 w-[660px] h-[510px] rounded-[50px] pt-[92px] pb-[24px] px-[24px]">
         {/* 레이블 */}
-        <div className="absolute top-[32px] left-[156px] text-[28px] text-gray09 font-pretendard font-semibold">
+        <div className="absolute top-[32px] left-[160px] text-[28px] text-gray09 font-pretendard font-semibold">
           성별
         </div>
-        <div className="absolute top-[32px] right-[156px] text-[28px] text-gray09 font-pretendard font-semibold">
+        <div className="absolute top-[32px] right-[160px] text-[28px] text-gray09 font-pretendard font-semibold">
           나이
         </div>
 
@@ -45,7 +45,7 @@ export default function DashBoardVisitor() {
 
             return (
               // 그래프
-              <div className="absolute bottom-6 w-[612px] h-[394px] rounded-[40px] flex items-center justify-center overflow-hidden">
+              <div className="absolute bg-gray01 gap-[100px] bottom-6 w-[612px] h-[394px] rounded-[40px] flex items-center justify-center overflow-hidden">
                 <VisitorPieChart
                   data={genderData}
                   gradIdPrefix="genderGrad"
