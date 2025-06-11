@@ -1,6 +1,19 @@
+/**
+ * @Description
+ * 로딩 중임을 나타내는 스켈레톤 컴포넌트입니다.
+ * - `framer-motion`을 활용하여 좌우로 흐르는 반짝이는 효과를 제공합니다.
+ * - 부모 요소의 `width`, `height`를 상속받아 전체 영역에 적용됩니다.
+ * - API 응답 대기 중, 콘텐츠의 자리를 미리 확보하거나 시각적 피드백을 줄 때 사용합니다.
+ *
+ * @Example
+ * <div className="w-[300px] h-[100px]">
+ *   <Skeleton />
+ * </div>
+ */
+
 import { motion } from "framer-motion";
 
-export default function Skeleton() {
+const Skeleton = () => {
   return (
     <motion.div
       className="relative overflow-hidden bg-gray-200 w-full h-full"
@@ -21,4 +34,6 @@ export default function Skeleton() {
       />
     </motion.div>
   );
-}
+};
+
+export default Skeleton;

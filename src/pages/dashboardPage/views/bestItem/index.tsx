@@ -1,9 +1,9 @@
 import { useBestItemsApi } from "@/hooks/api/useDashboardApi";
-import Skeleton from "@/components/common/Skeleton";
+import Skeleton from "@/components/ui/Skeleton";
 import QueryComponent from "@/components/common/QueryComponent";
-import NoDataComp from "@/components/common/NoDataComp";
+import NoDataComp from "@/pages/dashboardPage/views/@common/NoDataComp";
 import BestItemCard from "@/pages/dashboardPage/views/bestItem/BestItemCard";
-import DashBoardTitle from "@/pages/dashboardPage/views/DashBoardTitle";
+import Title from "@/pages/dashboardPage/views/@common/Title";
 
 const BestItem = () => {
   const { data: bestItemData, isLoading, isError } = useBestItemsApi();
@@ -12,7 +12,7 @@ const BestItem = () => {
     <div data-testid="dashboard-bestItems">
       {/* Title */}
       <div className="flex items-start gap-6">
-        <DashBoardTitle title="실시간 인기상품" />
+        <Title title="실시간 인기상품" />
       </div>
 
       {/* Top 3 카드 */}

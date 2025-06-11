@@ -1,4 +1,4 @@
-import CustomInput from "@/components/common/CustomInput";
+import CustomInput from "@/components/ui/CustomInput";
 import Modal from "@/components/common/Modal";
 import React, { useState } from "react";
 import bin from "@/assets/webps/common/bin.webp";

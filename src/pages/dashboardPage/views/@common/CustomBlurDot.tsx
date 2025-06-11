@@ -1,10 +1,15 @@
+/**
+ * @Description
+ * rechart 라이브러리를 활용한 그래프에서 사용되는 Dot UI입니다.
+ */
+
 import { DotProps } from "recharts";
 
 type Props = DotProps & {
   fillColor: string;
 };
 
-export default function CustomBlurDot({ cx, cy, fillColor }: Props) {
+const CustomBlurDot = ({ cx, cy, fillColor }: Props) => {
   return (
     <circle
       cx={cx}
@@ -16,4 +21,6 @@ export default function CustomBlurDot({ cx, cy, fillColor }: Props) {
       }}
     />
   );
-}
+};
+
+export default CustomBlurDot;

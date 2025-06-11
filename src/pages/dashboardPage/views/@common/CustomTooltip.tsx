@@ -1,6 +1,6 @@
 /**
  * @Description
- * rechart 라이브러리를 활용한 그래프에서 사용되는 툴팁입니다
+ * rechart 라이브러리를 활용한 그래프에서 사용되는 툴팁 UI입니다.
  */
 
 import { SegmentDatum } from "@/pages/dashboardPage/views/VisitorPieChart";
@@ -23,7 +23,7 @@ type Props = {
   unitPrefix?: string;
 };
 
-export default function CustomTooltip({
+const CustomTooltip = ({
   active,
   payload,
   label,
@@ -31,7 +31,7 @@ export default function CustomTooltip({
   unitPrefix,
   highlightColor,
   unitSuffix,
-}: Props) {
+}: Props) => {
   if (active && payload && payload.length) {
     const dynamicColor =
       highlightColor ??
@@ -61,4 +61,6 @@ export default function CustomTooltip({
     );
   }
   return null;
-}
+};
+
+export default CustomTooltip;

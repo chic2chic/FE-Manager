@@ -1,3 +1,8 @@
+/**
+ * @Description
+ * 커스텀 스타일을 적용할 수 있는 입력 필드 공통 컴포넌트입니다.
+ */
+
 import React from "react";
 
 type Props = {
@@ -15,7 +20,7 @@ type Props = {
   maxValue?: number;
 };
 
-export default function CustomInput({
+const CustomInput = ({
   inputType,
   isOnlyNumber = false,
   title,
@@ -28,7 +33,7 @@ export default function CustomInput({
   isPatchMode = false,
   onKeyDown,
   maxValue,
-}: Props) {
+}: Props) => {
   const numberHandler = (e: React.FormEvent<HTMLInputElement>) => {
     if (isOnlyNumber) {
       const input = e.currentTarget;
@@ -80,4 +85,6 @@ export default function CustomInput({
       )}
     </div>
   );
-}
+};
+
+export default CustomInput;

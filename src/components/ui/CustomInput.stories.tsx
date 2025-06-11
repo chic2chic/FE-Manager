@@ -1,4 +1,4 @@
-import CustomInput from "@/components/common/CustomInput";
+import CustomInput from "@/components/ui/CustomInput";
 import { Meta, StoryObj } from "@storybook/react";
 
 const meta: Meta<typeof CustomInput> = {

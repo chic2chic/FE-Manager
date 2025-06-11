@@ -11,7 +11,7 @@ import { FormatDateTimeToString, FormatDateToString } from "@/utils/FormatDay";
 import { getTimeValue } from "@/utils/FormatTimestamp";
 import useClickOutside from "@/hooks/useClickOutside";
 import { addDays } from "date-fns";
-import NoImageComp from "@/components/common/NoImageComp";
+import NoImageComp from "@/components/ui/NoImageComp";
 
 type Props = {
   formData: PopUpWithChoicesRequest;

@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import { Days } from "@/constants/dashboard/Days";
 import { useCongestionApi } from "@/hooks/api/useDashboardApi";
 import { DayOfWeek } from "@/types/CongestionType";
-import DashBoardTitle from "@/pages/dashboardPage/views/DashBoardTitle";
-import NoDataComp from "@/components/common/NoDataComp";
+import Title from "@/pages/dashboardPage/views/@common/Title";
+import NoDataComp from "@/pages/dashboardPage/views/@common/NoDataComp";
 import QueryComponent from "@/components/common/QueryComponent";
-import Skeleton from "@/components/common/Skeleton";
+import Skeleton from "@/components/ui/Skeleton";
 import CongestionChart from "@/pages/dashboardPage/views/congestion/CongestionChart";
 import CongestionDaySelector from "@/pages/dashboardPage/views/congestion/CongestionDaySelector";
 
@@ -23,7 +23,7 @@ const Congestion = () => {
 
   return (
     <div className="flex flex-col" data-testid="dashboard-congestion">
-      <DashBoardTitle title="혼잡도 분석" />
+      <Title title="혼잡도 분석" />
       <div className="relative w-[660px] h-[510px] bg-gray02 rounded-[50px] px-6">
         {/* 요일 버튼 */}
         <CongestionDaySelector

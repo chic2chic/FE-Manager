@@ -14,7 +14,7 @@ import bin from "@/assets/webps/common/bin.webp";
 import check from "@/assets/webps/common/check.webp";
 import { usePopUpListReadApi } from "@/hooks/api/usePopUpListReadApi";
 import { usePopUpDeleteApi } from "@/hooks/api/usePopUpDeleteApi";
-import Loading from "@/components/common/Loading";
+import Loading from "@/components/ui/Loading";
 
 export default function PopUpListPage() {
   const { cards, isLoading } = usePopUpListReadApi();
