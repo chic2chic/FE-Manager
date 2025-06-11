@@ -38,6 +38,7 @@ jobs:
 
   e2e-tests:
     runs-on: ubuntu-latest
+    if: contains(github.event.head_commit.message, '[e2e]')
     needs: build-and-test
 
     steps:
