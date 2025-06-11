@@ -14,10 +14,7 @@ import { useEffect, useRef, useState } from "react";
 import NoticeModal from "@/components/noticeModal/NoticeModal";
 import { useAuth } from "@/hooks/useAuth";
 import { usePopUpReadStore } from "@/stores/usePopUpReadStore";
-import {
-  connectNotificationSocket,
-  disconnectNotificationSocket,
-} from "@/utils/NotificationSocket";
+import { connectNotificationSocket } from "@/utils/NotificationSocket";
 import { useNotificationStore } from "@/stores/useNotificationStore";
 
 const NavBar = () => {
@@ -38,14 +35,6 @@ const NavBar = () => {
       connectNotificationSocket(managerId, popupId);
       connected.current = true;
     }
-
-    // clean up
-    return () => {
-      if (connected.current) {
-        disconnectNotificationSocket();
-        connected.current = false;
-      }
-    };
   }, [managerId, popupId]);
 
   return (

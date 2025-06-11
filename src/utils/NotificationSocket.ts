@@ -39,10 +39,3 @@ export const connectNotificationSocket = (
   });
   client.activate();
 };
-
-// 소켓 연결 해제
-export const disconnectNotificationSocket = () => {
-  if (client && client.connected) {
-    client.deactivate();
-  }
-};
