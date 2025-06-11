@@ -7,12 +7,12 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 export const queryClient = new QueryClient();
 
 async function startApp() {
-  if (import.meta.env.DEV) {
-    const { worker } = await import("./mocks/browser");
-    await worker.start({
-      onUnhandledRequest: "bypass",
-    });
-  }
+  // if (import.meta.env.DEV) {
+  //   const { worker } = await import("./mocks/browser");
+  //   await worker.start({
+  //     onUnhandledRequest: "bypass",
+  //   });
+  // }
 
   createRoot(document.getElementById("root")!).render(
     <StrictMode>

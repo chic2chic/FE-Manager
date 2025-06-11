@@ -6,7 +6,10 @@ import { useEffect, useRef, useState } from "react";
 import NoticeModal from "@/components/noticeModal/NoticeModal";
 import { useAuth } from "@/hooks/useAuth";
 import { usePopUpReadStore } from "@/stores/usePopUpReadStore";
-import { connectNotificationSocket } from "@/utils/NotificationSocket";
+import {
+  connectNotificationSocket,
+  disconnectNotificationSocket,
+} from "@/utils/NotificationSocket";
 import { useNotificationStore } from "@/stores/useNotificationStore";
 
 export default function NavBar() {
@@ -20,12 +23,22 @@ export default function NavBar() {
 
   // WebSocket 연결 (NavBar가 처음 렌더링될 때)
   const connected = useRef(false);
+  const managerId = 1; // api 응답 변경되면 수정
+
   useEffect(() => {
     if (popupId && !connected.current) {
-      connectNotificationSocket("1", popupId);
+      connectNotificationSocket(managerId, popupId);
       connected.current = true;
     }
-  }, [popupId]);
+
+    // clean up
+    return () => {
+      if (connected.current) {
+        disconnectNotificationSocket();
+        connected.current = false;
+      }
+    };
+  }, [managerId, popupId]);
 
   return (
     <div
@@ -76,7 +89,7 @@ export default function NavBar() {
                   clearNewFlag(); // 모달 열면 빨간 점 지우기
                 }}
               >
-                <img src={alarmImage} width={24} height={24} />
+                <img src={alarmImage} alt="alarm" width={24} height={24} />
                 {hasNewNotification && (
                   <span className="absolute top-[2px] right-[2px] w-[8px] h-[8px] bg-main07 rounded-full" />
                 )}

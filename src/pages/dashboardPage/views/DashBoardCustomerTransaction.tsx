@@ -1,6 +1,7 @@
 import { useAvgPurchaseApi } from "@/hooks/api/useDashboardApi";
 import { CountCard } from "@/pages/dashboardPage/views/CountCard";
 import DashBoardTitle from "@/pages/dashboardPage/views/DashBoardTitle";
+import NoDataCompt from "@/components/common/NoDataComp";
 
 export default function DashBoardCustomerTransaction() {
   const { data } = useAvgPurchaseApi();
@@ -9,7 +10,7 @@ export default function DashBoardCustomerTransaction() {
     <div className="w-[414px] flex-col" data-testid="dashboard-transaction">
       <DashBoardTitle title="1인 평균 구매액" />
       <div className="flex h-[394px] flex-col justify-between">
-        {data && (
+        {data ? (
           <>
             <CountCard
               title="팝업 기간 내"
@@ -28,6 +29,10 @@ export default function DashBoardCustomerTransaction() {
               unitCSS="text-blue07 text-[40px]"
             />
           </>
+        ) : (
+          <div className="flex justify-center h-[394px] bg-gray02 rounded-[50px]">
+            <NoDataCompt />
+          </div>
         )}
       </div>
     </div>

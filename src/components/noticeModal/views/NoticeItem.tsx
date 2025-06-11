@@ -1,8 +1,10 @@
 import { GetStockNotificationResponse } from "@/types/api/ApiResponseType";
 import { formatTimestamp } from "@/utils/FormatTimestamp";
+import { useNavigate } from "react-router-dom";
 
 type Props = Omit<GetStockNotificationResponse, "notificationId"> & {
   popUp: string;
+  onClose?: () => void;
 };
 
 export default function NoticeItem({
@@ -11,9 +13,20 @@ export default function NoticeItem({
   name,
   notifiedAt,
   minStock,
+  onClose,
 }: Props) {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    onClose?.();
+    navigate("/order-list");
+  };
+
   return (
-    <div className="border-b border-b-gray03 w-full flex flex-col pt-3 pb-4">
+    <div
+      onClick={handleClick}
+      className="cursor-pointer border-b border-b-gray03 w-full flex flex-col pt-3 pb-4"
+    >
       <div className="flex justify-between items-center">
         <div className="flex items-center gap-[6px]">
           <span
