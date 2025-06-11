@@ -42,22 +42,28 @@ export default function OnBoradingPage() {
             />
           </button>
           <div className="w-full max-w-[1100px] md:max-w-[1000px] flex items-center">
-            <Swiper
-              onSwiper={(swiper: SwiperType) => {
-                swiperRef.current = swiper;
-              }}
-              onSlideChange={(swiper: SwiperType) => {
-                setActiveidx(swiper.activeIndex);
-              }}
-              className="w-full"
-              slidesPerView={1}
-            >
-              {ContentDesc.map(content => (
-                <SwiperSlide key={content.id}>
-                  <OnBoardingContents info={content} />
-                </SwiperSlide>
-              ))}
-            </Swiper>
+            {activeidx === 0 ? (
+              // ✅ 첫 번째 슬라이드는 Swiper 바깥에서 직접 렌더링
+              <OnBoardingContents info={ContentDesc[0]} />
+            ) : (
+              <Swiper
+                onSwiper={(swiper: SwiperType) => {
+                  swiperRef.current = swiper;
+                }}
+                onSlideChange={(swiper: SwiperType) => {
+                  setActiveidx(swiper.activeIndex);
+                }}
+                initialSlide={1} // ✅ 1번 슬라이드부터 시작
+                className="w-full"
+                slidesPerView={1}
+              >
+                {ContentDesc.slice(1).map(content => (
+                  <SwiperSlide key={content.id}>
+                    <OnBoardingContents info={content} />
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            )}
           </div>
           <button
             className="absolute right-10 cursor-pointer"

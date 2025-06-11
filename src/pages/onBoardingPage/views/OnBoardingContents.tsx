@@ -1,4 +1,5 @@
 import { OnBoardingContentType } from "@/constants/onboarding/ContentDesc";
+import { Helmet } from "react-helmet";
 
 type Props = {
   info: OnBoardingContentType;
@@ -10,6 +11,7 @@ export default function OnBoardingContents({ info }: Props) {
       <div>
         <img
           src={info.imagePath}
+          loading={info.id === 1 ? "eager" : "lazy"}               
           className="rounded-[30px] max-w-[460px] h-auto"
         />
       </div>
