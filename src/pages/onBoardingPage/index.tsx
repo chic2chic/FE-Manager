@@ -8,7 +8,7 @@ import OnBoardingLogin from "@/pages/onBoardingPage/views/OnBoardingLogin";
 import OnBoardingHeader from "@/pages/onBoardingPage/views/OnBoardingHeader";
 import OnBoardingContents from "@/pages/onBoardingPage/views/OnBoardingContents";
 
-export default function OnBoradingPage() {
+const OnBoardingPage = () => {
   const swiperRef = useRef<SwiperType | null>(null);
   const [activeidx, setActiveidx] = useState<number>(0);
 
@@ -90,4 +90,6 @@ export default function OnBoradingPage() {
       </div>
     </div>
   );
-}
+};
+
+export default OnBoardingPage;

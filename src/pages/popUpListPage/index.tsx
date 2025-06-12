@@ -16,7 +16,7 @@ import { usePopUpListReadApi } from "@/hooks/api/usePopUpListReadApi";
 import { usePopUpDeleteApi } from "@/hooks/api/usePopUpDeleteApi";
 import Loading from "@/components/ui/Loading";
 
-export default function PopUpListPage() {
+const PopUpListPage = () => {
   const { cards, isLoading } = usePopUpListReadApi();
   const { deletePopUpMutation } = usePopUpDeleteApi();
   const navigate = useNavigate();
@@ -191,4 +191,6 @@ export default function PopUpListPage() {
       />
     </div>
   );
-}
+};
+
+export default PopUpListPage;

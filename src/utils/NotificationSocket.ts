@@ -17,7 +17,9 @@ export const connectNotificationSocket = (
 
   client = new Client({
     webSocketFactory: () => new SockJS(`${baseURL}/ws`),
-    reconnectDelay: 60000,
+    reconnectDelay: 0,
+    heartbeatIncoming: 0,
+    heartbeatOutgoing: 0,
     connectHeaders: {
       Authorization: `Bearer ${token}`,
     },
@@ -35,6 +37,9 @@ export const connectNotificationSocket = (
           notifiedAt: body.notifiedAt,
         });
       });
+    },
+    debug: str => {
+      console.log("🛠 STOMP DEBUG:", str);
     },
   });
   client.activate();

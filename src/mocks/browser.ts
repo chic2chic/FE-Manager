@@ -14,7 +14,7 @@ import {
 } from "./handlers/dashboard/ReservationDatas.handlers";
 import { BestItemsHandlers } from "./handlers/dashboard/BestItems.handlers";
 import { QuestionnaireHandlers } from "./handlers/dashboard/Questionnaire.handlers";
-import { VisitorStatsHandlers } from "./handlers/dashboard/VisitorDatas.handlers";
+import { VisitorHandlers } from "./handlers/dashboard/VisitorDatas.handlers";
 import { PopUpListReadHandlers } from "./handlers/popUpListRead/PopUpListRead.handlers";
 import { OrderListHandlers } from "./handlers/orderList/OrderList.handlers";
 
@@ -33,7 +33,7 @@ export const handlers = [
   ...CongestionReadHandlers,
   ...QuestionnaireHandlers,
   ...ConversionReadHandlers,
-  ...VisitorStatsHandlers,
+  ...VisitorHandlers,
   ...OrderListHandlers,
 ];
 

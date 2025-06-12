@@ -5,7 +5,7 @@ import ItemCreateExcelModal from "./views/ItemCreateExcelModal";
 import { useState } from "react";
 import ConditionalComponent from "@/components/common/ConditionalComponent";
 
-export default function ItemListPage() {
+const ItemListPage = () => {
   const { data } = useItemListApi();
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -56,4 +56,6 @@ export default function ItemListPage() {
       </ConditionalComponent>
     </div>
   );
-}
+};
+
+export default ItemListPage;

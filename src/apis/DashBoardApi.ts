@@ -7,7 +7,7 @@ import {
   GetCongestionResponse,
   QuestionnaireListResponse,
   GetConversionResponse,
-  VisitorStatsResponse,
+  VisitorResponse,
 } from "@/types/api/ApiResponseType";
 import { apiPopUp } from "./config/PopUpApi";
 
@@ -48,7 +48,7 @@ export const getConversion = async (): ApiResponse<GetConversionResponse> => {
   return response.data;
 };
 
-export const getVisitorStats = async (): ApiResponse<VisitorStatsResponse> => {
+export const getVisitor = async (): ApiResponse<VisitorResponse> => {
   const response = await apiPopUp.get(`/dashboard/visitors`);
   return response.data;
 };

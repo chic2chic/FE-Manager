@@ -1,13 +1,13 @@
+import { createBrowserRouter } from "react-router-dom";
 import GlobalLayout from "@/components/layouts/GlobalLayout";
 import ProtectLayout from "@/components/layouts/ProtectLayout";
-import DashBoardPage from "@/pages/dashboardPage/DashBoardPage";
-import ItemCreatePage from "@/pages/itemCreatePage/ItemCreatePage";
-import ItemListPage from "@/pages/itemListPage/ItemListPage";
-import OnBoradingPage from "@/pages/onBoardingPage/OnBoardingPage";
-import OrderListPage from "@/pages/orderListPage/OrderListPage";
-import PopUpCreatePage from "@/pages/popUpCreatePage/PopUpCreatePage";
-import PopUpListPage from "@/pages/popUpListPage/PopUpListPage";
-import { createBrowserRouter } from "react-router-dom";
+import DashBoardPage from "@/pages/dashboardPage";
+import ItemCreatePage from "@/pages/itemCreatePage";
+import ItemListPage from "@/pages/itemListPage";
+import OnBoardingPage from "@/pages/onBoardingPage";
+import OrderListPage from "@/pages/orderListPage";
+import PopUpCreatePage from "@/pages/popUpCreatePage";
+import PopUpListPage from "@/pages/popUpListPage";
 
 export const Router = createBrowserRouter([
   {
@@ -16,7 +16,7 @@ export const Router = createBrowserRouter([
     children: [
       {
         path: "/onboarding",
-        element: <OnBoradingPage />,
+        element: <OnBoardingPage />,
       },
       {
         path: "/",

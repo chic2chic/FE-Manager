@@ -6,7 +6,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { LoginErrorMsg } from "@/constants/Message";
 import { useNavigate } from "react-router-dom";
 
-export default function OnBoradingLogin() {
+const OnBoardingLogin = () => {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const { login } = useAuth();
@@ -79,4 +79,6 @@ export default function OnBoradingLogin() {
       />
     </div>
   );
-}
+};
+
+export default OnBoardingLogin;

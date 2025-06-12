@@ -3,7 +3,7 @@
  * rechart 라이브러리를 활용한 그래프에서 사용되는 툴팁 UI입니다.
  */
 
-import { SegmentDatum } from "@/pages/dashboardPage/views/VisitorPieChart";
+import { PieChartSegment } from "@/pages/dashboardPage/views/visitor/VisitorPieChart";
 
 type Props = {
   active?: boolean;
@@ -40,7 +40,7 @@ const CustomTooltip = ({
       "#000";
 
     const value = payload[0].value;
-    const segmentPayload = payload[0].payload as SegmentDatum;
+    const segmentPayload = payload[0].payload as PieChartSegment;
     const ratio = segmentPayload?.ratio;
 
     return (

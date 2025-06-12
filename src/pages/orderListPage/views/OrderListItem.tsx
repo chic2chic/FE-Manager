@@ -1,5 +1,5 @@
 import { OrderListItemType } from "@/types/OrderListPageType";
-import { PendingActionType } from "../OrderListPage";
+import { PendingActionType } from "..";
 import { useState } from "react";
 import { FormatDateTimeToString } from "@/utils/FormatDay";
 
