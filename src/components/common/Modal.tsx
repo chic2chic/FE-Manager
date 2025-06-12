@@ -1,8 +1,8 @@
 /**
  * @Description
  * 모달 공통 컴포넌트입니다
- * onCancel이 없으면 버튼이 한 개만 있는 alert 모달이고,
- * onCancel까지 있으면 버튼이 두 개 있는 confirm 모달이 됩니다.
+ * - `onCancel`이 없으면 버튼이 한 개만 있는 `alert 모달`이 됩니다.
+ * - `onCancel`이 있으면 버튼이 두 개 있는 `confirm 모달`이 됩니다.
  */
 
 import { useEffect } from "react";
@@ -20,7 +20,7 @@ type Props = {
   onCancel?: () => void;
 };
 
-export default function Modal({
+const Modal = ({
   isOpen,
   setIsOpen,
   content,
@@ -29,7 +29,7 @@ export default function Modal({
   cancelText,
   onConfirm,
   onCancel,
-}: Props) {
+}: Props) => {
   const handleClose = () => {
     if (onCancel) {
       onCancel(); // Confirm 모달일 경우 취소만
@@ -119,4 +119,6 @@ export default function Modal({
       </div>
     </div>
   );
-}
+};
+
+export default Modal;

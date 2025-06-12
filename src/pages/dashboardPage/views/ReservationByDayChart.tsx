@@ -1,4 +1,4 @@
-import CustomTooltip from "@/components/common/CustomTooltip";
+import CustomTooltip from "@/pages/dashboardPage/views/@common/CustomTooltip";
 import { ReservationChartResponse } from "@/types/api/ApiResponseType";
 import { reservationColorMapper } from "@/utils/ReservationColorMapper";
 import {

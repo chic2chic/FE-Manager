@@ -1,14 +1,14 @@
 import { useState } from "react";
-import { DropdownFilter } from "@/components/common/DropdownFilter";
 import { Cell, Pie, PieChart, Tooltip, TooltipProps } from "recharts";
-import DashBoardTitle from "@/pages/dashboardPage/views/DashBoardTitle";
-import CustomTooltip from "@/components/common/CustomTooltip";
+import Title from "@/pages/dashboardPage/views/@common/Title";
+import CustomTooltip from "@/pages/dashboardPage/views/@common/CustomTooltip";
 import { useQuestionnaireApi } from "@/hooks/api/useDashboardApi";
 import { QuestionnaireResponse } from "@/types/api/ApiResponseType";
 import { Questions } from "@/constants/popUpCreate/Questions";
-import NoDataComp from "@/components/common/NoDataComp";
-import Skeleton from "@/components/common/Skeleton";
-import { QueryComponent } from "@/components/common/QueryComponent";
+import NoDataComp from "@/pages/dashboardPage/views/@common/NoDataComp";
+import Skeleton from "@/components/ui/Skeleton";
+import QueryComponent from "@/components/common/QueryComponent";
+import DropdownFilter from "@/pages/dashboardPage/views/@common/DropdownFilter";
 
 const options = ["1번 문항", "2번 문항", "3번 문항", "4번 문항"];
 const SIZE = 300;
@@ -75,7 +75,7 @@ export default function DashBoardQuestionnaire() {
       data-testid="dashboard-questionnaire-data-exist"
     >
       <div className="relative flex gap-[20px]">
-        <DashBoardTitle title="설문지 분석" />
+        <Title title="설문지 분석" />
         <div className="ml-2">
           <DropdownFilter
             value={selectedQuestion}

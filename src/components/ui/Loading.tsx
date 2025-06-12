@@ -1,6 +1,11 @@
+/**
+ * @Description
+ * 로딩 애니메이션을 보여주는 로딩 컴포넌트입니다.
+ */
+
 import { motion } from "framer-motion";
 
-export default function Loading() {
+const Loading = () => {
   return (
     <div className="flex items-center justify-center p-4">
       <div className="flex space-x-3">
@@ -69,4 +74,6 @@ export default function Loading() {
       </div>
     </div>
   );
-}
+};
+
+export default Loading;

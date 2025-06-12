@@ -1,3 +1,11 @@
+/**
+ * @Description
+ * 네비게이션 바 컴포넌트입니다.
+ * - 로그인 여부에 따라 로그아웃 버튼을 표시하며, 로그인 상태에서만 사용 가능합니다.
+ * - `popupId`가 설정된 경우, 알림용 WebSocket을 연결하여 실시간 알림 수신을 지원합니다.
+ * - 알림 아이콘 클릭 시 알림 모달(noticeModal)을 띄우며, 새로운 알림이 있는 경우 빨간 점으로 표시합니다.
+ */
+
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { NavigationItems } from "@/constants/NavigationItems";
 import logoImage from "@/assets/webps/common/logo-manager.webp";
@@ -6,13 +14,10 @@ import { useEffect, useRef, useState } from "react";
 import NoticeModal from "@/components/noticeModal/NoticeModal";
 import { useAuth } from "@/hooks/useAuth";
 import { usePopUpReadStore } from "@/stores/usePopUpReadStore";
-import {
-  connectNotificationSocket,
-  disconnectNotificationSocket,
-} from "@/utils/NotificationSocket";
+import { connectNotificationSocket } from "@/utils/NotificationSocket";
 import { useNotificationStore } from "@/stores/useNotificationStore";
 
-export default function NavBar() {
+const NavBar = () => {
   const { isLogin, logout } = useAuth();
   const navigate = useNavigate();
   const [isNoticeModalOpen, setIsNoticeModalOpen] = useState(false);
@@ -30,14 +35,6 @@ export default function NavBar() {
       connectNotificationSocket(managerId, popupId);
       connected.current = true;
     }
-
-    // clean up
-    return () => {
-      if (connected.current) {
-        disconnectNotificationSocket();
-        connected.current = false;
-      }
-    };
   }, [managerId, popupId]);
 
   return (
@@ -114,4 +111,6 @@ export default function NavBar() {
       </div>
     </div>
   );
-}
+};
+
+export default NavBar;

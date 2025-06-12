@@ -1,6 +1,6 @@
 import React from "react";
 import { PieChart, Pie, Cell, Tooltip, TooltipProps } from "recharts";
-import CustomTooltip from "@/components/common/CustomTooltip";
+import CustomTooltip from "@/pages/dashboardPage/views/@common/CustomTooltip";
 
 export type SegmentDatum = {
   name: string;

@@ -1,5 +1,5 @@
-import Skeleton from "@/components/common/Skeleton";
 import { useState } from "react";
+import Skeleton from "@/components/ui/Skeleton";
 
 type BestItemCardImageProps = {
   src: string;
@@ -7,7 +7,7 @@ type BestItemCardImageProps = {
 };
 
 // 이미지 (Skeleton UI 포함)
-export const BestItemCardImage = ({ src, alt }: BestItemCardImageProps) => {
+const BestItemCardImage = ({ src, alt }: BestItemCardImageProps) => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   return (
@@ -28,3 +28,5 @@ export const BestItemCardImage = ({ src, alt }: BestItemCardImageProps) => {
     </div>
   );
 };
+
+export default BestItemCardImage;

@@ -1,6 +1,22 @@
+/**
+ * @description
+ * React Query 요청의 로딩, 에러, 빈 데이터 상태를 공통 처리하는 래퍼 컴포넌트입니다.
+ * - `data`, `isLoading`, `isError` 상태에 따라 적절한 fallback UI를 렌더링하고,
+ * - 데이터가 존재할 경우 `children` 함수로 실제 UI를 렌더링합니다.
+ *
+ * @example
+ * <QueryComponent
+ *   data={data}
+ *   isLoading={isLoading}
+ *   isError={isError}
+ * >
+ *   {(data) => <MyList data={data} />}
+ * </QueryComponent>
+ */
+
 import React from "react";
-import Skeleton from "./Skeleton";
-import NoDataComp from "./NoDataComp";
+import Skeleton from "../ui/Skeleton";
+import NoDataComp from "../../pages/dashboardPage/views/@common/NoDataComp";
 
 type Props<T> = {
   data: T | undefined;
@@ -13,7 +29,7 @@ type Props<T> = {
   children: (_data: T) => React.ReactNode;
 };
 
-export const QueryComponent = <T,>({
+const QueryComponent = <T,>({
   data,
   isLoading,
   isError,
@@ -37,3 +53,5 @@ export const QueryComponent = <T,>({
   }
   return <>{children(data)}</>;
 };
+
+export default QueryComponent;

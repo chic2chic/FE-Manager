@@ -1,16 +1,16 @@
-import NoDataComp from "@/components/common/NoDataComp";
+import NoDataComp from "@/pages/dashboardPage/views/@common/NoDataComp";
 import { useConversionApi } from "@/hooks/api/useDashboardApi";
 import { ConversionRateChart } from "@/pages/dashboardPage/views/ConversionRateChart";
-import DashBoardTitle from "@/pages/dashboardPage/views/DashBoardTitle";
-import Skeleton from "@/components/common/Skeleton";
-import { QueryComponent } from "@/components/common/QueryComponent";
+import Title from "@/pages/dashboardPage/views/@common/Title";
+import Skeleton from "@/components/ui/Skeleton";
+import QueryComponent from "@/components/common/QueryComponent";
 
 export default function DashBoardConversionRate() {
   const { data, isLoading, isError } = useConversionApi();
 
   return (
     <div className="flex flex-col" data-testid="dashboard-conversionRate">
-      <DashBoardTitle title="구매전환율" />
+      <Title title="구매전환율" />
       <div className="flex justify-between">
         {/* 하위 상품 TOP 6 */}
         <div className="relative w-[660px] h-[510px] bg-gray02 rounded-[50px] px-6 flex justify-center">

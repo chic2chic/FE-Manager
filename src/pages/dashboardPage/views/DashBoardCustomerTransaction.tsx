@@ -1,16 +1,16 @@
 import { useAvgPurchaseApi } from "@/hooks/api/useDashboardApi";
-import { CountCard } from "@/pages/dashboardPage/views/CountCard";
-import DashBoardTitle from "@/pages/dashboardPage/views/DashBoardTitle";
-import NoDataComp from "@/components/common/NoDataComp";
-import Skeleton from "@/components/common/Skeleton";
-import { QueryComponent } from "@/components/common/QueryComponent";
+import CountCard from "@/pages/dashboardPage/views/@common/CountCard";
+import Title from "@/pages/dashboardPage/views/@common/Title";
+import NoDataComp from "@/pages/dashboardPage/views/@common/NoDataComp";
+import Skeleton from "@/components/ui/Skeleton";
+import QueryComponent from "@/components/common/QueryComponent";
 
 export default function DashBoardCustomerTransaction() {
   const { data, isLoading, isError } = useAvgPurchaseApi();
 
   return (
     <div className="w-[414px] flex-col" data-testid="dashboard-transaction">
-      <DashBoardTitle title="1인 평균 구매액" />
+      <Title title="1인 평균 구매액" />
       <div className="flex h-[394px] flex-col justify-between">
         {/* 팝업 기간 내 */}
         <QueryComponent
