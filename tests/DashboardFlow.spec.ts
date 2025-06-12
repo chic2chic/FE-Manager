@@ -1,7 +1,4 @@
-import {
-  ReservationChartResponse,
-  VisitorStat,
-} from "@/types/api/ApiResponseType";
+import { ReservationChartResponse, Visitor } from "@/types/api/ApiResponseType";
 import { NavigateDashboard } from "@/utils/TestHelper";
 import test, { expect } from "playwright/test";
 
@@ -150,7 +147,7 @@ test.describe("대쉬보드 조회 Flow", () => {
       if (data.gender && Array.isArray(data.gender)) {
         expect(data.gender.length).toBeGreaterThan(0);
 
-        data.gender.forEach((genderItem: VisitorStat) => {
+        data.gender.forEach((genderItem: Visitor) => {
           expect(genderItem).toHaveProperty("name");
           expect(genderItem).toHaveProperty("count");
           expect(genderItem).toHaveProperty("ratio");
@@ -168,7 +165,7 @@ test.describe("대쉬보드 조회 Flow", () => {
       if (data.age && Array.isArray(data.age)) {
         expect(data.age.length).toBeGreaterThan(0);
 
-        data.age.forEach((ageItem: VisitorStat) => {
+        data.age.forEach((ageItem: Visitor) => {
           expect(ageItem).toHaveProperty("name");
           expect(ageItem).toHaveProperty("count");
           expect(ageItem).toHaveProperty("ratio");
