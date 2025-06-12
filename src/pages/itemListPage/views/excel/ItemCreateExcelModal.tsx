@@ -1,11 +1,13 @@
 import { useItemCreate } from "@/hooks/useItemCreate";
 import React, { useRef, useState } from "react";
+import Button from "../@common/Button";
+import FileDropArea from "../@common/FileDropArea";
 
 type Props = {
   closeModal: () => void;
 };
 
-export default function ItemCreateExcelModal({ closeModal }: Props) {
+const ItemCreateExcelModal = ({ closeModal }: Props) => {
   const { createItemExcel } = useItemCreate(); // 100이면 완료되었음을 의미 (성공)
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [excelFile, setExcelFile] = useState<File | null>(null);
@@ -57,67 +59,37 @@ export default function ItemCreateExcelModal({ closeModal }: Props) {
             </div>
           </div>
         ) : (
-          <div
-            className="border-2 border-dashed border-gray03 rounded-lg cursor-pointer hover:border-main03 transition-colors mb-5"
+          <FileDropArea
+            file={excelFile}
             onClick={handleClickInput}
-          >
-            <div className="flex flex-col items-center justify-center py-8">
-              {excelFile ? (
-                <div className="text-sm text-gray08 text-center">
-                  {excelFile.name}
-                </div>
-              ) : (
-                <div>
-                  <p className="text-sm text-gray08 mb-1 text-center">
-                    Excel 파일을 클릭하여 업로드
-                  </p>
-                  <p className="text-xs text-gray07 text-center">
-                    .xlsx, .xls, .csv 형식
-                  </p>
-                </div>
-              )}
-              <input
-                ref={fileInputRef}
-                type="file"
-                accept=".xlsx,.xls,.csv"
-                className="hidden"
-                onChange={handleExcelUpload}
-              />
-            </div>
-          </div>
+            onChange={handleExcelUpload}
+          />
         )}
 
         <div className="flex justify-end gap-3">
           {isSuccess ? (
-            <button
-              onClick={closeModal}
-              className="px-4 py-2 text-sm font-medium text-gray01 bg-main06 rounded-md hover:bg-main04 cursor-pointer focus:outline-none transition-colors"
-            >
+            <Button size="sm" variant="success" onClick={closeModal}>
               확인
-            </button>
+            </Button>
           ) : (
             <>
-              <button
-                onClick={closeModal}
-                className="cursor-pointer px-4 py-2 text-sm font-medium text-gray09 bg-gray-100 rounded-md hover:bg-gray05 focus:outline-none transition-colors"
-              >
+              <Button size="sm" variant="secondary" onClick={closeModal}>
                 취소
-              </button>
-              <button
+              </Button>
+
+              <Button
+                size="sm"
+                variant="success"
                 onClick={handleExcelSubmit}
                 disabled={!excelFile || isUploading}
-                className={`px-4 py-2 text-sm font-medium text-gray01 rounded-md focus:outline-none transition-colors ${
-                  !excelFile || isUploading
-                    ? "bg-gray07"
-                    : "bg-main06 hover:bg-main04 cursor-pointer"
-                }`}
               >
                 {isUploading ? "전송중" : "전송"}
-              </button>
+              </Button>
             </>
           )}
         </div>
       </div>
     </div>
   );
-}
+};
+export default ItemCreateExcelModal;

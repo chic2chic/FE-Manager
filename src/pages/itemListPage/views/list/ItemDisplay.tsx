@@ -6,6 +6,8 @@ import { useState } from "react";
 import { useItemDeleteApi } from "@/hooks/api/useItemListApi";
 import { useNavigate } from "react-router-dom";
 import { useSelectedItemStore } from "@/stores/useSelectedItemStore";
+import ItemCard from "../@common/ItemCard";
+import ItemActionButtons from "./ItemActionButtons";
 
 type Props = {
   displayName: string;
@@ -48,55 +50,25 @@ export default function ItemDisplay({ displayName, items }: Props) {
         </div>
         <div className="flex-1 h-px bg-gray05" />
       </div>
+
       <div
         className="grid grid-cols-4 gap-6 gap-y-14 "
         style={{ paddingLeft: "272px", paddingRight: "180px" }}
       >
         {items.map(item => (
-          <div key={item.itemId} className="flex flex-col items-center">
-            {/* 상품 이미지 */}
-            <div className="relative w-[240px] h-[240px] mb-3 overflow-hidden">
-              <img
-                src={item.imageUrl}
-                alt={item.name}
-                className="absolute inset-0 w-full h-full object-cover"
-              />
-            </div>
-
-            {/* 상품명 + 버튼 */}
-            <p
-              id={`test-product-name-${item.itemId}`}
-              className="font-bold text-[20px] mb-2 w-[280px] text-center break-keep"
-            >
-              {item.name}
-            </p>
-            <p className="text-[16px] text-gray08 mb-1">
-              {item.price.toLocaleString()}원
-            </p>
-            <p className="text-[16px] text-gray08 mb-1">
-              최소 발주 수량 : {item.minStock}
-            </p>
-            <p className="text-[16px] text-gray08 mb-2">
-              남은재고 : {item.stock}
-            </p>
-
-            <div className="flex gap-2">
-              <div className="flex justify-center gap-4 mt-2">
-                <button
-                  className="text-[18px] px-4 py-1 cursor-pointer bg-gray10 text-gray01 rounded-full hover:opacity-90"
-                  onClick={() => handlePatchBtn(item)}
-                >
-                  수정
-                </button>
-                <button
-                  className="text-[18px] px-4 py-1 cursor-pointer border border-gray10 rounded-full hover:bg-gray10 hover:text-gray01 transition-colors duration-300"
-                  onClick={() => handleOpenDeleteModal(item)}
-                >
-                  삭제
-                </button>
-              </div>
-            </div>
-          </div>
+          <ItemCard
+            key={item.itemId}
+            imageUrl={item.imageUrl}
+            name={item.name}
+            price={item.price}
+            minStock={item.minStock}
+            stock={item.stock}
+          >
+            <ItemActionButtons
+              onEdit={() => handlePatchBtn(item)}
+              onDelete={() => handleOpenDeleteModal(item)}
+            />
+          </ItemCard>
         ))}
       </div>
       {/* 삭제 확인 모달 */}
