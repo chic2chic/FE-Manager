@@ -64,6 +64,7 @@ export type ItemAddExcelRequest = {
 export type GetOrderListRequest = {
   lastOrderItemId: number | undefined;
   size: number;
+  popupId: number;
 };
 
 export type PostChangeOrderItemRequest = {

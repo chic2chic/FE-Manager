@@ -84,7 +84,7 @@ export default function OrderListItem({
         )}
       </td>
       <td className="px-6 py-4 whitespace-nowrap text-center text-lg text-gray09">
-        {FormatDateTimeToString(new Date(item.lastRestockDate), 24).replace(
+        {FormatDateTimeToString(new Date(item.lastRestockDateTime), 24).replace(
           "T",
           " ",
         )}

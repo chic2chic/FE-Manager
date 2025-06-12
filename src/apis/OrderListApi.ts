@@ -12,8 +12,9 @@ import {
 export const getOrderList = async ({
   lastOrderItemId,
   size,
+  popupId,
 }: GetOrderListRequest): ApiResponse<GetOrderListResponse> => {
-  const response = await api.get("/order-items/", {
+  const response = await api.get(`/order-items/${popupId}`, {
     params: {
       ...(lastOrderItemId && { lastOrderItemId }),
       size: size || 10,
