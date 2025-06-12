@@ -1,23 +1,18 @@
 import { deleteItem, getItemList } from "@/apis/ItemListApi";
+import { QUERY_KEYS } from "@/hooks/api/queryKey";
 import { ErrorMessage } from "@/utils/ErrorMessage";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 export const useItemListApi = () => {
-  const { data, isLoading, isError, error, refetch } = useQuery({
-    queryKey: ["itemList"],
+  const { data, isLoading, isError } = useQuery({
+    queryKey: QUERY_KEYS.ITEM.INDEX,
     queryFn: async () => {
       const response = await getItemList();
       return response.data;
     },
   });
 
-  return {
-    data,
-    isLoading,
-    isError,
-    error,
-    refetch,
-  };
+  return { data, isLoading, isError };
 };
 
 export const useItemDeleteApi = () => {
@@ -27,11 +22,11 @@ export const useItemDeleteApi = () => {
       await deleteItem(itemId);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["itemList"] });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.ITEM.INDEX });
     },
     throwOnError: true,
     onError: error => {
-      throw new Error(`아이템 삭제 에러 : ${ErrorMessage(error)}`);
+      throw new Error(`상품 삭제 에러 : ${ErrorMessage(error)}`);
     },
   });
 

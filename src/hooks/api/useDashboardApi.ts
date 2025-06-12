@@ -10,90 +10,26 @@ import {
   getVisitor,
 } from "@/apis/DashBoardApi";
 import { VisitorResponse } from "@/types/api/ApiResponseType";
-
-export const useCongestionApi = () => {
-  const { data, isError, isLoading } = useQuery({
-    queryKey: ["congestion", "dashboard"],
-    queryFn: async () => {
-      const res = await getCongestion();
-      return res.data;
-    },
-  });
-
-  return { data, isError, isLoading };
-};
-
-export const useAvgPurchaseApi = () => {
-  const { data, isError, isLoading } = useQuery({
-    queryKey: ["avgPurchase", "dashboard"],
-    queryFn: async () => {
-      const res = await getAvgPurchase();
-      return res.data;
-    },
-  });
-
-  return { data, isError, isLoading };
-};
-
-export const useTodayEntrantsApi = () => {
-  const { data, isError, isLoading } = useQuery({
-    queryKey: ["todayEntrants", "dashboard"],
-    queryFn: async () => {
-      const res = await getTodayEntrants();
-      return res.data;
-    },
-  });
-
-  return { data, isError, isLoading };
-};
-
-export const useTodayReservationsApi = () => {
-  const { data, isError, isLoading } = useQuery({
-    queryKey: ["todayReservation", "dashboard"],
-    queryFn: async () => {
-      const res = await getTodayReservations();
-      return res.data;
-    },
-  });
-
-  return { data, isError, isLoading };
-};
+import { QUERY_KEYS } from "@/hooks/api/queryKey";
 
 export const useBestItemsApi = () => {
   const { data, isError, isLoading } = useQuery({
-    queryKey: ["top3", "dashboard"],
+    queryKey: QUERY_KEYS.DASHBOARD.BESTITEM,
     queryFn: async () => {
-      const res = await getBestItems();
-      return res.data;
-    },
-  });
-
-  return { data, isError, isLoading };
-};
-
-export const useQuestionnaireApi = () => {
-  const { data, isLoading, isError } = useQuery({
-    queryKey: ["questionnaire", "dashboard"],
-    queryFn: async () => {
-      const response = await getQuestionnaire();
+      const response = await getBestItems();
       return response.data;
     },
   });
 
-  return {
-    surveys: data?.surveys,
-    totalCount: data?.totalCount,
-    isLoading,
-    isError,
-  };
+  return { data, isError, isLoading };
 };
 
-export const useConversionApi = () => {
+export const useCongestionApi = () => {
   const { data, isError, isLoading } = useQuery({
-    queryKey: ["conversion", "dashboard"],
+    queryKey: QUERY_KEYS.DASHBOARD.CONGESTION,
     queryFn: async () => {
-      const res = await getConversion();
-      return res.data;
+      const response = await getCongestion();
+      return response.data;
     },
   });
 
@@ -102,11 +38,72 @@ export const useConversionApi = () => {
 
 export const useVisitorApi = () => {
   const { data, isLoading, isError } = useQuery<VisitorResponse>({
-    queryKey: ["visitor", "dashboard"],
+    queryKey: QUERY_KEYS.DASHBOARD.VISITOR,
     queryFn: async () => {
-      const res = await getVisitor();
-      return res.data;
+      const response = await getVisitor();
+      return response.data;
     },
   });
+
   return { data, isLoading, isError };
+};
+
+export const useTodayReservationsApi = () => {
+  const { data, isError, isLoading } = useQuery({
+    queryKey: QUERY_KEYS.DASHBOARD.TODAY_RESERVATION,
+    queryFn: async () => {
+      const response = await getTodayReservations();
+      return response.data;
+    },
+  });
+
+  return { data, isError, isLoading };
+};
+
+export const useTodayEntrantsApi = () => {
+  const { data, isError, isLoading } = useQuery({
+    queryKey: QUERY_KEYS.DASHBOARD.TODAY_ENTRANT,
+    queryFn: async () => {
+      const response = await getTodayEntrants();
+      return response.data;
+    },
+  });
+
+  return { data, isError, isLoading };
+};
+
+export const useAvgPurchaseApi = () => {
+  const { data, isError, isLoading } = useQuery({
+    queryKey: QUERY_KEYS.DASHBOARD.AVG_PURCHASE,
+    queryFn: async () => {
+      const response = await getAvgPurchase();
+      return response.data;
+    },
+  });
+
+  return { data, isError, isLoading };
+};
+
+export const useQuestionnaireApi = () => {
+  const { data, isLoading, isError } = useQuery({
+    queryKey: QUERY_KEYS.DASHBOARD.QUESTIONNAIRE,
+    queryFn: async () => {
+      const response = await getQuestionnaire();
+      return response.data;
+    },
+  });
+
+  return { data, isLoading, isError };
+};
+
+export const useConversionApi = () => {
+  const { data, isError, isLoading } = useQuery({
+    queryKey: QUERY_KEYS.DASHBOARD.CONVERSION,
+    queryFn: async () => {
+      const response = await getConversion();
+      return response.data;
+    },
+  });
+
+  return { data, isError, isLoading };
 };

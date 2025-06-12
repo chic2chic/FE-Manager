@@ -1,4 +1,5 @@
 import { getOrderList, postChangeOrderItemStatus } from "@/apis/OrderListApi";
+import { QUERY_KEYS } from "@/hooks/api/queryKey";
 import { PostChangeOrderItemRequest } from "@/types/api/ApiRequestType";
 import {
   useInfiniteQuery,
@@ -8,7 +9,7 @@ import {
 
 export const useGetOrderListApi = ({ size }: { size: number }) => {
   return useInfiniteQuery({
-    queryKey: ["orderItem"],
+    queryKey: QUERY_KEYS.ORDER_ITEM.INDEX,
     queryFn: ({ pageParam }) =>
       getOrderList({ lastOrderItemId: pageParam, size }),
     getNextPageParam: response => {
@@ -30,6 +31,7 @@ export const usePostChangeOrderItemStatus = () => {
   return useMutation({
     mutationFn: ({ orderItemId, qty, status }: PostChangeOrderItemRequest) =>
       postChangeOrderItemStatus({ orderItemId, qty, status }),
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["orderItem"] }),
+    onSuccess: () =>
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.ORDER_ITEM.INDEX }),
   });
 };
