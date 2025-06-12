@@ -15,7 +15,7 @@ export type PendingActionType = {
   status: Omit<OrderItemStatus, "PENDING">;
 };
 
-export default function OrderListPage() {
+const OrderListPage = () => {
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useGetOrderListApi({ size: 5 });
   const orderList = data?.pages.flatMap(item => item.data.content);
@@ -146,4 +146,6 @@ export default function OrderListPage() {
       />
     </div>
   );
-}
+};
+
+export default OrderListPage;

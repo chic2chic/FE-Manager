@@ -9,7 +9,7 @@ import PopUpQuestionnaire from "./views/PopUpQuestionnaire";
 import { usePopUpCreate } from "@/hooks/usePopUpCreate";
 import PopUpInfoArea from "./views/PopUpInfoArea";
 
-export default function PopUpCreatePage() {
+const PopUpCreatePage = () => {
   const [isAlertModalOpen, setIsAlertModalOpen] = useState<boolean>(false);
   const [isSaveModalOpen, setIsSaveModalOpen] = useState<boolean>(false);
 
@@ -105,4 +105,6 @@ export default function PopUpCreatePage() {
       />
     </div>
   );
-}
+};
+
+export default PopUpCreatePage;

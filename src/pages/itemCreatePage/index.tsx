@@ -1,6 +1,5 @@
 import CustomButton from "@/components/ui/CustomButton";
 import React, { useEffect, useState } from "react";
-
 import Modal from "@/components/common/Modal";
 import bin from "@/assets/webps/common/bin.webp";
 import check from "@/assets/webps/common/check.webp";
@@ -12,7 +11,7 @@ import { useSelectedItemStore } from "@/stores/useSelectedItemStore";
 import { ValidateAllField } from "@/utils/ValidateAllField";
 import CustomErrorBoundary from "@/components/boundary/CustomErrorBoundary";
 
-export default function ItemCreatePage() {
+const ItemCreatePage = () => {
   const popupId = usePopUpReadStore.getState().popupId;
 
   const [itemName, setItemName] = useState<string>("");
@@ -165,4 +164,6 @@ export default function ItemCreatePage() {
       </div>
     </CustomErrorBoundary>
   );
-}
+};
+
+export default ItemCreatePage;

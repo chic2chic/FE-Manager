@@ -1,6 +1,6 @@
 import TestImage from "@/assets/webps/onBoarding/test.png";
-import OnBoarding2 from "@/assets/webps/onBoarding/onBorading2.webp";
-import OnBoarding3 from "@/assets/webps/onBoarding/onBorading3.webp";
+import OnBoarding2 from "@/assets/webps/onBoarding/onBoarding2.webp";
+import OnBoarding3 from "@/assets/webps/onBoarding/onBoarding3.webp";
 
 export type OnBoardingContentType = {
   id: number;
