@@ -1,7 +1,7 @@
-import CustomInput from "@/components/common/CustomInput";
+import CustomInput from "@/components/ui/CustomInput";
 import { useSelectedItemStore } from "@/stores/useSelectedItemStore";
 import React from "react";
-import NoImageComp from "@/components/common/NoImageComp";
+import NoImageComp from "@/components/ui/NoImageComp";
 
 type Props = {
   name: string;

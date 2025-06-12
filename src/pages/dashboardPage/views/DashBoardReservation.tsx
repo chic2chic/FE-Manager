@@ -1,14 +1,14 @@
-import DashBoardTitle from "@/pages/dashboardPage/views/DashBoardTitle";
+import Title from "@/pages/dashboardPage/views/@common/Title";
 import checkCalendar from "@/assets/webps/dashboard/check-calendar.webp";
-import { CountCard } from "@/pages/dashboardPage/views/CountCard";
 import ReservationByDayChart from "@/pages/dashboardPage/views/ReservationByDayChart";
 import {
   useTodayEntrantsApi,
   useTodayReservationsApi,
 } from "@/hooks/api/useDashboardApi";
-import Skeleton from "@/components/common/Skeleton";
-import NoDataComp from "@/components/common/NoDataComp";
+import Skeleton from "@/components/ui/Skeleton";
+import NoDataComp from "@/pages/dashboardPage/views/@common/NoDataComp";
 import QueryComponent from "@/components/common/QueryComponent";
+import CountCard from "@/pages/dashboardPage/views/@common/CountCard";
 
 export default function DashBoardReservation() {
   const entrants = useTodayEntrantsApi();
@@ -16,7 +16,7 @@ export default function DashBoardReservation() {
 
   return (
     <div className="w-[906px] flex-col" data-testid="dashboard-reservation">
-      <DashBoardTitle title="예약 분석" />
+      <Title title="예약 분석" />
       <div className="w-[906px] h-[394px] flex justify-between">
         {/* CountCard 2개 */}
         <div className="w-[314px] flex flex-col justify-between">

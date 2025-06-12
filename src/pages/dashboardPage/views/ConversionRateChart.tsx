@@ -1,5 +1,4 @@
-import CustomBlurDot from "@/components/common/CustomBlurDot";
-import CustomCursor from "@/components/common/CustomCursor";
+import CustomCursor from "@/pages/dashboardPage/views/@common/CustomCursor";
 import { GetConversionItemResponse } from "@/types/api/ApiResponseType";
 import { useCallback } from "react";
 import {
@@ -13,6 +12,7 @@ import {
   YAxis,
   TooltipProps,
 } from "recharts";
+import CustomBlurDot from "@/pages/dashboardPage/views/@common/CustomBlurDot";
 
 type Props = {
   data: GetConversionItemResponse[];

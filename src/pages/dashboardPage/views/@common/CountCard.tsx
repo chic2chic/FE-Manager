@@ -1,3 +1,8 @@
+/**
+ * @Description
+ * 예약자 수, 입장자 수, 1인 평균 구매액에서 사용되는 count card UI입니다.
+ */
+
 type Props = {
   bgCSS: string;
   title: string;
@@ -7,15 +12,7 @@ type Props = {
   unit: string;
 };
 
-// 예약자 수, 입장자 수, 1인 평균 구매액 count card
-export function CountCard({
-  bgCSS,
-  title,
-  valueCSS,
-  value,
-  unitCSS,
-  unit,
-}: Props) {
+const CountCard = ({ bgCSS, title, valueCSS, value, unitCSS, unit }: Props) => {
   return (
     <div
       className={`${bgCSS} rounded-[40px] h-[180px] flex flex-col justify-center items-center`}
@@ -31,4 +28,6 @@ export function CountCard({
       </p>
     </div>
   );
-}
+};
+
+export default CountCard;

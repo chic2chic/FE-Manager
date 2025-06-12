@@ -1,10 +1,10 @@
-import DashBoardTitle from "@/pages/dashboardPage/views/DashBoardTitle";
+import Title from "@/pages/dashboardPage/views/@common/Title";
 import { mapGenderData, mapAgeData } from "@/utils/VisitorColorMapper";
 import VisitorPieChart from "@/pages/dashboardPage/views/VisitorPieChart";
 import { useVisitorStatsApi } from "@/hooks/api/useDashboardApi";
-import NoDataComp from "@/components/common/NoDataComp";
+import NoDataComp from "@/pages/dashboardPage/views/@common/NoDataComp";
 import QueryComponent from "@/components/common/QueryComponent";
-import Skeleton from "@/components/common/Skeleton";
+import Skeleton from "@/components/ui/Skeleton";
 
 export default function DashBoardVisitor() {
   const { gender, age, isLoading, isError } = useVisitorStatsApi();
@@ -12,7 +12,7 @@ export default function DashBoardVisitor() {
 
   return (
     <div className="flex flex-col w-[660px]" data-testid="dashboard-visitor">
-      <DashBoardTitle title="팝업스토어 방문자 분석" />
+      <Title title="팝업스토어 방문자 분석" />
 
       <div className="relative bg-gray02 w-[660px] h-[510px] rounded-[50px] pt-[92px] pb-[24px] px-[24px]">
         {/* 레이블 */}

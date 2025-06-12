@@ -1,8 +1,13 @@
+/**
+ * @Description
+ * 대시보드에서 사용되는 Title UI입니다.
+ */
+
 type Props = {
   title: string;
 };
 
-export default function DashBoardTitle({ title }: Props) {
+const Title = ({ title }: Props) => {
   return (
     <div className="flex gap-[18px] items-start mb-10">
       <div className="flex gap-[6px] items-end">
@@ -13,4 +18,6 @@ export default function DashBoardTitle({ title }: Props) {
       <span className="text-gray10 font-bold text-[32px]">{title}</span>
     </div>
   );
-}
+};
+
+export default Title;

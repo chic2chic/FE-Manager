@@ -7,9 +7,9 @@ import {
   Tooltip,
   YAxis,
 } from "recharts";
-import CustomBlurDot from "@/components/common/CustomBlurDot";
-import CustomCursor from "@/components/common/CustomCursor";
-import CustomTooltip from "@/components/common/CustomTooltip";
+import CustomCursor from "@/pages/dashboardPage/views/@common/CustomCursor";
+import CustomTooltip from "@/pages/dashboardPage/views/@common/CustomTooltip";
+import CustomBlurDot from "@/pages/dashboardPage/views/@common/CustomBlurDot";
 
 type Props = {
   dayData: GetCongestionTimeValue[];

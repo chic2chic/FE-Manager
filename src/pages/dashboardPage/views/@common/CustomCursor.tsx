@@ -1,3 +1,8 @@
+/**
+ * @Description
+ * rechart 라이브러리를 활용한 그래프에서 사용되는 커서 UI입니다.
+ */
+
 type Props = {
   points?: { x: number; y: number }[];
   strokeColor?: string;
@@ -5,12 +10,12 @@ type Props = {
   y2?: number;
 };
 
-export default function CustomCursor({
+const CustomCursor = ({
   points,
   strokeColor = "#dadada",
   y1 = 60,
   y2 = 340,
-}: Props) {
+}: Props) => {
   const x = points?.[0]?.x;
   if (x === undefined) return null;
 
@@ -25,4 +30,6 @@ export default function CustomCursor({
       strokeDasharray="3 6"
     />
   );
-}
+};
+
+export default CustomCursor;

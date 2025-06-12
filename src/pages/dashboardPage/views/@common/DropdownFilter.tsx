@@ -1,19 +1,25 @@
+/**
+ * @Description
+ * Dropdown UI 입니다.
+ * - 대시보드 설문지 분석에 사용됩니다.
+ */
+
 import { useState, useRef, useEffect } from "react";
 import optionBar from "@/assets/webps/common/option-bar.webp";
 
-interface DropdownFilterProps<T extends string | number> {
+type Props<T extends string | number> = {
   value: T;
   options: readonly T[];
   onChange: (_value: T) => void;
   buttonGap?: string;
-}
+};
 
-export function DropdownFilter<T extends string | number>({
+const DropdownFilter = <T extends string | number>({
   value,
   options,
   onChange,
   buttonGap,
-}: DropdownFilterProps<T>) {
+}: Props<T>) => {
   const [open, setOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -71,4 +77,6 @@ export function DropdownFilter<T extends string | number>({
       )}
     </div>
   );
-}
+};
+
+export default DropdownFilter;

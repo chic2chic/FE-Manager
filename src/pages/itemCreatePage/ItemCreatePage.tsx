@@ -1,4 +1,4 @@
-import CustomButton from "@/components/common/CustomButton";
+import CustomButton from "@/components/ui/CustomButton";
 import React, { useEffect, useState } from "react";
 
 import Modal from "@/components/common/Modal";

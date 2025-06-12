@@ -1,6 +1,11 @@
+/**
+ * @Description
+ * GET 메서드로 받아온 data가 없을 때 사용되는 UI입니다.
+ */
+
 import sad from "@/assets/webps/dashboard/sad.webp";
 
-export default function NoDataComp() {
+const NoDataComp = () => {
   return (
     <div className="flex flex-col items-center justify-center w-full h-full">
       <div className="mb-4">
@@ -12,4 +17,6 @@ export default function NoDataComp() {
       <p className="text-[18px] text-gray07">아직 데이터가 없어요</p>
     </div>
   );
-}
+};
+
+export default NoDataComp;

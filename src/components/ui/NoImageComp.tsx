@@ -1,8 +1,14 @@
+/**
+ * @Description
+ * 이미지가 업로드되지 않은 상태를 시각적으로 안내하는 컴포넌트입니다.
+ */
+
 type Props = {
   width: number;
   height: number;
 };
-export default function NoImageComp({ width, height }: Props) {
+
+const NoImageComp = ({ width, height }: Props) => {
   return (
     <div
       className="flex flex-col items-center justify-center text-center p-6 border-dashed border-2 border-gray05 rounded-lg"
@@ -16,4 +22,6 @@ export default function NoImageComp({ width, height }: Props) {
       </p>
     </div>
   );
-}
+};
+
+export default NoImageComp;
