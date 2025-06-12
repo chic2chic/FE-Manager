@@ -7,9 +7,9 @@ import {
   getCongestion,
   getQuestionnaire,
   getConversion,
-  getVisitorStats,
+  getVisitor,
 } from "@/apis/DashBoardApi";
-import { VisitorStatsResponse } from "@/types/api/ApiResponseType";
+import { VisitorResponse } from "@/types/api/ApiResponseType";
 
 export const useCongestionApi = () => {
   const { data, isError, isLoading } = useQuery({
@@ -100,19 +100,13 @@ export const useConversionApi = () => {
   return { data, isError, isLoading };
 };
 
-export const useVisitorStatsApi = () => {
-  const { data, isLoading, isError } = useQuery<VisitorStatsResponse>({
-    queryKey: ["visitorStats", "dashboard"],
+export const useVisitorApi = () => {
+  const { data, isLoading, isError } = useQuery<VisitorResponse>({
+    queryKey: ["visitor", "dashboard"],
     queryFn: async () => {
-      const res = await getVisitorStats();
+      const res = await getVisitor();
       return res.data;
     },
   });
-
-  return {
-    gender: data?.gender,
-    age: data?.age,
-    isLoading,
-    isError,
-  };
+  return { data, isLoading, isError };
 };

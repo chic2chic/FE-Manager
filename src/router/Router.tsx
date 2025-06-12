@@ -1,6 +1,6 @@
 import GlobalLayout from "@/components/layouts/GlobalLayout";
 import ProtectLayout from "@/components/layouts/ProtectLayout";
-import DashBoardPage from "@/pages/dashboardPage/DashBoardPage";
+import DashBoardPage from "@/pages/dashboardPage";
 import ItemCreatePage from "@/pages/itemCreatePage/ItemCreatePage";
 import ItemListPage from "@/pages/itemListPage/ItemListPage";
 import OnBoradingPage from "@/pages/onBoardingPage/OnBoardingPage";

@@ -123,12 +123,12 @@ export type GetConversionResponse = {
   high: GetConversionItemResponse[];
 };
 
-export type VisitorStatsResponse = {
-  gender: VisitorStat[];
-  age: VisitorStat[];
+export type VisitorResponse = {
+  gender: Visitor[];
+  age: Visitor[];
 };
 
-export type VisitorStat = {
+export type Visitor = {
   name: string;
   count: number;
   ratio: number;

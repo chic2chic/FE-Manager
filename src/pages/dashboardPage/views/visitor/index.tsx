@@ -1,13 +1,16 @@
 import Title from "@/pages/dashboardPage/views/@common/Title";
 import { mapGenderData, mapAgeData } from "@/utils/VisitorColorMapper";
-import VisitorPieChart from "@/pages/dashboardPage/views/VisitorPieChart";
-import { useVisitorStatsApi } from "@/hooks/api/useDashboardApi";
+import VisitorPieChart from "@/pages/dashboardPage/views/visitor/VisitorPieChart";
+import { useVisitorApi } from "@/hooks/api/useDashboardApi";
 import NoDataComp from "@/pages/dashboardPage/views/@common/NoDataComp";
 import QueryComponent from "@/components/common/QueryComponent";
 import Skeleton from "@/components/ui/Skeleton";
+import Label from "@/pages/dashboardPage/views/visitor/Label";
 
-export default function DashBoardVisitor() {
-  const { gender, age, isLoading, isError } = useVisitorStatsApi();
+const Visitor = () => {
+  const { data, isLoading, isError } = useVisitorApi();
+  const gender = data?.gender;
+  const age = data?.age;
   const isEmpty = !gender || gender.length === 0 || !age || age.length === 0;
 
   return (
@@ -16,12 +19,8 @@ export default function DashBoardVisitor() {
 
       <div className="relative bg-gray02 w-[660px] h-[510px] rounded-[50px] pt-[92px] pb-[24px] px-[24px]">
         {/* 레이블 */}
-        <div className="absolute top-[32px] left-[160px] text-[28px] text-gray09 font-pretendard font-semibold">
-          성별
-        </div>
-        <div className="absolute top-[32px] right-[160px] text-[28px] text-gray09 font-pretendard font-semibold">
-          나이
-        </div>
+        <Label text="성별" position="left" />
+        <Label text="나이" position="right" />
 
         {/* 그래프 영역 */}
         <QueryComponent
@@ -44,13 +43,14 @@ export default function DashBoardVisitor() {
             const ageData = mapAgeData(age);
 
             return (
-              // 그래프
               <div className="absolute bg-gray01 gap-[100px] bottom-6 w-[612px] h-[394px] rounded-[40px] flex items-center justify-center overflow-hidden">
+                {/* 성별 그래프 */}
                 <VisitorPieChart
                   data={genderData}
                   gradIdPrefix="genderGrad"
                   innerRadius={40}
                 />
+                {/* 나이대 그래프 */}
                 <VisitorPieChart data={ageData} gradIdPrefix="ageGrad" />
               </div>
             );
@@ -59,4 +59,6 @@ export default function DashBoardVisitor() {
       </div>
     </div>
   );
-}
+};
+
+export default Visitor;

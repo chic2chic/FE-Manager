@@ -1,15 +1,16 @@
 import React from "react";
 import { PieChart, Pie, Cell, Tooltip, TooltipProps } from "recharts";
 import CustomTooltip from "@/pages/dashboardPage/views/@common/CustomTooltip";
+import VisitorPieLegend from "@/pages/dashboardPage/views/visitor/VisitorPieLegend";
 
-export type SegmentDatum = {
+export type PieChartSegment = {
   name: string;
   count: number;
   rawFill: string;
   ratio: number;
 };
 
-type TooltipPayloadItem = {
+type PieTooltipItem = {
   value: number;
   name: string;
   dataKey: string;
@@ -19,69 +20,74 @@ type TooltipPayloadItem = {
   };
 };
 
-type TooltipPayload = TooltipPayloadItem[];
+type PieTooltip = PieTooltipItem[];
 
-const SIZE = 180;
-const RADIUS = 80;
-
-type Props = {
-  data: SegmentDatum[];
-  gradIdPrefix: string;
-  innerRadius?: number;
+type RenderGradientsProps = {
+  data: PieChartSegment[];
+  prefix: string;
+  radius?: number;
 };
 
-export default function VisitorPieChart({
+type Props = {
+  data: PieChartSegment[];
+  gradIdPrefix: string;
+  innerRadius?: number;
+  size?: number;
+  radius?: number;
+};
+
+// 그라데이션
+const renderGradients = ({
+  data,
+  prefix,
+  radius = 80,
+}: RenderGradientsProps) => (
+  <defs>
+    {data.map((d, i) => (
+      <radialGradient
+        key={i}
+        id={`${prefix}${i}`}
+        gradientUnits="userSpaceOnUse"
+        cx="50%"
+        cy="50%"
+        r={radius}
+      >
+        <stop offset="0%" stopColor={d.rawFill} stopOpacity={1} />
+        <stop offset="100%" stopColor={d.rawFill} stopOpacity={0.4} />
+      </radialGradient>
+    ))}
+  </defs>
+);
+
+// 파이 그래프
+const VisitorPieChart = ({
   data,
   gradIdPrefix,
   innerRadius,
-}: Props) {
+  size = 180,
+  radius = 80,
+}: Props) => {
   return (
     <div className="flex flex-col items-center">
       {/* 범례 */}
-      <div className="grid grid-cols-2 gap-2 mb-[27px] h-[60px]">
-        {data.map((d, i) => (
-          <div key={i} className="flex items-center gap-2">
-            <span
-              className="w-4 h-4 rounded-full"
-              style={{ backgroundColor: d.rawFill }}
-            />
-            <span className="text-gray09 text-[18px] font-pretendard">
-              {d.name}
-            </span>
-          </div>
-        ))}
-      </div>
+      <VisitorPieLegend data={data} />
       <div
         onMouseDown={(e: React.MouseEvent<HTMLDivElement>) =>
           e.preventDefault()
         }
       >
-        <PieChart width={SIZE} height={SIZE}>
-          {/* 그라디언트 정의 */}
-          <defs>
-            {data.map((d, i) => (
-              <radialGradient
-                key={i}
-                id={`${gradIdPrefix}${i}`}
-                gradientUnits="userSpaceOnUse"
-                cx="50%"
-                cy="50%"
-                r={RADIUS}
-              >
-                <stop offset="0%" stopColor={d.rawFill} stopOpacity={1} />
-                <stop offset="100%" stopColor={d.rawFill} stopOpacity={0.4} />
-              </radialGradient>
-            ))}
-          </defs>
+        <PieChart width={size} height={size}>
+          {/* 그라데이션 */}
+          {renderGradients({ data, prefix: gradIdPrefix, radius })}
 
-          {/* 툴팁 설정 */}
+          {/* 툴팁 */}
           <Tooltip
             content={(props: TooltipProps<number, string>) => {
               const { active, payload } = props;
               if (!active || !payload?.length) return null;
 
-              const tooltipData = payload as TooltipPayload;
-              const segmentInfo = tooltipData[0].payload as SegmentDatum;
+              const tooltipData = payload as PieTooltip;
+              const segmentInfo = tooltipData[0].payload as PieChartSegment;
 
               return (
                 <CustomTooltip
@@ -96,11 +102,11 @@ export default function VisitorPieChart({
             }}
           />
 
-          {/* 파이 차트 */}
+          {/* 파이 그래프 */}
           <Pie
             data={data}
             innerRadius={innerRadius}
-            outerRadius={RADIUS}
+            outerRadius={radius}
             dataKey="count"
             cx="50%"
             cy="50%"
@@ -113,4 +119,6 @@ export default function VisitorPieChart({
       </div>
     </div>
   );
-}
+};
+
+export default VisitorPieChart;
