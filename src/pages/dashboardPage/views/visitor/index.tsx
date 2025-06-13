@@ -27,16 +27,8 @@ const Visitor = () => {
           data={isEmpty ? undefined : { gender, age }}
           isLoading={isLoading}
           isError={isError}
-          loadingFallback={
-            <div className="absolute bottom-6 w-[612px] h-[394px] rounded-[40px] flex items-center justify-center overflow-hidden">
-              <Skeleton />
-            </div>
-          }
-          emptyFallback={
-            <div className="absolute bottom-6 w-[612px] h-[394px] rounded-[40px] flex items-center justify-center overflow-hidden">
-              <NoDataComp />
-            </div>
-          }
+          loadingFallback={<Skeleton height="h-[394px]" />}
+          emptyFallback={<NoDataComp height="h-[394px]" />}
         >
           {({ gender, age }) => {
             const genderData = mapGenderData(gender);

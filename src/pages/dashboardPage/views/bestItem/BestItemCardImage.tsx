@@ -12,11 +12,7 @@ const BestItemCardImage = ({ src, alt }: BestItemCardImageProps) => {
 
   return (
     <div className="w-[334px] h-[334px] mt-9 mb-3">
-      {!isLoaded && (
-        <div className="w-full h-full rounded-[20px] overflow-hidden">
-          <Skeleton />
-        </div>
-      )}
+      {!isLoaded && <Skeleton />}
       <img
         src={src}
         alt={alt}
