@@ -13,10 +13,22 @@
 
 import { motion } from "framer-motion";
 
-const Skeleton = () => {
+type Props = {
+  width?: string;
+  height?: string;
+  rounded?: string;
+  className?: string;
+};
+
+const Skeleton = ({
+  width = "w-full",
+  height = "h-full",
+  rounded = "rounded-[40px]",
+  className = "",
+}: Props) => {
   return (
     <motion.div
-      className="relative overflow-hidden bg-gray-200 w-full h-full"
+      className={`relative overflow-hidden bg-gray-200 ${width} ${height} ${rounded} ${className}`}
       initial={{ opacity: 0.6 }}
     >
       <motion.div

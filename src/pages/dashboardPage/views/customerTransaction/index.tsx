@@ -5,7 +5,7 @@ import NoDataComp from "@/pages/dashboardPage/views/@common/NoDataComp";
 import Skeleton from "@/components/ui/Skeleton";
 import QueryComponent from "@/components/common/QueryComponent";
 
-export default function DashBoardCustomerTransaction() {
+const CustomerTransaction = () => {
   const { data, isLoading, isError } = useAvgPurchaseApi();
 
   return (
@@ -17,22 +17,14 @@ export default function DashBoardCustomerTransaction() {
           data={data?.totalAverageAmount}
           isLoading={isLoading}
           isError={isError}
-          loadingFallback={
-            <div className="h-[180px] rounded-[40px] bg-gray02 flex justify-center items-center overflow-hidden">
-              <Skeleton />
-            </div>
-          }
-          emptyFallback={
-            <div className="h-[180px] rounded-[40px] bg-gray02 flex justify-center items-center">
-              <NoDataComp />
-            </div>
-          }
+          loadingFallback={<Skeleton height="h-[180px]" />}
+          emptyFallback={<NoDataComp height="h-[180px]" />}
         >
-          {amount => (
+          {data => (
             <CountCard
               title="팝업 기간 내"
               bgCSS="bg-mint02"
-              value={amount}
+              value={data}
               valueCSS="text-mint08 text-[56px]"
               unit="원"
               unitCSS="text-mint08 text-[40px]"
@@ -42,25 +34,17 @@ export default function DashBoardCustomerTransaction() {
 
         {/* TODAY */}
         <QueryComponent
-          data={data?.todayAverageAmount}
+          data={data?.totalAverageAmount}
           isLoading={isLoading}
           isError={isError}
-          loadingFallback={
-            <div className="h-[180px] rounded-[40px] bg-gray02 flex justify-center items-center overflow-hidden">
-              <Skeleton />
-            </div>
-          }
-          emptyFallback={
-            <div className="h-[180px] rounded-[40px] bg-gray02 flex justify-center items-center">
-              <NoDataComp />
-            </div>
-          }
+          loadingFallback={<Skeleton height="h-[180px]" />}
+          emptyFallback={<NoDataComp height="h-[180px]" />}
         >
-          {amount => (
+          {data => (
             <CountCard
               title="TODAY"
               bgCSS="bg-blue02"
-              value={amount}
+              value={data}
               valueCSS="text-blue07 text-[56px]"
               unit="원"
               unitCSS="text-blue07 text-[40px]"
@@ -70,4 +54,6 @@ export default function DashBoardCustomerTransaction() {
       </div>
     </div>
   );
-}
+};
+
+export default CustomerTransaction;

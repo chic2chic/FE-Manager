@@ -21,21 +21,18 @@ const BestItem = () => {
         isLoading={isLoading}
         isError={isError}
         loadingFallback={
-          <div className="flex justify-center gap-[60px] mt-2">
+          <div className="flex justify-center gap-[60px] h-[512px] mt-2">
             {[1, 2, 3].map(i => (
-              <div
-                key={i}
-                className="w-[400px] h-[512px] rounded-[50px] overflow-hidden"
-              >
-                <Skeleton />
-              </div>
+              <Skeleton key={i} width="w-[400px]" rounded="rounded-[50px]" />
             ))}
           </div>
         }
         emptyFallback={
-          <div className="flex justify-center gap-[60px] mt-2 h-[512px] bg-gray02 rounded-[50px]">
-            <NoDataComp />
-          </div>
+          <NoDataComp
+            height="h-[512px]"
+            rounded="rounded-[50px]"
+            className="mt-2"
+          />
         }
       >
         {data => (

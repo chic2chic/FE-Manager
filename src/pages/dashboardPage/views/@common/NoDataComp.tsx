@@ -5,9 +5,23 @@
 
 import sad from "@/assets/webps/dashboard/sad.webp";
 
-const NoDataComp = () => {
+type Props = {
+  width?: string;
+  height?: string;
+  rounded?: string;
+  className?: string;
+};
+
+const NoDataComp = ({
+  width = "w-full",
+  height = "h-full",
+  rounded = "rounded-[40px]",
+  className = "",
+}: Props) => {
   return (
-    <div className="flex flex-col items-center justify-center w-full h-full">
+    <div
+      className={`flex flex-col items-center justify-center ${width} ${height} ${rounded} ${className}`}
+    >
       <div className="mb-4">
         <img src={sad} width={40} />
       </div>

@@ -1,6 +1,6 @@
 import Title from "@/pages/dashboardPage/views/@common/Title";
 import checkCalendar from "@/assets/webps/dashboard/check-calendar.webp";
-import ReservationByDayChart from "@/pages/dashboardPage/views/ReservationByDayChart";
+import ReservationByDayChart from "@/pages/dashboardPage/views/reservation/ReservationByDayChart";
 import {
   useTodayEntrantsApi,
   useTodayReservationsApi,

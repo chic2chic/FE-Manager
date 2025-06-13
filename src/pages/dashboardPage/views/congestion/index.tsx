@@ -35,16 +35,8 @@ const Congestion = () => {
           data={data?.[selectedDay]}
           isLoading={isLoading}
           isError={isError}
-          loadingFallback={
-            <div className="absolute bottom-6 w-[612px] h-[394px] rounded-[40px] flex items-center justify-center overflow-hidden">
-              <Skeleton />
-            </div>
-          }
-          emptyFallback={
-            <div className="flex justify-center absolute bottom-6 w-[612px] h-[394px]">
-              <NoDataComp />
-            </div>
-          }
+          loadingFallback={<Skeleton height="h-[394px]" />}
+          emptyFallback={<NoDataComp height="h-[394px]" />}
         >
           {data => (
             <div className="absolute bottom-6 w-[612px] h-[394px] bg-gray01 rounded-[40px] flex justify-center">
