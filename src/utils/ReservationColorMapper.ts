@@ -7,7 +7,7 @@ import { ReservationChartResponse } from "@/types/api/ApiResponseType";
  * @returns 색상 정보가 추가된 데이터 배열
  */
 
-// ⭐️ value 기준 오름차순으로 color 매칭시키기 ⭐️
+// value 기준 오름차순으로 color 매칭시키기
 export function reservationColorMapper(data: ReservationChartResponse[]) {
   // 1. value 기준 오름차순 정렬
   const sortedData = [...data].sort(

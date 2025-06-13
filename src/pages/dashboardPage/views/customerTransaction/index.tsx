@@ -8,11 +8,11 @@ import QueryComponent from "@/components/common/QueryComponent";
 const CustomerTransaction = () => {
   const { data, isLoading, isError } = useAvgPurchaseApi();
 
-  const cardConfigs = [
+  const cardInfo = [
     {
       key: "total",
       title: "팝업 기간 내",
-      value: data?.totalAverageAmount,
+      data: data?.totalAverageAmount,
       bgCSS: "bg-mint02",
       valueCSS: "text-mint08 text-[56px]",
       unitCSS: "text-mint08 text-[40px]",
@@ -20,7 +20,7 @@ const CustomerTransaction = () => {
     {
       key: "today",
       title: "TODAY",
-      value: data?.todayAverageAmount,
+      data: data?.todayAverageAmount,
       bgCSS: "bg-blue02",
       valueCSS: "text-blue07 text-[56px]",
       unitCSS: "text-blue07 text-[40px]",
@@ -31,23 +31,23 @@ const CustomerTransaction = () => {
     <div className="w-[414px] flex-col" data-testid="dashboard-transaction">
       <Title title="1인 평균 구매액" />
       <div className="flex h-[394px] flex-col justify-between">
-        {cardConfigs.map(config => (
+        {cardInfo.map(card => (
           <QueryComponent
-            key={config.key}
-            data={config.value}
+            key={card.key}
+            data={card.data}
             isLoading={isLoading}
             isError={isError}
             loadingFallback={<Skeleton height="h-[180px]" />}
             emptyFallback={<NoDataComp height="h-[180px]" />}
           >
-            {value => (
+            {data => (
               <CountCard
-                title={config.title}
-                bgCSS={config.bgCSS}
-                value={value}
-                valueCSS={config.valueCSS}
+                title={card.title}
+                bgCSS={card.bgCSS}
+                value={data}
+                valueCSS={card.valueCSS}
                 unit="원"
-                unitCSS={config.unitCSS}
+                unitCSS={card.unitCSS}
               />
             )}
           </QueryComponent>

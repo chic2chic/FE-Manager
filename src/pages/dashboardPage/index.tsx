@@ -1,5 +1,5 @@
 import DashBoardCustomerTransaction from "@/pages/dashboardPage/views/customerTransaction";
-import DashBoardReservation from "@/pages/dashboardPage/views/reservation/DashBoardReservation";
+import DashBoardReservation from "@/pages/dashboardPage/views/reservation";
 import DashBoardConversionRate from "@/pages/dashboardPage/views/DashBoardConversionRate";
 import DashBoardQuestionnaire from "@/pages/dashboardPage/views/DashBoardQuestionnaire";
 import BestItem from "@/pages/dashboardPage/views/bestItem";
