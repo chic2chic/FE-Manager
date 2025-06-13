@@ -1,7 +1,8 @@
 import { useItemCreate } from "@/hooks/useItemCreate";
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import Button from "../@common/Button";
 import FileDropArea from "../@common/FileDropArea";
+
 
 type Props = {
   closeModal: () => void;
@@ -9,29 +10,21 @@ type Props = {
 
 const ItemCreateExcelModal = ({ closeModal }: Props) => {
   const { createItemExcel } = useItemCreate(); // 100이면 완료되었음을 의미 (성공)
-  const fileInputRef = useRef<HTMLInputElement>(null);
   const [excelFile, setExcelFile] = useState<File | null>(null);
-  const [isUploading, setIsUploading] = useState<boolean>(false);
-  const [isSuccess, setIsSuccess] = useState<boolean>(false);
+  const [isUploading, setIsUploading] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
-  const handleExcelUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleExcelUpload: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     if (e.target.files && e.target.files[0]) {
       setExcelFile(e.target.files[0]);
     }
   };
 
-  const handleClickInput = () => {
-    if (fileInputRef.current) {
-      fileInputRef.current.click();
-    }
-  };
-
   const handleExcelSubmit = async () => {
-    if (!excelFile) return null;
+    if (!excelFile) return;
 
     setIsUploading(true);
     const status = await createItemExcel(excelFile);
-
     if (status === 201) {
       setIsSuccess(true);
     }
@@ -61,7 +54,6 @@ const ItemCreateExcelModal = ({ closeModal }: Props) => {
         ) : (
           <FileDropArea
             file={excelFile}
-            onClick={handleClickInput}
             onChange={handleExcelUpload}
           />
         )}
@@ -76,7 +68,6 @@ const ItemCreateExcelModal = ({ closeModal }: Props) => {
               <Button size="sm" variant="secondary" onClick={closeModal}>
                 취소
               </Button>
-
               <Button
                 size="sm"
                 variant="success"
@@ -92,4 +83,5 @@ const ItemCreateExcelModal = ({ closeModal }: Props) => {
     </div>
   );
 };
+
 export default ItemCreateExcelModal;

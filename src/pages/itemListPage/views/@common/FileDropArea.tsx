@@ -1,16 +1,21 @@
-import React from "react";
+import React, { useRef } from "react";
 
 type Props = {
   file: File | null;
-  onClick: () => void;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
 };
 
-const FileDropArea = ({ file, onClick, onChange }: Props) => {
+const FileDropArea = ({ file, onChange }: Props) => {
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const handleClick = () => {
+    inputRef.current?.click();
+  };
+
   return (
     <div
+      onClick={handleClick}
       className="border-2 border-dashed border-gray03 rounded-lg cursor-pointer hover:border-main03 transition-colors mb-5"
-      onClick={onClick}
     >
       <div className="flex flex-col items-center justify-center py-8">
         {file ? (
@@ -26,6 +31,7 @@ const FileDropArea = ({ file, onClick, onChange }: Props) => {
           </>
         )}
         <input
+          ref={inputRef}
           type="file"
           accept=".xlsx,.xls,.csv"
           className="hidden"

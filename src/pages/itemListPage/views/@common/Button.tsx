@@ -1,6 +1,7 @@
 import React from "react";
 
 type ButtonProps = {
+  id?: string;
   children: React.ReactNode;
   onClick?: () => void;
   variant?: "primary" | "secondary" | "success" | "dark";
@@ -9,6 +10,7 @@ type ButtonProps = {
 };
 
 const Button = ({
+  id,
   children,
   onClick,
   variant = "primary",
@@ -35,6 +37,7 @@ const Button = ({
 
   return (
     <button
+      id={id}
       onClick={onClick}
       disabled={disabled}
       className={`cursor-pointer rounded-full font-semibold transition-colors duration-300 ${sizeClass} ${variantClass} ${disabledClass}`}

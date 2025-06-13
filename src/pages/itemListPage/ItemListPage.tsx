@@ -31,6 +31,7 @@ const ItemListPage = () => {
           전체 상품 등록
         </Button>
         <Button
+          id="item-create-button"
           size="lg"
           variant="primary"
           onClick={() => navigate("/items/create")}
