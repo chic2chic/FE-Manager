@@ -1,20 +1,15 @@
 import { getStockNotificationList } from "@/apis/StockNotificationListApi";
+import { QUERY_KEYS } from "@/hooks/api/queryKey";
 import { useQuery } from "@tanstack/react-query";
 
 export const useStockNotificationListApi = () => {
-  const query = useQuery({
-    queryKey: ["stockNotification"],
+  const { data, isLoading, isError } = useQuery({
+    queryKey: QUERY_KEYS.STOCK_NOTIFICATION.INDEX,
     queryFn: async () => {
       const response = await getStockNotificationList();
       return response.data;
     },
-    refetchInterval: 10 * 60 * 1000, // 10분마다 요청
-    refetchIntervalInBackground: true, // 백그라운드에서도 10분마다 요청
   });
 
-  return {
-    notifications: query.data,
-    isLoading: query.isLoading,
-    error: query.error,
-  };
+  return { data, isLoading, isError };
 };

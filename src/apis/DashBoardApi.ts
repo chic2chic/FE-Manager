@@ -34,8 +34,8 @@ export const getQuestionnaire =
 
 export const getTodayReservations =
   async (): ApiResponse<ReservationsResponse> => {
-    const res = await apiPopUp.get(`/dashboard/reservations`);
-    return res.data;
+    const response = await apiPopUp.get(`/dashboard/reservations`);
+    return response.data;
   };
 
 export const getBestItems = async (): ApiResponse<GetBestItemsResponse> => {

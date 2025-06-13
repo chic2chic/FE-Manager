@@ -3,7 +3,7 @@ export type OrderListItemType = {
   itemName: string;
   recommendCount: number;
   realCount: number;
-  lastRestockDate: string;
+  lastRestockDateTime: string;
   status: OrderItemStatus;
 };
 
