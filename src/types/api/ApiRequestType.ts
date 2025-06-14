@@ -67,7 +67,7 @@ export type GetOrderListRequest = {
   size: number;
 };
 
-export type PostChangeOrderItemRequest = {
+export type PatchChangeOrderItemRequest = {
   orderItemId: number;
   qty: number;
   status: Omit<OrderItemStatus, "PENDING">;

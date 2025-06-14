@@ -1,5 +1,5 @@
-import { getOrderList, postChangeOrderItemStatus } from "@/apis/OrderListApi";
-import { PostChangeOrderItemRequest } from "@/types/api/ApiRequestType";
+import { getOrderList, patchChangeOrderItemStatus } from "@/apis/OrderListApi";
+import { PatchChangeOrderItemRequest } from "@/types/api/ApiRequestType";
 import {
   useInfiniteQuery,
   useMutation,
@@ -31,11 +31,11 @@ export const useGetOrderListApi = ({
   });
 };
 
-export const usePostChangeOrderItemStatus = () => {
+export const usePatchChangeOrderItemStatus = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: ({ orderItemId, qty, status }: PostChangeOrderItemRequest) =>
-      postChangeOrderItemStatus({ orderItemId, qty, status }),
+    mutationFn: ({ orderItemId, qty, status }: PatchChangeOrderItemRequest) =>
+      patchChangeOrderItemStatus({ orderItemId, qty, status }),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ["orderItem"] }),
   });
 };

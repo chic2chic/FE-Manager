@@ -6,7 +6,7 @@ import {
 import { api } from "./config/Axios";
 import {
   GetOrderListRequest,
-  PostChangeOrderItemRequest,
+  PatchChangeOrderItemRequest,
 } from "@/types/api/ApiRequestType";
 
 export const getOrderList = async ({
@@ -23,11 +23,11 @@ export const getOrderList = async ({
   return response.data;
 };
 
-export const postChangeOrderItemStatus = async ({
+export const patchChangeOrderItemStatus = async ({
   orderItemId,
   qty,
   status,
-}: PostChangeOrderItemRequest): ApiResponse<NoResponse> => {
+}: PatchChangeOrderItemRequest): ApiResponse<NoResponse> => {
   const response = await api.patch(`/order-items/status/${orderItemId}`, {
     qty,
     status,

@@ -1,6 +1,6 @@
 import {
   useGetOrderListApi,
-  usePostChangeOrderItemStatus,
+  usePatchChangeOrderItemStatus,
 } from "@/hooks/api/useOrderListApi";
 import OrderListItem from "./views/OrderListItem";
 import Modal from "@/components/common/Modal";
@@ -28,7 +28,7 @@ const OrderListPage = () => {
   );
   const navigate = useNavigate();
 
-  const { mutate: postChangeOrderItemStatus } = usePostChangeOrderItemStatus();
+  const { mutate: postChangeOrderItemStatus } = usePatchChangeOrderItemStatus();
 
   const handleUpdate = () => {
     if (!pendingAction) {
