@@ -6,14 +6,15 @@ import {
 import { api } from "./config/Axios";
 import {
   GetOrderListRequest,
-  PostChangeOrderItemRequest,
+  PatchChangeOrderItemRequest,
 } from "@/types/api/ApiRequestType";
 
 export const getOrderList = async ({
   lastOrderItemId,
+  popupId,
   size,
 }: GetOrderListRequest): ApiResponse<GetOrderListResponse> => {
-  const response = await api.get("/order-items/", {
+  const response = await api.get(`/order-items/${popupId}`, {
     params: {
       ...(lastOrderItemId && { lastOrderItemId }),
       size: size || 10,
@@ -22,12 +23,12 @@ export const getOrderList = async ({
   return response.data;
 };
 
-export const postChangeOrderItemStatus = async ({
+export const patchChangeOrderItemStatus = async ({
   orderItemId,
   qty,
   status,
-}: PostChangeOrderItemRequest): ApiResponse<NoResponse> => {
-  const response = await api.post(`/order-items/status/${orderItemId}`, {
+}: PatchChangeOrderItemRequest): ApiResponse<NoResponse> => {
+  const response = await api.patch(`/order-items/status/${orderItemId}`, {
     qty,
     status,
   });

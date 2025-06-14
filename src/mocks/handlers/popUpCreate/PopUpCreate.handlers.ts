@@ -45,8 +45,6 @@ export const PopUpCreateHandlers = [
     const requestBody = (await request.json()) as PopUpWithChoicesRequest;
     const isError = requestBody.popupCreateRequest.name === "error";
 
-    console.log("popup 생성시 Request : ", requestBody);
-
     if (isError) {
       return HttpResponse.json(
         {
