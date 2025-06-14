@@ -37,7 +37,7 @@ export default function OrderListItem({
               onClick={() =>
                 changePendingAction({
                   item: { ...item, realCount: Number(realCount) },
-                  status: "CANCELLED",
+                  status: "CANCELED",
                 })
               }
             >
@@ -47,7 +47,7 @@ export default function OrderListItem({
         );
       case "COMPLETED":
         return <span>완료</span>;
-      case "CANCELLED":
+      case "CANCELED":
         return <span>취소</span>;
       default:
         return status;
@@ -77,14 +77,14 @@ export default function OrderListItem({
         ) : (
           <input
             className="text-lg font-medium text-gray10 w-20 px-2 py-1 border border-gray07 rounded bg-gray01 text-center placeholder:text-gray07"
-            placeholder={String(item.realCount)}
+            placeholder={String(item.recommendCount)}
             value={realCount}
             onChange={e => setRealCount(e.target.value)}
           />
         )}
       </td>
       <td className="px-6 py-4 whitespace-nowrap text-center text-lg text-gray09">
-        {FormatDateTimeToString(new Date(item.lastRestockDate), 24).replace(
+        {FormatDateTimeToString(new Date(item.lastRestockDateTime), 24).replace(
           "T",
           " ",
         )}

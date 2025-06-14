@@ -11,8 +11,6 @@ export const ItemCreateHandlers = [
     const { popupId, name, imageUrl, price, stock, minStock, location } =
       requestBody;
 
-    console.log("ItemCreateHandlers Request : ", requestBody);
-
     if (
       !popupId ||
       !name ||

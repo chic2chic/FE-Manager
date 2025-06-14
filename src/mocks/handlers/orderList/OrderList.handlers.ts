@@ -1,4 +1,3 @@
-import { GetOrderListResponse } from "@/types/api/ApiResponseType";
 import { http, HttpResponse } from "msw";
 
 const mockOrderItems = [
@@ -261,11 +260,6 @@ export const OrderListHandlers = [
     const content = mockOrderItems.slice(startIndex, startIndex + size);
     const isLast = startIndex + size >= mockOrderItems.length;
 
-    console.log(
-      `Order List Request - lastOrderItemId: ${lastOrderItemId}, size: ${size}`,
-    );
-    console.log(`Returning ${content.length} items, isLast: ${isLast}`);
-
     return HttpResponse.json(
       {
         success: true,
@@ -273,7 +267,7 @@ export const OrderListHandlers = [
         data: {
           content,
           isLast,
-        } as GetOrderListResponse,
+        },
         timestamp: new Date().toISOString(),
       },
       { status: 200 },
@@ -286,9 +280,6 @@ export const OrderListHandlers = [
       qty: number;
       status: string;
     };
-
-    console.log(`Status Change Request - orderItemId: ${orderItemId}`);
-    console.log(`Request body:`, requestBody);
 
     const itemExists = mockOrderItems.find(
       item => item.orderItemId === Number(orderItemId),
@@ -328,9 +319,6 @@ export const OrderListHandlers = [
     if (itemIndex !== -1) {
       mockOrderItems[itemIndex].status = requestBody.status;
       mockOrderItems[itemIndex].realCount = requestBody.qty;
-      console.log(
-        `Updated item ${orderItemId} status to ${requestBody.status}`,
-      );
     }
 
     return HttpResponse.json(

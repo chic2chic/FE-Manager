@@ -3,8 +3,8 @@ export type OrderListItemType = {
   itemName: string;
   recommendCount: number;
   realCount: number;
-  lastRestockDate: string;
+  lastRestockDateTime: string;
   status: OrderItemStatus;
 };
 
-export type OrderItemStatus = "CANCELLED" | "COMPLETED" | "PENDING";
+export type OrderItemStatus = "CANCELED" | "COMPLETED" | "PENDING";

@@ -188,9 +188,6 @@ export const ItemListHandlers = [
 
     if (section && itemIndex !== -1) {
       itemsDatabase[section].splice(itemIndex, 1);
-      console.log(`아이템 "${itemId}" 삭제됨. (섹션: ${section})`);
-    } else {
-      console.log(`아이템 "${itemId}"을 찾을 수 없음.`);
     }
 
     return HttpResponse.json(

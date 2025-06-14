@@ -38,9 +38,6 @@ export const connectNotificationSocket = (
         });
       });
     },
-    debug: str => {
-      console.log("🛠 STOMP DEBUG:", str);
-    },
   });
   client.activate();
 };

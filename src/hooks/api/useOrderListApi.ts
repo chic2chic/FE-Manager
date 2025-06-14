@@ -6,11 +6,17 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 
-export const useGetOrderListApi = ({ size }: { size: number }) => {
+export const useGetOrderListApi = ({
+  size,
+  popupId,
+}: {
+  size: number;
+  popupId: number;
+}) => {
   return useInfiniteQuery({
     queryKey: ["orderItem"],
     queryFn: ({ pageParam }) =>
-      getOrderList({ lastOrderItemId: pageParam, size }),
+      getOrderList({ lastOrderItemId: pageParam, size, popupId }),
     getNextPageParam: response => {
       const lastPage = response.data;
 

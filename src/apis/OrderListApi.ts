@@ -11,9 +11,10 @@ import {
 
 export const getOrderList = async ({
   lastOrderItemId,
+  popupId,
   size,
 }: GetOrderListRequest): ApiResponse<GetOrderListResponse> => {
-  const response = await api.get("/order-items/", {
+  const response = await api.get(`/order-items/${popupId}`, {
     params: {
       ...(lastOrderItemId && { lastOrderItemId }),
       size: size || 10,
@@ -27,7 +28,7 @@ export const postChangeOrderItemStatus = async ({
   qty,
   status,
 }: PostChangeOrderItemRequest): ApiResponse<NoResponse> => {
-  const response = await api.post(`/order-items/status/${orderItemId}`, {
+  const response = await api.patch(`/order-items/status/${orderItemId}`, {
     qty,
     status,
   });

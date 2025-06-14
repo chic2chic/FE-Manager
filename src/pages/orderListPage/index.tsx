@@ -9,6 +9,7 @@ import bin from "@/assets/webps/common/bin.webp";
 import { useState } from "react";
 import { OrderItemStatus, OrderListItemType } from "@/types/OrderListPageType";
 import { useNavigate } from "react-router-dom";
+import { usePopUpReadStore } from "@/stores/usePopUpReadStore";
 
 export type PendingActionType = {
   item: OrderListItemType;
@@ -16,8 +17,9 @@ export type PendingActionType = {
 };
 
 const OrderListPage = () => {
+  const popupId = usePopUpReadStore(state => state.popupId);
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
-    useGetOrderListApi({ size: 5 });
+    useGetOrderListApi({ size: 5, popupId });
   const orderList = data?.pages.flatMap(item => item.data.content);
   const [showModal, setShowModal] = useState<boolean>(false);
   const [showConfirmModal, setShowConfirmModal] = useState<boolean>(false);
