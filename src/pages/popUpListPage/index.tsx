@@ -15,7 +15,6 @@ import check from "@/assets/webps/common/check.webp";
 import { usePopUpListReadApi } from "@/hooks/api/usePopUpListReadApi";
 import { usePopUpDeleteApi } from "@/hooks/api/usePopUpDeleteApi";
 import Loading from "@/components/ui/Loading";
-import { postRefreshAccessToken } from "@/apis/user/AuthApi";
 
 const PopUpListPage = () => {
   const { cards, isLoading } = usePopUpListReadApi();
@@ -56,10 +55,6 @@ const PopUpListPage = () => {
     setIsEnd(swiper.isEnd);
   };
 
-  const handleReIssue = async () => {
-    await postRefreshAccessToken();
-  };
-
   const handleSwiperInit = (swiper: SwiperType) => {
     swiperRef.current = swiper;
     setIsBeginning(swiper.isBeginning);
@@ -78,7 +73,6 @@ const PopUpListPage = () => {
             <span lang="en" className="ml-4 text-[36px] text-main07">
               List
             </span>
-            <button onClick={handleReIssue}>토큰 재발급</button>
           </div>
           {/* plus button */}
           <div
